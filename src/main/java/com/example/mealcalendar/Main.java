@@ -10,7 +10,7 @@ import java.io.IOException;
 import static javafx.application.Application.launch;
 
 
-public class Main extends Application {
+public class \Main extends Application {
 
 
     private static Stage stg;
