@@ -10,7 +10,7 @@ import java.io.IOException;
 import static javafx.application.Application.launch;
 
 
-public class \Main extends Application {
+public class Main extends Application {
 
 
     private static Stage stg;
@@ -18,7 +18,7 @@ public class \Main extends Application {
 
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setResizable(true); //non ridimensionabile
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("checkout-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280,720);
         primaryStage.setTitle("Q");
         primaryStage.setScene(scene);
