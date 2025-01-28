@@ -5,7 +5,7 @@ package com.example.mealcalendar;
     import javafx.fxml.FXML;
     import javafx.scene.control.Button;
 
-    public class RegisterPageController {
+    public class RegisterLoginPageController {
 
         @FXML
         private Button goBackButton;
