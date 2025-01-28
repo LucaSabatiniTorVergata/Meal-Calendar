@@ -21,7 +21,7 @@ public class Main extends Application {
         primaryStage.setResizable(true); //non ridimensionabile
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("checkout-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Q");
+        primaryStage.setTitle("Finestra");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
