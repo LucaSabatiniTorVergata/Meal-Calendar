@@ -9,7 +9,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.CartaCreditoViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681db" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
@@ -42,9 +41,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="446.0" fitWidth="450.0" layoutX="84.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="446.0" fitWidth="450.0" layoutX="110.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../pictures/contactless-VISA.gif" />
+            <Image url="C:\Users\hp\IdeaProjects\Meal-Calendar\src\main\resources\pictures\impresa 447x469.png" />
          </image>
       </ImageView>
    </children>
