@@ -42,9 +42,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="446.0" fitWidth="450.0" layoutX="84.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="425.0" layoutX="84.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../pictures/contactless-VISA.gif" />
+            <Image url="@../../../../../pictures/impresa%20447x469.png" />
          </image>
       </ImageView>
    </children>
