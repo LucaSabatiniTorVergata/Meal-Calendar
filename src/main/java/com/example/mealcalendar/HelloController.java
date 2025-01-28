@@ -26,11 +26,7 @@ public class HelloController{
     @FXML
     void LoadLoginPage(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("register-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280,720);
 
-        Stage stage = (Stage) fxmlLoader.getRoot().getScene().getWindow();
-        stage.setScene(scene);
 
     }
 
