@@ -29,12 +29,12 @@
       <Button layoutX="1169.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Help" />
       <ImageView fitHeight="249.0" fitWidth="382.0" layoutX="479.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../pictures/tortino%20senza%20sfondo.png" />
+            <Image url="@../../../../../pictures/tortino%20senza%20sfondo.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="179.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../pictures/gulyx.png" />
+            <Image url="@../../../../../pictures/gulyx.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="933.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true" />
