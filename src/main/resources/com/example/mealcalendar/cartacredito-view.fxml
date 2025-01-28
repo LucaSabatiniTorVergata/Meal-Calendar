@@ -41,9 +41,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="446.0" fitWidth="450.0" layoutX="110.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="341.0" fitWidth="355.0" layoutX="173.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\hp\IdeaProjects\Meal-Calendar\src\main\resources\pictures\impresa 447x469.png" />
+            <Image url="@../../../pictures/impresa.png" />
          </image>
       </ImageView>
    </children>
