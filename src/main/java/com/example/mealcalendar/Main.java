@@ -19,9 +19,9 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setResizable(true); //non ridimensionabile
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("checkout-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("guestMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Finestra");
+        primaryStage.setTitle("Q");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
