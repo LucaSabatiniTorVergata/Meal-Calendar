@@ -1,4 +1,4 @@
-package demo;
+package com.example.mealcalendar;
 
 
 public class ChooseRestaurantController {

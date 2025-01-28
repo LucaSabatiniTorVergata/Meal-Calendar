@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.mealcalendar.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.HelloController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="799.0" layoutY="62.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
+      <Circle fill="#e2ecf5" layoutX="377.0" layoutY="353.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="327.0" layoutY="333.0" prefHeight="55.0" prefWidth="98.0" text="Logo">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Label>
+      <Label layoutX="869.0" layoutY="192.0" prefHeight="23.0" prefWidth="69.0" text="Username" />
+      <TextField layoutX="869.0" layoutY="217.0" prefHeight="20.0" prefWidth="273.0" promptText="inserisci qui il tuo username" />
+      <Label layoutX="869.0" layoutY="314.0" prefHeight="23.0" prefWidth="69.0" text="Email" />
+      <TextField layoutX="872.0" layoutY="340.0" prefHeight="20.0" prefWidth="273.0" promptText="Inserisci la tua email" />
+      <Label layoutX="869.0" layoutY="448.0" prefHeight="23.0" prefWidth="69.0" text="Password" />
+      <TextField fx:id="passInChiaro" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" />
+      <PasswordField fx:id="passWordBox" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" promptText="Inserisci la password" />
+      <Button layoutX="869.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Button" />
+      <Button layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Button" />
+      <Label layoutX="918.0" layoutY="625.0" text="clicca qui per entrare come guest" />
+   </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package demo;
+package com.example.mealcalendar;
 import java.util.Vector;
 
 public class RestaurantList {

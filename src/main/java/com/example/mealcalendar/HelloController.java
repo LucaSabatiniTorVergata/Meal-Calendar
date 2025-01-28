@@ -1,14 +1,14 @@
 package com.example.mealcalendar;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
-public class HelloController {
-    @FXML
-    private Label welcomeText;
+public class HelloController{
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+
+
+
+
+
 }
