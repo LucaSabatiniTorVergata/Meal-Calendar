@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static javafx.application.Application.launch;
 
+//COMPRAMOS CAMIONETAS Y CARROS
 
 public class Main extends Application {
 
@@ -19,7 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setResizable(true); //non ridimensionabile
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("checkout-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280,720);
+        Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("Q");
         primaryStage.setScene(scene);
         primaryStage.show();
