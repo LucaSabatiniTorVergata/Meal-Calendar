@@ -19,7 +19,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="97.0" layoutY="15.0" prefHeight="70.0" prefWidth="398.0" text="FINDING RECIPE">
+      <Label layoutX="97.0" layoutY="15.0" prefHeight="70.0" prefWidth="398.0" text="FINDING RECIPE...">
          <font>
             <Font name="System Bold Italic" size="41.0" />
          </font>

@@ -53,10 +53,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="80.0" layoutY="298.0" prefHeight="31.0" prefWidth="339.0" text="selezionera una delle ricette">
-         <font>
-            <Font name="System Bold" size="21.0" />
-         </font>
-      </Label>
+      <Label layoutX="110.0" layoutY="313.0" text="selezionera una delle ricette" />
     </children>
 </AnchorPane>
