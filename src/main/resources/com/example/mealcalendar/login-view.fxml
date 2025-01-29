@@ -16,9 +16,9 @@
       <TextField layoutX="850.0" layoutY="217.0" prefHeight="26.0" prefWidth="296.0" promptText="inserisci la tua mail" />
       <Label layoutX="854.0" layoutY="280.0" text="Password" />
       <PasswordField layoutX="850.0" layoutY="300.0" prefHeight="26.0" prefWidth="296.0" promptText="Inserisci la tua password" />
-      <Button layoutX="850.0" layoutY="460.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="300.0" text="log in" />
+      <Button layoutX="850.0" layoutY="460.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="26.0" prefWidth="300.0" text="log in" />
       <Label layoutX="929.0" layoutY="523.0" text="click here to join as a guest" />
       <Label layoutX="851.0" layoutY="145.0" text="Accedi al tuo account" />
-      <Button layoutX="21.0" layoutY="17.0" mnemonicParsing="false" text="Indietro" onAction="#indietroview" />
+      <Button layoutX="21.0" layoutY="17.0" mnemonicParsing="false" onAction="#indietroview" text="Indietro" />
    </children>
 </AnchorPane>

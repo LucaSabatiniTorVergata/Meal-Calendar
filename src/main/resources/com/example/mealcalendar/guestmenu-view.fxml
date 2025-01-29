@@ -19,7 +19,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="798.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Find restaurant">
+      <Button layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#FindRestaurantGuest" style="-fx-background-color: 000000;" text="Find restaurant">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

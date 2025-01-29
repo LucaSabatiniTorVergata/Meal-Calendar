@@ -24,9 +24,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
-      <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
-      <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="calendar" textFill="#9e8686" />
+      <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
+      <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
+      <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="calendar" textFill="#9e8686" />
       <Button layoutX="1169.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Help">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -37,7 +37,7 @@
             <Font name="Chalkboard" size="44.0" />
          </font>
       </Label>
-      <Button layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
+      <Button layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" onAction="#RegisterGuest" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="34.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="861.0" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="950.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
       <Label layoutX="981.0" layoutY="235.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
@@ -64,5 +64,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button layoutX="506.0" layoutY="39.0" mnemonicParsing="false" onAction="#LoadHomePageGuest" text="Home" />
    </children>
 </AnchorPane>

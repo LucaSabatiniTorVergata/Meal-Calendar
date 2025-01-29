@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+
 public class RegisterLoginPageController {
 
         @FXML
@@ -20,8 +21,13 @@ public class RegisterLoginPageController {
             Finestra.show();
 
         }
-
-
-
+        @FXML
+        private void LogIn(ActionEvent event) throws IOException {
+            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("userMenu-view.fxml"));
+            Scene NuovaScena=new Scene(NuovaSchermata);
+            Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+            Finestra.setScene(NuovaScena);
+            Finestra.show();
+        }
 
     }
