@@ -59,17 +59,17 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="882.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe">
+      <Button layoutX="882.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe" onAction="#addrecipeview">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe">
+      <Button layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe" onAction="#editrecipeview">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="19.0" layoutY="20.0" mnemonicParsing="false" text="HOME">
+      <Button layoutX="19.0" layoutY="20.0" mnemonicParsing="false" text="HOME" onAction="#homeview">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

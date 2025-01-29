@@ -21,7 +21,7 @@ public class RecipeEditViewController {
     }
     @FXML
     private void backview(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
         Scene NuovaScena=new Scene(NuovaSchermata);
         Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
         Finestra.setScene(NuovaScena);
