@@ -41,22 +41,22 @@
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="34.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="861.0" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="950.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
       <Label layoutX="981.0" layoutY="235.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
-      <SplitMenuButton layoutX="982.0" layoutY="258.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Dieta">
+      <SplitMenuButton fx:id="TipoDieta" layoutX="982.0" layoutY="258.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Dieta">
         <items>
-          <MenuItem mnemonicParsing="false" text="Vegan" />
-          <MenuItem mnemonicParsing="false" text="Vegetariana" />
-            <MenuItem mnemonicParsing="false" text="Onnivora" />
+          <MenuItem fx:id="Vegan" mnemonicParsing="false" text="Vegan" />
+          <MenuItem fx:id="Vegetariana" mnemonicParsing="false" text="Vegetariana" />
+            <MenuItem fx:id="Omnivora" mnemonicParsing="false" text="Onnivora" />
         </items>
       </SplitMenuButton>
-      <SplitMenuButton layoutX="982.0" layoutY="342.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Dieta">
+      <SplitMenuButton fx:id="Pasto" layoutX="982.0" layoutY="342.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Dieta">
          <items>
-            <MenuItem mnemonicParsing="false" text="Vegan" />
-            <MenuItem mnemonicParsing="false" text="Vegetariana" />
-            <MenuItem mnemonicParsing="false" text="Onnivora" />
+            <MenuItem fx:id="Colazione" mnemonicParsing="false" text="Colazione" />
+            <MenuItem fx:id="Pranzo" mnemonicParsing="false" text="Pranzo" />
+            <MenuItem fx:id="Cena" mnemonicParsing="false" text="Cena" />
          </items>
       </SplitMenuButton>
       <Label layoutX="982.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
-      <TextField layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" text="Inserisci una distanza massima" />
+      <TextField fx:id="Distanza" layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" text="Inserisci una distanza massima" />
       <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
       <Button layoutX="983.0" layoutY="515.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="conferma" />
       <Label layoutX="979.0" layoutY="174.0" text="filtra ristoranti e locali">

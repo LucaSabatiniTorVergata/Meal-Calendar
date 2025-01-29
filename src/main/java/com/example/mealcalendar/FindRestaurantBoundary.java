@@ -7,11 +7,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class FindRestaurantBoundary {
-    @FXML private SplitMenuButton ;
+    @FXML private SplitMenuButton TipoDieta;
+    @FXML private SplitMenuButton Pasto;
+    @FXML private TextField Distanza;
+
+    @FXML private MenuItem Vegan;
+    @FXML private MenuItem Vegetariana;
+    @FXML private MenuItem Omnivora;
+
+    @FXML private MenuItem Colazione;
+    @FXML private MenuItem Pranzo;
+    @FXML private MenuItem Cena;
 
     @FXML
     private void LoadHomePageGuest(ActionEvent event) throws IOException {
