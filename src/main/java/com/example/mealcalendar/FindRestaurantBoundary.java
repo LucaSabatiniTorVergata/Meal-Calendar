@@ -6,11 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitMenuButton;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class FindRestaurantController {
-
+public class FindRestaurantBoundary {
+    @FXML private SplitMenuButton ;
 
     @FXML
     private void LoadHomePageGuest(ActionEvent event) throws IOException {
@@ -21,7 +22,6 @@ public class FindRestaurantController {
         Finestra.show();
 
     }
-
     @FXML
     private void RegisterGuest(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -31,7 +31,6 @@ public class FindRestaurantController {
         Finestra.show();
 
     }
-    //metodi user
     @FXML
     private void LoadHomePageUser(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
@@ -40,4 +39,5 @@ public class FindRestaurantController {
         Finestra.setScene(NuovaScena);
         Finestra.show();
     }
+
 }
