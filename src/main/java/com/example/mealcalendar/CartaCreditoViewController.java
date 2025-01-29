@@ -14,8 +14,19 @@ public class CartaCreditoViewController {
 
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-
-
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("checkout-view.fxml"));
+        Scene NuovaScena=new Scene(NuovaSchermata);
+        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
+    @FXML
+    private void goBackHome(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene NuovaScena=new Scene(NuovaSchermata);
+        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
     }
 
 }
