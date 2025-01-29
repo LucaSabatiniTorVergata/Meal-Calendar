@@ -31,7 +31,13 @@ public class FindRestaurantController {
         Finestra.show();
 
     }
-
-
-
+    //metodi user
+    @FXML
+    private void LoadHomePageUser(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
+        Scene NuovaScena = new Scene(NuovaSchermata);
+        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
 }

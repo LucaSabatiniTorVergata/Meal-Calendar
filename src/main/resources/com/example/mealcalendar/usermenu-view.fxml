@@ -21,15 +21,15 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Find recipe">
+        <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#LoadFindRecpe" style="-fx-background-color: 000000;" text="Find recipe">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Fill fridge">
+        <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#LoadFrigeMenu" style="-fx-background-color: 000000;" text="Fill fridge">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="calendar">
+        <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" onAction="#LoadCalendarMenu" style="-fx-background-color: 000000;" text="calendar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
