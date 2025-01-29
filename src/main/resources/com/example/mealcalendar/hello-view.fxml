@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.HelloViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="799.0" layoutY="62.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
       <Circle fill="#e2ecf5" layoutX="377.0" layoutY="353.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
@@ -26,7 +26,8 @@
       <TextField fx:id="passInChiaro" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" />
       <PasswordField fx:id="passWordBox" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" promptText="Inserisci la password" />
       <Button layoutX="869.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="register" />
-      <Button fx:id="loginbutton" layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" onAction="#LoadLoginPage" prefHeight="26.0" prefWidth="100.0" text="login" />
-      <Label layoutX="918.0" layoutY="625.0" text="clicca qui per entrare come guest" />
+      <Button layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="login" onAction="#loginview"/>
+      <Label layoutX="918.0" layoutY="625.0" text="clicca                  per entrare come guest" />
+      <Button layoutX="954.0" layoutY="621.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="42.0" text="QUI" onAction="#guestmenuview"/>
    </children>
 </AnchorPane>

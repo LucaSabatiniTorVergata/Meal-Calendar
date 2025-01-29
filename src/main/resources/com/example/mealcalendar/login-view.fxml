@@ -19,6 +19,6 @@
       <Button layoutX="850.0" layoutY="460.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="300.0" text="log in" />
       <Label layoutX="929.0" layoutY="523.0" text="click here to join as a guest" />
       <Label layoutX="851.0" layoutY="145.0" text="Accedi al tuo account" />
-      <Button layoutX="21.0" layoutY="17.0" mnemonicParsing="false" text="Indietro" />
+      <Button layoutX="21.0" layoutY="17.0" mnemonicParsing="false" text="Indietro" onAction="#indietroview" />
    </children>
 </AnchorPane>
