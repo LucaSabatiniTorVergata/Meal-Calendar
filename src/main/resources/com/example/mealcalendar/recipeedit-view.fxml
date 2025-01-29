@@ -54,5 +54,10 @@
          </font>
       </Button>
       <Label layoutX="110.0" layoutY="313.0" text="selezionera una delle ricette" />
+      <Button layoutX="303.0" layoutY="641.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="221.0" style="-fx-background-color: #cfac5b;" text="ADD TO SERVER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
