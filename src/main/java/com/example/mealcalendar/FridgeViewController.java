@@ -9,10 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class MealCalenderViewController {
+public class FridgeViewController {
 
     @FXML
-    private void homeview(ActionEvent event) throws IOException {
+    private void backview(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
         Scene NuovaScena = new Scene(NuovaSchermata);
         Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();

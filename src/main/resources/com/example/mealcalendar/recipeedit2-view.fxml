@@ -14,12 +14,12 @@
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
         <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="448.0" layoutX="72.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="519.0" />
-        <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="BACK">
+        <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="BACK" onAction="#recipeeditview">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="10.0" layoutY="54.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="HOME">
+        <Button layoutX="10.0" layoutY="54.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="HOME" onAction="#homeview">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
