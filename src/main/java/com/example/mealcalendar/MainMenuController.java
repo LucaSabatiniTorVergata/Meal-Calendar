@@ -22,6 +22,15 @@ public class MainMenuController {
         Finestra.setScene(NuovaScena);
         Finestra.show();
     }
+
+    @FXML
+    private void goHome(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene NuovaScena=new Scene(NuovaSchermata);
+        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
     //metodi eseguibili dall'user
     @FXML
     private void FindRestaurantUser(ActionEvent event) throws IOException {
@@ -33,7 +42,7 @@ public class MainMenuController {
     }
 
     @FXML
-    void LoadCalendarMenu(ActionEvent event) throws IOException {
+    private void LoadCalendarMenu(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
         Scene NuovaScena=new Scene(NuovaSchermata);
         Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -42,7 +51,7 @@ public class MainMenuController {
     }
 
     @FXML
-    void LoadFindRecpe(ActionEvent event) throws IOException {
+    private void LoadFindRecpe(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
         Scene NuovaScena=new Scene(NuovaSchermata);
         Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -51,8 +60,17 @@ public class MainMenuController {
     }
 
     @FXML
-    void LoadFrigeMenu(ActionEvent event) throws IOException {
+    private void LoadFrigeMenu(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
+        Scene NuovaScena=new Scene(NuovaSchermata);
+        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
+
+    @FXML
+    private void goBack(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
         Scene NuovaScena=new Scene(NuovaSchermata);
         Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
         Finestra.setScene(NuovaScena);

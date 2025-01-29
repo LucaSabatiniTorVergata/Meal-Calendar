@@ -28,5 +28,14 @@ public class CartaCreditoViewController {
         Finestra.setScene(NuovaScena);
         Finestra.show();
     }
+    @FXML
+    private void payWithCard(ActionEvent event) throws IOException {
+
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+        Scene NuovaScena=new Scene(NuovaSchermata);
+        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
 
 }

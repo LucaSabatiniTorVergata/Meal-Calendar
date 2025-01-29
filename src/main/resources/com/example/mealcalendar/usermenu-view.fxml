@@ -76,5 +76,6 @@
             <Image url="@../../../pictures/gulyx.png" />
          </image>
       </ImageView>
+      <Button layoutX="222.0" layoutY="40.0" mnemonicParsing="false" onAction="#goBack" text="back " />
     </children>
 </AnchorPane>

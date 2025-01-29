@@ -64,5 +64,6 @@
          </font>
       </Label>
       <Button layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
+      <Button layoutX="228.0" layoutY="40.0" mnemonicParsing="false" onAction="#goHome" text="back" />
    </children>
 </AnchorPane>

@@ -36,7 +36,7 @@
       <TextField layoutX="721.0" layoutY="289.0" prefHeight="35.0" prefWidth="258.0" promptText="12 Numbers" />
       <TextField layoutX="721.0" layoutY="375.0" prefHeight="35.0" prefWidth="258.0" promptText="MM/YY" />
       <TextField layoutX="721.0" layoutY="458.0" prefHeight="35.0" prefWidth="258.0" promptText="3 behind card" />
-      <Button layoutX="827.0" layoutY="542.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="223.0" style="-fx-background-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;" text="Pay" textFill="WHITE">
+      <Button layoutX="827.0" layoutY="542.0" mnemonicParsing="false" onAction="#payWithCard" prefHeight="42.0" prefWidth="223.0" style="-fx-background-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;" text="Pay" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
