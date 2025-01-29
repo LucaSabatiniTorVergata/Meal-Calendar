@@ -64,9 +64,9 @@
                 <MenuItem mnemonicParsing="false" text="cena" />
             </items>
         </SplitMenuButton>
-        <Label layoutX="982.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
+        <Label layoutX="983.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci fascia oraria" />
         <TextField layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" promptText="Inserisci una distanza massima" />
-        <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci il tipo di dieta " />
+        <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="distanza massima" />
         <Button layoutX="983.0" layoutY="515.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="conferma" />
         <Label layoutX="979.0" layoutY="174.0" text="filtra ristoranti e locali">
             <font>

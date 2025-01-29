@@ -11,15 +11,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class FindRestaurantBoundary {
-    @FXML private SplitMenuButton TipoDieta ;
-    @FXML private SplitMenuButton Pasto ;
-    @FXML private SplitMenuButton Distanza ;
-
-    private String TipoDietaSelezionato;
-    private String PastoSelezionato;
-    private double DistanzaInserita;
-
-    private ChooseRestaurantController controller=new ChooseRestaurantController();
+    @FXML private SplitMenuButton ;
 
     @FXML
     private void LoadHomePageGuest(ActionEvent event) throws IOException {
@@ -47,7 +39,5 @@ public class FindRestaurantBoundary {
         Finestra.setScene(NuovaScena);
         Finestra.show();
     }
-
-
 
 }
