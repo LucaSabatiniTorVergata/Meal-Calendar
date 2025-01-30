@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class ChooseRestaurantController {
 
-    private static final String API_KEY = "INSERISCI_LA_TUA_API_KEY";
+    private static final String API_KEY = "AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE";
 
     public void TrovaRistorante(FiltersRestaurantBean Filtro) throws IOException {
 
