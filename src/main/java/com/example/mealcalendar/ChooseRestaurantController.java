@@ -39,13 +39,17 @@ public class ChooseRestaurantController {
         //Parsing della risposta JSON
         JSONObject jsonResponse = new JSONObject(response.toString());
         JSONArray results = jsonResponse.getJSONArray("results");
-        List<ReturnRestaurantsBean> listaRistoranti = new ArrayList<>();
+
+        RestaurantListSingletonPattern ListaRistoranti = RestaurantListSingletonPattern.getInstance();
+        ListaRistoranti.svuotaLista();// Pulisce la lista prima di aggiungere nuovi ristoranti
+
+        List<ReturnRestaurantsBean> ristorantibeans = new ArrayList<>();
+
         if (results.length() > 0) {
             for (int i = 0; i < results.length(); i++) {
                 JSONObject ristorante = results.getJSONObject(i);
                 String nome = ristorante.getString("name"); // Nome ristorante
                 String indirizzo = ristorante.optString("vicinity", "Indirizzo non disponibile");
-
                 //Recuperiamo le coordinate GPS (latitudine e longitudine)
                 double lat = 0, lng = 0;
                 if (ristorante.has("geometry")) {
@@ -53,12 +57,14 @@ public class ChooseRestaurantController {
                     lat = location.getDouble("lat");
                     lng = location.getDouble("lng");
                 }
+                RestaurantEntity nuovoristorante = RestaurantFactory.CreaRistorante(nome, indirizzo, lat, lng);
+                ListaRistoranti.AggiungiRistorante(nuovoristorante);
 
                 //  Creiamo un oggetto Bean e lo aggiungiamo alla lista
                 ReturnRestaurantsBean bean = new ReturnRestaurantsBean(nome, indirizzo, lat, lng);
-                listaRistoranti.add(bean);
+                ristorantibeans.add(new ReturnRestaurantsBean(nome, indirizzo, lat, lng));
             }
         }
-        return listaRistoranti;
+        return ristorantibeans;
     }
 }

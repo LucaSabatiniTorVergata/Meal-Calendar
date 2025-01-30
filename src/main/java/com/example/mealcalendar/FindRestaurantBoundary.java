@@ -99,8 +99,10 @@ public class FindRestaurantBoundary {
         System.out.println("Pasto: " + PastoSelezionato);
         System.out.println("Distanza: " + DistanzaInserita + " km");
         FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
-        ListaRistoranti = Controller.TrovaRistorante(Filtro);
-        MostraRistoranti(ListaRistoranti);
+
+        List<ReturnRestaurantsBean> RistorantiBeans = Controller.TrovaRistorante(Filtro);
+
+        MostraRistoranti(RistorantiBeans);;
 
     }
 
@@ -123,8 +125,8 @@ public class FindRestaurantBoundary {
     }
     //Metodo per mostrare i ristoranti nella ListView
     public void MostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
-        this.ListaRistoranti = ListaRistoranti;
         RistorantiListView.getItems().clear();
+        this.ListaRistoranti=ListaRistoranti;
         RistorantiListView.getItems().addAll(ListaRistoranti);
     }
     //Metodo per aprire Google Maps nel browser con le coordinate
