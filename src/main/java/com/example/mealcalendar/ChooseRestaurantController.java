@@ -13,7 +13,7 @@ public class ChooseRestaurantController {
 
     private static final String API_KEY = "INSERISCI_LA_TUA_API_KEY";
 
-    public void TrovaRistorante(FiltersRestaurantBean Filtro) {
+    public void TrovaRistorante(FiltersRestaurantBean Filtro) throws IOException {
 
         String UrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                 "location=41.9028,12.4964" +  // 📍 Posizione fissa (Roma) → Puoi sostituirlo con la posizione dell’utente
@@ -49,7 +49,5 @@ public class ChooseRestaurantController {
         }
     }
 
-    catch (IOException e) {
-        e.printStackTrace();
-    }
+
 }

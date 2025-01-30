@@ -78,7 +78,7 @@ public class FindRestaurantBoundary {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
         Vegan.setOnAction(e -> TipoDieta.setText("Vegano"));
         Vegetariana.setOnAction(e -> TipoDieta.setText("Vegetariano"));
