@@ -1,20 +1,24 @@
 package com.example.mealcalendar;
 
-
-import java.util.Map;
+import java.util.List;
 
 public class FrigoriferoController {
+
     private Frigorifero frigorifero;
 
     public FrigoriferoController() {
-        this.frigorifero = new Frigorifero();
+        frigorifero = new Frigorifero();  // Istanzia il frigorifero vuoto
     }
 
-    public void gestisciIngrediente(String nome) {
-        frigorifero.aggiungiIngrediente(nome);
+    public void aggiungiIngrediente(String nomeIngrediente) {
+        Ingrediente ingrediente = new Ingrediente(nomeIngrediente);
+        frigorifero.aggiungiIngrediente(ingrediente);
     }
 
-    public Map<String, Integer> getInventario() {
+    public List<Ingrediente> getInventario() {
         return frigorifero.getInventario();
+    }
+    public void stampaInventario() {
+        frigorifero.stampaInventario();
     }
 }

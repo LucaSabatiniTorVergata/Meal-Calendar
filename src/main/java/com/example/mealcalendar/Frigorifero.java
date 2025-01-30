@@ -1,19 +1,30 @@
 package com.example.mealcalendar;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Frigorifero {
-    private Map<String, Integer> inventario;
+    private List<Ingrediente> inventario;
 
     public Frigorifero() {
-        this.inventario = new HashMap<>();
+        this.inventario = new ArrayList<>();
     }
 
-    public void aggiungiIngrediente(String nome) {
-        Ingrediente ingrediente = IngredienteFactory.creaIngrediente(nome);
-        inventario.put(ingrediente.getNome(), inventario.getOrDefault(ingrediente.getNome(), 0) + 1);
+    public void aggiungiIngrediente(Ingrediente ingrediente) {
+        inventario.add(ingrediente);
     }
 
-    public Map<String, Integer> getInventario() {
+    public List<Ingrediente> getInventario() {
         return inventario;
+    }
+    public void stampaInventario() {
+        if (inventario.isEmpty()) {
+            System.out.println("Il frigorifero è vuoto.");
+        } else {
+            System.out.println("Inventario del frigorifero:");
+            for (Ingrediente ingrediente : inventario) {
+                System.out.println(ingrediente.getNome());
+            }
+        }
     }
 }

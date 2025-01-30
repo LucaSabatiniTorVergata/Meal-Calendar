@@ -23,34 +23,33 @@ public class FridgeViewController {
     @FXML
     private ListView<String> listaInventario;
 
-    private FrigoriferoController controller = new FrigoriferoController();
+    private FrigoriferoController frigoriferoController;
 
+    public FridgeViewController() {
+        frigoriferoController = new FrigoriferoController();  // Crea un controller per il frigorifero
+    }
     @FXML
-    private void aggiungiIngrediente() {
-        String nomeIngrediente = txtIngrediente.getText().trim();
-        String quantitaStr = txtQuantita.getText().trim();
+    private void aggiungiIngrediente(ActionEvent event) {
+        // Prendi il nome dell'ingrediente dal campo di testo
+        String nomeIngrediente = txtIngrediente.getText();
 
-        if (!nomeIngrediente.isEmpty() && !quantitaStr.isEmpty()) {
-            try {
-                int quantita = Integer.parseInt(quantitaStr);
-                if (quantita > 0) {
-                    for (int i = 0; i < quantita; i++) {
-                        controller.gestisciIngrediente(nomeIngrediente);
-                    }
-                    aggiornaLista();
-                    txtIngrediente.clear();
-                    txtQuantita.clear();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Inserire un numero valido per la quantità.");
-            }
-        }
+        // Aggiungi l'ingrediente al frigorifero tramite il controller
+        frigoriferoController.aggiungiIngrediente(nomeIngrediente);
+
+        // Pulisci il campo di testo
+        txtIngrediente.clear();
+
+        // Stampa l'inventario nella console ogni volta che un ingrediente viene aggiunto
+        frigoriferoController.stampaInventario();
     }
 
-    private void aggiornaLista() {
+    private void aggiornaInventario() {
+        // Pulisce la lista nella UI
         listaInventario.getItems().clear();
-        for (Map.Entry<String, Integer> entry : controller.getInventario().entrySet()) {
-            listaInventario.getItems().add(entry.getKey() + ": " + entry.getValue());
+
+        // Ottieni gli ingredienti dal frigorifero e aggiungili alla ListView
+        for (Ingrediente ingrediente : frigoriferoController.getInventario()) {
+            listaInventario.getItems().add(ingrediente.getNome());
         }
     }
     @FXML
