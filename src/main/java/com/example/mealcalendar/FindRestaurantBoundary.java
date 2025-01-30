@@ -71,18 +71,11 @@ public class FindRestaurantBoundary {
     }
 
     @FXML
-    private void confermafiltri(ActionEvent event) {
-        // Solo dopo aver premuto "conferma" copiamo i dati
-        TipoDietaSelezionato = TipoDieta.getText();
-        PastoSelezionato = Pasto.getText();
-    }
-
-    @FXML
     public void initialize() throws IOException {
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
         Vegan.setOnAction(e -> TipoDieta.setText("Vegano"));
         Vegetariana.setOnAction(e -> TipoDieta.setText("Vegetariano"));
-        Omnivora.setOnAction(e -> TipoDieta.setText("Carnivoro"));
+        Omnivora.setOnAction(e -> TipoDieta.setText("Onnivoro"));
 
         Colazione.setOnAction(e -> Pasto.setText("Colazione"));
         Pranzo.setOnAction(e -> Pasto.setText("Pranzo"));
@@ -93,6 +86,16 @@ public class FindRestaurantBoundary {
             System.out.println("Errore: Inserisci un numero valido per la distanza!");
             return;
         }
+    }
+
+    @FXML
+    private void confermafiltri(ActionEvent event) {
+        // Solo dopo aver premuto "conferma" copiamo i dati
+        TipoDietaSelezionato = TipoDieta.getText();
+        PastoSelezionato = Pasto.getText();
+        DistanzaInserita=Distanza.getText();
+    }
+
         // Stampiamo per controllo
         System.out.println("Filtri confermati:");
         System.out.println("Dieta: " + TipoDietaSelezionato);
@@ -101,5 +104,4 @@ public class FindRestaurantBoundary {
         // Creiamo il Bean e lo passiamo al Controller
         FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
         Controller.TrovaRistorante(Filtro);
-    }
 }
