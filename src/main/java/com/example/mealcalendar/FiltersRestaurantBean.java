@@ -6,6 +6,8 @@ public class FiltersRestaurantBean {
     private String Pasto;
     private double Distanza;
 
+
+
     public FiltersRestaurantBean(String TipoDieta, String Pasto, double Distanza) {
         this.TipoDieta = TipoDieta;
         this.Pasto = Pasto;

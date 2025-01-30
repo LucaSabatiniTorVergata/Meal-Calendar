@@ -1,5 +1,6 @@
 package com.example.mealcalendar;
 
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import javafx.scene.control.ListView;
+
 
 public class FindRestaurantBoundary {
 
@@ -35,9 +42,14 @@ public class FindRestaurantBoundary {
     @FXML
     private MenuItem Cena;
 
+    @FXML
+    private ListView<ReturnRestaurantsBean> RistorantiListView;// ListView per mostrare i ristoranti
+
     private String TipoDietaSelezionato;
     private String PastoSelezionato;
     private double DistanzaInserita;
+
+    private List<ReturnRestaurantsBean> ListaRistoranti;
 
     private ChooseRestaurantController Controller = new ChooseRestaurantController();
 
@@ -87,7 +99,9 @@ public class FindRestaurantBoundary {
         System.out.println("Pasto: " + PastoSelezionato);
         System.out.println("Distanza: " + DistanzaInserita + " km");
         FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
-        Controller.TrovaRistorante(Filtro);
+        ListaRistoranti = Controller.TrovaRistorante(Filtro);
+        MostraRistoranti(ListaRistoranti);
+
     }
 
     @FXML
@@ -106,11 +120,35 @@ public class FindRestaurantBoundary {
             System.out.println("Errore: Inserisci un numero valido per la distanza!");
             return;
         }
-
-
-
     }
+    //Metodo per mostrare i ristoranti nella ListView
+    public void MostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
+        this.ListaRistoranti = ListaRistoranti;
+        RistorantiListView.getItems().clear();
+        RistorantiListView.getItems().addAll(ListaRistoranti);
+    }
+    //Metodo per aprire Google Maps nel browser con le coordinate
+        private void ApriGoogleMaps(double lat, double lng) {
+            String url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
+            try {
+                Desktop.getDesktop().browse(new URI(url)); // Apriamo il browser
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
 
+
+    //Metodo chiamato quando l'utente clicca su un ristorante
+    @FXML
+    private void handleclick(MouseEvent event) {
+        if (event.getClickCount() == 2) { // Doppio click per aprire Google Maps
+            int selectedIndex = RistorantiListView.getSelectionModel().getSelectedIndex();
+            if (selectedIndex >= 0) {
+                ReturnRestaurantsBean Ristorante = ListaRistoranti.get(selectedIndex);
+                ApriGoogleMaps(Ristorante.getLatitudine(), Ristorante.getLongitudine());
+            }
+        }
+    }
 
 
 
