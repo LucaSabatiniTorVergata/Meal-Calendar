@@ -58,7 +58,7 @@
       <Label layoutX="982.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Inserisci la fascia oraria" />
       <TextField fx:id="Distanza" layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" promptText="Inserisci una distanza massima" />
       <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="inserisci raggio" />
-      <Button layoutX="983.0" layoutY="515.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="conferma" />
+      <Button layoutX="983.0" layoutY="515.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="conferma" onAction="#confermafiltri" />
       <Label layoutX="979.0" layoutY="174.0" text="filtra ristoranti e locali">
          <font>
             <Font size="24.0" />
