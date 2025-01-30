@@ -69,6 +69,15 @@ public class FindRestaurantBoundary {
         Finestra.setScene(NuovaScena);
         Finestra.show();
     }
+    @FXML
+    private void confermafiltri(ActionEvent event) throws IOException {
+        // Solo dopo aver premuto "conferma" copiamo i dati
+        TipoDietaSelezionato = TipoDieta.getText();
+        PastoSelezionato = Pasto.getText();
+        DistanzaInserita= Double.parseDouble(Distanza.getText());
+        FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
+        Controller.TrovaRistorante(Filtro);
+    }
 
     @FXML
     public void initialize() throws IOException {
@@ -86,13 +95,12 @@ public class FindRestaurantBoundary {
             System.out.println("Errore: Inserisci un numero valido per la distanza!");
             return;
         }
+        // Stampiamo per controllo
         System.out.println("Filtri confermati:");
         System.out.println("Dieta: " + TipoDietaSelezionato);
         System.out.println("Pasto: " + PastoSelezionato);
         System.out.println("Distanza: " + DistanzaInserita + " km");
-        // Creiamo il Bean e lo passiamo al Controller
-        FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
-        Controller.TrovaRistorante(Filtro);
+
     }
 
 
