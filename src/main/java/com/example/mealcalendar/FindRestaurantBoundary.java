@@ -73,7 +73,13 @@ public class FindRestaurantBoundary {
     @FXML
     private void confermafiltri(ActionEvent event) throws IOException {
         // Solo dopo aver premuto "conferma" copiamo i dati
-        TipoDietaSelezionato = TipoDieta.getText();
+        if(TipoDieta.getText().equalsIgnoreCase("Onnivoro")){
+            TipoDietaSelezionato = "";
+
+        }
+        else {
+            TipoDietaSelezionato = TipoDieta.getText();
+        }
         PastoSelezionato = Pasto.getText();
         DistanzaInserita= Double.parseDouble(Distanza.getText());
         System.out.println("Filtri confermati:");
