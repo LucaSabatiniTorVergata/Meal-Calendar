@@ -17,6 +17,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import javafx.scene.control.ListView;
+import java.util.regex.Pattern;
+import javafx.scene.control.TextFormatter;
+import java.util.function.UnaryOperator;
 
 
 public class FindRestaurantBoundary {
@@ -116,12 +119,18 @@ public class FindRestaurantBoundary {
         Colazione.setOnAction(e -> Pasto.setText("Colazione"));
         Pranzo.setOnAction(e -> Pasto.setText("Pranzo"));
         Cena.setOnAction(e -> Pasto.setText("Cena"));
-        try {
-            DistanzaInserita = Double.parseDouble(Distanza.getText());
-        } catch (NumberFormatException e) {
-            System.out.println("Errore: Inserisci un numero valido per la distanza!");
-            return;
-        }
+        Pattern validEditingState = Pattern.compile("\\d*"); // Solo cifre
+
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if (validEditingState.matcher(change.getControlNewText()).matches()) {
+                return change; // Accetta la modifica
+            } else {
+                return null; // Rifiuta la modifica se contiene caratteri non numerici
+            }
+        };
+
+        TextFormatter<String> textformatter = new TextFormatter<>(filter);
+        Distanza.setTextFormatter(textformatter);
     }
     //Metodo per mostrare i ristoranti nella ListView
     public void MostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
