@@ -2,6 +2,13 @@ package com.example.mealcalendar;
 import java.util.*;
 
 public class IngredienteFactory {
+
+
+    private IngredienteFactory(){
+
+        throw new IllegalStateException("Utility class");
+    }
+
     // Mappa per tenere traccia degli ingredienti già creati
     private static Map<String, Ingrediente> ingredientiCreati = new HashMap<>();
 
