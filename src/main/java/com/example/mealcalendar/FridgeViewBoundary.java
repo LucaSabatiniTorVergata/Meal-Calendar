@@ -23,7 +23,8 @@ public class FridgeViewBoundary {
     @FXML
     private ListView<String> listaInventario;
 
-    private FrigoriferoController frigoriferoController = new FrigoriferoController();
+    private FrigoriferoController frigoriferoController = FrigoriferoController.getInstance();
+    private IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
 
     @FXML
     public void initialize() {
@@ -35,17 +36,23 @@ public class FridgeViewBoundary {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
+        // Controllo se l'ingrediente e la quantità sono stati inseriti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
             System.out.println("Inserisci nome e quantità dell'ingrediente!");
+            return;
+        }
+
+        // Verifica se l'ingrediente è valido (presente nell'elenco predefinito)
+        if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
+            System.out.println("Errore: Inserisci un ingrediente valido!");
             return;
         }
 
         try {
             int quantita = Integer.parseInt(quantitaText);
 
-            // Creiamo il bean e passiamo al controller
-            FrigoBean frigoBean = new FrigoBean(nomeIngrediente, quantita);
-            frigoriferoController.aggiungiIngrediente(frigoBean);
+            // Aggiungi l'ingrediente alla lista tramite il controller
+            frigoriferoController.aggiungiIngrediente(nomeIngrediente, quantita);
 
             aggiornaInventario(); // Aggiorniamo la lista dell'inventario
         } catch (NumberFormatException e) {
@@ -64,6 +71,7 @@ public class FridgeViewBoundary {
             listaInventario.getItems().add(entry.getKey() + " - Quantità: " + entry.getValue());
         }
     }
+
 
     // Aggiungi altre azioni come il back a seconda delle necessità
 

@@ -3,20 +3,36 @@ package com.example.mealcalendar;
 import java.util.Map;
 
 public class FrigoriferoController {
-    private static Frigorifero frigorifero = new Frigorifero();
+    // Creazione dell'istanza Singleton
+    private static FrigoriferoController instance;
 
-    public static Frigorifero getFrigorifero() {
-        return frigorifero;
+    private IngredienteSingleton ingredienteSingleton;
+
+    // Costruttore privato per evitare che vengano create altre istanze
+    private FrigoriferoController() {
+        this.ingredienteSingleton = IngredienteSingleton.getInstance(); // Otteniamo l'istanza unica della lista
     }
 
-    public void aggiungiIngrediente(FrigoBean frigoBean) {
-        String nomeIngrediente = frigoBean.getNomeIngrediente();
-        int quantita = frigoBean.getQuantita();
-
-        frigorifero.aggiungiIngrediente(nomeIngrediente, quantita);
+    // Metodo per ottenere l'istanza Singleton
+    public static FrigoriferoController getInstance() {
+        if (instance == null) {
+            instance = new FrigoriferoController(); // Crea l'istanza solo se non esiste già
+        }
+        return instance;
     }
 
+    // Aggiunge un ingrediente alla lista
+    public void aggiungiIngrediente(String nomeIngrediente, int quantita) {
+        ingredienteSingleton.aggiungiIngrediente(nomeIngrediente, quantita);
+    }
+
+    // Ottiene l'inventario
     public Map<String, Integer> getInventario() {
-        return frigorifero.getInventario();
+        return ingredienteSingleton.getInventario();
+    }
+
+    // Stampa l'inventario
+    public void stampaInventario() {
+        ingredienteSingleton.stampaInventario();
     }
 }
