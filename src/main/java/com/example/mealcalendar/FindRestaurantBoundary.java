@@ -57,59 +57,59 @@ public class FindRestaurantBoundary {
     private ChooseRestaurantController Controller = new ChooseRestaurantController();
 
     @FXML
-    private void LoadHomePageGuest(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void loadHomePageGuest(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
 
     }
 
     @FXML
-    private void RegisterGuest(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void registerGuest(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
 
     }
 
     @FXML
-    private void LoadHomePageUser(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void loadHomePageUser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
     private void recipeuser(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
     private void fridgeuser(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
     private void calendaruser(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
