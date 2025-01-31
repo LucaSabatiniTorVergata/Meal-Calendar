@@ -24,27 +24,46 @@ public class FridgeViewController {
     private ListView<String> listaInventario;
 
     private FrigoriferoController frigoriferoController;
+    private Frigorifero frigorifero = FrigoriferoController.getFrigorifero();
 
     public FridgeViewController() {
         frigoriferoController = new FrigoriferoController();  // Crea un controller per il frigorifero
     }
+
+
+    @FXML
+    public void initialize() {
+        aggiornaInventario(); // 🔥 Carica l'inventario esistente quando la schermata si apre
+    }
+
+
+
     @FXML
     private void aggiungiIngrediente(ActionEvent event) {
-        // Prendi il nome dell'ingrediente dal campo di testo
-        String nomeIngrediente = txtIngrediente.getText();
+        String nomeIngrediente = txtIngrediente.getText().trim();
+        String quantitaText = txtQuantita.getText().trim();
 
-        // Prendi la quantità dal campo di testo e convertila in intero
-        int quantita = Integer.parseInt(txtQuantita.getText());  // Assicurati che la quantità sia un numero valido
+        // Controlliamo se entrambi i campi sono valorizzati
+        if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
+            System.out.println("Inserisci nome e quantità dell'ingrediente!");
+            return;
+        }
 
-        // Aggiungi l'ingrediente al frigorifero tramite il controller
-        frigoriferoController.aggiungiIngrediente(nomeIngrediente, quantita);
+        try {
+            int quantita = Integer.parseInt(quantitaText); // Convertiamo la quantità
 
-        // Pulisci i campi di testo
+            // Passiamo nome + quantità al frigo!
+            frigorifero.aggiungiIngrediente(nomeIngrediente, quantita);
+
+            mostraInventario(); // 🔥 Aggiorniamo la ListView
+
+        } catch (NumberFormatException e) {
+            System.out.println("Errore: Inserisci un numero valido per la quantità!");
+        }
+
+        // Puliamo i campi dopo l'aggiunta
         txtIngrediente.clear();
         txtQuantita.clear();
-
-        // Stampa l'inventario nella console ogni volta che un ingrediente viene aggiunto
-        frigoriferoController.stampaInventario();
     }
 
 
@@ -53,10 +72,19 @@ public class FridgeViewController {
         listaInventario.getItems().clear();
 
         // Ottieni gli ingredienti dal frigorifero e aggiungili alla ListView
-        for (Ingrediente ingrediente : frigoriferoController.getInventario()) {
-            listaInventario.getItems().add(ingrediente.getNome());
+        for (Map.Entry<String, Integer> entry : frigorifero.getInventario().entrySet()) {
+            listaInventario.getItems().add(entry.getKey() + " - Quantità: " + entry.getValue());
         }
     }
+
+    @FXML
+    private void mostraInventario() {
+        listaInventario.getItems().clear();  // Puliamo la ListView
+        for (Map.Entry<String, Integer> entry : frigorifero.getInventario().entrySet()) {
+            listaInventario.getItems().add(entry.getKey() + " - Quantità: " + entry.getValue());
+        }
+    }
+
     @FXML
     private void backview(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));

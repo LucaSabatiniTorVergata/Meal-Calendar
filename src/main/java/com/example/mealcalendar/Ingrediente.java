@@ -12,16 +12,12 @@ public class Ingrediente {
     public String getNome() {
         return nome;
     }
+
     public int getQuantita() {
         return quantita;
     }
 
-    public void incrementaQuantita(int quantita) {
-        this.quantita+=quantita;
-    }
-    @Override
-    public String toString() {
-        return nome + " (Quantità: " + quantita + ")";
+    public void aggiungiQuantita(int quantita) {
+        this.quantita += quantita;
     }
 }
-
