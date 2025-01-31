@@ -33,15 +33,20 @@ public class FridgeViewController {
         // Prendi il nome dell'ingrediente dal campo di testo
         String nomeIngrediente = txtIngrediente.getText();
 
-        // Aggiungi l'ingrediente al frigorifero tramite il controller
-        frigoriferoController.aggiungiIngrediente(nomeIngrediente);
+        // Prendi la quantità dal campo di testo e convertila in intero
+        int quantita = Integer.parseInt(txtQuantita.getText());  // Assicurati che la quantità sia un numero valido
 
-        // Pulisci il campo di testo
+        // Aggiungi l'ingrediente al frigorifero tramite il controller
+        frigoriferoController.aggiungiIngrediente(nomeIngrediente, quantita);
+
+        // Pulisci i campi di testo
         txtIngrediente.clear();
+        txtQuantita.clear();
 
         // Stampa l'inventario nella console ogni volta che un ingrediente viene aggiunto
         frigoriferoController.stampaInventario();
     }
+
 
     private void aggiornaInventario() {
         // Pulisce la lista nella UI
