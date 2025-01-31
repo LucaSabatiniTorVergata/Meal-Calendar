@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 
-public class RegisterLoginPageController {
+public class LoginPageController {
 
         @FXML
         private void indietroview(ActionEvent event) throws IOException {
@@ -23,11 +23,20 @@ public class RegisterLoginPageController {
         }
         @FXML
         private void LogIn(ActionEvent event) throws IOException {
-            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("userMenu-view.fxml"));
+            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
             Scene NuovaScena=new Scene(NuovaSchermata);
             Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
             Finestra.setScene(NuovaScena);
             Finestra.show();
         }
+        @FXML
+        private void here(ActionEvent event) throws IOException {
+            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
+            Scene NuovaScena=new Scene(NuovaSchermata);
+            Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+            Finestra.setScene(NuovaScena);
+            Finestra.show();
 
+
+        }
     }

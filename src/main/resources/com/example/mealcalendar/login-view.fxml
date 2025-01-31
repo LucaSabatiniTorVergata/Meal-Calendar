@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFF8BF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.RegisterLoginPageController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFF8BF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.LoginPageController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="435.0" layoutX="799.0" layoutY="120.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
       <Circle fill="#e2ecf5" layoutX="377.0" layoutY="353.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
@@ -21,7 +21,7 @@
       <Label layoutX="919.0" layoutY="523.0" prefHeight="18.0" prefWidth="198.0" text="click                  to join as a guest" />
       <Label layoutX="851.0" layoutY="145.0" text="Accedi al tuo account" />
       <Button layoutX="21.0" layoutY="17.0" mnemonicParsing="false" onAction="#indietroview" text="Indietro" />
-      <Button layoutX="951.0" layoutY="519.0" mnemonicParsing="false" text="HERE">
+      <Button layoutX="951.0" layoutY="519.0" mnemonicParsing="false" text="HERE" onAction="#here">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

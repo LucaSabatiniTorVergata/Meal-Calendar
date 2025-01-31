@@ -86,6 +86,33 @@ public class FindRestaurantBoundary {
     }
 
     @FXML
+    private void recipeuser(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
+        Scene NuovaScena = new Scene(NuovaSchermata);
+        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
+
+    @FXML
+    private void fridgeuser(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
+        Scene NuovaScena = new Scene(NuovaSchermata);
+        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
+
+    @FXML
+    private void calendaruser(ActionEvent event) throws IOException {
+        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
+        Scene NuovaScena = new Scene(NuovaSchermata);
+        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Finestra.setScene(NuovaScena);
+        Finestra.show();
+    }
+
+    @FXML
     private void confermafiltri(ActionEvent event) throws IOException {
         // Solo dopo aver premuto "conferma" copiamo i dati
         if(TipoDieta.getText().equalsIgnoreCase("Onnivoro")){

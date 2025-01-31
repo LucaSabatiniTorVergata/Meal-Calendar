@@ -58,7 +58,7 @@
             <Image url="@../../../pictures/pollos.png" />
          </image>
       </ImageView>
-      <Label layoutX="36.0" layoutY="637.0" text="Join our community to share your recpes to all users">
+      <Label layoutX="36.0" layoutY="637.0" text="Join our community to share your recipes to all users">
          <font>
             <Font name="Chalkboard" size="44.0" />
          </font>

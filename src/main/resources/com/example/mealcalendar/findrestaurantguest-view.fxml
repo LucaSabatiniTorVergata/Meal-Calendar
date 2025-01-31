@@ -16,15 +16,11 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Circle fill="#e4f2ff" layoutX="50.0" layoutY="50.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="104.0" layoutY="37.0" text="Hello guest">
+      <Label layoutX="92.0" layoutY="37.0" text="Hello guest">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="798.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Find restaurant">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
       <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
       <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
       <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="calendar" textFill="#9e8686" />
@@ -68,7 +64,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="506.0" layoutY="39.0" mnemonicParsing="false" onAction="#LoadHomePageGuest" text="Home" />
+      <Button layoutX="724.0" layoutY="38.0" mnemonicParsing="false" onAction="#LoadHomePageGuest" text="Home" />
       <ListView fx:id="RistorantiListView" layoutX="30.0" layoutY="124.0" onMouseClicked="#handleclick" prefHeight="480.0" prefWidth="882.0" />
+      <Label layoutX="221.0" layoutY="23.0" text="FINDING RESTAURANT...">
+         <font>
+            <Font name="System Bold Italic" size="41.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
