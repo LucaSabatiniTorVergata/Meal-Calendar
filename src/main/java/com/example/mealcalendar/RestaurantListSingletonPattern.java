@@ -31,4 +31,17 @@ public class RestaurantListSingletonPattern {
         ListaRistoranti.clear();
     }
 
+    public List<ReturnRestaurantsBean> GetBeansList() {
+        List<ReturnRestaurantsBean> beansList = new ArrayList<>();
+        for (RestaurantEntity ristorante : ListaRistoranti) {
+            beansList.add(new ReturnRestaurantsBean(
+                    ristorante.getnome(),
+                    ristorante.getindirizzo(),
+                    ristorante.getlatitudine(),
+                    ristorante.getlongitudine()
+            ));
+        }
+        return beansList;
+    }
+
 }

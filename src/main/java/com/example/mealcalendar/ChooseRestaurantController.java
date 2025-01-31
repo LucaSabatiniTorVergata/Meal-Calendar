@@ -59,12 +59,9 @@ public class ChooseRestaurantController {
                 }
                 RestaurantEntity nuovoristorante = RestaurantFactory.CreaRistorante(nome, indirizzo, lat, lng);
                 ListaRistoranti.AggiungiRistorante(nuovoristorante);
-
-                //  Creiamo un oggetto Bean e lo aggiungiamo alla lista
-                ReturnRestaurantsBean bean = new ReturnRestaurantsBean(nome, indirizzo, lat, lng);
-                ristorantibeans.add(new ReturnRestaurantsBean(nome, indirizzo, lat, lng));
             }
         }
+        ristorantibeans=ListaRistoranti.GetBeansList();
         return ristorantibeans;
     }
 }
