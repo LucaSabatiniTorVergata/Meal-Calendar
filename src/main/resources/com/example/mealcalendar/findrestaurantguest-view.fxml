@@ -23,7 +23,7 @@
       </Label>
       <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
       <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
-      <Button layoutX="1087.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="calendar" textFill="#9e8686" />
+      <Button layoutX="1068.0" layoutY="37.0" mnemonicParsing="false" onAction="#RegisterGuest" style="-fx-background-color: 000000;" text="Set eating time" textFill="#9e8686" />
       <Button layoutX="1169.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Help">
          <cursor>
             <Cursor fx:constant="HAND" />

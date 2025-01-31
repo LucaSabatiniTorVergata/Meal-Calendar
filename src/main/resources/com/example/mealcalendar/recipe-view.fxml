@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.RecipeViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="342.0" layoutX="66.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
+      <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="342.0" layoutX="66.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
       <Circle fill="#d1d7dc" layoutX="997.0" layoutY="375.0" radius="209.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="925.0" layoutY="351.0" text="IMMAGINE">
          <font>
@@ -59,17 +59,17 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="882.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe" onAction="#addrecipeview">
+      <Button layoutX="882.0" layoutY="39.0" mnemonicParsing="false" onAction="#addrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe" onAction="#editrecipeview">
+      <Button layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" onAction="#editrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="19.0" layoutY="20.0" mnemonicParsing="false" text="HOME" onAction="#homeview">
+      <Button layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeview" text="HOME">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
