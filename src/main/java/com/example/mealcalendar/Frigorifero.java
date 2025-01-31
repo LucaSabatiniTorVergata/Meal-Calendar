@@ -1,4 +1,5 @@
 package com.example.mealcalendar;
+
 import java.util.*;
 
 public class Frigorifero {
@@ -9,9 +10,8 @@ public class Frigorifero {
     }
 
     public void aggiungiIngrediente(String nome, int quantita) {
-        // Se l'ingrediente è già presente, aggiorna la quantità
         inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
-        stampaInventario(); // 🔥 Stampa automaticamente dopo ogni aggiunta!
+        stampaInventario();
     }
 
     public Map<String, Integer> getInventario() {
@@ -29,5 +29,3 @@ public class Frigorifero {
         }
     }
 }
-
-

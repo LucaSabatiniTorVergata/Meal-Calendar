@@ -9,15 +9,14 @@ public class FrigoriferoController {
         return frigorifero;
     }
 
-    public void aggiungiIngrediente(String nomeIngrediente, int quantita) {
-        frigorifero.aggiungiIngrediente(nomeIngrediente, quantita); // ✅ Passiamo nome e quantità, non un oggetto
+    public void aggiungiIngrediente(FrigoBean frigoBean) {
+        String nomeIngrediente = frigoBean.getNomeIngrediente();
+        int quantita = frigoBean.getQuantita();
+
+        frigorifero.aggiungiIngrediente(nomeIngrediente, quantita);
     }
 
     public Map<String, Integer> getInventario() {
-        return frigorifero.getInventario(); // ✅ Ritorniamo la mappa corretta
-    }
-
-    public void stampaInventario() {
-        frigorifero.stampaInventario(); // ✅ Chiamiamo il metodo corretto di Frigorifero
+        return frigorifero.getInventario();
     }
 }
