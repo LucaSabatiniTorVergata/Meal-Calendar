@@ -70,10 +70,10 @@ public class MainMenuController {
 
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
         Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(NuovaScena);
+        finestra.setScene(nuovaScena);
         finestra.show();
     }
 
