@@ -15,66 +15,66 @@ public class MainMenuController {
 
     //metodi eseguibi dal guest
     @FXML
-    private void FindRestaurantGuest(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("findrestaurantguest-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void findRestaurantGuest(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("findrestaurantguest-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
     private void goHome(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
     //metodi eseguibili dall'user
     @FXML
-    private void FindRestaurantUser(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("findrestaurantuser-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void findRestaurantUser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("findrestaurantuser-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
-    private void LoadCalendarMenu(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void loadCalendarMenu(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
-    private void LoadFindRecpe(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void loadFindRecpe(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
-    private void LoadFrigeMenu(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
-        Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+    private void loadFrigeMenu(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 
     @FXML
     private void goBack(ActionEvent event) throws IOException {
         Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
         Scene NuovaScena=new Scene(NuovaSchermata);
-        Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(NuovaScena);
+        finestra.show();
     }
 
 
