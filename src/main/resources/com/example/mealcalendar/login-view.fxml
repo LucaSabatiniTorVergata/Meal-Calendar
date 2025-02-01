@@ -17,7 +17,7 @@
       <TextField layoutX="850.0" layoutY="217.0" prefHeight="26.0" prefWidth="296.0" promptText="inserisci la tua mail" />
       <Label layoutX="854.0" layoutY="280.0" text="Password" />
       <PasswordField layoutX="850.0" layoutY="300.0" prefHeight="26.0" prefWidth="296.0" promptText="Inserisci la tua password" />
-      <Button layoutX="850.0" layoutY="460.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="26.0" prefWidth="300.0" text="log in" />
+      <Button layoutX="850.0" layoutY="460.0" mnemonicParsing="false" onAction="#logIn" prefHeight="26.0" prefWidth="300.0" text="log in" />
       <Label layoutX="919.0" layoutY="523.0" prefHeight="18.0" prefWidth="198.0" text="click                  to join as a guest" />
       <Label layoutX="851.0" layoutY="145.0" text="Log in to your account">
          <font>

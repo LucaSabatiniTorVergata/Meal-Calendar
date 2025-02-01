@@ -14,28 +14,28 @@ public class LoginPageController {
 
         @FXML
         private void indietroview(ActionEvent event) throws IOException {
-            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-            Scene NuovaScena=new Scene(NuovaSchermata);
-            Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-            Finestra.setScene(NuovaScena);
-            Finestra.show();
+            Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Scene nuovaScena=new Scene(nuovaSchermata);
+            Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+            finestra.setScene(nuovaScena);
+            finestra.show();
 
         }
         @FXML
-        private void LogIn(ActionEvent event) throws IOException {
-            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-            Scene NuovaScena=new Scene(NuovaSchermata);
-            Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-            Finestra.setScene(NuovaScena);
-            Finestra.show();
+        private void logIn(ActionEvent event) throws IOException {
+            Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
+            Scene nuovaScena=new Scene(nuovaSchermata);
+            Stage finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
+            finestra.setScene(nuovaScena);
+            finestra.show();
         }
         @FXML
         private void here(ActionEvent event) throws IOException {
-            Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
-            Scene NuovaScena=new Scene(NuovaSchermata);
-            Stage Finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-            Finestra.setScene(NuovaScena);
-            Finestra.show();
+            Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
+            Scene nuovaScena=new Scene(nuovaSchermata);
+            Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+            finestra.setScene(nuovaScena);
+            finestra.show();
 
 
         }
