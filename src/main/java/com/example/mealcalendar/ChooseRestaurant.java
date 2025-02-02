@@ -11,7 +11,6 @@ public class ChooseRestaurant {
     public ChooseRestaurant() {
 
         logger.info("Filtri non immessi");
-        //System.out.println("Filtri non immessi");
     }
 
 }

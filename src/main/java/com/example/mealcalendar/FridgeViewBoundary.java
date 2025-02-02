@@ -40,14 +40,12 @@ public class FridgeViewBoundary {
 
         // Controllo se l'ingrediente e la quantità sono stati inseriti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
-            //System.out.println("Inserisci nome e quantità dell'ingrediente!");
             logger.info("Inserisci nome e quantità dell'ingrediente!");
             return;
         }
 
         // Verifica se l'ingrediente è valido (presente nell'elenco predefinito)
         if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
-            //System.out.println("Errore: Inserisci un ingrediente valido!");
             logger.info("Errore: Inserisci un ingrediente valido!");
             return;
         }
@@ -60,7 +58,6 @@ public class FridgeViewBoundary {
 
             aggiornaInventario(); // Aggiorniamo la lista dell'inventario
         } catch (NumberFormatException e) {
-            //System.out.println("Errore: Inserisci un numero valido per la quantità!");
             logger.info("Errore: Inserisci un numero valido per la quantità!");
         }
 

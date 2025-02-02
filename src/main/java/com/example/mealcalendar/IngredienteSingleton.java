@@ -49,14 +49,11 @@ public class IngredienteSingleton {
 
     // Metodo per stampare l'inventario
     public void stampaInventario() {
-        //System.out.println("🧊 Contenuto del Frigorifero:");
         logger.info("🧊 Contenuto del Frigorifero:");
         if (inventario.isEmpty()) {
-            //System.out.println("⚠️ Il frigorifero è vuoto!");
             logger.info("⚠️ Il frigorifero è vuoto!");
         } else {
             for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                //System.out.println("- " + entry.getKey() + " | Quantità: " + entry.getValue());
                 logger.info("- " + entry.getKey() + " | Quantità: " + entry.getValue());
             }
         }

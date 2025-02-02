@@ -13,26 +13,26 @@ public class RecipeViewController {
 
     @FXML
     private void addrecipeview(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipeadd-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipeadd-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
     @FXML
     private void editrecipeview(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("recipeedit-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipeedit-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
     @FXML
     private void homeview(ActionEvent event) throws IOException {
-        Parent NuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene NuovaScena = new Scene(NuovaSchermata);
-        Stage Finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Finestra.setScene(NuovaScena);
-        Finestra.show();
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
+        Scene nuovaScena = new Scene(nuovaSchermata);
+        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
     }
 }
