@@ -2,6 +2,7 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ public class FridgeViewBoundary {
 
     private FrigoriferoController frigoriferoController = FrigoriferoController.getInstance();
     private IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
+    Logger logger = Logger.getLogger(getClass().getName());
 
     @FXML
     public void initialize() {
@@ -38,13 +40,15 @@ public class FridgeViewBoundary {
 
         // Controllo se l'ingrediente e la quantità sono stati inseriti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
-            System.out.println("Inserisci nome e quantità dell'ingrediente!");
+            //System.out.println("Inserisci nome e quantità dell'ingrediente!");
+            logger.info("Inserisci nome e quantità dell'ingrediente!");
             return;
         }
 
         // Verifica se l'ingrediente è valido (presente nell'elenco predefinito)
         if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
-            System.out.println("Errore: Inserisci un ingrediente valido!");
+            //System.out.println("Errore: Inserisci un ingrediente valido!");
+            logger.info("Errore: Inserisci un ingrediente valido!");
             return;
         }
 
@@ -56,7 +60,8 @@ public class FridgeViewBoundary {
 
             aggiornaInventario(); // Aggiorniamo la lista dell'inventario
         } catch (NumberFormatException e) {
-            System.out.println("Errore: Inserisci un numero valido per la quantità!");
+            //System.out.println("Errore: Inserisci un numero valido per la quantità!");
+            logger.info("Errore: Inserisci un numero valido per la quantità!");
         }
 
         // Puliamo i campi dopo l'aggiunta

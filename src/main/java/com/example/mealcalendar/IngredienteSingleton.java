@@ -1,8 +1,15 @@
 package com.example.mealcalendar;
 
 import java.util.*;
+import java.util.logging.Logger;
+
 
 public class IngredienteSingleton {
+
+
+    Logger logger = Logger.getLogger(getClass().getName());
+
+
     // Creazione dell'istanza Singleton
     private static IngredienteSingleton instance;
 
@@ -42,12 +49,15 @@ public class IngredienteSingleton {
 
     // Metodo per stampare l'inventario
     public void stampaInventario() {
-        System.out.println("🧊 Contenuto del Frigorifero:");
+        //System.out.println("🧊 Contenuto del Frigorifero:");
+        logger.info("🧊 Contenuto del Frigorifero:");
         if (inventario.isEmpty()) {
-            System.out.println("⚠️ Il frigorifero è vuoto!");
+            //System.out.println("⚠️ Il frigorifero è vuoto!");
+            logger.info("⚠️ Il frigorifero è vuoto!");
         } else {
             for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                System.out.println("- " + entry.getKey() + " | Quantità: " + entry.getValue());
+                //System.out.println("- " + entry.getKey() + " | Quantità: " + entry.getValue());
+                logger.info("- " + entry.getKey() + " | Quantità: " + entry.getValue());
             }
         }
     }

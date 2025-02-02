@@ -3,6 +3,7 @@ module demo {
     requires javafx.fxml;
     requires org.json;
     requires java.desktop;
+    requires java.logging;
 
 
     exports com.example.mealcalendar;
