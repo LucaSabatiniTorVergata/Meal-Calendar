@@ -31,7 +31,6 @@ public class FridgeViewBoundary {
     @FXML
     public void initialize() {
         aggiornaInventario();
-        System.out.println("partitos");
     }
 
     @FXML
