@@ -57,7 +57,8 @@ public class ChooseRestaurantController {
                 String nome = ristorante.getString("name"); // Nome ristorante
                 String indirizzo = ristorante.optString("vicinity", "Indirizzo non disponibile");
                 //Recuperiamo le coordinate GPS (latitudine e longitudine)
-                double lat = 0, lng = 0;
+                double lat = 0;
+                double lng = 0;
                 if (ristorante.has("geometry")) {
                     JSONObject location = ristorante.getJSONObject("geometry").getJSONObject("location");
                     lat = location.getDouble("lat");

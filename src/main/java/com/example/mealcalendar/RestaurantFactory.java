@@ -5,8 +5,8 @@ public class RestaurantFactory {
     private RestaurantFactory () {
     }
 
-    public static RestaurantEntity creaRistorante(String Nome, String Indirizzo, double Lat, double Lng) {
-        return new RestaurantEntity(Nome, Indirizzo, Lat, Lng);
+    public static RestaurantEntity creaRistorante(String nome, String indirizzo, double lat, double lng) {
+        return new RestaurantEntity(nome, indirizzo, lat, lng);
     }
 }
 

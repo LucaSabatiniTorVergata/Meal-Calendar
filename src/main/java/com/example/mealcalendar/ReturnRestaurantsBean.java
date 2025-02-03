@@ -8,11 +8,11 @@ public class ReturnRestaurantsBean {
     private double longitudine;
 
     //costruttore
-    public ReturnRestaurantsBean(String Nome, String Indirizzo, double Latitudine, double Longitudine) {
-        this.nomeRistoranteTrovato = Nome;
-        this.indirizzoRistoranteTrovato = Indirizzo;
-        this.latitudine = Latitudine;
-        this.longitudine = Longitudine;
+    public ReturnRestaurantsBean(String nome, String indirizzo, double latitudine, double longitudine) {
+        this.nomeRistoranteTrovato = nome;
+        this.indirizzoRistoranteTrovato = indirizzo;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
     }
 
 

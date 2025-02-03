@@ -8,10 +8,10 @@ public class FiltersRestaurantBean {
 
 
 
-    public FiltersRestaurantBean(String TipoDieta, String Pasto, double Distanza) {
-        this.tipoDieta = TipoDieta;
-        this.pasto = Pasto;
-        this.distanza = Distanza;
+    public FiltersRestaurantBean(String tipoDieta, String pasto, double distanza) {
+        this.tipoDieta = tipoDieta;
+        this.pasto = pasto;
+        this.distanza = distanza;
     }
 
     public String getTipoDieta() {
