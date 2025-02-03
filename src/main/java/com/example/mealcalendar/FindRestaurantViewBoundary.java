@@ -25,25 +25,25 @@ import java.util.function.UnaryOperator;
 public class FindRestaurantViewBoundary {
 
     @FXML
-    private SplitMenuButton TipoDieta;
+    private SplitMenuButton tipoDieta;
     @FXML
-    private SplitMenuButton Pasto;
+    private SplitMenuButton pasto;
     @FXML
-    private TextField Distanza;
+    private TextField distanza;
 
     @FXML
-    private MenuItem Vegan;
+    private MenuItem vegan;
     @FXML
-    private MenuItem Vegetariana;
+    private MenuItem vegetariana;
     @FXML
-    private MenuItem Omnivora;
+    private MenuItem omnivora;
 
     @FXML
-    private MenuItem Colazione;
+    private MenuItem colazione;
     @FXML
-    private MenuItem Pranzo;
+    private MenuItem pranzo;
     @FXML
-    private MenuItem Cena;
+    private MenuItem cena;
 
     @FXML
     private ListView<ReturnRestaurantsBean> RistorantiListView;// ListView per mostrare i ristoranti
@@ -114,16 +114,16 @@ public class FindRestaurantViewBoundary {
     @FXML
     private void confermafiltri(ActionEvent event) throws IOException {
         // Solo dopo aver premuto "conferma" copiamo i dati
-        if(TipoDieta.getText().equalsIgnoreCase("Onnivoro")){
+        if(tipoDieta.getText().equalsIgnoreCase("Onnivoro")){
             tipoDietaSelezionato = "";
 
         }
         else {
-            tipoDietaSelezionato = TipoDieta.getText();
+            tipoDietaSelezionato = tipoDieta.getText();
         }
 
-        pastoSelezionato = Pasto.getText();
-        distanzaInserita= Double.parseDouble(Distanza.getText());
+        pastoSelezionato = pasto.getText();
+        distanzaInserita= Double.parseDouble(distanza.getText());
         System.out.println("Filtri confermati:");
         System.out.println("Dieta: " + tipoDietaSelezionato);
         System.out.println("Pasto: " + pastoSelezionato);
@@ -133,20 +133,20 @@ public class FindRestaurantViewBoundary {
         ChooseRestaurantController Controller = new ChooseRestaurantController(filtro);
         List<ReturnRestaurantsBean> RistorantiBeans = Controller.trovaRistorante();
 
-        MostraRistoranti(RistorantiBeans);;
+        mostraRistoranti(RistorantiBeans);;
 
     }
 
     @FXML
     public void initialize() throws IOException {
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
-        Vegan.setOnAction(e -> TipoDieta.setText("Vegano"));
-        Vegetariana.setOnAction(e -> TipoDieta.setText("Vegetariano"));
-        Omnivora.setOnAction(e -> TipoDieta.setText("Onnivoro"));
+        vegan.setOnAction(e -> tipoDieta.setText("Vegano"));
+        vegetariana.setOnAction(e -> tipoDieta.setText("Vegetariano"));
+        omnivora.setOnAction(e -> tipoDieta.setText("Onnivoro"));
 
-        Colazione.setOnAction(e -> Pasto.setText("Colazione"));
-        Pranzo.setOnAction(e -> Pasto.setText("Pranzo"));
-        Cena.setOnAction(e -> Pasto.setText("Cena"));
+        colazione.setOnAction(e -> pasto.setText("Colazione"));
+        pranzo.setOnAction(e -> pasto.setText("Pranzo"));
+        cena.setOnAction(e -> pasto.setText("Cena"));
         Pattern validEditingState = Pattern.compile("\\d*"); // Solo cifre
 
         UnaryOperator<TextFormatter.Change> filter = change -> {
@@ -158,16 +158,16 @@ public class FindRestaurantViewBoundary {
         };
 
         TextFormatter<String> textformatter = new TextFormatter<>(filter);
-        Distanza.setTextFormatter(textformatter);
+        distanza.setTextFormatter(textformatter);
     }
     //Metodo per mostrare i ristoranti nella ListView
-    public void MostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
+    public void mostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
         RistorantiListView.getItems().clear();
         this.listaRistoranti=ListaRistoranti;
         RistorantiListView.getItems().addAll(ListaRistoranti);
     }
     //Metodo per aprire Google Maps nel browser con le coordinate
-        private void ApriGoogleMaps(double lat, double lng) {
+        private void apriGoogleMaps(double lat, double lng) {
             String url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
             try {
                 Desktop.getDesktop().browse(new URI(url)); // Apriamo il browser
@@ -184,7 +184,7 @@ public class FindRestaurantViewBoundary {
             int selectedIndex = RistorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean Ristorante = listaRistoranti.get(selectedIndex);
-                ApriGoogleMaps(Ristorante.getLatitudine(), Ristorante.getLongitudine());
+                apriGoogleMaps(Ristorante.getLatitudine(), Ristorante.getLongitudine());
             }
         }
     }
