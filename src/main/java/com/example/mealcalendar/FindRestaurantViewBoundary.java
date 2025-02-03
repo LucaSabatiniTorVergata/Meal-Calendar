@@ -112,6 +112,62 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
+    private void registerGuest(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+
+    @FXML
+    private void loadHomePageGuest(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+    @FXML
+    private void loadHomePageUser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+
+    @FXML
+    private void recipeuser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+    @FXML
+    private void fridgeuser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+    @FXML
+    private void calendaruser(ActionEvent event) throws IOException {
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
+        Scene nuovaScena=new Scene(nuovaSchermata);
+        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
+        finestra.setScene(nuovaScena);
+        finestra.show();
+    }
+
+    @FXML
     private void handleclick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();

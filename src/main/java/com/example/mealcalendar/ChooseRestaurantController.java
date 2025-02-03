@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class ChooseRestaurantController {
 
 
-    private static final String API_KEY = "AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE";
+    private static final String API_KEY = System.getenv("GOOGLE_API_KEY");
     private FiltersRestaurantBean filtro;
 
     public ChooseRestaurantController(FiltersRestaurantBean filtro) {
