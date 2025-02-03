@@ -29,11 +29,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <SplitMenuButton layoutX="91.0" layoutY="283.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="212.0" text="Choose">
+      <SplitMenuButton fx:id="tipoDieta" layoutX="91.0" layoutY="283.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="212.0" text="Choose">
         <items>
-            <MenuItem mnemonicParsing="false" text="omnivorous" />
-          <MenuItem mnemonicParsing="false" text="vegetarian" />
-          <MenuItem mnemonicParsing="false" text="vegan" />
+            <MenuItem fx:id="" mnemonicParsing="false" text="omnivorous" />
+          <MenuItem fx:id="vegetarian" mnemonicParsing="false" text="vegetarian" />
+          <MenuItem fx:id="vegan" mnemonicParsing="false" text="vegan" />
         </items>
          <font>
             <Font name="System Italic" size="22.0" />
@@ -44,11 +44,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <SplitMenuButton layoutX="93.0" layoutY="419.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="206.0" text="Choose">
+      <SplitMenuButton fx:id="tipoPasto" layoutX="93.0" layoutY="419.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="206.0" text="Choose">
         <items>
-          <MenuItem mnemonicParsing="false" text="Colazione" />
-          <MenuItem mnemonicParsing="false" text="Pranzo" />
-            <MenuItem mnemonicParsing="false" text="Cena" />
+          <MenuItem fx:id="breakfast"  mnemonicParsing="false" text="Breakfast" />
+          <MenuItem fx:id="launch" mnemonicParsing="false" text="Launch" />
+            <MenuItem fx:id="dinner" mnemonicParsing="false" text="Dinner" />
         </items>
          <font>
             <Font name="System Italic" size="22.0" />

@@ -18,8 +18,8 @@ public class ChooseRestaurantController {
     private static final String API_KEY = "AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE";
     private FiltersRestaurantBean filtro;
 
-    public ChooseRestaurantController(FiltersRestaurantBean Filtro) {
-        this.filtro=Filtro;
+    public ChooseRestaurantController(FiltersRestaurantBean filtro) {
+        this.filtro=filtro;
     }
 
     public List<ReturnRestaurantsBean> trovaRistorante() throws IOException {
