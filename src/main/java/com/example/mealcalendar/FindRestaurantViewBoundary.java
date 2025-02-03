@@ -22,7 +22,7 @@ import javafx.scene.control.TextFormatter;
 import java.util.function.UnaryOperator;
 
 
-public class FindRestaurantBoundary {
+public class FindRestaurantViewBoundary {
 
     @FXML
     private SplitMenuButton TipoDieta;

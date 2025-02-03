@@ -1,19 +1,16 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class RecipeViewController {
+public class RecipeViewBoundary {
 
     @FXML
     private void addrecipeview(ActionEvent event) throws IOException {

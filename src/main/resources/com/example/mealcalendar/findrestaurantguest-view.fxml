@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.FindRestaurantBoundary">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.FindRestaurantViewBoundary">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Circle fill="#e4f2ff" layoutX="50.0" layoutY="50.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
@@ -47,9 +47,9 @@
       </SplitMenuButton>
       <SplitMenuButton fx:id="Pasto" layoutX="982.0" layoutY="342.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Choose">
          <items>
-            <MenuItem fx:id="Colazione" mnemonicParsing="false" text="Colazione" />
-            <MenuItem fx:id="Pranzo" mnemonicParsing="false" text="Pranzo" />
-            <MenuItem fx:id="Cena" mnemonicParsing="false" text="Cena" />
+            <MenuItem fx:id="Colazione" mnemonicParsing="false" text="Breakfast" />
+            <MenuItem fx:id="Pranzo" mnemonicParsing="false" text="Launch" />
+            <MenuItem fx:id="Cena" mnemonicParsing="false" text="Dinner" />
          </items>
       </SplitMenuButton>
       <Label layoutX="982.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Select type of meal" />
