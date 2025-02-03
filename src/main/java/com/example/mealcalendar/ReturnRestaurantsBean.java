@@ -2,54 +2,54 @@ package com.example.mealcalendar;
 
 public class ReturnRestaurantsBean {
 
-    private String NomeRistoranteTrovato;
-    private String IndirizzoRistoranteTrovato;
-    private double Latitudine;
-    private double Longitudine;
+    private String nomeRistoranteTrovato;
+    private String indirizzoRistoranteTrovato;
+    private double latitudine;
+    private double longitudine;
 
     //costruttore
     public ReturnRestaurantsBean(String Nome, String Indirizzo, double Latitudine, double Longitudine) {
-        this.NomeRistoranteTrovato = Nome;
-        this.IndirizzoRistoranteTrovato = Indirizzo;
-        this.Latitudine = Latitudine;
-        this.Longitudine = Longitudine;
+        this.nomeRistoranteTrovato = Nome;
+        this.indirizzoRistoranteTrovato = Indirizzo;
+        this.latitudine = Latitudine;
+        this.longitudine = Longitudine;
     }
 
 
     public String getNome() {
-        return NomeRistoranteTrovato;
+        return nomeRistoranteTrovato;
     }
 
     public void setNome(String nome) {
-        this.NomeRistoranteTrovato = nome;
+        this.nomeRistoranteTrovato = nome;
     }
 
     public String getIndirizzo() {
-        return IndirizzoRistoranteTrovato;
+        return indirizzoRistoranteTrovato;
     }
 
     public void setIndirizzo(String indirizzo) {
-        this.IndirizzoRistoranteTrovato = indirizzo;
+        this.indirizzoRistoranteTrovato = indirizzo;
     }
 
     public double getLatitudine() {
-        return Latitudine;
+        return latitudine;
     }
 
     public void setLatitudine(double latitudine) {
-        this.Latitudine = latitudine;
+        this.latitudine = latitudine;
     }
 
     public double getLongitudine() {
-        return Longitudine;
+        return longitudine;
     }
 
     public void setLongitudine(double longitudine) {
-        this.Longitudine = longitudine;
+        this.longitudine = longitudine;
     }
 
     @Override
     public String toString() {
-        return "🍽️ " + NomeRistoranteTrovato + " - 📍 " + IndirizzoRistoranteTrovato;
+        return "🍽️ " + nomeRistoranteTrovato + " - 📍 " + indirizzoRistoranteTrovato;
     }
 }

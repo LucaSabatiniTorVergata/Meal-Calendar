@@ -14,23 +14,29 @@ import org.json.JSONObject;
 //coordinate di roma: 41.9028,12.4964
 public class ChooseRestaurantController {
 
-    private static final String API_KEY = "AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE";
 
-    public List<ReturnRestaurantsBean> TrovaRistorante(FiltersRestaurantBean Filtro) throws IOException {
+    private static final String API_KEY = "AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE";
+    private FiltersRestaurantBean filtro;
+
+    public ChooseRestaurantController(FiltersRestaurantBean Filtro) {
+        this.filtro=Filtro;
+    }
+
+    public List<ReturnRestaurantsBean> trovaRistorante() throws IOException {
 
         //Costruzione della query API
-        String UrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
+        String urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
                 "location=41.9028,12.4964" +  // 📍 Posizione fissa (Roma) → Puoi sostituirlo con la posizione dell’utente
-                "&radius=" + (Filtro.getDistanza() * 1000) +  // 🔁 Convertiamo km in metri
+                "&radius=" + (filtro.getDistanza() * 1000) +  // 🔁 Convertiamo km in metri
                 "&type=restaurant" +
-                "&keyword=" + Filtro.getTipoDieta() + "+" + Filtro.getPasto() +  // 🏷️ Filtri della ricerca
+                "&keyword=" + filtro.getTipoDieta() + "+" + filtro.getPasto() +  // 🏷️ Filtri della ricerca
                 "&key=" + API_KEY;
         //Costruzione della query API
-        URL Url = new URL(UrlString);
-        HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+        URL url = new URL(urlString);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         //Lettura della risposta API
-        Scanner scanner = new Scanner(Url.openStream());
+        Scanner scanner = new Scanner(url.openStream());
         StringBuilder response = new StringBuilder();
         while (scanner.hasNext()) {
             response.append(scanner.nextLine());
@@ -40,8 +46,8 @@ public class ChooseRestaurantController {
         JSONObject jsonResponse = new JSONObject(response.toString());
         JSONArray results = jsonResponse.getJSONArray("results");
 
-        RestaurantListSLTPat ListaRistoranti = RestaurantListSLTPat.getInstance();
-        ListaRistoranti.svuotaLista();// Pulisce la lista prima di aggiungere nuovi ristoranti
+        RestaurantListSLTPat listaRistoranti = RestaurantListSLTPat.getInstance();
+        listaRistoranti.svuotaLista();// Pulisce la lista prima di aggiungere nuovi ristoranti
 
         List<ReturnRestaurantsBean> ristorantibeans = new ArrayList<>();
 
@@ -57,11 +63,11 @@ public class ChooseRestaurantController {
                     lat = location.getDouble("lat");
                     lng = location.getDouble("lng");
                 }
-                RestaurantEntity nuovoristorante = RestaurantFactory.CreaRistorante(nome, indirizzo, lat, lng);
-                ListaRistoranti.AggiungiRistorante(nuovoristorante);
+                RestaurantEntity nuovoristorante = RestaurantFactory.creaRistorante(nome, indirizzo, lat, lng);
+                listaRistoranti.aggiungiRistorante(nuovoristorante);
             }
         }
-        ristorantibeans=ListaRistoranti.GetBeansList();
+        ristorantibeans=listaRistoranti.getBeansList();
         return ristorantibeans;
     }
 }

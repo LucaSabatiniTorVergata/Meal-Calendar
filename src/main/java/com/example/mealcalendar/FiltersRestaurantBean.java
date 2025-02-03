@@ -2,27 +2,27 @@ package com.example.mealcalendar;
 
 public class FiltersRestaurantBean {
 
-    private String TipoDieta;
-    private String Pasto;
-    private double Distanza;
+    private String tipoDieta;
+    private String pasto;
+    private double distanza;
 
 
 
     public FiltersRestaurantBean(String TipoDieta, String Pasto, double Distanza) {
-        this.TipoDieta = TipoDieta;
-        this.Pasto = Pasto;
-        this.Distanza = Distanza;
+        this.tipoDieta = TipoDieta;
+        this.pasto = Pasto;
+        this.distanza = Distanza;
     }
 
     public String getTipoDieta() {
-        return TipoDieta;
+        return tipoDieta;
     }
 
     public String getPasto() {
-        return Pasto;
+        return pasto;
     }
 
     public double getDistanza() {
-        return Distanza;
+        return distanza;
     }
 }

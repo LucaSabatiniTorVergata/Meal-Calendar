@@ -18,11 +18,11 @@ public class RestaurantListSLTPat {
         return instance;
     }
 
-    public void AggiungiRistorante(RestaurantEntity ristorante) {
+    public void aggiungiRistorante(RestaurantEntity ristorante) {
         ListaRistoranti.add(ristorante);
     }
 
-    public List<RestaurantEntity> GetRistoranti() {
+    public List<RestaurantEntity> getRistoranti() {
         return ListaRistoranti;
     }
 
@@ -30,7 +30,7 @@ public class RestaurantListSLTPat {
         ListaRistoranti.clear();
     }
 
-    public List<ReturnRestaurantsBean> GetBeansList() {
+    public List<ReturnRestaurantsBean> getBeansList() {
         List<ReturnRestaurantsBean> beansList = new ArrayList<>();
         for (RestaurantEntity ristorante : ListaRistoranti) {
             beansList.add(new ReturnRestaurantsBean(

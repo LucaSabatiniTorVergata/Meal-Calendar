@@ -3,36 +3,36 @@ package com.example.mealcalendar;
 
 public class RestaurantEntity {
 
-    private String Nome;
-    private String Indirizzo;
-    private double Latitudine;
-    private double Longitudine;
+    private String nome;
+    private String indirizzo;
+    private double latitudine;
+    private double longitudine;
 
     public RestaurantEntity(String nome, String indirizzo, double latitudine, double longitudine) {
-        this.Nome = nome;
-        this.Indirizzo = indirizzo;
-        this.Latitudine = latitudine;
-        this.Longitudine = longitudine;
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
     }
     public String getnome() {
-        return Nome;
+        return nome;
     }
 
     public String getindirizzo() {
-        return Indirizzo;
+        return indirizzo;
     }
 
     public double getlatitudine() {
-        return Latitudine;
+        return latitudine;
     }
 
     public double getlongitudine() {
-        return Longitudine;
+        return longitudine;
     }
 
     @Override
     public String toString() {
-        return "🍽️ " + Nome + " - 📍 " + Indirizzo;
+        return "🍽️ " + nome + " - 📍 " + indirizzo;
     }
 
 
