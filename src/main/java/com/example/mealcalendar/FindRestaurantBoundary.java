@@ -54,7 +54,6 @@ public class FindRestaurantBoundary {
 
     private List<ReturnRestaurantsBean> ListaRistoranti;
 
-    private ChooseRestaurantController Controller = new ChooseRestaurantController();
 
     @FXML
     private void loadHomePageGuest(ActionEvent event) throws IOException {
@@ -128,9 +127,10 @@ public class FindRestaurantBoundary {
         System.out.println("Dieta: " + TipoDietaSelezionato);
         System.out.println("Pasto: " + PastoSelezionato);
         System.out.println("Distanza: " + DistanzaInserita + " km");
-        FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
+        FiltersRestaurantBean filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
 
-        List<ReturnRestaurantsBean> RistorantiBeans = Controller.TrovaRistorante(Filtro);
+        ChooseRestaurantController Controller = new ChooseRestaurantController(filtro);
+        List<ReturnRestaurantsBean> RistorantiBeans = Controller.trovaRistorante();
 
         MostraRistoranti(RistorantiBeans);;
 
