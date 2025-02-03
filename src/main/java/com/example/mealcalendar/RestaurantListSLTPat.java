@@ -5,10 +5,10 @@ import java.util.List;
 public class RestaurantListSLTPat {
 
     private static RestaurantListSLTPat instance = null;
-    private List<RestaurantEntity> ListaRistoranti;
+    private List<RestaurantEntity> listaRistoranti;
 
     private RestaurantListSLTPat() {
-        ListaRistoranti = new ArrayList<>();
+        listaRistoranti = new ArrayList<>();
     }
 
     public static RestaurantListSLTPat getInstance () {
@@ -19,20 +19,20 @@ public class RestaurantListSLTPat {
     }
 
     public void aggiungiRistorante(RestaurantEntity ristorante) {
-        ListaRistoranti.add(ristorante);
+        listaRistoranti.add(ristorante);
     }
 
     public List<RestaurantEntity> getRistoranti() {
-        return ListaRistoranti;
+        return listaRistoranti;
     }
 
     public void svuotaLista() {
-        ListaRistoranti.clear();
+        listaRistoranti.clear();
     }
 
     public List<ReturnRestaurantsBean> getBeansList() {
         List<ReturnRestaurantsBean> beansList = new ArrayList<>();
-        for (RestaurantEntity ristorante : ListaRistoranti) {
+        for (RestaurantEntity ristorante : listaRistoranti) {
             beansList.add(new ReturnRestaurantsBean(
                     ristorante.getnome(),
                     ristorante.getindirizzo(),
