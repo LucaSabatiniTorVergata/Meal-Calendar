@@ -99,8 +99,8 @@ public class RecipeViewBoundary {
         launch.setOnAction(e -> tipoPasto.setText("Lunch"));
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
 
-
-
+        RecipeFiltersBean filtro = new RecipeFiltersBean(tipoDietaSelezionato, pastoSelezionato);
+        mostraRicette(ricettebeans);
 
     }
 
