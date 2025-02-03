@@ -15,7 +15,6 @@ import org.json.JSONObject;
 //coordinate di roma: 41.9028,12.4964
 public class ChooseRestaurantController {
 
-    //chiaveapi: AIzaSyDX5EA-t9Bpsmm8VIrhCT9eCgpX-9v5PCE
     private static final String API_KEY = System.getenv("GOOGLE_API_KEY");
 
     private FiltersRestaurantBean filtro;
