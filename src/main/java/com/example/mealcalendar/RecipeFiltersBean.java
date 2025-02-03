@@ -8,7 +8,14 @@ public class RecipeFiltersBean {
     public RecipeFiltersBean(String tipoDieta,String tipoPasto) {
            this.tipoDieta = tipoDieta;
            this.tipoPasto = tipoPasto;
+    }
 
+    public String getTipoDieta() {
+        return tipoDieta;
+    }
+
+    public String getTipoPasto() {
+        return tipoPasto;
     }
 
 }
