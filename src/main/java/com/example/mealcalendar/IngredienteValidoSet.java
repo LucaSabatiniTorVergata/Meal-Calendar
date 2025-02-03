@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class IngredienteValidoSet {
     // Insieme di ingredienti validi (tutti in minuscolo)
-    private static IngredienteValidoSet instance;
+    private static IngredienteValidoSet instance = null;
     private Set<String> ingredientiValidi;
 
     // Costruttore privato per evitare che vengano create altre istanze
