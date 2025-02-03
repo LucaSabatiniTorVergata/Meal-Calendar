@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
@@ -35,6 +36,9 @@ public class RecipeViewBoundary {
     private MenuItem launch;
     @FXML
     private MenuItem dinner;
+
+    @FXML
+    private ListView<ReturnRecipesBean> listaRicetteview;
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
@@ -94,11 +98,16 @@ public class RecipeViewBoundary {
         breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
         launch.setOnAction(e -> tipoPasto.setText("Lunch"));
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
+
+
+
+
     }
 
-    public void mostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
-        RistorantiListView.getItems().clear();
-        this.listaRistoranti=ListaRistoranti;
-        RistorantiListView.getItems().addAll(ListaRistoranti);
+    public void mostraRicette(List<ReturnRecipesBean> listaRicette) {
+        listaRicetteview.getItems().clear();
+        this.listaRicette = listaRicette;
+        listaRicetteview.getItems().addAll(listaRicette);
+    }
 
 }

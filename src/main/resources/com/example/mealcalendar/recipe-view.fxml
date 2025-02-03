@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -13,12 +13,6 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="342.0" layoutX="66.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
-      <Circle fill="#d1d7dc" layoutX="997.0" layoutY="375.0" radius="209.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="925.0" layoutY="351.0" text="IMMAGINE">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Label>
       <Label layoutX="97.0" layoutY="15.0" prefHeight="70.0" prefWidth="398.0" text="FINDING RECIPE...">
          <font>
             <Font name="System Bold Italic" size="41.0" />
@@ -46,7 +40,7 @@
       </Label>
       <SplitMenuButton fx:id="tipoPasto" layoutX="93.0" layoutY="419.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="206.0" text="Choose">
         <items>
-          <MenuItem fx:id="breakfast"  mnemonicParsing="false" text="Breakfast" />
+          <MenuItem fx:id="breakfast" mnemonicParsing="false" text="Breakfast" />
           <MenuItem fx:id="launch" mnemonicParsing="false" text="Launch" />
             <MenuItem fx:id="dinner" mnemonicParsing="false" text="Dinner" />
         </items>
@@ -54,7 +48,7 @@
             <Font name="System Italic" size="22.0" />
          </font>
       </SplitMenuButton>
-      <Button layoutX="70.0" layoutY="602.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #cfac5b;" onAction="#searchrecipies" text="SEARCH">
+      <Button layoutX="70.0" layoutY="602.0" mnemonicParsing="false" onAction="#searchrecipies" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #cfac5b;" text="SEARCH">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -74,5 +68,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <ListView fx:id="listaRicetteview" layoutX="622.0" layoutY="170.0" prefHeight="496.0" prefWidth="608.0" />
    </children>
 </AnchorPane>
