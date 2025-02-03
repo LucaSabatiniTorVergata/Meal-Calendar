@@ -96,7 +96,7 @@ public class FindRestaurantViewBoundary {
         distanza.setTextFormatter(textformatter);
     }
 
-    public void mostraRistoranti(List<ReturnRestaurantsBean> LlstaRistoranti) {
+    public void mostraRistoranti(List<ReturnRestaurantsBean> listaRistoranti) {
         ristorantiListView.getItems().clear();
         this.listaRistoranti = listaRistoranti;
         ristorantiListView.getItems().addAll(listaRistoranti);
