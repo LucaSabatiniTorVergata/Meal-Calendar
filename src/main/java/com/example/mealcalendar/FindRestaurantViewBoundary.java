@@ -46,7 +46,7 @@ public class FindRestaurantViewBoundary {
     private MenuItem cena;
 
     @FXML
-    private ListView<ReturnRestaurantsBean> RistorantiListView;// ListView per mostrare i ristoranti
+    private ListView<ReturnRestaurantsBean> ristorantiListView;// ListView per mostrare i ristoranti
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
@@ -162,9 +162,9 @@ public class FindRestaurantViewBoundary {
     }
     //Metodo per mostrare i ristoranti nella ListView
     public void mostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
-        RistorantiListView.getItems().clear();
+        ristorantiListView.getItems().clear();
         this.listaRistoranti=ListaRistoranti;
-        RistorantiListView.getItems().addAll(ListaRistoranti);
+        ristorantiListView.getItems().addAll(ListaRistoranti);
     }
     //Metodo per aprire Google Maps nel browser con le coordinate
         private void apriGoogleMaps(double lat, double lng) {
@@ -181,7 +181,7 @@ public class FindRestaurantViewBoundary {
     @FXML
     private void handleclick(MouseEvent event) {
         if (event.getClickCount() == 2) { // Doppio click per aprire Google Maps
-            int selectedIndex = RistorantiListView.getSelectionModel().getSelectedIndex();
+            int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean Ristorante = listaRistoranti.get(selectedIndex);
                 apriGoogleMaps(Ristorante.getLatitudine(), Ristorante.getLongitudine());
