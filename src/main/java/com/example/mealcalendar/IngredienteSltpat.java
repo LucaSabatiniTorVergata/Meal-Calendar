@@ -4,27 +4,27 @@ import java.util.*;
 import java.util.logging.Logger;
 
 
-public class IngredienteSingleton {
+public class IngredienteSltpat {
 
 
     Logger logger = Logger.getLogger(getClass().getName());
 
 
     // Creazione dell'istanza Singleton
-    private static IngredienteSingleton instance;
+    private static IngredienteSltpat instance;
 
     // La lista degli ingredienti è rappresentata da una mappa di nome e quantità
     private Map<String, Integer> inventario;
 
     // Costruttore privato per evitare che vengano create altre istanze
-    private IngredienteSingleton() {
+    private IngredienteSltpat() {
         this.inventario = new LinkedHashMap<>();
     }
 
     // Metodo per ottenere l'istanza Singleton
-    public static IngredienteSingleton getInstance() {
+    public static IngredienteSltpat getInstance() {
         if (instance == null) {
-            instance = new IngredienteSingleton(); // Crea l'istanza solo se non esiste già
+            instance = new IngredienteSltpat(); // Crea l'istanza solo se non esiste già
         }
         return instance;
     }

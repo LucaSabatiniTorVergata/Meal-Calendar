@@ -6,11 +6,11 @@ public class FrigoriferoController {
     // Creazione dell'istanza Singleton
     private static FrigoriferoController instance;
 
-    private IngredienteSingleton ingredienteSingleton;
+    private IngredienteSltpat ingredienteSingleton;
 
     // Costruttore privato per evitare che vengano create altre istanze
     private FrigoriferoController() {
-        this.ingredienteSingleton = IngredienteSingleton.getInstance(); // Otteniamo l'istanza unica della lista
+        this.ingredienteSingleton = IngredienteSltpat.getInstance(); // Otteniamo l'istanza unica della lista
     }
 
     // Metodo per ottenere l'istanza Singleton
