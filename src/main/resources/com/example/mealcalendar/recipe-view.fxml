@@ -31,7 +31,7 @@
       </Label>
       <SplitMenuButton fx:id="tipoDieta" layoutX="91.0" layoutY="283.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="212.0" text="Choose">
         <items>
-            <MenuItem fx:id="" mnemonicParsing="false" text="omnivorous" />
+            <MenuItem fx:id="omnivorous" mnemonicParsing="false" text="omnivorous" />
           <MenuItem fx:id="vegetarian" mnemonicParsing="false" text="vegetarian" />
           <MenuItem fx:id="vegan" mnemonicParsing="false" text="vegan" />
         </items>
@@ -54,7 +54,7 @@
             <Font name="System Italic" size="22.0" />
          </font>
       </SplitMenuButton>
-      <Button layoutX="70.0" layoutY="602.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #cfac5b;" text="SEARCH">
+      <Button layoutX="70.0" layoutY="602.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #cfac5b;" onAction="#searchrecipies" text="SEARCH">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

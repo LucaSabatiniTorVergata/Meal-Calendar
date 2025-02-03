@@ -121,6 +121,7 @@ public class FindRestaurantViewBoundary {
         else {
             tipoDietaSelezionato = TipoDieta.getText();
         }
+
         pastoSelezionato = Pasto.getText();
         distanzaInserita= Double.parseDouble(Distanza.getText());
         System.out.println("Filtri confermati:");
