@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import javafx.scene.control.ListView;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.scene.control.TextFormatter;
@@ -25,7 +26,8 @@ import java.util.function.UnaryOperator;
 
 public class FindRestaurantBoundary {
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private static final Logger LOGGER = Logger.getLogger(FindRestaurantBoundary.class.getName());
+
 
     @FXML
     private SplitMenuButton TipoDieta;
@@ -129,10 +131,11 @@ public class FindRestaurantBoundary {
         }
         PastoSelezionato = Pasto.getText();
         DistanzaInserita= Double.parseDouble(Distanza.getText());
-        logger.info("Filtri confermati:");
-        logger.info("Dieta: " + TipoDietaSelezionato);
-        logger.info("Pasto: " + PastoSelezionato);
-        logger.info("Distanza: " + DistanzaInserita + " km");
+        LOGGER.log(Level.INFO, "Filtri confermati:");
+        LOGGER.log(Level.INFO, "Dieta: {0}", TipoDietaSelezionato);
+        LOGGER.log(Level.INFO, "Pasto: {0}", PastoSelezionato);
+        LOGGER.log(Level.INFO, "Distanza: {0} km", DistanzaInserita);
+
         FiltersRestaurantBean Filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
 
         List<ReturnRestaurantsBean> RistorantiBeans = Controller.TrovaRistorante(Filtro);
