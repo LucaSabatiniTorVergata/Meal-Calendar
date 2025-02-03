@@ -11,7 +11,7 @@ public class IngredienteSltpat {
 
 
     // Creazione dell'istanza Singleton
-    private static IngredienteSltpat instance;
+    private static IngredienteSltpat instance = null;
 
     // La lista degli ingredienti è rappresentata da una mappa di nome e quantità
     private Map<String, Integer> inventario;
