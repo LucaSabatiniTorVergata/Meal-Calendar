@@ -24,7 +24,7 @@ public class FridgeViewBoundary {
     @FXML
     private ListView<String> listaInventario;
 
-    private FrigoriferoController frigoriferoController = FrigoriferoController.getInstance();
+    private FrigoriferoController frigoriferoController = new FrigoriferoController();
     private IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     Logger logger = Logger.getLogger(getClass().getName());
 
