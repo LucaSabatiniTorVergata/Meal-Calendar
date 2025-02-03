@@ -123,7 +123,7 @@ public class FindRestaurantViewBoundary {
 
     @FXML
     private void loadHomePageGuest(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu.fxml"));
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
         Scene nuovaScena=new Scene(nuovaSchermata);
         Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
         finestra.setScene(nuovaScena);
@@ -132,7 +132,7 @@ public class FindRestaurantViewBoundary {
 
     @FXML
     private void loadHomePageUser(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu.fxml"));
+        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
         Scene nuovaScena=new Scene(nuovaSchermata);
         Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
         finestra.setScene(nuovaScena);
