@@ -40,7 +40,7 @@ public class ChooseRestaurantController {
         JSONObject jsonResponse = new JSONObject(response.toString());
         JSONArray results = jsonResponse.getJSONArray("results");
 
-        RestaurantListSingletonPattern ListaRistoranti = RestaurantListSingletonPattern.getInstance();
+        RestaurantListSLTPat ListaRistoranti = RestaurantListSLTPat.getInstance();
         ListaRistoranti.svuotaLista();// Pulisce la lista prima di aggiungere nuovi ristoranti
 
         List<ReturnRestaurantsBean> ristorantibeans = new ArrayList<>();

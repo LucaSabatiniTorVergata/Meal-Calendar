@@ -1,20 +1,19 @@
 package com.example.mealcalendar;
-import java.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantListSingletonPattern {
+public class RestaurantListSLTPat {
 
-    private static RestaurantListSingletonPattern instance = null;
+    private static RestaurantListSLTPat instance = null;
     private List<RestaurantEntity> ListaRistoranti;
 
-    private RestaurantListSingletonPattern() {
+    private RestaurantListSLTPat() {
         ListaRistoranti = new ArrayList<>();
     }
 
-    public static RestaurantListSingletonPattern getInstance () {
+    public static RestaurantListSLTPat getInstance () {
         if (instance == null) {
-            instance = new RestaurantListSingletonPattern();
+            instance = new RestaurantListSLTPat();
         }
         return instance;
     }
