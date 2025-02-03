@@ -83,7 +83,12 @@ public class RecipeViewBoundary {
 
         pastoSelezionato=tipoPasto.getText();
 
+        RecipeFiltersBean fitri= new RecipeFiltersBean(tipoDietaSelezionato,pastoSelezionato);
+        RecipeSearchController controller= new RecipeSearchController(fitri);
 
+        //List<ReturnRecipesBean> recipesBeans=controller.trovaRicette();
+
+        //mostraRicette(recipesBeans);
     }
 
 
@@ -100,7 +105,7 @@ public class RecipeViewBoundary {
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
 
         RecipeFiltersBean filtro = new RecipeFiltersBean(tipoDietaSelezionato, pastoSelezionato);
-        
+
 
     }
 
