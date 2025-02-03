@@ -48,11 +48,11 @@ public class FindRestaurantBoundary {
     @FXML
     private ListView<ReturnRestaurantsBean> RistorantiListView;// ListView per mostrare i ristoranti
 
-    private String TipoDietaSelezionato;
-    private String PastoSelezionato;
-    private double DistanzaInserita;
+    private String tipoDietaSelezionato;
+    private String pastoSelezionato;
+    private double distanzaInserita;
 
-    private List<ReturnRestaurantsBean> ListaRistoranti;
+    private List<ReturnRestaurantsBean> listaRistoranti;
 
 
     @FXML
@@ -115,19 +115,19 @@ public class FindRestaurantBoundary {
     private void confermafiltri(ActionEvent event) throws IOException {
         // Solo dopo aver premuto "conferma" copiamo i dati
         if(TipoDieta.getText().equalsIgnoreCase("Onnivoro")){
-            TipoDietaSelezionato = "";
+            tipoDietaSelezionato = "";
 
         }
         else {
-            TipoDietaSelezionato = TipoDieta.getText();
+            tipoDietaSelezionato = TipoDieta.getText();
         }
-        PastoSelezionato = Pasto.getText();
-        DistanzaInserita= Double.parseDouble(Distanza.getText());
+        pastoSelezionato = Pasto.getText();
+        distanzaInserita= Double.parseDouble(Distanza.getText());
         System.out.println("Filtri confermati:");
-        System.out.println("Dieta: " + TipoDietaSelezionato);
-        System.out.println("Pasto: " + PastoSelezionato);
-        System.out.println("Distanza: " + DistanzaInserita + " km");
-        FiltersRestaurantBean filtro = new FiltersRestaurantBean(TipoDietaSelezionato, PastoSelezionato, DistanzaInserita);
+        System.out.println("Dieta: " + tipoDietaSelezionato);
+        System.out.println("Pasto: " + pastoSelezionato);
+        System.out.println("Distanza: " + distanzaInserita + " km");
+        FiltersRestaurantBean filtro = new FiltersRestaurantBean(tipoDietaSelezionato, pastoSelezionato, distanzaInserita);
 
         ChooseRestaurantController Controller = new ChooseRestaurantController(filtro);
         List<ReturnRestaurantsBean> RistorantiBeans = Controller.trovaRistorante();
@@ -162,7 +162,7 @@ public class FindRestaurantBoundary {
     //Metodo per mostrare i ristoranti nella ListView
     public void MostraRistoranti(List<ReturnRestaurantsBean> ListaRistoranti) {
         RistorantiListView.getItems().clear();
-        this.ListaRistoranti=ListaRistoranti;
+        this.listaRistoranti=ListaRistoranti;
         RistorantiListView.getItems().addAll(ListaRistoranti);
     }
     //Metodo per aprire Google Maps nel browser con le coordinate
@@ -182,7 +182,7 @@ public class FindRestaurantBoundary {
         if (event.getClickCount() == 2) { // Doppio click per aprire Google Maps
             int selectedIndex = RistorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
-                ReturnRestaurantsBean Ristorante = ListaRistoranti.get(selectedIndex);
+                ReturnRestaurantsBean Ristorante = listaRistoranti.get(selectedIndex);
                 ApriGoogleMaps(Ristorante.getLatitudine(), Ristorante.getLongitudine());
             }
         }
