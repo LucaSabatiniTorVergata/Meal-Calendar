@@ -14,6 +14,11 @@ public class HelloViewController {
 
     @FXML
     private Button quibutton;
+    @FXML
+    private Button register;
+    @FXML
+    private Button login;
+
 
     @FXML
     private void guestmenuview(ActionEvent event) throws IOException  {
@@ -24,20 +29,16 @@ public class HelloViewController {
 
     @FXML
     private void loginview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+
+        Stage stage = (Stage) login.getScene().getWindow();
+        GraphicController.cambiascena(stage, "login-view.fxml");
     }
 
     @FXML
     private void register(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("checkout-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-       finestra.show();
+
+        Stage stage = (Stage) register.getScene().getWindow();
+        GraphicController.cambiascena(stage, "checkout-view.fxml");
     }
 
 }
