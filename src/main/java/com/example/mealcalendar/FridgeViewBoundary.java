@@ -13,9 +13,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 
 public class FridgeViewBoundary {
+
+    @FXML
+    private Button home;
 
     @FXML
     private TextField txtIngrediente;
@@ -81,10 +85,8 @@ public class FridgeViewBoundary {
 
     @FXML
     private void backview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene nuovaScena = new Scene(nuovaSchermata);
-        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+
+        Stage stage = (Stage) home.getScene().getWindow();
+        GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 }

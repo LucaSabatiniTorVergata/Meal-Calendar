@@ -35,7 +35,7 @@
       <TextField fx:id="txtIngrediente" layoutX="160.0" layoutY="366.0" prefHeight="26.0" prefWidth="172.0" promptText="Ingrediente" />
       <Label layoutX="211.0" layoutY="238.0" prefHeight="38.0" prefWidth="85.0" text="FRIGORIFERO" />
       <Label layoutX="154.0" layoutY="340.0" text="Inserisci un ingrediente" />
-      <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#backview" prefHeight="26.0" prefWidth="48.0" text="BACK">
+      <Button fx:id="home" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#backview" prefHeight="26.0" prefWidth="48.0" text="BACK">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

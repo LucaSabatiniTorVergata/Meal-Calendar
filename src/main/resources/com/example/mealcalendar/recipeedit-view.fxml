@@ -11,7 +11,7 @@
     <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
         <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="442.0" layoutX="71.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" width="463.0" />
-        <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="BACK" onAction="#backview">
+        <Button fx:id="ritorno" layoutX="10.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="BACK" onAction="#backview">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -43,7 +43,7 @@
                 <Font name="System Bold" size="26.0" />
             </font>
         </Label>
-      <Button layoutX="70.0" layoutY="640.0" mnemonicParsing="false" onAction="#recipeedit2view" prefHeight="50.0" prefWidth="178.0" style="-fx-background-color: #cfac5b;" text="EDIT">
+      <Button fx:id="recipeEdit2" layoutX="70.0" layoutY="640.0" mnemonicParsing="false" onAction="#recipeedit2view" prefHeight="50.0" prefWidth="178.0" style="-fx-background-color: #cfac5b;" text="EDIT">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

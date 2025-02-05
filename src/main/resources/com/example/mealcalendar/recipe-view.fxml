@@ -53,17 +53,17 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="882.0" layoutY="39.0" mnemonicParsing="false" onAction="#addrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe">
+      <Button fx:id="addrecipe" layoutX="882.0" layoutY="39.0" mnemonicParsing="false" onAction="#addrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" onAction="#editrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe">
+      <Button fx:id="editrecipe" layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" onAction="#editrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeview" text="HOME">
+      <Button fx:id="returnhome" layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeview" text="HOME">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

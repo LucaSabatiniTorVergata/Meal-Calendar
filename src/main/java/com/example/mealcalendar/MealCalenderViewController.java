@@ -8,15 +8,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 public class MealCalenderViewController {
 
     @FXML
+    private Button backhome;
+
+    @FXML
     private void homeview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene nuovaScena = new Scene(nuovaSchermata);
-        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+
+        Stage stage = (Stage) backhome.getScene().getWindow();
+        GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 }

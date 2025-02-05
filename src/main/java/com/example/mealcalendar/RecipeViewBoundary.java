@@ -14,8 +14,17 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 public class RecipeViewBoundary {
+
+    @FXML
+    private Button addrecipe;
+    @FXML
+    private Button editrecipe;
+    @FXML
+    private Button returnhome;
+
 
     @FXML
     private SplitMenuButton tipoDieta;
@@ -43,32 +52,26 @@ public class RecipeViewBoundary {
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
 
-    private List<ReturnRecipesBean> listaRicette;
+
 
     @FXML
-    private void addrecipeview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipeadd-view.fxml"));
-        Scene nuovaScena = new Scene(nuovaSchermata);
-        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+    private void addrecipeview(ActionEvent event) {
 
+        Stage stage = (Stage) addrecipe.getScene().getWindow();
+        GraphicController.cambiascena(stage, "recipeadd-view.fxml");
     }
+
     @FXML
     private void editrecipeview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipeedit-view.fxml"));
-        Scene nuovaScena = new Scene(nuovaSchermata);
-        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+
+        Stage stage = (Stage) editrecipe.getScene().getWindow();
+        GraphicController.cambiascena(stage, "recipeedit-view.fxml");
     }
     @FXML
     private void homeview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene nuovaScena = new Scene(nuovaSchermata);
-        Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+
+        Stage stage = (Stage) returnhome.getScene().getWindow();
+        GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
     @FXML
@@ -110,10 +113,6 @@ public class RecipeViewBoundary {
 
     }
 
-    public void mostraRicette(List<ReturnRecipesBean> listaRicette) {
-        listaRicetteview.getItems().clear();
-        this.listaRicette = listaRicette;
-        listaRicetteview.getItems().addAll(listaRicette);
-    }
+
 
 }
