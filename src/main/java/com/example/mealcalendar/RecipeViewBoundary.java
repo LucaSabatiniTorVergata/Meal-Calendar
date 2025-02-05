@@ -52,6 +52,7 @@ public class RecipeViewBoundary {
         Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
         finestra.setScene(nuovaScena);
         finestra.show();
+
     }
     @FXML
     private void editrecipeview(ActionEvent event) throws IOException {
@@ -84,7 +85,7 @@ public class RecipeViewBoundary {
         pastoSelezionato=tipoPasto.getText();
 
         RecipeFiltersBean fitri= new RecipeFiltersBean(tipoDietaSelezionato,pastoSelezionato);
-        RecipeSearchController controller= new RecipeSearchController(fitri);
+        //RecipeSearchController controller= new RecipeSearchController(fitri);
 
         //List<ReturnRecipesBean> recipesBeans=controller.trovaRicette();
 
