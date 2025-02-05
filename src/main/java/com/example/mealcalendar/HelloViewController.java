@@ -16,7 +16,7 @@ public class HelloViewController {
     private Button quibutton;
 
     @FXML
-    private void guestmenuview(ActionEvent event)  {
+    private void guestmenuview(ActionEvent event) throws IOException  {
 
         Stage stage = (Stage) quibutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "guestmenu-view.fxml");

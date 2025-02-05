@@ -19,6 +19,8 @@ public class IngredienteValidoSet {
         ingredientiValidi.add("sale");
         ingredientiValidi.add("pepe");
         ingredientiValidi.add("farina");
+        ingredientiValidi.add("mandarancio");
+        ingredientiValidi.add("ravanellus");
         // Aggiungi qui gli ingredienti che desideri
     }
 

@@ -19,13 +19,13 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantGuest" style="-fx-background-color: 000000;" text="Find restaurant">
+      <Button fx:id="findrestaurantbutton" layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantGuest" style="-fx-background-color: 000000;" text="Find restaurant">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
-      <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
-      <Button layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Set eating time" textFill="#9e8686" />
+      <Button fx:id="homebutton" layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
+      <Button fx:id="homebutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
+      <Button fx:id="homebutton" layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: 000000;" text="Set eating time" textFill="#9e8686" />
       <Button layoutX="1169.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Help">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -63,7 +63,7 @@
             <Font name="Chalkboard" size="44.0" />
          </font>
       </Label>
-      <Button layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" onAction="#goHome" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
+      <Button fx:id="homebutton" layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" onAction="#goHome" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
       <Button layoutX="228.0" layoutY="40.0" mnemonicParsing="false" onAction="#goHome" text="back" />
    </children>
 </AnchorPane>

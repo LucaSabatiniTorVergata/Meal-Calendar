@@ -17,19 +17,19 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
+        <Button fx:id="findrestaurantbutton" layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFindRecpe" style="-fx-background-color: 000000;" text="Find recipe">
+        <Button fx:id="findrecipebutton" layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFindRecpe" style="-fx-background-color: 000000;" text="Find recipe">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFrigeMenu" style="-fx-background-color: 000000;" text="Fill fridge">
+        <Button fx:id="fillfridgebutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFrigeMenu" style="-fx-background-color: 000000;" text="Fill fridge">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadCalendarMenu" style="-fx-background-color: 000000;" text="Set eating time">
+        <Button fx:id="seteatingtimebutton" layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadCalendarMenu" style="-fx-background-color: 000000;" text="Set eating time">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -69,6 +69,6 @@
             <Image url="@../../../pictures/gulyx.png" />
          </image>
       </ImageView>
-      <Button layoutX="222.0" layoutY="40.0" mnemonicParsing="false" onAction="#goBack" text="back " />
+      <Button fx:id="backbutton" layoutX="222.0" layoutY="40.0" mnemonicParsing="false" onAction="#goBack" text="back " />
     </children>
 </AnchorPane>
