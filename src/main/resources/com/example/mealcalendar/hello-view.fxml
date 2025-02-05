@@ -28,6 +28,6 @@
       <Button layoutX="869.0" layoutY="551.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="100.0" text="register" />
       <Button layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" onAction="#loginview" prefHeight="26.0" prefWidth="100.0" text="login" />
       <Label layoutX="918.0" layoutY="625.0" text="clicca                  per entrare come guest" />
-      <Button layoutX="954.0" layoutY="621.0" mnemonicParsing="false" onAction="#guestmenuview" prefHeight="23.0" prefWidth="42.0" text="QUI" />
+      <Button fx:id="quibutton" layoutX="954.0" layoutY="621.0" mnemonicParsing="false" onAction="#guestmenuview" prefHeight="23.0" prefWidth="42.0" text="QUI" />
    </children>
 </AnchorPane>

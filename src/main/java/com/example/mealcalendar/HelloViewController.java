@@ -8,17 +8,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 public class HelloViewController {
 
     @FXML
-    private void guestmenuview(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra=(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+    private Button quibutton;
+
+    @FXML
+    private void guestmenuview(ActionEvent event)  {
+
+        Stage stage = (Stage) quibutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "guestmenu-view.fxml");
     }
+
     @FXML
     private void loginview(ActionEvent event) throws IOException {
         Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("login-view.fxml"));
@@ -36,6 +39,7 @@ public class HelloViewController {
         finestra.setScene(nuovaScena);
        finestra.show();
     }
+
 }
 
 
