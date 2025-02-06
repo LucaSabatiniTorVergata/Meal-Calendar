@@ -17,12 +17,21 @@ public class RecipeAddController {
          String nome= bean.getRecipeName();
          String dieta= bean.getTypeofDiet();
          String pasto= bean.getTypeofMeal();
-         double numingredienti=bean.getNumIngredients();
+         String numingredienti=bean.getNumIngredients();
          String ingredienti= bean.getIngredients();
          String descrizione= bean.getDescription();
          String autore= bean.getAuthor();
 
+        RecipeDaoFS dao = new RecipeDaoFS();
+        RecipeEntity newrecipe = new RecipeEntity(nome,dieta,pasto,numingredienti,ingredienti,descrizione,autore);
+        if(dao.addRecipe(newrecipe)){
 
+            return true;
+        }
+        else {
+
+            return false;
+        }
 
     }
 }

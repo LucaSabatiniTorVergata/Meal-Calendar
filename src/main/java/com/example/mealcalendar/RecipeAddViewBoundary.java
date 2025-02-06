@@ -70,11 +70,11 @@ public class RecipeAddViewBoundary {
     }
 
     @FXML
-    private void handleAddRecipe(ActionEvent event) {
+    private void handleAddRecipe(ActionEvent event) throws IOException {
         String name = recipename.getText().trim();
         String diet = (dietMenu.getText().equals("Seleziona dieta")) ? "" : dietMenu.getText();
         String meal = (mealMenu.getText().equals("Seleziona pasto")) ? "" : mealMenu.getText();
-        double numIngredients = Double.parseDouble(recipeNumIngredients.getText());
+        String numIngredients = (recipeNumIngredients.getText());
         String ingredients = recipeIngredients.getText().trim();
         String description = recipeDesc.getText().trim();
         String author = SessionManagerSLT.getInstance().getLoggedInUsername();
