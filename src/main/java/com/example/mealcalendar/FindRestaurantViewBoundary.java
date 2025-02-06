@@ -1,6 +1,8 @@
 package com.example.mealcalendar;
 
 import javafx.scene.input.MouseEvent;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import java.awt.Desktop;
+import javafx.scene.control.Button;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,6 +56,19 @@ public class FindRestaurantViewBoundary {
 
     @FXML
     private ListView<ReturnRestaurantsBean> ristorantiListView;
+
+    @FXML
+    private Button homebutton;
+
+    @FXML
+    private Button registerbutton;
+
+    @FXML
+    private Button findrecipebutton;
+    @FXML
+    private Button seteatingtimebutton;
+    @FXML
+    private Button fillfridgebutton;
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
@@ -123,58 +138,40 @@ public class FindRestaurantViewBoundary {
 
     @FXML
     private void registerGuest(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+        Stage stage = (Stage)registerbutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "hello-view.fxml");
     }
 
 
     @FXML
-    private void loadHomePageGuest(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("guestmenu-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+    private void loadHomePageGuest(ActionEvent event) {
+        Stage stage = (Stage)homebutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "guestmenu-view.fxml");
     }
 
     @FXML
     private void loadHomePageUser(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("usermenu-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+        Stage stage = (Stage)homebutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
 
     @FXML
     private void recipeuser(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("recipe-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+        Stage stage = (Stage)findrecipebutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "recipelist-view.fxml");
     }
 
     @FXML
     private void fridgeuser(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("fridge-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+        Stage stage = (Stage)fillfridgebutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "fridge-view.fxml");
     }
 
     @FXML
     private void calendaruser(ActionEvent event) throws IOException {
-        Parent nuovaSchermata = FXMLLoader.load(getClass().getResource("mealcalendar-view.fxml"));
-        Scene nuovaScena=new Scene(nuovaSchermata);
-        Stage finestra =(Stage)((Node)event.getSource()).getScene().getWindow();
-        finestra.setScene(nuovaScena);
-        finestra.show();
+        Stage stage = (Stage)seteatingtimebutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
     @FXML
