@@ -13,6 +13,9 @@ import java.io.IOException;
 
 public class RecipeAddController {
 
+
+    RecipeDaoFS dao = new RecipeDaoFS();
+
     public boolean salvaricetta(AddRecipeBean bean)throws IOException{
          String nome= bean.getRecipeName();
          String dieta= bean.getTypeofDiet();
@@ -22,7 +25,7 @@ public class RecipeAddController {
          String descrizione= bean.getDescription();
          String autore= bean.getAuthor();
 
-        RecipeDaoFS dao = new RecipeDaoFS();
+
         RecipeEntity newrecipe = new RecipeEntity(nome,dieta,pasto,numingredienti,ingredienti,descrizione,autore);
         if(dao.addRecipe(newrecipe)){
 
