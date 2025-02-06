@@ -33,7 +33,6 @@ public class HelloViewController {
     @FXML
     private Label messageLabel;
 
-    private RegisterController controller = new RegisterController();
 
     @FXML
     private void guestmenuview(ActionEvent event) throws IOException  {
