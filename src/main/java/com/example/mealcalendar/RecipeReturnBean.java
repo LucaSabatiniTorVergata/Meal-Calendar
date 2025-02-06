@@ -1,4 +1,4 @@
 package com.example.mealcalendar;
 
-public class ReturnRecipesBean {
+public class RecipeReturnBean {
 }

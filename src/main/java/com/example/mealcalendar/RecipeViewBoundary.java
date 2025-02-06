@@ -1,20 +1,15 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
-import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import java.util.List;
 
 public class RecipeViewBoundary {
 
@@ -47,7 +42,9 @@ public class RecipeViewBoundary {
     private MenuItem dinner;
 
     @FXML
-    private ListView<ReturnRecipesBean> listaRicetteview;
+    private ListView<RecipeReturnBean> listaRicetteview;
+
+    private List<RecipeReturnBean> listaricette;
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
@@ -76,13 +73,6 @@ public class RecipeViewBoundary {
 
 
     @FXML
-    private void backView(ActionEvent event) throws IOException {
-
-        Stage stage = (Stage) returnhome.getScene().getWindow();
-        GraphicController.cambiascena(stage, "usermenu-view.fxml");
-    }
-
-    @FXML
     private void searchrecipies(ActionEvent event) throws IOException {
 
         if(tipoDieta.getText().equalsIgnoreCase("Onnivorous")){
@@ -95,12 +85,13 @@ public class RecipeViewBoundary {
 
         pastoSelezionato=tipoPasto.getText();
 
-        RecipeFiltersBean fitri= new RecipeFiltersBean(tipoDietaSelezionato,pastoSelezionato);
-        //RecipeSearchController controller= new RecipeSearchController(fitri);
+        RecipeSearchFiltersBean bean=new RecipeSearchFiltersBean(tipoDietaSelezionato,pastoSelezionato);
+        RecipeSearchController controller=new RecipeSearchController(bean);
 
-        //List<ReturnRecipesBean> recipesBeans=controller.trovaRicette();
+        List<RecipeReturnBean> ricettereturnbean=controller.trovaricette();
 
-        //mostraRicette(recipesBeans);
+        mostraricette(ricettereturnbean);
+
     }
 
 
@@ -115,12 +106,13 @@ public class RecipeViewBoundary {
         breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
         launch.setOnAction(e -> tipoPasto.setText("Lunch"));
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
-
-        RecipeFiltersBean filtro = new RecipeFiltersBean(tipoDietaSelezionato, pastoSelezionato);
-
-
     }
 
+    public void mostraricette(List<RecipeReturnBean> listaRicette) {
+        listaRicetteview.getItems().clear();
+        this.listaricette = listaRicette;
+        listaRicetteview.getItems().addAll(listaricette);
+    }
 
 
 }

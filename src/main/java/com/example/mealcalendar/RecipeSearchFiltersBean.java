@@ -1,11 +1,11 @@
 package com.example.mealcalendar;
 
-public class RecipeFiltersBean {
+public class RecipeSearchFiltersBean {
 
     private String tipoDieta;
     private String tipoPasto;
 
-    public RecipeFiltersBean(String tipoDieta,String tipoPasto) {
+    public RecipeSearchFiltersBean(String tipoDieta, String tipoPasto) {
            this.tipoDieta = tipoDieta;
            this.tipoPasto = tipoPasto;
     }
