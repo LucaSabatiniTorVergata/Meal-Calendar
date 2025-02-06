@@ -5,12 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.MealCalenderViewController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.MealCalenderViewBoundary">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" layoutY="-14.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
       <Label layoutX="96.0" prefHeight="87.0" prefWidth="619.0" text="SETTING EATING TIME..">
@@ -24,10 +25,10 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <SplitMenuButton layoutX="115.0" layoutY="212.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="274.0" text="Choose">
+      <SplitMenuButton fx:id="posizione" layoutX="115.0" layoutY="212.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="274.0" text="Choose">
         <items>
-          <MenuItem mnemonicParsing="false" text="Home" />
-          <MenuItem mnemonicParsing="false" text="Restaurant" />
+          <MenuItem fx:id="home" mnemonicParsing="false" text="Home" />
+          <MenuItem fx:id="restaurant" mnemonicParsing="false" text="Restaurant" />
         </items>
          <font>
             <Font name="System Italic" size="20.0" />
@@ -48,36 +49,8 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <DatePicker layoutX="112.0" layoutY="540.0" prefHeight="46.0" prefWidth="268.0" promptText="Choose" style="-fx-background-color: #c9c4c4;" />
-      <SplitMenuButton layoutX="118.0" layoutY="381.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="174.0" text="Time">
-        <items>
-            <MenuItem mnemonicParsing="false" text="01:00" />
-          <MenuItem mnemonicParsing="false" text="02:00" />
-          <MenuItem mnemonicParsing="false" text="03:00" />
-            <MenuItem mnemonicParsing="false" text="04:00" />
-            <MenuItem mnemonicParsing="false" text="05:00" />
-            <MenuItem mnemonicParsing="false" text="06:00" />
-            <MenuItem mnemonicParsing="false" text="07:00" />
-            <MenuItem mnemonicParsing="false" text="08:00" />
-            <MenuItem mnemonicParsing="false" text="09:00" />
-            <MenuItem mnemonicParsing="false" text="10:00" />
-            <MenuItem mnemonicParsing="false" text="11:00" />
-            <MenuItem mnemonicParsing="false" text="12:00" />
-        </items>
-         <font>
-            <Font name="System Italic" size="20.0" />
-         </font>
-      </SplitMenuButton>
-      <SplitMenuButton layoutX="318.0" layoutY="382.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="AM/PM">
-        <items>
-          <MenuItem mnemonicParsing="false" text="AM" />
-          <MenuItem mnemonicParsing="false" text="PM" />
-        </items>
-         <font>
-            <Font size="20.0" />
-         </font>
-      </SplitMenuButton>
-      <Button layoutX="85.0" layoutY="664.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="211.0" style="-fx-background-color: #dcc08c;" text="Conferma">
+      <DatePicker fx:id="calendar" layoutX="112.0" layoutY="540.0" prefHeight="46.0" prefWidth="268.0" promptText="Choose" style="-fx-background-color: #c9c4c4;" />
+      <Button fx:id="confirmButton" layoutX="85.0" layoutY="664.0" mnemonicParsing="false" onAction="#confirmChoise" prefHeight="45.0" prefWidth="211.0" style="-fx-background-color: #dcc08c;" text="Conferma">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -88,5 +61,6 @@
             <Font size="26.0" />
          </font>
       </Label>
+      <TextField fx:id="timeField" layoutX="128.0" layoutY="392.0" promptText="00:00-23:59" />
    </children>
 </AnchorPane>
