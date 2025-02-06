@@ -1,0 +1,2 @@
+luca:lucagmail:$2a$10$nlV5yvUfMdIPayNEFBynoePBZkEDBl/cPT2TO/l5zL1VSIFzl7si.
+duce:duce@lux.it:$2a$10$8klNVUd/87RdyNVJ26JsUuHgdWLM1DFRIArkCd3qgOk5xeHL1uUA.
