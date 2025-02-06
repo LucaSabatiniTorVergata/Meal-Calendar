@@ -42,7 +42,7 @@ public class RecipeViewBoundary {
     private MenuItem dinner;
 
     @FXML
-    private ListView<RecipeReturnBean> listaRicetteview;
+    private ListView<String> listaRicetteview;
 
     private List<RecipeReturnBean> listaricette;
 
@@ -75,23 +75,18 @@ public class RecipeViewBoundary {
     @FXML
     private void searchrecipies(ActionEvent event) throws IOException {
 
-        if(tipoDieta.getText().equalsIgnoreCase("Onnivorous")){
-            tipoDietaSelezionato = "";
-
-        }
-        else {
-            tipoDietaSelezionato = tipoDieta.getText();
-        }
-
-        pastoSelezionato=tipoPasto.getText();
+        tipoDietaSelezionato = tipoDieta.getText();
+        pastoSelezionato= tipoPasto.getText();
 
         RecipeSearchFiltersBean bean=new RecipeSearchFiltersBean(tipoDietaSelezionato,pastoSelezionato);
         RecipeSearchController controller=new RecipeSearchController(bean);
-
         List<RecipeReturnBean> ricettereturnbean=controller.trovaricette();
 
-        mostraricette(ricettereturnbean);
-
+        if(ricettereturnbean!=null){
+            mostraricette(ricettereturnbean);
+        }else{
+           System.out.println("ricettereturnbean is null");
+        }
     }
 
 
@@ -99,7 +94,7 @@ public class RecipeViewBoundary {
     @FXML
     public void initialize() throws IOException {
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
-        vegan.setOnAction(e -> tipoDieta.setText("Vega"));
+        vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
         vegetarian.setOnAction(e -> tipoDieta.setText("Vegetarian"));
         omnivorous.setOnAction(e -> tipoDieta.setText("Onnivorous"));
 
@@ -109,10 +104,18 @@ public class RecipeViewBoundary {
     }
 
     public void mostraricette(List<RecipeReturnBean> listaRicette) {
+
         listaRicetteview.getItems().clear();
-        this.listaricette = listaRicette;
-        listaRicetteview.getItems().addAll(listaricette);
+        for (RecipeReturnBean ricetta : listaRicette) {
+            String nomeRicetta = ricetta.getRecipeName();  // Prendi il nome
+            String tipoDieta = ricetta.getTypeofDiet();    // Prendi il tipo di dieta
+            String tipoPasto = ricetta.getTypeofMeal();// Prendi il tipo di pasto
+            String numingredienti = ricetta.getNumIngredients();
+            String ingredienti = ricetta.getIngredients();
+            String descrizione = ricetta.getDescription();
+            String author = ricetta.getAuthor();
+            String riga = nomeRicetta + " - " + tipoDieta + " - " + tipoPasto + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
+            listaRicetteview.getItems().add(riga);
+        }
     }
-
-
 }

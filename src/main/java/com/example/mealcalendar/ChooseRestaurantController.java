@@ -65,10 +65,10 @@ public class ChooseRestaurantController {
                     lat = location.getDouble("lat");
                     lng = location.getDouble("lng");
                 }
-                RestaurantEntity nuovoristorante = RestaurantFactory.creaRistorante(nome, indirizzo, lat, lng);
-                listaRistoranti.aggiungiRistorante(nuovoristorante);
+                listaRistoranti.aggiungiRistorante(RestaurantFactory.creaRistorante(nome, indirizzo, lat, lng));
             }
         }
+
         ristorantibeans=listaRistoranti.getBeansList();
         return ristorantibeans;
     }

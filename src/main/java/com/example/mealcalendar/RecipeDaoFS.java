@@ -3,6 +3,8 @@ package com.example.mealcalendar;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class RecipeDaoFS {
 
@@ -32,26 +34,53 @@ public class RecipeDaoFS {
         return true;
     }
 
-    public boolean recipeExists(String recipeName) throws IOException {
+    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean) throws IOException {
+
+        RecipeListSLT listaRicette = RecipeListSLT.getInstance();
+        listaRicette.svuotaLista();
+
+        List<RecipeReturnBean> ricettebeans = new ArrayList<>();
 
         List<RecipeEntity> recipeEntityList = getAllRecipes();
+
         for (RecipeEntity recipe : recipeEntityList) {
-            if (recipe.getRecipeName().equals(recipeName)) {
-                return true;
+            if (recipe.getTypeofDiet().equals(bean.getTipoDieta()) && recipe.getTypeofMeal().equals(bean.getTipoPasto())) {
+                listaRicette.aggiungiRicette(recipe);
+
             }
         }
-        return false;
+        ricettebeans = listaRicette.getrcicettereturn();
+        if (ricettebeans.size() > 0) {
+            return ricettebeans;
+        } else {
+            return null;
+        }
     }
+
+
+
 
     private List<RecipeEntity> getAllRecipes() throws IOException {
         List<RecipeEntity> recipeEntityList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            int i = 0;
             while ((line = reader.readLine()) != null) {
-                String[] recipeParts = line.split(":");
-                recipeEntityList.add(new RecipeEntity(recipeParts[0], recipeParts[1], recipeParts[2],recipeParts[3],recipeParts[4],recipeParts[5],recipeParts[6]));
-                i++;
+                Scanner scanner = new Scanner(line);
+                scanner.useDelimiter(":");  // Imposta il separatore
+
+                if (scanner.hasNext()) {
+                    String recipename = scanner.next();
+                    String typediet= scanner.hasNext() ? scanner.next() : "";
+                    String typemeal = scanner.hasNext() ? scanner.next() : "";
+                    String numingredients = scanner.hasNext() ? scanner.next() : "";
+                    String ingredients = scanner.hasNext() ? scanner.next() : "";
+                    String description = scanner.hasNext() ? scanner.next() : "";
+                    String author = scanner.hasNext() ? scanner.next() : "";
+                    RecipeEntity recipe=new RecipeEntity(recipename, typediet, typemeal, numingredients, ingredients, description, author);
+                    recipeEntityList.add(recipe);
+
+                }
+                scanner.close();
             }
         }
         return recipeEntityList;
