@@ -52,6 +52,9 @@ public class RecipeViewBoundary {
     private Pane detailpane;
 
     @FXML
+    private Label label;
+
+    @FXML
     private Label detailLabel;
 
     private List<RecipeReturnBean> listaricette;
@@ -93,9 +96,11 @@ public class RecipeViewBoundary {
         List<RecipeReturnBean> ricettereturnbean=controller.trovaricette();
 
         if(ricettereturnbean!=null){
+            label.setVisible(false);
             mostraricette(ricettereturnbean);
         }else{
-           System.out.println("ricettereturnbean is null");
+            listaRicetteview.getItems().clear();
+            label.setVisible(true);
         }
     }
 
