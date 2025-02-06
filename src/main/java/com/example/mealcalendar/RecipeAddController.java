@@ -9,30 +9,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import java.io.IOException;
 
 public class RecipeAddController {
-    private static ObservableList<RecipeEntity> recipeList = FXCollections.observableArrayList();
 
-    public void saveRecipe(String name, String diet, String meal, String numIngredientsStr, String ingredients, String description, String author, RecipeListViewController listController) {
-        if (name.isEmpty() || diet.isEmpty() || meal.isEmpty() || numIngredientsStr.isEmpty() || ingredients.isEmpty() || description.isEmpty() || author.isEmpty()) {
-            System.out.println("Compila tutti i campi prima di salvare la ricetta.");
-            return;
-        }
+    public boolean salvaricetta(AddRecipeBean bean)throws IOException{
+         String nome= bean.getRecipeName();
+         String dieta= bean.getTypeofDiet();
+         String pasto= bean.getTypeofMeal();
+         double numingredienti=bean.getNumIngredients();
+         String ingredienti= bean.getIngredients();
+         String descrizione= bean.getDescription();
+         String autore= bean.getAuthor();
 
-        double numIngredients;
-        try {
-            numIngredients = Double.parseDouble(numIngredientsStr);
-        } catch (NumberFormatException e) {
-            System.out.println("Il numero di ingredienti deve essere un valore numerico.");
-            return;
-        }
 
-        RecipeEntity recipe = RecipeEntityFactory.createRecipe(name, diet, meal, numIngredients, ingredients, description, author);
-        recipeList.add(recipe);
-        listController.updateRecipeList();
-    }
 
-    public static ObservableList<RecipeEntity> getRecipeList() {
-        return recipeList;
     }
 }

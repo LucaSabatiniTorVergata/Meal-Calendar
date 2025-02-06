@@ -13,10 +13,6 @@ public class RecipeListViewController {
             System.out.println("Errore: recipeListView è null! Verifica il caricamento della FXML.");
             return;
         }
-        ObservableList<RecipeEntity> recipes = RecipeAddController.getRecipeList();
-        recipeListView.getItems().clear();
-        for (RecipeEntity recipe : recipes) {
-            recipeListView.getItems().add(recipe.getRecipeName() + " - " + recipe.getTypeofDiet() + " - " + recipe.getTypeofMeal());
-        }
+
     }
 }

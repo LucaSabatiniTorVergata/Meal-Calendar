@@ -17,8 +17,7 @@ import java.io.IOException;
 
 public class RecipeAddViewBoundary {
 
-    @FXML
-    private Button addRecipe;
+
     @FXML
     private Button backview;
     @FXML
@@ -75,12 +74,14 @@ public class RecipeAddViewBoundary {
         String name = recipename.getText().trim();
         String diet = (dietMenu.getText().equals("Seleziona dieta")) ? "" : dietMenu.getText();
         String meal = (mealMenu.getText().equals("Seleziona pasto")) ? "" : mealMenu.getText();
-        String numIngredients = recipeNumIngredients.getText().trim();
+        double numIngredients = Double.parseDouble(recipeNumIngredients.getText());
         String ingredients = recipeIngredients.getText().trim();
         String description = recipeDesc.getText().trim();
-        String author = "Default Author";
+        String author = SessionManagerSLT.getInstance().getLoggedInUsername();
+        RecipeAddController controller= new RecipeAddController();
+        AddRecipeBean bean = new AddRecipeBean(name, diet, meal, numIngredients, ingredients, description, author);
 
-        controller.saveRecipe(name, diet, meal, numIngredients, ingredients, description, author, listController);
+        boolean result=controller.salvaricetta(bean);
     }
 
     @FXML
@@ -95,6 +96,6 @@ public class RecipeAddViewBoundary {
     private void backView(ActionEvent event) throws IOException {
 
         Stage stage = (Stage) backview.getScene().getWindow();
-        GraphicController.cambiascena(stage, "usermenu-view.fxml");
+        GraphicController.cambiascena(stage, "recipe-view.fxml");
     }
 }
