@@ -62,5 +62,6 @@
          </font>
       </Label>
       <TextField fx:id="timeField" layoutX="128.0" layoutY="392.0" promptText="00:00-23:59" />
+      <Label fx:id="ristoranteSelezionato" layoutX="661.0" layoutY="656.0" text="Label" />
    </children>
 </AnchorPane>

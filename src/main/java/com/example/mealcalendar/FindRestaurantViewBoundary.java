@@ -26,9 +26,17 @@ import javafx.scene.control.TextFormatter;
 import java.util.function.UnaryOperator;
 import javafx.scene.control.Label;
 
+import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
+import static com.example.mealcalendar.MealCalenderViewBoundary.nomePerCalendar;
+
+
 public class FindRestaurantViewBoundary {
 
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
+
+
+
+
 
     @FXML
     private SplitMenuButton tipoDieta;
@@ -180,7 +188,17 @@ public class FindRestaurantViewBoundary {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
-                apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
+                System.out.println("vengo da calendar " + vengoDaCalendar);
+                if(vengoDaCalendar){
+
+                    nomePerCalendar = ristorante.getNome();
+                    System.out.println("preso da maps "+nomePerCalendar);
+                    vengoDaCalendar=false;
+                    Stage stage = (Stage) ristorantiListView.getScene().getWindow();
+                    GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
+                }else{
+                    apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
+                }
             }
         }
     }
