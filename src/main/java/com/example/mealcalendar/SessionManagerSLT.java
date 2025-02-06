@@ -2,7 +2,7 @@ package com.example.mealcalendar;
 
 public class SessionManagerSLT {
 
-    private static SessionManagerSLT instance;
+    private static SessionManagerSLT instance=null;
     private String loggedInUsername;
 
     private SessionManagerSLT() {}
