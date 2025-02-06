@@ -22,6 +22,7 @@ import javafx.scene.control.ListView;
 import java.util.regex.Pattern;
 import javafx.scene.control.TextFormatter;
 import java.util.function.UnaryOperator;
+import javafx.scene.control.Label;
 
 public class FindRestaurantViewBoundary {
 
@@ -47,6 +48,9 @@ public class FindRestaurantViewBoundary {
     private MenuItem pranzo;
     @FXML
     private MenuItem cena;
+
+    @FXML
+    private Label welcomelabel;
 
     @FXML
     private ListView<ReturnRestaurantsBean> ristorantiListView;
@@ -81,6 +85,12 @@ public class FindRestaurantViewBoundary {
 
     @FXML
     public void initialize() throws IOException {
+
+        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+        if (username != null) {
+            welcomelabel.setText("Hi, " + username + "!");
+        }
+
         vegan.setOnAction(e -> tipoDieta.setText("Vegano"));
         vegetariana.setOnAction(e -> tipoDieta.setText("Vegetariano"));
         omnivora.setOnAction(e -> tipoDieta.setText("Onnivoro"));

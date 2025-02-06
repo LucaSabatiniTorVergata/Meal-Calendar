@@ -19,9 +19,9 @@
          </font>
       </Label>
       <Label layoutX="869.0" layoutY="192.0" prefHeight="23.0" prefWidth="69.0" text="Username" />
-      <TextField layoutX="869.0" layoutY="217.0" prefHeight="20.0" prefWidth="273.0" promptText="inserisci qui il tuo username" />
+      <TextField fx:id="usernamefield" layoutX="869.0" layoutY="217.0" prefHeight="20.0" prefWidth="273.0" promptText="inserisci qui il tuo username" />
       <Label layoutX="869.0" layoutY="314.0" prefHeight="23.0" prefWidth="69.0" text="Email" />
-      <TextField layoutX="872.0" layoutY="340.0" prefHeight="20.0" prefWidth="273.0" promptText="Inserisci la tua email" />
+      <TextField fx:id="emailfield" layoutX="872.0" layoutY="340.0" prefHeight="20.0" prefWidth="273.0" promptText="Inserisci la tua email" />
       <Label layoutX="869.0" layoutY="448.0" prefHeight="23.0" prefWidth="69.0" text="Password" />
       <TextField fx:id="passInChiaro" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" />
       <PasswordField fx:id="passWordBox" layoutX="869.0" layoutY="471.0" prefHeight="26.0" prefWidth="273.0" promptText="Inserisci la password" />
@@ -29,5 +29,9 @@
       <Button fx:id="login" layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" onAction="#loginview" prefHeight="26.0" prefWidth="100.0" text="login" />
       <Label layoutX="918.0" layoutY="625.0" text="clicca                  per entrare come guest" />
       <Button fx:id="quibutton" layoutX="954.0" layoutY="621.0" mnemonicParsing="false" onAction="#guestmenuview" prefHeight="23.0" prefWidth="42.0" text="QUI" />
+      <Label fx:id="messageLabel" layoutX="874.0" layoutY="103.0" prefHeight="55.0" prefWidth="201.0" textFill="RED">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>
