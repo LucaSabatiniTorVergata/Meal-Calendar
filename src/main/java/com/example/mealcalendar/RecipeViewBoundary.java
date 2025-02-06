@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import java.util.List;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+
 
 public class RecipeViewBoundary {
 
@@ -43,6 +47,12 @@ public class RecipeViewBoundary {
 
     @FXML
     private ListView<String> listaRicetteview;
+
+    @FXML
+    private Pane detailpane;
+
+    @FXML
+    private Label detailLabel;
 
     private List<RecipeReturnBean> listaricette;
 
@@ -93,6 +103,8 @@ public class RecipeViewBoundary {
 
     @FXML
     public void initialize() throws IOException {
+
+
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
         vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
         vegetarian.setOnAction(e -> tipoDieta.setText("Vegetarian"));
@@ -117,5 +129,24 @@ public class RecipeViewBoundary {
             String riga = nomeRicetta + " - " + tipoDieta + " - " + tipoPasto + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
             listaRicetteview.getItems().add(riga);
         }
+    }
+
+    @FXML
+    private void handleItemClick(MouseEvent event) {
+        if (event.getClickCount() == 2) {  // Controlla se è un doppio click
+            String selectedItem = listaRicetteview.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                detailpane.setVisible(true);
+                listaRicetteview.setVisible(false);
+                detailLabel.setText(selectedItem);
+
+            }
+        }
+    }
+
+    @FXML
+    private void handleback() {
+        detailpane.setVisible(false);
+        listaRicetteview.setVisible(true);
     }
 }

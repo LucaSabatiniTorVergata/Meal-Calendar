@@ -6,6 +6,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -68,6 +69,16 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="listaRicetteview" layoutX="622.0" layoutY="170.0" prefHeight="496.0" prefWidth="608.0" />
+      <ListView fx:id="listaRicetteview" layoutX="622.0" layoutY="170.0" onMouseClicked="#handleItemClick" prefHeight="496.0" prefWidth="608.0" visible="true" />
+      <Pane fx:id="detailpane" layoutX="622.0" layoutY="173.0" prefHeight="490.0" prefWidth="608.0" visible="false">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleback" text="BACK" />
+            <Label fx:id="detailLabel" layoutX="8.0" layoutY="43.0" maxWidth="595.0" prefHeight="408.0" prefWidth="595.0" textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
