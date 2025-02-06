@@ -12,7 +12,7 @@ public class RecipeSearchController {
 
     public List<RecipeReturnBean> trovaricette(){
      
-
+    return null;
     }
 
 

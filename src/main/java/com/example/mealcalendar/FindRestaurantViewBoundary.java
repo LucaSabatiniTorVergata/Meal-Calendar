@@ -159,7 +159,7 @@ public class FindRestaurantViewBoundary {
     @FXML
     private void recipeuser(ActionEvent event) throws IOException {
         Stage stage = (Stage)findrecipebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipelist-view.fxml");
+        GraphicController.cambiascena(stage, "recipe-view.fxml");
     }
 
     @FXML
