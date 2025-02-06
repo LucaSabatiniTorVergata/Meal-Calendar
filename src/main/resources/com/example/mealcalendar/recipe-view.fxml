@@ -63,7 +63,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="returnhome" layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeview" text="HOME">
+      <Button fx:id="returnhome" layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeView" text="HOME">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

@@ -68,7 +68,15 @@ public class RecipeViewBoundary {
         GraphicController.cambiascena(stage, "recipeedit-view.fxml");
     }
     @FXML
-    private void homeview(ActionEvent event) throws IOException {
+    private void homeView(ActionEvent event) throws IOException {
+
+        Stage stage = (Stage) returnhome.getScene().getWindow();
+        GraphicController.cambiascena(stage, "usermenu-view.fxml");
+    }
+
+
+    @FXML
+    private void backView(ActionEvent event) throws IOException {
 
         Stage stage = (Stage) returnhome.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
