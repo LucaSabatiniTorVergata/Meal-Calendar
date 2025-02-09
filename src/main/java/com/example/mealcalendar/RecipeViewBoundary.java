@@ -113,7 +113,7 @@ public class RecipeViewBoundary {
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
         vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
         vegetarian.setOnAction(e -> tipoDieta.setText("Vegetarian"));
-        omnivorous.setOnAction(e -> tipoDieta.setText("Onnivorous"));
+        omnivorous.setOnAction(e -> tipoDieta.setText("Omnivorous"));
 
         breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
         launch.setOnAction(e -> tipoPasto.setText("Lunch"));

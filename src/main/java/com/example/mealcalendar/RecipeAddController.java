@@ -1,40 +1,44 @@
 package com.example.mealcalendar;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import com.example.mealcalendar.RecipeEntity;
-import com.example.mealcalendar.RecipeEntityFactory;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeAddController {
 
+    // Istanza del DAO per interagire con il file
+    private RecipeDaoFS dao = new RecipeDaoFS();
 
-    RecipeDaoFS dao = new RecipeDaoFS();
+    // Metodo per salvare una ricetta
+    public boolean salvaRicetta(AddRecipeBean bean) throws IOException {
+        String nome = bean.getRecipeName();
+        String dieta = bean.getTypeofDiet();
+        String pasto = bean.getTypeofMeal();
+        String numingredienti = bean.getNumIngredients();
+        String ingredienti = bean.getIngredients();
+        String descrizione = bean.getDescription();
+        String autore = bean.getAuthor();
 
-    public boolean salvaricetta(AddRecipeBean bean)throws IOException{
-         String nome= bean.getRecipeName();
-         String dieta= bean.getTypeofDiet();
-         String pasto= bean.getTypeofMeal();
-         String numingredienti=bean.getNumIngredients();
-         String ingredienti= bean.getIngredients();
-         String descrizione= bean.getDescription();
-         String autore= bean.getAuthor();
+        RecipeEntity newRecipe = new RecipeEntity(nome, dieta, pasto, numingredienti, ingredienti, descrizione, autore);
+        return dao.addRecipe(newRecipe);
+    }
 
+    // Metodo spostato nel controller: verifica la presenza di ricette in base ai filtri
+    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean) throws IOException {
+        // Supponiamo che RecipeListSLT sia un singleton che gestisce la lista filtrata
+        RecipeListSLT listaRicette = RecipeListSLT.getInstance();
+        listaRicette.svuotaLista();
 
-        RecipeEntity newrecipe = new RecipeEntity(nome,dieta,pasto,numingredienti,ingredienti,descrizione,autore);
-        if(dao.addRecipe(newrecipe)){
+        List<RecipeEntity> recipeEntityList = dao.getAllRecipes();
 
-            return true;
+        for (RecipeEntity recipe : recipeEntityList) {
+            // Confronta i filtri: per esempio, tipo di dieta e tipo di pasto
+            if (recipe.getTypeofDiet().equalsIgnoreCase(bean.getTipoDieta()) &&
+                    recipe.getTypeofMeal().equalsIgnoreCase(bean.getTipoPasto())) {
+                listaRicette.aggiungiRicette(recipe);
+            }
         }
-        else {
-
-            return false;
-        }
-
+        List<RecipeReturnBean> ricetteBeans = listaRicette.getrcicettereturn();
+        return ricetteBeans.size() > 0 ? ricetteBeans : null;
     }
 }

@@ -80,7 +80,7 @@ public class RecipeAddViewBoundary {
         String author = SessionManagerSLT.getInstance().getLoggedInUsername();
         RecipeAddController controller= new RecipeAddController();
         AddRecipeBean bean = new AddRecipeBean(name, diet, meal, numIngredients, ingredients, description, author);
-        boolean result=controller.salvaricetta(bean);
+        boolean result=controller.salvaRicetta(bean);
     }
 
     @FXML

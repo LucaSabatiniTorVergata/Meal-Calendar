@@ -9,10 +9,28 @@ public class LoginController {
 
     public boolean login(LoginBean userLoginBean) throws IOException {
 
-        if (userDAO.checkPassword(userLoginBean.getUsername(), userLoginBean.getPassword())) {
+        if (checkPassword(userLoginBean.getUsername(), userLoginBean.getPassword())) {
             return true; // Login riuscito
         } else {
             return false; // Login fallito
         }
+    }
+
+
+    public boolean checkPassword (String username, String password) throws IOException {
+
+        UserEntity user = userDAO.getUserByUsername(username);
+
+
+        if (user != null) {
+            // Confronta la password criptata con quella inserita
+            System.out.println("Password inserita: " + password);
+            System.out.println("Password memorizzata: " + user.getPassword());
+            System.out.println("Password corretta: " + BCrypt.checkpw(password, user.getPassword()));
+            return BCrypt.checkpw(password, user.getPassword());
+
+        }
+
+        return false;
     }
 }
