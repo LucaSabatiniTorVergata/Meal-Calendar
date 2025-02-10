@@ -4,24 +4,32 @@ import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginControllerTest {
+public class RegisterControllerTest {
 
-    private LoginController loginController;
-    private static final String PASSWORD = "password";
+
+    private RegisterController registerController;
+    private static final String PASSWORD = "1";
+    private static final String USERNAME = "luca";
 
     @Test
-    public void test() throws IOException {
-        loginController = new LoginController(new TestUserDao(false));
-        LoginBean bean = new LoginBean("", "");
-        assertFalse(loginController.login(bean));//Luca
-        loginController = new LoginController(new TestUserDao(true));
-        bean = new LoginBean("", PASSWORD);
-        assertTrue(loginController.login(bean));//Luca
+    public void test() throws IOException{
+
+
+        registerController = new RegisterController(new TestUserDao(false));
+        UserBean bean = new UserBean(USERNAME,"",PASSWORD);
+        assertFalse(registerController.register(bean));
+        registerController = new RegisterController(new TestUserDao(true));
+        bean = new UserBean("new","new","new");
+        assertTrue(registerController.register(bean));
+
     }
+
+
 
     private class TestUserDao extends UserDaoFS{
         boolean good;

@@ -9,6 +9,15 @@ public class RegisterController {
     // Il controller utilizza il DAO
     private UserDaoFS userDAO = new UserDaoFS();
 
+
+    public RegisterController(){
+        this(new UserDaoFS());
+    }
+
+    public RegisterController(UserDaoFS userDaoFS) {
+        this.userDAO = userDaoFS;
+    }
+
     // Metodo per verificare se l'username esiste già (logica nel controller)
     public boolean usernameExists(String username) throws IOException {
         List<UserEntity> users = userDAO.getAllUsers();
