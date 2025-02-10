@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,11 +30,12 @@ class RegisterControllerTest {
 
 
 
-    private class TestUserDao extends UserDaoFS{
+    private class TestUserDao extends UserDao {
         boolean good;
 
 
         public TestUserDao(boolean good) {
+            super(USE_DATABASE);
             this.good = good;
         }
 

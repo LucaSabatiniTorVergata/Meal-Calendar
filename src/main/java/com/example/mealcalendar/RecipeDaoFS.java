@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeDaoFS {
+public class RecipeDaoFS implements RecipeDao {
 
     private static final String FILE_PATH = "ricette.txt";
 

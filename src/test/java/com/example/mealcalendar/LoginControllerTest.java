@@ -23,11 +23,12 @@ class LoginControllerTest {
         assertTrue(loginController.login(bean));//Luca
     }
 
-    private class TestUserDao extends UserDaoFS{
+    private class TestUserDao extends UserDao {
         boolean good;
 
 
         public TestUserDao(boolean good) {
+            super(USE_DATABASE);
             this.good = good;
         }
 

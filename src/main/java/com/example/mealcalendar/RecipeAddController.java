@@ -7,7 +7,7 @@ import java.util.List;
 public class RecipeAddController {
 
     // Istanza del DAO per interagire con il file
-    private RecipeDaoFS dao = new RecipeDaoFS();
+    private RecipeDao dao = RecipeDaoFactory.createRecipeDao();
 
     // Metodo per salvare una ricetta
     public boolean salvaRicetta(AddRecipeBean bean) throws IOException {

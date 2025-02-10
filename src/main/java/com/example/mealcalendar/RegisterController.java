@@ -6,43 +6,36 @@ import java.util.List;
 
 public class RegisterController {
 
-    // Il controller utilizza il DAO
-    private UserDaoFS userDAO = new UserDaoFS();
+    private UserDaoInterface userDAO;
 
-
-    public RegisterController(){
-        this(new UserDaoFS());
+    public RegisterController() {
+        this(UserDaoFactory.createUserDao()); // Usa la factory per ottenere il DAO corretto
     }
 
-    public RegisterController(UserDaoFS userDaoFS) {
-        this.userDAO = userDaoFS;
+    public RegisterController(UserDaoInterface userDao) {
+        this.userDAO = userDao;
     }
 
-    // Metodo per verificare se l'username esiste già (logica nel controller)
+    // Metodo per verificare se l'username esiste già
     public boolean usernameExists(String username) throws IOException {
         List<UserEntity> users = userDAO.getAllUsers();
-        for (UserEntity user : users) {
-            if (user.getUsername().equals(username)) {
-                return true; // L'username esiste già
-            }
-        }
-        return false; // L'username non esiste
+        return users.stream().anyMatch(user -> user.getUsername().equals(username));
     }
 
-    // Metodo per registrare un utente
+    // Metodo per registrare un nuovo utente
     public boolean register(UserBean userRegisterBean) throws IOException {
-        // Verifica che l'username non esista già
         if (usernameExists(userRegisterBean.getUsername())) {
-            return false; // Non registriamo l'utente perché l'username è già in uso
+            return false; // Username già in uso
         }
 
-        // Hash della password (opzionale, se vuoi usarlo)
+        // Hash della password con BCrypt
+        System.out.println("password prima dell'hash"+userRegisterBean.getPassword());
         String hashedPassword = BCrypt.hashpw(userRegisterBean.getPassword(), BCrypt.gensalt());
-
-        // Crea il nuovo utente
+        System.out.println("dal register controller:" + hashedPassword);
+        // Creazione dell'oggetto utente
         UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword);
 
-        // Registra l'utente utilizzando il DAO
+        // Registrazione utente tramite il DAO
         return userDAO.registerUser(newUser);
     }
 }

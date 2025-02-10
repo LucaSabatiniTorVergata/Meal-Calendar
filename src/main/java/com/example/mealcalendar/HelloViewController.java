@@ -59,9 +59,7 @@ public class HelloViewController {
             messageLabel.setText(" Completa tutti i campi!");
             return;
         }
-
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        UserBean userRegisterBean = new UserBean(username, email, hashedPassword);
+        UserBean userRegisterBean = new UserBean(username, email, password);
         RegisterController controller=new RegisterController();
         boolean results = controller.register(userRegisterBean);
 
