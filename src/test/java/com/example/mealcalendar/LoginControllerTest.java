@@ -8,13 +8,13 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginControllerTest {
+class LoginControllerTest {
 
     private LoginController loginController;
     private static final String PASSWORD = "password";
 
     @Test
-    public void test() throws IOException {
+    void test() throws IOException {
         loginController = new LoginController(new TestUserDao(false));
         LoginBean bean = new LoginBean("", "");
         assertFalse(loginController.login(bean));//Luca

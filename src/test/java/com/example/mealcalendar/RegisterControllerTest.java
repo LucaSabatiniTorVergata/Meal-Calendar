@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RegisterControllerTest {
+class RegisterControllerTest {
 
 
     private RegisterController registerController;
@@ -17,7 +17,7 @@ public class RegisterControllerTest {
     private static final String USERNAME = "luca";
 
     @Test
-    public void test() throws IOException{
+    void test() throws IOException{
 
 
         registerController = new RegisterController(new TestUserDao(false));
