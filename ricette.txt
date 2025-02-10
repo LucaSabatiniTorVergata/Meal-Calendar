@@ -8,3 +8,4 @@ Lasagna:Omnivorous:Lunch:1:Pomodoro:Lasang:luca
 pollo alle palle:Vegan:Dinner:1:1:1:luca
 ciuba avr:Omnivorous:Lunch:1:ciuba:the avr:luca
 Edoardo:Vegan:Lunch:1:edoardo:edoardone:luca
+davide:Omnivorous:Lunch:1:davide:davide cotto:davide
