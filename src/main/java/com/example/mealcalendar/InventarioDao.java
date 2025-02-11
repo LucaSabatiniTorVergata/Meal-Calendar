@@ -1,109 +1,87 @@
 package com.example.mealcalendar;
 
 import java.io.*;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class InventarioDao {
 
-    private static final String FILE_PATH = "inventario.txt";
-    private static InventarioDao instance = null;
-    private boolean usePersistence; // Se true usa il file, altrimenti RAM
+    private static InventarioDao instance;
+    private boolean usePersistence;
     private Map<String, Integer> inventario;
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private static final String FILE_PATH = "inventario.txt";
 
-    // Costruttore privato per Singleton
-    private InventarioDao(boolean usePersistence) throws IOException {
+    private InventarioDao(boolean usePersistence) {
         this.usePersistence = usePersistence;
+        this.inventario = new HashMap<>();
         if (usePersistence) {
-            this.inventario = loadInventario();
-        } else {
-            this.inventario = new LinkedHashMap<>();
+            loadInventario();
         }
     }
 
-    // Metodo per ottenere l'istanza Singleton
-    public static InventarioDao getInstance(boolean usePersistence) throws IOException {
+    // Singleton pattern per gestire l'istanza unica di InventarioDao
+    public static InventarioDao getInstance(boolean usePersistence) {
         if (instance == null) {
             instance = new InventarioDao(usePersistence);
         }
         return instance;
     }
 
-    // Metodo per aggiungere un ingrediente
-    public void aggiungiIngrediente(String nome, int quantita) throws IOException {
-        if (inventario.containsKey(nome)) {
-            inventario.put(nome, inventario.get(nome) + quantita);
-        } else {
-            inventario.put(nome, quantita);
-        }
-        if (usePersistence) saveInventario();
+    // Aggiunge ingrediente all'inventario
+    public void aggiungiIngrediente(String nome, int quantita) {
+        inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
     }
 
-    // Metodo per rimuovere un ingrediente
-    public void rimuoviIngrediente(String nome, int quantita) throws IOException {
+    // Rimuove ingrediente dall'inventario
+    public void rimuoviIngrediente(String nome, int quantita) {
         if (inventario.containsKey(nome)) {
-            int current = inventario.get(nome);
-            if (quantita >= current) {
-                inventario.remove(nome);
-                logger.info("Rimosso completamente: " + nome);
+            int currentQuantity = inventario.get(nome);
+            if (currentQuantity > quantita) {
+                inventario.put(nome, currentQuantity - quantita);
             } else {
-                inventario.put(nome, current - quantita);
-                logger.info("Ridotta quantità di " + nome + " a " + (current - quantita));
+                inventario.remove(nome);
             }
-        } else {
-            logger.info("Ingrediente non trovato: " + nome);
         }
-        if (usePersistence) saveInventario();
     }
 
-    // Metodo per ottenere l'inventario
+    // Restituisce l'inventario
     public Map<String, Integer> getInventario() {
-        return new LinkedHashMap<>(inventario);
+        return new HashMap<>(inventario);
     }
 
-    // Metodo per stampare l'inventario
-    public void stampaInventario() {
-        logger.info("🧊 Contenuto dell'inventario:");
-        if (inventario.isEmpty()) {
-            logger.info("⚠️ Il frigorifero è vuoto!");
-        } else {
-            for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                logger.info("- " + entry.getKey() + " | Quantità: " + entry.getValue());
+    // Verifica se la persistenza è abilitata
+    public boolean isPersistenceEnabled() {
+        return usePersistence;
+    }
+
+    // Salva l'inventario nel file
+    public void salvaInventario() {
+        if (usePersistence) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+                for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
+                    writer.write(entry.getKey() + ":" + entry.getValue());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
-    // Carica i dati dal file
-    private Map<String, Integer> loadInventario() throws IOException {
-        Map<String, Integer> map = new LinkedHashMap<>();
-        File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            file.createNewFile();
-            return map;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+    // Carica l'inventario dal file
+    private void loadInventario() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
                 if (parts.length == 2) {
-                    String nome = parts[0].trim();
-                    int quantita = Integer.parseInt(parts[1].trim());
-                    map.put(nome, quantita);
+                    String nome = parts[0];
+                    int quantita = Integer.parseInt(parts[1]);
+                    inventario.put(nome, quantita);
                 }
             }
-        }
-        return map;
-    }
-
-    // Salva i dati su file
-    private void saveInventario() throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                writer.write(entry.getKey() + ":" + entry.getValue());
-                writer.newLine();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
