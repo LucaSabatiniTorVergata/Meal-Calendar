@@ -3,12 +3,9 @@ package com.example.mealcalendar;
 import java.util.*;
 import java.util.logging.Logger;
 
-
 public class IngredienteSltpat {
 
-
     Logger logger = Logger.getLogger(getClass().getName());
-
 
     // Creazione dell'istanza Singleton
     private static IngredienteSltpat instance = null;
@@ -39,6 +36,24 @@ public class IngredienteSltpat {
             nuovoInventario.put(nome, quantita);
             nuovoInventario.putAll(inventario); // Aggiungiamo il vecchio inventario
             inventario = nuovoInventario;
+        }
+    }
+
+    // Metodo per rimuovere un ingrediente dalla lista
+    public void rimuoviIngrediente(String nome, int quantita) {
+        if (inventario.containsKey(nome)) {
+            int currentQuantity = inventario.get(nome);
+            if (quantita >= currentQuantity) {
+                // Se la quantità da rimuovere è maggiore o uguale a quella presente, elimina l'ingrediente
+                inventario.remove(nome);
+                logger.info("Rimosso completamente l'ingrediente: " + nome);
+            } else {
+                // Altrimenti, diminuisci la quantità
+                inventario.put(nome, currentQuantity - quantita);
+                logger.info("Diminuita la quantità di " + nome + " di " + quantita + ". Quantità rimanente: " + (currentQuantity - quantita));
+            }
+        } else {
+            logger.info("L'ingrediente " + nome + " non esiste nell'inventario.");
         }
     }
 

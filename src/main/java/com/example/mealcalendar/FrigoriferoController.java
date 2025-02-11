@@ -1,33 +1,28 @@
 package com.example.mealcalendar;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class FrigoriferoController {
-    // Creazione dell'istanza Singleton
-    private static FrigoriferoController instance;
+    private InventarioDao inventarioDao;
 
-    private IngredienteSltpat ingredienteSingleton;
-
-    // Costruttore privato per evitare che vengano create altre istanze
-    public FrigoriferoController() {
-        this.ingredienteSingleton = IngredienteSltpat.getInstance(); // Otteniamo l'istanza unica della lista
+    public FrigoriferoController(boolean usePersistence) throws IOException {
+        this.inventarioDao = InventarioDao.getInstance(usePersistence);
     }
 
-    // Metodo per ottenere l'istanza Singleton
-
-
-    // Aggiunge un ingrediente alla lista
-    public void aggiungiIngrediente(String nomeIngrediente, int quantita) {
-        ingredienteSingleton.aggiungiIngrediente(nomeIngrediente, quantita);
+    public void aggiungiIngrediente(String nome, int quantita) throws IOException {
+        inventarioDao.aggiungiIngrediente(nome, quantita);
     }
 
-    // Ottiene l'inventario
+    public void rimuoviIngrediente(String nome, int quantita) throws IOException {
+        inventarioDao.rimuoviIngrediente(nome, quantita);
+    }
+
     public Map<String, Integer> getInventario() {
-        return ingredienteSingleton.getInventario();
+        return inventarioDao.getInventario();
     }
 
-    // Stampa l'inventario
     public void stampaInventario() {
-        ingredienteSingleton.stampaInventario();
+        inventarioDao.stampaInventario();
     }
 }
