@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.HelloViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.HelloViewBoudary">
    <children>
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="600.0" layoutX="799.0" layoutY="62.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
       <Circle fill="#e2ecf5" layoutX="377.0" layoutY="353.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
@@ -33,5 +33,7 @@
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font></Label>
+      <Button layoutX="34.0" layoutY="47.0" mnemonicParsing="false" onAction="#useDatabase" text="DB" />
+      <Button layoutX="100.0" layoutY="48.0" mnemonicParsing="false" onAction="#useFileSystem" text="FS" />
    </children>
 </AnchorPane>

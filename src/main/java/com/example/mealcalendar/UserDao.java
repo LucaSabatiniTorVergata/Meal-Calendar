@@ -3,14 +3,13 @@ package com.example.mealcalendar;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
-import java.io.FileInputStream;
 
 public class UserDao implements UserDaoInterface {
 
-    private static final String FILE_PATH = "users.txt";
-    private static final boolean USE_DATABASE = true; // Cambia a true per usare il database
+    private static final String FILE_PATH = "users.txt";  // Percorso del file per il File System
+    private static boolean USE_DATABASE;  // Determina se usare il DB o il File System
 
-    // Configurazione Database (da cambiare con i tuoi dati)
+    // Configurazione Database
     private static String url;
     private static String dbuser;
     private static String password;
@@ -24,13 +23,11 @@ public class UserDao implements UserDaoInterface {
             password = props.getProperty("db.password");
         } catch (IOException ex) {
             ex.printStackTrace();
-            // Aggiungi gestione dell'errore se il file non viene trovato
         }
     }
 
-
-
-    public UserDao(boolean usedatabase) {
+    public UserDao(boolean useDatabase) {
+        UserDao.USE_DATABASE = useDatabase;
         if (!USE_DATABASE) {
             File file = new File(FILE_PATH);
             try {
@@ -53,7 +50,7 @@ public class UserDao implements UserDaoInterface {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false; // 🔥 Aggiunto return false in caso di eccezione
+            return false;
         }
     }
 
@@ -70,12 +67,8 @@ public class UserDao implements UserDaoInterface {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
-            System.out.println("password mandata al db register:"+ user.getPassword());
             stmt.setString(3, user.getPassword());
             return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false; // 🔥 Aggiunto return false in caso di eccezione
         }
     }
 
@@ -85,7 +78,7 @@ public class UserDao implements UserDaoInterface {
             return USE_DATABASE ? getAllUsersDB() : getAllUsersFS();
         } catch (SQLException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // 🔥 Aggiunto return di una lista vuota in caso di errore
+            return new ArrayList<>();
         }
     }
 
@@ -119,13 +112,18 @@ public class UserDao implements UserDaoInterface {
     @Override
     public UserEntity getUserByUsername(String username) throws IOException {
         try {
-            return USE_DATABASE ? getUserByUsernameDB(username) : getUserByUsernameFS(username);
+            if (USE_DATABASE) {
+                return getUserByUsernameDB(username);  // Usa il DB
+            } else {
+                return getUserByUsernameFS(username);  // Usa il File System
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null; // 🔥 Aggiunto return null in caso di errore
+            return null;  // In caso di errore, ritorna null
         }
     }
 
+    // Implementazione del metodo per il File System
     private UserEntity getUserByUsernameFS(String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -136,9 +134,10 @@ public class UserDao implements UserDaoInterface {
                 }
             }
         }
-        return null;
+        return null;  // Restituisce null se non trovato
     }
 
+    // Implementazione del metodo per il Database
     private UserEntity getUserByUsernameDB(String username) throws SQLException {
         String sql = "SELECT username, email, password FROM users WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(url, dbuser, password);
@@ -150,6 +149,7 @@ public class UserDao implements UserDaoInterface {
                 }
             }
         }
-        return null;
+        return null;  // Restituisce null se non trovato
     }
+
 }
