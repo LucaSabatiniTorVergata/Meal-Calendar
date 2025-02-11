@@ -29,36 +29,45 @@ public class FridgeViewBoundary {
     private IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     Logger logger = Logger.getLogger(getClass().getName());
 
-    private boolean usePersistence;
+    // Variabile per la modalità di persistenza
+    private boolean usePersistence = true; //smith ci sono delle cose da sistemare perchè di fatto non riesco a fare lo switching tra persistenza e non persistenza se domani mattina riesci cerca di sistemarlo
 
-    // Costruttore che inizializza la modalità di persistenza
-    public FridgeViewBoundary(boolean usePersistence) throws IOException {
+    // Metodo per impostare la persistenza
+    public void setUsePersistence(boolean usePersistence) {
         this.usePersistence = usePersistence;
-        this.frigoriferoController = new FrigoriferoController(usePersistence);
+        try {
+            frigoriferoController = new FrigoriferoController(usePersistence); // Inizializza il controller con il flag
+            logger.info("Persistenza impostata su: " + usePersistence);
+        } catch (IOException e) {
+            logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
+        }
     }
 
-    // Costruttore di default senza persistenza abilitata
-    public FridgeViewBoundary() throws IOException {
-        this(false);
-    }
-
-    // Metodo chiamato al caricamento della view
     @FXML
     public void initialize() {
+        if (frigoriferoController == null) {
+            try {
+                frigoriferoController = new FrigoriferoController(usePersistence);
+            } catch (IOException e) {
+                logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
+            }
+        }
         aggiornaInventario();
     }
 
-    // Aggiungi ingrediente all'inventario
+    // Aggiunge un ingrediente all'inventario
     @FXML
     private void aggiungiIngrediente(ActionEvent event) throws IOException {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
+        // Controlla se i campi sono vuoti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
             logger.info("Inserisci nome e quantità dell'ingrediente!");
             return;
         }
 
+        // Verifica se l'ingrediente è valido
         if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
             logger.info("Errore: Inserisci un ingrediente valido!");
             return;
@@ -77,17 +86,19 @@ public class FridgeViewBoundary {
         txtQuantita.clear();
     }
 
-    // Rimuovi ingrediente dall'inventario
+    // Rimuove un ingrediente dall'inventario
     @FXML
     private void rimuoviIngrediente(ActionEvent event) throws IOException {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
+        // Controlla se i campi sono vuoti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
             logger.info("Inserisci nome e quantità dell'ingrediente!");
             return;
         }
 
+        // Verifica se l'ingrediente è valido
         if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
             logger.info("Errore: Inserisci un ingrediente valido!");
             return;
@@ -106,7 +117,7 @@ public class FridgeViewBoundary {
         txtQuantita.clear();
     }
 
-    // Metodo per aggiornare la visualizzazione dell'inventario
+    // Metodo per aggiornare la visualizzazione dell'inventario nella ListView
     private void aggiornaInventario() {
         listaInventario.getItems().clear();
         for (Map.Entry<String, Integer> entry : frigoriferoController.getInventario().entrySet()) {
@@ -114,32 +125,23 @@ public class FridgeViewBoundary {
         }
     }
 
-    // Gestisce il cambio di scena
     @FXML
     private void backview(ActionEvent event) throws IOException {
         Stage stage = (Stage) home.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
-    // Abilita la persistenza
     @FXML
     private void enablePersistence(ActionEvent event) throws IOException {
-        if (!usePersistence) {
-            this.usePersistence = true;
-            frigoriferoController.setUsePersistence(usePersistence);
-            aggiornaInventario();
-            logger.info("Persistenza abilitata.");
-        }
+        setUsePersistence(true);
+        // Attiva la persistenza
+        aggiornaInventario();
     }
 
-    // Disabilita la persistenza
     @FXML
     private void disablePersistence(ActionEvent event) throws IOException {
-        if (usePersistence) {
-            this.usePersistence = false;
-            frigoriferoController.setUsePersistence(usePersistence);
-            aggiornaInventario();
-            logger.info("Persistenza disabilitata.");
-        }
+        setUsePersistence(false);
+        // Disattiva la persistenza
+        aggiornaInventario();
     }
 }

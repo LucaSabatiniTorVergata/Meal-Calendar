@@ -6,34 +6,29 @@ import java.util.Map;
 public class FrigoriferoController {
     private InventarioDao inventarioDao;
 
-    // Costruttore che inizializza la modalità di persistenza
     public FrigoriferoController(boolean usePersistence) throws IOException {
+        System.out.println("FrigoriferoController: Inizializzazione con persistenza " + usePersistence);
         this.inventarioDao = InventarioDao.getInstance(usePersistence);
     }
 
-    // Metodo per cambiare la modalità di persistenza
-    public void setUsePersistence(boolean usePersistence) throws IOException {
-        this.inventarioDao = InventarioDao.getInstance(usePersistence);
-    }
 
-    // Aggiunge un ingrediente
     public void aggiungiIngrediente(String nome, int quantita) throws IOException {
+        System.out.println("FrigoriferoController: Aggiungi ingrediente " + nome + " con quantità " + quantita);
         inventarioDao.aggiungiIngrediente(nome, quantita);
-        if (inventarioDao.isPersistenceEnabled()) {
-            inventarioDao.salvaInventario();  // Salva solo se la persistenza è abilitata
-        }
     }
 
-    // Rimuove un ingrediente
     public void rimuoviIngrediente(String nome, int quantita) throws IOException {
+        System.out.println("FrigoriferoController: Rimuovi ingrediente " + nome + " con quantità " + quantita);
         inventarioDao.rimuoviIngrediente(nome, quantita);
-        if (inventarioDao.isPersistenceEnabled()) {
-            inventarioDao.salvaInventario();  // Salva solo se la persistenza è abilitata
-        }
     }
 
-    // Restituisce l'inventario
     public Map<String, Integer> getInventario() {
+        System.out.println("FrigoriferoController: Recupero inventario");
         return inventarioDao.getInventario();
+    }
+
+    public boolean isPersistenceEnabled() {
+        System.out.println("FrigoriferoController: Verifica se la persistenza è abilitata");
+        return inventarioDao.isPersistenceEnabled();
     }
 }

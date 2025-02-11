@@ -9,31 +9,36 @@ public class InventarioDao {
     private static InventarioDao instance;
     private boolean usePersistence;
     private Map<String, Integer> inventario;
-    private static final String FILE_PATH = "inventario.txt";
+    private static final String FILE_PATH = "inventario.txt";  // Assicurati che il percorso sia corretto
 
     private InventarioDao(boolean usePersistence) {
+        System.out.println("InventarioDao: Inizializzazione con persistenza " + usePersistence);
         this.usePersistence = usePersistence;
         this.inventario = new HashMap<>();
         if (usePersistence) {
-            loadInventario();
+            loadInventario();  // Carica l'inventario dal file se la persistenza è attiva
         }
     }
 
-    // Singleton pattern per gestire l'istanza unica di InventarioDao
     public static InventarioDao getInstance(boolean usePersistence) {
         if (instance == null) {
+            System.out.println("InventarioDao: Creazione della nuova istanza con persistenza " + usePersistence);
             instance = new InventarioDao(usePersistence);
         }
         return instance;
     }
 
-    // Aggiunge ingrediente all'inventario
     public void aggiungiIngrediente(String nome, int quantita) {
+        System.out.println("InventarioDao: Aggiungi ingrediente " + nome + " con quantità " + quantita);
         inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
+        if (usePersistence) {
+            System.out.println("InventarioDao: Persistenza abilitata, salvataggio...");
+            salvaInventario();
+        }
     }
 
-    // Rimuove ingrediente dall'inventario
     public void rimuoviIngrediente(String nome, int quantita) {
+        System.out.println("InventarioDao: Rimuovi ingrediente " + nome + " con quantità " + quantita);
         if (inventario.containsKey(nome)) {
             int currentQuantity = inventario.get(nome);
             if (currentQuantity > quantita) {
@@ -41,36 +46,33 @@ public class InventarioDao {
             } else {
                 inventario.remove(nome);
             }
-        }
-    }
-
-    // Restituisce l'inventario
-    public Map<String, Integer> getInventario() {
-        return new HashMap<>(inventario);
-    }
-
-    // Verifica se la persistenza è abilitata
-    public boolean isPersistenceEnabled() {
-        return usePersistence;
-    }
-
-    // Salva l'inventario nel file
-    public void salvaInventario() {
-        if (usePersistence) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-                for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                    writer.write(entry.getKey() + ":" + entry.getValue());
-                    writer.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (usePersistence) {
+                System.out.println("InventarioDao: Persistenza abilitata, salvataggio...");
+                salvaInventario();
             }
         }
     }
 
-    // Carica l'inventario dal file
+    public Map<String, Integer> getInventario() {
+        System.out.println("InventarioDao: Recupero inventario");
+        return new HashMap<>(inventario);  // Restituisci una copia per evitare modifiche dirette
+    }
+
+    private void salvaInventario() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+            System.out.println("InventarioDao: Salvataggio inventario su file...");
+            for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
+                writer.write(entry.getKey() + ":" + entry.getValue());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadInventario() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            System.out.println("InventarioDao: Caricamento inventario dal file...");
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
@@ -83,5 +85,10 @@ public class InventarioDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isPersistenceEnabled() {
+        System.out.println("InventarioDao: Verifica se la persistenza è abilitata: " + usePersistence);
+        return usePersistence;
     }
 }

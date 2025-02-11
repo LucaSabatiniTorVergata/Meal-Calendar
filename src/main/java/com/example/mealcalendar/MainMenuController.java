@@ -1,4 +1,5 @@
 package com.example.mealcalendar;
+
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
-
-
-
 
 public class MainMenuController {
 
@@ -37,8 +34,10 @@ public class MainMenuController {
     @FXML
     private Label welcomelabel;
 
+    // Aggiungi un flag per la persistenza, per esempio
+    private boolean usePersistence = true;
 
-    //metodi eseguibi dal guest
+    //metodi eseguibili dal guest
     @FXML
     private void findRestaurantGuest(ActionEvent event) {
         Stage stage = (Stage) findrestaurantbutton.getScene().getWindow();
@@ -54,7 +53,6 @@ public class MainMenuController {
     //metodi eseguibili dall'user
     @FXML
     private void findRestaurantUser(ActionEvent event) throws IOException {
-
         Stage stage = (Stage) findrestaurantbutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "findrestaurantuser-view.fxml");
     }
@@ -73,8 +71,16 @@ public class MainMenuController {
 
     @FXML
     private void loadFrigeMenu(ActionEvent event) throws IOException {
+        // Passa la variabile usePersistence a FridgeView
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fridge-view.fxml"));
+        Parent root = loader.load();
+
+        FridgeViewBoundary fridgeView = loader.getController();
+        fridgeView.setUsePersistence(usePersistence);  // Imposta il flag della persistenza
+
         Stage stage = (Stage) fillfridgebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "fridge-view.fxml");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
