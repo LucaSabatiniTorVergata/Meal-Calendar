@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class IngredienteValidoSet {
 
-    private static IngredienteValidoSet instance;
+    private static IngredienteValidoSet instance = null;
     private Set<String> ingredientiValidi;
 
     private IngredienteValidoSet() {

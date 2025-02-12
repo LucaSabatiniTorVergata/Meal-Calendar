@@ -14,6 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 
+import static com.example.mealcalendar.MealCalenderViewBoundary.nomePerCalendar;
+import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
+
 
 public class RecipeViewBoundary {
 
@@ -140,6 +143,15 @@ public class RecipeViewBoundary {
     private void handleItemClick(MouseEvent event) {
         if (event.getClickCount() == 2) {  // Controlla se è un doppio click
             String selectedItem = listaRicetteview.getSelectionModel().getSelectedItem();
+
+            if(vengoDaCalendar==true){
+                nomePerCalendar=selectedItem;
+                Stage stage = (Stage) returnhome.getScene().getWindow();
+                vengoDaCalendar=false;
+                GraphicController.cambiascena(stage,"mealcalendar-view.fxml");
+                return;
+            }
+
             if (selectedItem != null) {
                 detailpane.setVisible(true);
                 listaRicetteview.setVisible(false);
