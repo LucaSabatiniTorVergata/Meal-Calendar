@@ -3,9 +3,12 @@ package com.example.mealcalendar;
 import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterController {
 
+    private static final Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
     private UserDaoInterface userDAO;
 
     public RegisterController() {
@@ -29,9 +32,10 @@ public class RegisterController {
         }
 
         // Hash della password con BCrypt
-        System.out.println("password prima dell'hash"+userRegisterBean.getPassword());
+        LOGGER.log(Level.INFO, "Password prima dell'hash: {0}", userRegisterBean.getPassword());
         String hashedPassword = BCrypt.hashpw(userRegisterBean.getPassword(), BCrypt.gensalt());
-        System.out.println("dal register controller:" + hashedPassword);
+        LOGGER.log(Level.INFO, "Dal RegisterController: {0}", hashedPassword);
+
         // Creazione dell'oggetto utente
         UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword);
 

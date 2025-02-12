@@ -11,6 +11,10 @@ import javafx.event.ActionEvent;
 
 public class GraphicController {
 
+    private GraphicController(){
+
+    }
+
     public static void cambiascena(Stage stage, String fxmlview) {
 
         try {

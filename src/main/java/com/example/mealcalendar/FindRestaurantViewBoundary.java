@@ -182,24 +182,23 @@ public class FindRestaurantViewBoundary {
         GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
-    @FXML
     private void handleclick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
-                System.out.println("vengo da calendar " + vengoDaCalendar);
+                LOGGER.log(Level.INFO, "vengo da calendar: {0}", vengoDaCalendar);
                 if(vengoDaCalendar){
-
                     nomePerCalendar = ristorante.getNome();
-                    System.out.println("preso da maps "+nomePerCalendar);
-                    vengoDaCalendar=false;
+                    LOGGER.log(Level.INFO, "preso da maps: {0}", nomePerCalendar);
+                    vengoDaCalendar = false;
                     Stage stage = (Stage) ristorantiListView.getScene().getWindow();
                     GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
-                }else{
+                } else {
                     apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
                 }
             }
         }
     }
+
 }

@@ -4,10 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MealCalenderViewBoundary {
 
-
+    private static final Logger LOGGER = Logger.getLogger(MealCalenderViewBoundary.class.getName());
 
     @FXML
     private Button backhome;
@@ -30,9 +32,10 @@ public class MealCalenderViewBoundary {
     @FXML
     private Label ristoranteSelezionato;
 
-    public static boolean sceltaLuogo = false;// sempre falso perchè di base si mangia a casa
-    public static boolean vengoDaCalendar = false; //mi serve per dire a restaurant di non aprire browser
+    public static boolean sceltaLuogo = false;
+    public static boolean vengoDaCalendar = false;
     public static String nomePerCalendar = "";
+
     @FXML
     private void initialize() {
         home.setOnAction(e -> {
@@ -48,33 +51,26 @@ public class MealCalenderViewBoundary {
             ristoranteSelezionato.setText("Ristorante selezionato: " + nomePerCalendar);
         }
 
-        System.out.println("Scelta luogo: " + sceltaLuogo);
+        LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
     }
 
     @FXML
     private void confirmChoise(ActionEvent actionEvent) {
-        if(sceltaLuogo) {
+        if (sceltaLuogo) {
             vengoDaCalendar = true;
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             GraphicController.cambiascena(stage, "findrestaurantuser-view.fxml");
-
-        }
-        else {
+        } else {
             vengoDaCalendar = true;
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             GraphicController.cambiascena(stage, "recipe-view.fxml");
-
         }
-        System.out.println("sono l'altra pagina: "+nomePerCalendar);
+        LOGGER.log(Level.INFO, "sono l'altra pagina: {0}", nomePerCalendar);
     }
-
-
 
     @FXML
     private void homeview(ActionEvent event) {
         Stage stage = (Stage) backhome.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
-
 }
-
