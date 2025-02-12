@@ -102,12 +102,12 @@ public class MainMenuController {
 
 
     @FXML
-    private void enablePersistence(ActionEvent event) throws IOException {
+    private void enablePersistence(ActionEvent event)  {
         usePersistence = true;
     }
 
     @FXML
-    private void disablePersistence(ActionEvent event) throws IOException {
+    private void disablePersistence(ActionEvent event)  {
         usePersistence = false;
     }
 }

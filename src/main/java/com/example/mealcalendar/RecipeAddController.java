@@ -10,7 +10,7 @@ public class RecipeAddController {
     private RecipeDao dao = RecipeDaoFactory.createRecipeDao();
 
     // Metodo per salvare una ricetta
-    public boolean salvaRicetta(AddRecipeBean bean) throws IOException {
+    public boolean salvaRicetta(AddRecipeBean bean)  {
         String nome = bean.getRecipeName();
         String dieta = bean.getTypeofDiet();
         String pasto = bean.getTypeofMeal();
@@ -24,7 +24,7 @@ public class RecipeAddController {
     }
 
     // Metodo spostato nel controller: verifica la presenza di ricette in base ai filtri
-    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean) throws IOException {
+    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean)  {
         // Supponiamo che RecipeListSLT sia un singleton che gestisce la lista filtrata
         RecipeListSLT listaRicette = RecipeListSLT.getInstance();
         listaRicette.svuotaLista();
@@ -39,6 +39,6 @@ public class RecipeAddController {
             }
         }
         List<RecipeReturnBean> ricetteBeans = listaRicette.getrcicettereturn();
-        return ricetteBeans.size() > 0 ? ricetteBeans : null;
+        return ricetteBeans.isEmpty() ? ricetteBeans : null;
     }
 }

@@ -1,11 +1,13 @@
 package com.example.mealcalendar;
 
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class IngredienteSltpat {
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    // Logger dichiarato come statico e finale
+    private static final Logger logger = Logger.getLogger(IngredienteSltpat.class.getName());
 
     // Creazione dell'istanza Singleton
     private static IngredienteSltpat instance = null;
@@ -30,12 +32,14 @@ public class IngredienteSltpat {
     public void aggiungiIngrediente(String nome, int quantita) {
         if (inventario.containsKey(nome)) {
             inventario.put(nome, inventario.get(nome) + quantita);
+            logger.log(Level.INFO, "Aggiunta quantità di {0}: {1}", new Object[]{nome, quantita});
         } else {
             // Inseriamo l'ingrediente come primo
             Map<String, Integer> nuovoInventario = new LinkedHashMap<>();
             nuovoInventario.put(nome, quantita);
             nuovoInventario.putAll(inventario); // Aggiungiamo il vecchio inventario
             inventario = nuovoInventario;
+            logger.log(Level.INFO, "Aggiunto nuovo ingrediente: {0} con quantità: {1}", new Object[]{nome, quantita});
         }
     }
 
@@ -46,14 +50,15 @@ public class IngredienteSltpat {
             if (quantita >= currentQuantity) {
                 // Se la quantità da rimuovere è maggiore o uguale a quella presente, elimina l'ingrediente
                 inventario.remove(nome);
-                logger.info("Rimosso completamente l'ingrediente: " + nome);
+                logger.log(Level.INFO, "Rimosso completamente l'ingrediente: {0}", nome);
             } else {
                 // Altrimenti, diminuisci la quantità
                 inventario.put(nome, currentQuantity - quantita);
-                logger.info("Diminuita la quantità di " + nome + " di " + quantita + ". Quantità rimanente: " + (currentQuantity - quantita));
+                logger.log(Level.INFO, "Diminuita la quantità di {0} di {1}. Quantità rimanente: {2}",
+                        new Object[]{nome, quantita, currentQuantity - quantita});
             }
         } else {
-            logger.info("L'ingrediente " + nome + " non esiste nell'inventario.");
+            logger.log(Level.WARNING, "L'ingrediente {0} non esiste nell'inventario.", nome);
         }
     }
 
@@ -69,7 +74,7 @@ public class IngredienteSltpat {
             logger.info("⚠️ Il frigorifero è vuoto!");
         } else {
             for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
-                logger.info("- " + entry.getKey() + " | Quantità: " + entry.getValue());
+                logger.log(Level.INFO, "- {0} | Quantità: {1}", new Object[]{entry.getKey(), entry.getValue()});
             }
         }
     }

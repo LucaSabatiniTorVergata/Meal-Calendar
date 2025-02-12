@@ -14,12 +14,12 @@ public class FrigoriferoController {
         this.inventarioDao = InventarioDao.getInstance(usePersistence);
     }
 
-    public void aggiungiIngrediente(String nome, int quantita) throws IOException {
+    public void aggiungiIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "FrigoriferoController: Aggiungi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         inventarioDao.aggiungiIngrediente(nome, quantita);
     }
 
-    public void rimuoviIngrediente(String nome, int quantita) throws IOException {
+    public void rimuoviIngrediente(String nome, int quantita)  {
         LOGGER.log(Level.INFO, "FrigoriferoController: Rimuovi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         inventarioDao.rimuoviIngrediente(nome, quantita);
     }

@@ -182,6 +182,7 @@ public class FindRestaurantViewBoundary {
         GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
+    @FXML
     private void handleclick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
