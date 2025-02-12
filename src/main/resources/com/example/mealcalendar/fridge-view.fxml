@@ -45,8 +45,6 @@
       </Label>
       <ListView fx:id="listaInventario" layoutX="474.0" layoutY="130.0" prefHeight="496.0" prefWidth="749.0" />
       <Button layoutX="211.0" layoutY="542.0" mnemonicParsing="false" onAction="#rimuoviIngrediente" text="Rimuovi" />
-      <Button layoutX="14.0" layoutY="66.0" mnemonicParsing="false" onAction="#enablePersistence" text="FS" />
-      <Button layoutX="73.0" layoutY="67.0" mnemonicParsing="false" onAction="#disablePersistence" text="RAM" />
     </children>
 
 </AnchorPane>

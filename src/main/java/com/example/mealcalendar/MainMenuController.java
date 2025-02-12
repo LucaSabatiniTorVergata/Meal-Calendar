@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
+
 public class MainMenuController {
 
     @FXML
@@ -35,7 +37,7 @@ public class MainMenuController {
     private Label welcomelabel;
 
     // Aggiungi un flag per la persistenza, per esempio
-    private boolean usePersistence = true;
+
 
     //metodi eseguibili dal guest
     @FXML
@@ -96,5 +98,16 @@ public class MainMenuController {
         if (username != null) {
             welcomelabel.setText("Hi, " + username + "!");
         }
+    }
+
+
+    @FXML
+    private void enablePersistence(ActionEvent event) throws IOException {
+        usePersistence = true;
+    }
+
+    @FXML
+    private void disablePersistence(ActionEvent event) throws IOException {
+        usePersistence = false;
     }
 }

@@ -30,7 +30,7 @@ public class FridgeViewBoundary {
     Logger logger = Logger.getLogger(getClass().getName());
 
     // Variabile per la modalità di persistenza
-    private boolean usePersistence = true; //smith ci sono delle cose da sistemare perchè di fatto non riesco a fare lo switching tra persistenza e non persistenza se domani mattina riesci cerca di sistemarlo
+    public static boolean usePersistence = false; //smith ci sono delle cose da sistemare perchè di fatto non riesco a fare lo switching tra persistenza e non persistenza se domani mattina riesci cerca di sistemarlo
 
     // Metodo per impostare la persistenza
     public void setUsePersistence(boolean usePersistence) {
@@ -131,17 +131,4 @@ public class FridgeViewBoundary {
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
-    @FXML
-    private void enablePersistence(ActionEvent event) throws IOException {
-        setUsePersistence(true);
-        // Attiva la persistenza
-        aggiornaInventario();
-    }
-
-    @FXML
-    private void disablePersistence(ActionEvent event) throws IOException {
-        setUsePersistence(false);
-        // Disattiva la persistenza
-        aggiornaInventario();
-    }
 }
