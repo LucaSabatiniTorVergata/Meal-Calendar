@@ -90,6 +90,7 @@ public class MainMenuController {
         SessionManagerSLT.getInstance().logout();
         Stage stage = (Stage) backbutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "login-view.fxml");
+
     }
 
     @FXML
