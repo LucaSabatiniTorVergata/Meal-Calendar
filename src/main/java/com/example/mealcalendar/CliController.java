@@ -13,6 +13,7 @@ public class CliController {
                 System.out.println("🔹 Navigazione alla schermata principale guest (CLI).");
                 MainMenuViewBoundaryGuestCli mainMenuViewGuest = new MainMenuViewBoundaryGuestCli();
                 mainMenuViewGuest.start();
+                break;
             case "mainmenu":
                 System.out.println("🔹 Navigazione alla schermata principale (CLI).");
                 MainMenuViewBoundaryCli mainMenuView = new MainMenuViewBoundaryCli();
