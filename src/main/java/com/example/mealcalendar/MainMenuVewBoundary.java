@@ -3,7 +3,6 @@ package com.example.mealcalendar;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,7 +12,7 @@ import javafx.event.ActionEvent;
 
 import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
 
-public class MainMenuController {
+public class MainMenuVewBoundary {
 
     @FXML
     private Button backbutton;
