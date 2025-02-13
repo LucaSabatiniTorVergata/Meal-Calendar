@@ -1,12 +1,14 @@
 package com.example.mealcalendar;
 
+import javafx.fxml.FXML;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InventarioDao {
+public class InventarioDao implements InventarioDaoInterface {
 
     private static final Logger LOGGER = Logger.getLogger(InventarioDao.class.getName());
     private static InventarioDao instance;
@@ -31,6 +33,7 @@ public class InventarioDao {
         return instance;
     }
 
+    @Override
     public void aggiungiIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "InventarioDao: Aggiungi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
@@ -40,6 +43,7 @@ public class InventarioDao {
         }
     }
 
+    @Override
     public void rimuoviIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "InventarioDao: Rimuovi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         if (inventario.containsKey(nome)) {
@@ -56,6 +60,7 @@ public class InventarioDao {
         }
     }
 
+    @Override
     public Map<String, Integer> getInventario() {
         LOGGER.log(Level.INFO, "InventarioDao: Recupero inventario");
         return new HashMap<>(inventario);
