@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.nomePerCalendar;
+
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
 
 
@@ -145,7 +145,6 @@ public class RecipeViewBoundary {
             String selectedItem = listaRicetteview.getSelectionModel().getSelectedItem();
 
             if(vengoDaCalendar==true){
-                nomePerCalendar=selectedItem;
                 Stage stage = (Stage) returnhome.getScene().getWindow();
                 vengoDaCalendar=false;
                 GraphicController.cambiascena(stage,"mealcalendar-view.fxml");

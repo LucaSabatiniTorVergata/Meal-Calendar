@@ -4,6 +4,7 @@ public class SessionManagerSLT {
 
     private static SessionManagerSLT instance=null;
     private String loggedInUsername;
+    private String loggedEmail;
 
     private SessionManagerSLT() {}
 
@@ -18,9 +19,12 @@ public class SessionManagerSLT {
         this.loggedInUsername = username;
     }
 
+
     public String getLoggedInUsername() {
         return loggedInUsername;
     }
+
+
 
     public void logout() {
         loggedInUsername = null;

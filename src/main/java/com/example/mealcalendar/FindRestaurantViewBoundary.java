@@ -27,7 +27,7 @@ import java.util.function.UnaryOperator;
 import javafx.scene.control.Label;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
-import static com.example.mealcalendar.MealCalenderViewBoundary.nomePerCalendar;
+
 
 
 public class FindRestaurantViewBoundary {
@@ -190,8 +190,6 @@ public class FindRestaurantViewBoundary {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
                 LOGGER.log(Level.INFO, "vengo da calendar: {0}", vengoDaCalendar);
                 if(vengoDaCalendar){
-                    nomePerCalendar = ristorante.getNome();
-                    LOGGER.log(Level.INFO, "preso da maps: {0}", nomePerCalendar);
                     vengoDaCalendar = false;
                     Stage stage = (Stage) ristorantiListView.getScene().getWindow();
                     GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
