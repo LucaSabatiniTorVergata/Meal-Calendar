@@ -29,7 +29,11 @@ public class CliController {
                 FindRestaurantViewBoundaryCli findRestaurantViewGuest = new FindRestaurantViewBoundaryCli();
                 findRestaurantViewGuest.start();
                 break;
-
+            case "trovaricette":
+                System.out.println("🔹 Navigazione alla schermata di trova ricette (CLI).");
+                RecipeVewBoundaryCli recipeView = new RecipeVewBoundaryCli();
+                recipeView.start();
+                break;
             default:
                 System.out.println("❌ Schermata non trovata.");
         }

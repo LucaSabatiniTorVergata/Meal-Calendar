@@ -33,7 +33,7 @@ public class MainMenuViewBoundaryCli {
                 loadCalendarMenu();
                 break;
             case "4":
-                loadFindRecipe();
+                cliController.navigateTo("trovaricette");
                 break;
             case "5":
                 loadFridgeMenu();

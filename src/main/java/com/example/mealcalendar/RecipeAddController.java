@@ -24,21 +24,5 @@ public class RecipeAddController {
     }
 
     // Metodo spostato nel controller: verifica la presenza di ricette in base ai filtri
-    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean)  {
-        // Supponiamo che RecipeListSLT sia un singleton che gestisce la lista filtrata
-        RecipeListSLT listaRicette = RecipeListSLT.getInstance();
-        listaRicette.svuotaLista();
 
-        List<RecipeEntity> recipeEntityList = dao.getAllRecipes();
-
-        for (RecipeEntity recipe : recipeEntityList) {
-            // Confronta i filtri: per esempio, tipo di dieta e tipo di pasto
-            if (recipe.getTypeofDiet().equalsIgnoreCase(bean.getTipoDieta()) &&
-                    recipe.getTypeofMeal().equalsIgnoreCase(bean.getTipoPasto())) {
-                listaRicette.aggiungiRicette(recipe);
-            }
-        }
-        List<RecipeReturnBean> ricetteBeans = listaRicette.getrcicettereturn();
-        return ricetteBeans.isEmpty() ? ricetteBeans : null;
-    }
 }
