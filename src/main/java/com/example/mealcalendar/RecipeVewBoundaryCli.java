@@ -27,7 +27,7 @@ public class RecipeVewBoundaryCli {
                     searchRecipies();
                     break;
                 case "2":
-                    addRecipe();
+                    cliController.navigateTo("addrecipe");
                     break;
                 case "3":
                     editRecipe();

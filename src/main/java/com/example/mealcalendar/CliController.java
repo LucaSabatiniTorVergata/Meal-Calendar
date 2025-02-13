@@ -4,6 +4,19 @@ public class CliController {
 
     public void navigateTo(String view) {
         switch (view) {
+            case "fridge":
+                System.out.println("🔹 Navigazione alla schermata frigo (CLI).");
+                FridgeViewBoundaryCli frigorifero = new FridgeViewBoundaryCli();
+                frigorifero.start();
+            case "registration":
+                System.out.println("🔹 Navigazione alla schermata hello (CLI).");
+                HelloViewBoundaryCli helloview = new HelloViewBoundaryCli();
+                helloview.start();
+            case "addrecipe":
+                System.out.println("🔹 Navigazione alla schermata aggiunta ricetta (CLI).");
+                RecipeAddViewBoundaryCli addrecipeboundary = new RecipeAddViewBoundaryCli();
+                addrecipeboundary.start();
+                break;
             case "login":
                 System.out.println("🔹 Navigazione alla schermata di login (CLI).");
                 LoginViewBoundaryCli loginView = new LoginViewBoundaryCli();

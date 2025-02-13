@@ -87,6 +87,7 @@ public class FindRestaurantViewBoundaryCli {
             }
         } else {
             System.out.println("Programma terminato.");
+
         }
 
         scanner.close();

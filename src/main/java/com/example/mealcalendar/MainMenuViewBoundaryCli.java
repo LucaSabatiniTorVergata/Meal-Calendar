@@ -17,8 +17,7 @@ public class MainMenuViewBoundaryCli {
         System.out.println("5. Riempi Frigorifero");
         System.out.println("6. Abilita Persistenza");
         System.out.println("7. Disabilita Persistenza");
-        System.out.println("8. Torna alla Home");
-        System.out.println("9. Logout");
+        System.out.println("8. Logout");
         System.out.print("Scegli un'opzione: ");
 
         String choice = scanner.nextLine();
@@ -36,7 +35,7 @@ public class MainMenuViewBoundaryCli {
                 cliController.navigateTo("trovaricette");
                 break;
             case "5":
-                loadFridgeMenu();
+                cliController.navigateTo("fridge");
                 break;
             case "6":
                 enablePersistence();
@@ -45,9 +44,6 @@ public class MainMenuViewBoundaryCli {
                 disablePersistence();
                 break;
             case "8":
-                cliController.navigateTo("home");
-                break;
-            case "9":
                 cliController.navigateTo("login");
                 break;
             default:

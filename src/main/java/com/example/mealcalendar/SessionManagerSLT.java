@@ -16,6 +16,7 @@ public class SessionManagerSLT {
     }
 
     public void setLoggedInUsername(String username) {
+
         this.loggedInUsername = username;
     }
 
