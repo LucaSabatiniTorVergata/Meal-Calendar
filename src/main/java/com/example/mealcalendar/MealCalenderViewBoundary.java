@@ -78,16 +78,8 @@ public class MealCalenderViewBoundary {
     }
 
     @FXML
-    private void confirmChoise(ActionEvent actionEvent) {
-        if (sceltaLuogo) {
-            vengoDaCalendar = true;
-            Stage stage = (Stage) confirmButton.getScene().getWindow();
-            GraphicController.cambiascena(stage, "findrestaurantuser-view.fxml");
-        } else {
-            vengoDaCalendar = true;
-            Stage stage = (Stage) confirmButton.getScene().getWindow();
-            GraphicController.cambiascena(stage, "recipe-view.fxml");
-        }
+    private void confirmChoise(ActionEvent actionEvent) throws Exception {
+
 
         dataselezionata = calendar.getValue();
         oraselezionata=orascelta.getText();
@@ -95,8 +87,7 @@ public class MealCalenderViewBoundary {
         MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,SessionManagerSLT.getInstance().getLoggedInUsername());
         MealcalendarController controller = new MealcalendarController(bean);
 
-
-
+        controller.invioMail();
 
 
     }
