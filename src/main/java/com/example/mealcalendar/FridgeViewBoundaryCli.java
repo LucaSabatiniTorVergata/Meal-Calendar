@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
+
+
 public class FridgeViewBoundaryCli {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -12,8 +15,6 @@ public class FridgeViewBoundaryCli {
     private FrigoriferoController frigoriferoController;
     private final IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     private final CliController cliController = new CliController();
-    public static boolean usePersistence = false;
-
     public void start() {
         // Inizializzazione del controller
         try {
