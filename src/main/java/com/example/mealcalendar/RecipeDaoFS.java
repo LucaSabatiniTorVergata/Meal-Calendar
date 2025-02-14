@@ -61,4 +61,21 @@ public class RecipeDaoFS implements RecipeDao {
         if (parts.length < 7) return null; // Verifica che la riga sia completa
         return new RecipeEntity(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
     }
+
+    public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
+
+        List<RecipeEntity> recipes = getAllRecipes(); // Legge il file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+
+            for (RecipeEntity recipe : recipes) {
+                if (formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
+                    writer.write(formatRecipe(newRecipe));// Scrive la versione aggiornata
+
+                } else {
+                    writer.write(formatRecipe(recipe));
+                }
+                writer.newLine();
+            }
+        }
+    }
 }

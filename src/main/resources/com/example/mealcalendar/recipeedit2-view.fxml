@@ -96,7 +96,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <Button fx:id="apply" layoutX="78.0" layoutY="611.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" style="-fx-background-color: #cfac5b;" text="APPLY CHANGES">
+        <Button fx:id="apply" onAction="#applyview" layoutX="78.0" layoutY="611.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" style="-fx-background-color: #cfac5b;" text="APPLY CHANGES">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>

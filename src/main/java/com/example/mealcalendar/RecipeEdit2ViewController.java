@@ -50,6 +50,16 @@ public class RecipeEdit2ViewController {
     @FXML
     private MenuItem cena;
 
+
+    private String nomeRicetta;
+    private String numIngredienti;
+    private String ingredientiRicetta;
+    private String descrizioneRicetta;
+    private String dieta;
+    private String pasto;
+
+
+
     private String ricettascelta;
 
     @FXML
@@ -67,15 +77,26 @@ public class RecipeEdit2ViewController {
     }
 
     public void setRecipe(String recipe) throws IOException {
-       ricettascelta=recipe;
+
+        this.ricettascelta = recipe;
+        updateUI();
+
     }
 
-    @FXML
-    private void initialize() throws IOException {
-
-        String firstPart = ricettascelta.split(" - ")[0];
-        nomericetta.setText(firstPart);
-
+    public void updateUI() {
+        if (ricettascelta != null) {
+            String[] parts = ricettascelta.split(" - ");
+            if (parts.length >= 6) {
+                nomericetta.setText(parts[0]);
+                tipodieta.setText(parts[1]);
+                tipopasto.setText(parts[2]);
+                numeroing.setText(parts[3]);
+                ingredienti.setText(parts[4]);
+                descrizione.setText(parts[5]);
+            }
+        } else {
+            System.out.println("Errore: ricettascelta è null!");
+        }
 
         vegan.setOnAction(e -> tipodieta.setText("Vegano"));
         vegetariana.setOnAction(e -> tipodieta.setText("Vegetariano"));
@@ -84,19 +105,27 @@ public class RecipeEdit2ViewController {
         colazione.setOnAction(e -> tipopasto.setText("Colazione"));
         pranzo.setOnAction(e -> tipopasto.setText("Pranzo"));
         cena.setOnAction(e -> tipopasto.setText("Cena"));
+    }
 
 
+    @FXML
+    private void applyview(ActionEvent event) throws IOException {
 
-        String fourthPart = ricettascelta.split(" - ")[3];
-        numeroing.setText(fourthPart);
-
-        String fifthPart = ricettascelta.split(" - ")[4];
-        ingredienti.setText(fifthPart);
-
-        String sixthPart = ricettascelta.split(" - ")[5];
-        descrizione.setText(sixthPart);
+        nomeRicetta = nomericetta.getText();
+        numIngredienti = numeroing.getText();
+        ingredientiRicetta = ingredienti.getText();
+        descrizioneRicetta = descrizione.getText();
+        pasto=tipopasto.getText();
+        dieta=tipodieta.getText();
 
 
+        RecipeEdit2Bean bean=new RecipeEdit2Bean(ricettascelta,nomeRicetta,dieta,pasto,numIngredienti,ingredientiRicetta,descrizioneRicetta,SessionManagerSLT.getInstance().getLoggedInUsername());
+        RecipeEdit2Controller controller = new RecipeEdit2Controller(bean);
+        controller.cambiaRicetta();
+
+
+        Stage stage = (Stage) homereturn.getScene().getWindow();
+        GraphicController.cambiascena(stage, "recipe-view.fxml");
 
 
     }

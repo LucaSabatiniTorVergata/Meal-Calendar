@@ -101,7 +101,8 @@ public class RecipeEditViewController {
 
             // Prendi il controller della nuova schermata
             RecipeEdit2ViewController controller = loader.getController();
-            controller.setRecipe(selectedRecipe);  // Passa la ricetta selezionata
+            controller.setRecipe(selectedRecipe);// Passa la ricetta selezionata
+
 
             // Mostra la nuova scena
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
