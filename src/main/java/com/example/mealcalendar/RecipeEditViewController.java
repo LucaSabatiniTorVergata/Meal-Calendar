@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+import javax.swing.text.html.ListView;
+
 public class RecipeEditViewController {
 
     @FXML
@@ -17,6 +19,9 @@ public class RecipeEditViewController {
 
     @FXML
     private Button ritorno;
+
+    @FXML
+    private ListView ricetteview;
 
 
     @FXML
@@ -31,4 +36,17 @@ public class RecipeEditViewController {
         Stage stage = (Stage) ritorno.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");
     }
+
+    @FXML
+    public void initialize() {
+        String user=SessionManagerSLT.getInstance().getLoggedInUsername();
+        RecipeEditBean bean=new RecipeEditBean(user);
+        RecipeEditController controller=new RecipeEditController(bean);
+
+
+
+
+    }
+
+
 }

@@ -4,8 +4,13 @@ package com.example.mealcalendar;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 
 public class MealcalendarController {
 
@@ -48,22 +53,41 @@ public class MealcalendarController {
             }
         });
 
+        if(sceltaLuogo) {
+            try {
+                // Creare il messaggio
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alessiodemar@gmail.com")); // L'indirizzo del destinatario
+                message.setSubject("Email di coonferma posto dove mangiare"); // Oggetto dell'email
+                message.setText("Salve,hai appena deciso di mangiare a" + mealcalendarBean.getScelta() + "il giorno " + mealcalendarBean.getData() + "alle ore" + mealcalendarBean.getOra()); // Corpo dell'email
 
-        try {
-            // Creare il messaggio
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("luca.sabatini.2k03@gmail.com")); // L'indirizzo del destinatario
-            message.setSubject("Test Email from Java"); // Oggetto dell'email
-            message.setText("Hello"); // Corpo dell'email
+                // Invia il messaggio
+                Transport.send(message);
 
-            // Invia il messaggio
-            Transport.send(message);
+                System.out.println("Email sent successfully");
 
-            System.out.println("Email sent successfully");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                // Creare il messaggio
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alessiodemar@gmail.com")); // L'indirizzo del destinatario
+                message.setSubject("Conferma Posto dove mangiare"); // Oggetto dell'email
+                message.setText("Salve,la ricetta scelta da te per il giorno" + mealcalendarBean.getData() + "alle ore" + mealcalendarBean.getOra() + "è" + mealcalendarBean.getScelta()); // Corpo dell'email
 
-        } catch (MessagingException e) {
-            e.printStackTrace();
+                // Invia il messaggio
+                Transport.send(message);
+
+                System.out.println("Email sent successfully");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         }
     };
 }

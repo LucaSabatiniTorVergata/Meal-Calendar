@@ -26,6 +26,7 @@ import javafx.scene.control.TextFormatter;
 import java.util.function.UnaryOperator;
 import javafx.scene.control.Label;
 
+import static com.example.mealcalendar.MealCalenderViewBoundary.ristorantescelto;
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
 
 
@@ -33,7 +34,6 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
 public class FindRestaurantViewBoundary {
 
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
-
 
 
 
@@ -183,16 +183,19 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
-    private void handleclick(MouseEvent event) {
+    private void handleclick(MouseEvent event) throws Exception {
         if (event.getClickCount() == 2) {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
-                LOGGER.log(Level.INFO, "vengo da calendar: {0}", vengoDaCalendar);
                 if(vengoDaCalendar){
                     vengoDaCalendar = false;
-                    Stage stage = (Stage) ristorantiListView.getScene().getWindow();
-                    GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
+                    ristorantescelto="🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo();
+                    MealCalenderViewBoundary.inviomail();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();  // Prendi la finestra dalla nuova scena
+                    stage.setScene(new Scene(root));
                 } else {
                     apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
                 }

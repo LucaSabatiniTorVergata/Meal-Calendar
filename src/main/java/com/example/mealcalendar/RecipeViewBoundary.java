@@ -3,6 +3,9 @@ package com.example.mealcalendar;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
@@ -16,6 +19,7 @@ import javafx.scene.control.Label;
 
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
+import static com.example.mealcalendar.MealCalenderViewBoundary.ricettascelta;
 
 
 public class RecipeViewBoundary {
@@ -156,22 +160,27 @@ public class RecipeViewBoundary {
 
 
     @FXML
-    private void handleItemClick(MouseEvent event) {
+    private void handleItemClick(MouseEvent event) throws Exception {
         if (event.getClickCount() == 2) {  // Controlla se è un doppio click
             String selectedItem = listaRicetteview.getSelectionModel().getSelectedItem();
 
-            if(vengoDaCalendar==true){
-                Stage stage = (Stage) returnhome.getScene().getWindow();
-                vengoDaCalendar=false;
-                GraphicController.cambiascena(stage,"mealcalendar-view.fxml");
-                return;
-            }
-
             if (selectedItem != null) {
-                detailpane.setVisible(true);
-                listaRicetteview.setVisible(false);
-                detailLabel.setText(selectedItem);
+                if(vengoDaCalendar){
+                    vengoDaCalendar=false;
+                    ricettascelta=selectedItem;
+                    MealCalenderViewBoundary.inviomail();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) returnhome.getScene().getWindow();  // Prendi la finestra dalla nuova scena
+                    stage.setScene(new Scene(root));
 
+
+                }else {
+
+                    detailpane.setVisible(true);
+                    listaRicetteview.setVisible(false);
+                    detailLabel.setText(selectedItem);
+                }
             }
         }
     }

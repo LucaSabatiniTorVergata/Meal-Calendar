@@ -7,11 +7,13 @@ public class MealcalendarBean {
     private LocalDate data;
     private String ora;
     private String user;
+    private String scelta;
 
-    public MealcalendarBean(LocalDate data, String ora, String user) {
+    public MealcalendarBean(LocalDate data, String ora, String user, String scelta) {
         this.data = data;
         this.ora = ora;
         this.user=user;
+        this.scelta=scelta;
     }
 
     public LocalDate getData() {
@@ -22,6 +24,9 @@ public class MealcalendarBean {
     }
     public String getUser() {
         return user;
+    }
+    public String getScelta() {
+        return scelta;
     }
 
 }
