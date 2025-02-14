@@ -9,8 +9,23 @@ import java.util.Scanner;
 
 public class FindRestaurantViewBoundaryCli {
 
-    public void start() {
+    private final boolean vengoDaCalendar;
+
+    // Costruttore con parametro per impostare vengoDaCalendar
+    public FindRestaurantViewBoundaryCli(boolean vengoDaCalendar) {
+        this.vengoDaCalendar = vengoDaCalendar;
+    }
+
+    // Costruttore di default (assume che non venga da Calendar)
+    public FindRestaurantViewBoundaryCli() {
+        this.vengoDaCalendar = false;
+    }
+
+    public void start() throws Exception {
         Scanner scanner = new Scanner(System.in);
+
+        // Controlla se provengo dal calendario
+        boolean fromCalendar = this.vengoDaCalendar;
 
         // Richiesta del tipo di dieta
         System.out.println("Inserisci il tipo di dieta (Vegano, Vegetariano, Onnivoro): ");
@@ -60,8 +75,8 @@ public class FindRestaurantViewBoundaryCli {
             System.out.println((i + 1) + ". " + ristorante.getNome() + " - " + ristorante.getIndirizzo());
         }
 
-        // Scelta opzionale per aprire il ristorante selezionato su Google Maps
-        System.out.println("\nInserisci il numero del ristorante per aprirlo su Google Maps, oppure 0 per uscire:");
+        // Scelta del ristorante
+        System.out.println("\nInserisci il numero del ristorante per selezionarlo, oppure 0 per uscire:");
         int scelta = 0;
         try {
             scelta = Integer.parseInt(scanner.nextLine().trim());
@@ -71,10 +86,27 @@ public class FindRestaurantViewBoundaryCli {
         }
 
         if (scelta > 0 && scelta <= listaRistoranti.size()) {
-            ReturnRestaurantsBean ristorante = listaRistoranti.get(scelta - 1);
+            ReturnRestaurantsBean ristoranteSelezionato = listaRistoranti.get(scelta - 1);
+
+            // Se provengo dal calendario, salvo il ristorante e torno al calendario
+            if (fromCalendar) {
+                System.out.println("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
+
+                // Salva il ristorante selezionato nella variabile statica
+                MealCalenderViewBoundaryCli.ristorantescelto = ristoranteSelezionato.getNome();
+
+                System.out.println("\n🔄 Sto tornando al calendario con il ristorante selezionato...");
+
+                // Usa il controller per navigare al calendario
+                CliController cliController = new CliController();
+                cliController.navigateTo("calendariopasti");
+                return;
+            }
+
+            // Se NON provengo dal calendario, offro l'opzione di aprirlo su Google Maps
             String url = "https://www.google.com/maps/search/?api=1&query="
-                    + ristorante.getLatitudine() + "," + ristorante.getLongitudine();
-            System.out.println("Apro Google Maps per: " + ristorante.getNome());
+                    + ristoranteSelezionato.getLatitudine() + "," + ristoranteSelezionato.getLongitudine();
+            System.out.println("Apro Google Maps per: " + ristoranteSelezionato.getNome());
             if (Desktop.isDesktopSupported()) {
                 try {
                     Desktop.getDesktop().browse(new URI(url));
@@ -85,9 +117,9 @@ public class FindRestaurantViewBoundaryCli {
                 System.out.println("Desktop non supportato. Copia e incolla il seguente URL nel tuo browser:");
                 System.out.println(url);
             }
-        } else {
-            System.out.println("Programma terminato.");
 
+        } else {
+            System.out.println("Nessun ristorante selezionato. Programma terminato.");
         }
 
         scanner.close();

@@ -24,12 +24,18 @@ public class MealCalenderViewBoundaryCli {
     // Aggiunto per salvare la ricetta selezionata
     private RecipeReturnBean ricettaSelezionata;
 
+    // Nuovo costruttore per il ristorante selezionato
     public MealCalenderViewBoundaryCli() {
     }
 
     // Costruttore per passare la ricetta selezionata
     public MealCalenderViewBoundaryCli(RecipeReturnBean ricettaSelezionata) {
         this.ricettaSelezionata = ricettaSelezionata;
+    }
+
+    // Costruttore per passare il ristorante selezionato
+    public MealCalenderViewBoundaryCli(String ristoranteSelezionato) {
+        ristorantescelto = ristoranteSelezionato;
     }
 
     public void start() throws Exception {
@@ -48,6 +54,12 @@ public class MealCalenderViewBoundaryCli {
             System.out.println("Descrizione: " + ricettaSelezionata.getDescription());
             System.out.println("Autore: " + ricettaSelezionata.getAuthor());
             setRicettaSelezionata(ricettaSelezionata);
+            inviomail();
+        } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
+            // Se c'è un ristorante selezionato, lo mostriamo
+            System.out.println("\n🍽 Ristorante Selezionato:");
+            System.out.println("Ristorante: " + ristorantescelto);
+            setRistoranteSelezionato(ristorantescelto);
             inviomail();
         }
 
@@ -109,7 +121,7 @@ public class MealCalenderViewBoundaryCli {
 
         if (sceltaLuogo) {
             // Vai a trovare il ristorante
-            cliController.navigateTo("ristoranteUser");
+            navigateToRestaurant();
         } else {
             // Vai a trovare la ricetta
             RecipeVewBoundaryCli ricercaRicette = new RecipeVewBoundaryCli(true);
@@ -117,12 +129,38 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
+    private void navigateToRestaurant() throws Exception {
+        // Inizializza la vista per i ristoranti e comunica che provieni dal calendario
+        FindRestaurantViewBoundaryCli findRestaurantView = new FindRestaurantViewBoundaryCli(true); // 'true' indica che provieni dal calendario
+        findRestaurantView.start(); // Avvia la ricerca dei ristoranti
+
+        // Stampa il ristorante selezionato (se esiste)
+        if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
+            System.out.println("Ristorante selezionato: " + ristorantescelto);
+
+            // Verifica che siamo entrati nella parte giusta del codice
+            System.out.println("Il ristorante selezionato non è nullo o vuoto.");
+
+        } else {
+            System.out.println("Nessun ristorante selezionato.");
+        }
+    }
+
     public static void inviomail() throws Exception {
         if (sceltaLuogo) {
+            // Log per confermare che siamo nella parte giusta del codice
+            System.out.println("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
+
+            // Log per confermare che il ristorante è selezionato correttamente
+            System.out.println("Ristorante scelto: " + ristorantescelto);
+
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
         } else {
+            // Log per il caso delle ricette
+            System.out.println("Scelta luogo = false. Inviamo la mail con la ricetta selezionata.");
+
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ricettascelta);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
@@ -133,5 +171,10 @@ public class MealCalenderViewBoundaryCli {
     public void setRicettaSelezionata(RecipeReturnBean ricetta) {
         this.ricettaSelezionata = ricetta;
         ricettascelta = ricetta.getRecipeName(); // Salva il nome della ricetta
+    }
+
+    // Metodo per salvare il ristorante selezionato
+    public void setRistoranteSelezionato(String ristorante) {
+        ristorantescelto = ristorante;
     }
 }
