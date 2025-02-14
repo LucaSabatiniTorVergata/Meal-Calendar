@@ -6,15 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 
 
 public class RecipeEdit2ViewController {
+
+    @FXML
+    private Label welcomelabel;
 
     @FXML
     private Button homereturn;
@@ -78,6 +78,11 @@ public class RecipeEdit2ViewController {
 
     public void setRecipe(String recipe) throws IOException {
 
+        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+        if (username != null) {
+            welcomelabel.setText("Hi, " + username + "!");
+        }
+
         this.ricettascelta = recipe;
         updateUI();
 
@@ -124,10 +129,12 @@ public class RecipeEdit2ViewController {
         controller.cambiaRicetta();
 
 
-        Stage stage = (Stage) homereturn.getScene().getWindow();
+        Stage stage = (Stage) apply.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");
 
 
     }
+
+
 
 }

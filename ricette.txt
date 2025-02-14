@@ -1,11 +1,9 @@
-asdsadsa:Vegan:Lunch:1:dsadsa:dsadsad:luca
 pollo alla cacciatora:Vegetarian:Breakfast:1:pollo:palle:luca
 gianluca alla cacciatora:Vegan:Breakfast:1:gianluca:gianluca che caccia tora:gianlucacazzogrosso
 Le palle quadrate di mazzillo:Vegan:Dinner:1:palle:delle palle:luca
 pollo manzo:Omnivorous:Lunch:1:pollo:pollo:luca
-Peroni:Omnivorous:Lunch:1:Chanel numero 5:Alessio è stato rapito:luca
 Lasagna:Omnivorous:Lunch:1:Pomodoro:Lasang:luca
-pollo senza palle:Vegano:Pranzo:1:1:leonardo gay:luca
+pollo con palle:Vegano:Pranzo:1:1:leonardo gay:luca
 ciuba avr:Omnivorous:Lunch:1:ciuba:the avr:luca
 Edoardo:Vegan:Lunch:1:edoardo:edoardone:luca
 davide:Omnivorous:Lunch:1:davide:davide cotto:davide

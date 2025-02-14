@@ -5,11 +5,7 @@ import javafx.collections.ObservableList;
 import com.example.mealcalendar.RecipeEntity;
 import com.example.mealcalendar.RecipeEntityFactory;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -17,6 +13,8 @@ import java.io.IOException;
 
 public class RecipeAddViewBoundary {
 
+    @FXML
+    private Label welcomelabel;
 
     @FXML
     private Button backview;
@@ -55,6 +53,12 @@ public class RecipeAddViewBoundary {
 
     @FXML
     private void initialize() {
+
+        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+        if (username != null) {
+            welcomelabel.setText("Hi, " + username + "!");
+        }
+
         // Assicura che quando selezioni un elemento, il testo venga aggiornato
         omnivorous.setOnAction(e -> dietMenu.setText(omnivorous.getText()));
         vegetarian.setOnAction(e -> dietMenu.setText(vegetarian.getText()));

@@ -1,6 +1,7 @@
 package com.example.mealcalendar;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ public class RecipeEditController {
 
     public RecipeEditController(RecipeEditBean bean) {
         this.bean = bean;
+    }
+
+    public RecipeEditController () {
     }
 
     public List<RecipeReturnBean> mostraricette(){
@@ -24,5 +28,17 @@ public class RecipeEditController {
         return lista;
     }
 
+    public void rimuovi(String ricetta) throws IOException {
+
+        String[] parts = ricetta.split(" - ");
+        if (parts.length >= 6) {
+
+            RecipeEntity ricettarim=new RecipeEntity(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],SessionManagerSLT.getInstance().getLoggedInUsername());
+            RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();
+            dao.removeRecipe(ricettarim);
+
+
+        }
+    }
 
 }

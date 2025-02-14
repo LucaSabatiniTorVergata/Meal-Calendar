@@ -78,4 +78,16 @@ public class RecipeDaoFS implements RecipeDao {
             }
         }
     }
+
+    public void removeRecipe(RecipeEntity recipeToRemove) throws IOException {
+        List<RecipeEntity> recipes = getAllRecipes(); // Legge il file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+            for (RecipeEntity recipe : recipes) {
+                if (!formatRecipe(recipe).equals(formatRecipe(recipeToRemove))) { // Salva tutte tranne quella da rimuovere
+                    writer.write(formatRecipe(recipe));
+                    writer.newLine();
+                }
+            }
+        }
+    }
 }
