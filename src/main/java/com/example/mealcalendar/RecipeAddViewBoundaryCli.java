@@ -8,7 +8,7 @@ public class RecipeAddViewBoundaryCli {
     private final RecipeAddController controller = new RecipeAddController();
     private final CliController cliController = new CliController();
 
-    public void start() {
+    public void start() throws Exception {
         System.out.println("===== Aggiungi Ricetta (CLI) =====");
 
         // Richiesta del nome della ricetta

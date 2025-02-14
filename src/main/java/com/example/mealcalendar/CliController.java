@@ -1,17 +1,20 @@
 package com.example.mealcalendar;
 
+
 public class CliController {
 
-    public void navigateTo(String view) {
+    public void navigateTo(String view) throws Exception {
         switch (view) {
             case "fridge":
                 System.out.println("🔹 Navigazione alla schermata frigo (CLI).");
                 FridgeViewBoundaryCli frigorifero = new FridgeViewBoundaryCli();
                 frigorifero.start();
+                break;
             case "registration":
                 System.out.println("🔹 Navigazione alla schermata hello (CLI).");
                 HelloViewBoundaryCli helloview = new HelloViewBoundaryCli();
                 helloview.start();
+                break;
             case "addrecipe":
                 System.out.println("🔹 Navigazione alla schermata aggiunta ricetta (CLI).");
                 RecipeAddViewBoundaryCli addrecipeboundary = new RecipeAddViewBoundaryCli();
@@ -31,7 +34,7 @@ public class CliController {
                 System.out.println("🔹 Navigazione alla schermata principale (CLI).");
                 MainMenuViewBoundaryCli mainMenuView = new MainMenuViewBoundaryCli();
                 mainMenuView.start();
-                 break;
+                break;
             case "ristoranteUser":
                 System.out.println("🔹 Navigazione alla schermata di ristorante user (CLI).");
                 FindRestaurantViewBoundaryCli findRestaurantView = new FindRestaurantViewBoundaryCli();
@@ -47,8 +50,20 @@ public class CliController {
                 RecipeVewBoundaryCli recipeView = new RecipeVewBoundaryCli();
                 recipeView.start();
                 break;
+            case "calendariopasti":
+                System.out.println("🔹 Navigazione alla schermata di calendario pasti (CLI).");
+                MealCalenderViewBoundaryCli mealcalendarView = new MealCalenderViewBoundaryCli();
+                mealcalendarView.start();
+                break;
             default:
                 System.out.println("❌ Schermata non trovata.");
         }
+
+
+    }
+    public void navigateToCalendarWithRecipe(RecipeReturnBean ricetta) throws Exception {
+        System.out.println("🔹 Navigazione al calendario con la ricetta selezionata.");
+        MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli(ricetta);
+        calendario.start();
     }
 }

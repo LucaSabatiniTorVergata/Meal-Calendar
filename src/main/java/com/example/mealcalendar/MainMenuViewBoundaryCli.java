@@ -9,7 +9,7 @@ public class MainMenuViewBoundaryCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
 
-    public void start() {
+    public void start() throws Exception {
         System.out.println("===== Menu Principale (CLI) =====");
         System.out.println("1. Trova Ristorante (Guest)");
         System.out.println("2. Trova Ristorante (Utente Registrato)");
@@ -30,7 +30,7 @@ public class MainMenuViewBoundaryCli {
                 cliController.navigateTo("ristoranteUser");
                 break;
             case "3":
-                loadCalendarMenu();
+                cliController.navigateTo("calendariopasti");
                 break;
             case "4":
                 cliController.navigateTo("trovaricette");
@@ -73,13 +73,13 @@ public class MainMenuViewBoundaryCli {
         System.out.println("Vai a: Riempi Frigorifero");
     }
 
-    private void enablePersistence() {
+    private void enablePersistence() throws Exception {
         usePersistence = true;
         System.out.println("✅ Persistenza abilitata.");
         start();
     }
 
-    private void disablePersistence() {
+    private void disablePersistence() throws Exception {
         usePersistence = false;
         System.out.println("✅ Persistenza disabilitata.");
         start();

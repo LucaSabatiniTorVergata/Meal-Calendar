@@ -9,7 +9,7 @@ public class LoginViewBoundaryCli {
     private static final Logger LOGGER = Logger.getLogger(LoginViewBoundaryCli.class.getName());
     private final CliController cliController = new CliController();
 
-    public void start() {
+    public void start() throws Exception {
         while (true) {
             System.out.println("\n===== Login =====");
             System.out.print("Username: ");

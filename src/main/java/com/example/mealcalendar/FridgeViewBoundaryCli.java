@@ -15,7 +15,7 @@ public class FridgeViewBoundaryCli {
     private FrigoriferoController frigoriferoController;
     private final IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     private final CliController cliController = new CliController();
-    public void start() {
+    public void start() throws Exception {
         // Inizializzazione del controller
         try {
             frigoriferoController = new FrigoriferoController(usePersistence);

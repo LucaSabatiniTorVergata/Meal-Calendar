@@ -21,7 +21,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("===== Calendario dei Pasti =====");
         System.out.println("1. Avvia interfaccia grafica (JavaFX)");

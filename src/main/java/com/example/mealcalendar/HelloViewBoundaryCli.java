@@ -16,7 +16,7 @@ public class HelloViewBoundaryCli {
     private final CliController cliController = new CliController();
     private static final Logger LOGGER = Logger.getLogger(HelloViewBoundaryCli.class.getName());
 
-    public void start() {
+    public void start() throws Exception {
         System.out.println("===== Calendario dei Pasti (CLI) =====");
         System.out.println("1. Registrazione");
         System.out.println("2. Login (se già registrato)");
@@ -71,6 +71,8 @@ public class HelloViewBoundaryCli {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore durante la registrazione.", e);
             System.out.println("❌ Errore durante la registrazione.");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

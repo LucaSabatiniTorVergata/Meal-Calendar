@@ -6,7 +6,7 @@ public class MainMenuViewBoundaryGuestCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
 
-    public void start() {
+    public void start() throws Exception {
         System.out.println("===== Menu Ristorante Guest (CLI) =====");
         System.out.println("1. Trova Ristorante (Guest)");
         System.out.println("2. Torna alla Home");

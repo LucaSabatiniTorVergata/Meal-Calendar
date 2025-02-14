@@ -8,15 +8,27 @@ public class RecipeVewBoundaryCli {
 
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
+    private final boolean vengoDaCalendar;
+    private RecipeReturnBean ricettaSelezionata;
 
-    public void start() {
+    // Costruttore per gestire la navigazione
+    public RecipeVewBoundaryCli(boolean vengoDaCalendar) {
+        this.vengoDaCalendar = vengoDaCalendar;
+    }
+
+    // Costruttore di default per compatibilità con altre chiamate
+    public RecipeVewBoundaryCli() {
+        this.vengoDaCalendar = false;
+    }
+
+    public void start() throws Exception {
         boolean exit = false;
         while (!exit) {
             System.out.println("\n===== Menu Ricette (CLI) =====");
             System.out.println("1. Cerca Ricette");
             System.out.println("2. Aggiungi Ricetta");
             System.out.println("3. Modifica Ricetta");
-            System.out.println("4. Torna alla Home");
+            System.out.println("4. Torna Indietro");
             System.out.println("5. Esci");
             System.out.print("Scegli un'opzione: ");
 
@@ -30,10 +42,16 @@ public class RecipeVewBoundaryCli {
                     cliController.navigateTo("addrecipe");
                     break;
                 case "3":
-                    editRecipe();
+                   // editRecipe();
                     break;
                 case "4":
-                    cliController.navigateTo("mainmenu");
+                    // Torna indietro in base alla schermata di provenienza
+                    if (vengoDaCalendar) {
+                        cliController.navigateTo("calendariopasti");
+                    } else {
+                        cliController.navigateTo("mainmenu");
+                    }
+                    exit = true;
                     break;
                 case "5":
                     exit = true;
@@ -44,7 +62,7 @@ public class RecipeVewBoundaryCli {
         }
     }
 
-    private void searchRecipies() {
+    private void searchRecipies() throws Exception {
         System.out.println("\n===== Ricerca Ricette =====");
 
         // Selezione tipo di dieta
@@ -113,7 +131,6 @@ public class RecipeVewBoundaryCli {
         System.out.println("\n===== Lista Ricette =====");
         for (int i = 0; i < listaRicette.size(); i++) {
             RecipeReturnBean ricetta = listaRicette.get(i);
-            // Creiamo una stringa riassuntiva simile a quella della GUI
             String riga = (i + 1) + ". " + ricetta.getRecipeName() + " - "
                     + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal() + " - "
                     + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
@@ -133,7 +150,13 @@ public class RecipeVewBoundaryCli {
         }
 
         if (scelta > 0 && scelta <= listaRicette.size()) {
-            showRecipeDetails(listaRicette.get(scelta - 1));
+            ricettaSelezionata = listaRicette.get(scelta - 1);
+            showRecipeDetails(ricettaSelezionata);
+
+            // Se vengo dal calendario, salvo la ricetta e navigo lì
+            if (vengoDaCalendar) {
+                cliController.navigateToCalendarWithRecipe(ricettaSelezionata);
+            }
         }
     }
 
@@ -148,17 +171,5 @@ public class RecipeVewBoundaryCli {
         System.out.println("Autore: " + ricetta.getAuthor());
         System.out.println("\nPremi invio per tornare al menu.");
         scanner.nextLine();
-    }
-
-    private void addRecipe() {
-        System.out.println("\nNavigazione verso Aggiungi Ricetta (funzionalità non implementata in CLI).");
-        // In alternativa, qui potresti richiedere i dati della nuova ricetta da linea di comando
-        // e poi chiamare il relativo controller per gestirla.
-        cliController.navigateTo("recipeadd");
-    }
-
-    private void editRecipe() {
-        System.out.println("\nNavigazione verso Modifica Ricetta (funzionalità non implementata in CLI).");
-        cliController.navigateTo("recipeedit");
     }
 }
