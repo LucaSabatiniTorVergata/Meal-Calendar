@@ -2,11 +2,12 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.Scanner;
+import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
+
 
 public class MainMenuViewBoundaryCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
-    private boolean usePersistence = false;
 
     public void start() {
         System.out.println("===== Menu Principale (CLI) =====");

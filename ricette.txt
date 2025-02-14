@@ -12,3 +12,4 @@ davide:Omnivorous:Lunch:1:davide:davide cotto:davide
 sajbdsaod:Vegan:Lunch:1:sadsadsa:sadsada:luca
 pierpaoloprolunga:Omnivorous:Breakfast:1:pomodoro:gianluca è entrato dentro uno al semaforo:null
 leonardo alato:Vegetarian:Breakfast:1:ali di leonardo:leonardo non vola quindi che ne so??:luca
+paolo vettura:Omnivorous:Breakfast:1:paolo:paolo vettura velocissimo:luca

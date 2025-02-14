@@ -130,26 +130,13 @@ public class RecipeViewBoundary {
         listaRicetteview.getItems().clear();
         for (RecipeReturnBean ricetta : listaRicette) {
             String nomeRicetta = ricetta.getRecipeName();  // Prendi il nome
-            System.out.println("nomeRicetta: " + nomeRicetta);
 
             String tipodieta = ricetta.getTypeofDiet();    // Prendi il tipo di dieta
-            System.out.println("tipodieta: " + tipodieta);
-
             String tipopasto = ricetta.getTypeofMeal(); // Prendi il tipo di pasto
-            System.out.println("tipopasto: " + tipopasto);
-
             String numingredienti = ricetta.getNumIngredients();
-            System.out.println("numingredienti: " + numingredienti);
-
             String ingredienti = ricetta.getIngredients();
-            System.out.println("ingredienti: " + ingredienti);
-
             String descrizione = ricetta.getDescription();
-            System.out.println("descrizione: " + descrizione);
-
             String author = ricetta.getAuthor();
-            System.out.println("author: " + author);
-
             String riga = nomeRicetta + " - " + tipodieta + " - " + tipopasto
                     + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
             System.out.println("riga: " + riga);
