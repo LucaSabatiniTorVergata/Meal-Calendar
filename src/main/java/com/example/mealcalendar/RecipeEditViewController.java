@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 
+
 public class RecipeEditViewController {
 
     @FXML
@@ -25,6 +26,7 @@ public class RecipeEditViewController {
     @FXML
     private ListView ricetteview;
 
+    private String selectedRecipe;
 
     @FXML
     private void recipeedit2view(ActionEvent event) throws IOException {
@@ -76,7 +78,36 @@ public class RecipeEditViewController {
 
             ricetteview.getItems().add(riga);
 
+            recipeEdit2.setDisable(true);
 
+            // Ascolta il cambiamento nella selezione della ListView
+            ricetteview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+                selectedRecipe = (String) newValue;// Prendi la ricetta selezionata
+
+                recipeEdit2.setDisable(selectedRecipe == null); // Abilita il bottone se c'è una selezione
+            });
+
+            // Aggiungi l'azione al bottone
+            recipeEdit2.setOnAction(event -> showRecipeDetails());
+
+        }
+    }
+    private void showRecipeDetails() {
+        try {
+            // Carica il FXML della nuova schermata (dettagli della ricetta)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("recipeedit2-View.fxml"));
+            Parent root = loader.load();
+
+            // Prendi il controller della nuova schermata
+            RecipeEdit2ViewController controller = loader.getController();
+            controller.setRecipe(selectedRecipe);  // Passa la ricetta selezionata
+
+            // Mostra la nuova scena
+            Stage stage = (Stage) recipeEdit2.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -66,11 +66,11 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <SplitMenuButton layoutX="90.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Choose">
+        <SplitMenuButton fx:id="tipodieta" layoutX="90.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Choose">
             <items>
-                <MenuItem mnemonicParsing="false" text="Omnivorous" />
-                <MenuItem mnemonicParsing="false" text="Vegan" />
-                <MenuItem mnemonicParsing="false" text="Vegetarian" />
+                <MenuItem fx:id="omnivora" mnemonicParsing="false" text="Omnivorous" />
+                <MenuItem fx:id="vegan" mnemonicParsing="false" text="Vegan" />
+                <MenuItem fx:id="vegetariana" mnemonicParsing="false" text="Vegetarian" />
             </items>
             <font>
                 <Font name="System Italic" size="12.0" />
@@ -81,11 +81,11 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <SplitMenuButton layoutX="90.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Choose">
+        <SplitMenuButton fx:id="tipopasto" layoutX="90.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Choose">
             <items>
-                <MenuItem mnemonicParsing="false" text="Breakfast" />
-                <MenuItem mnemonicParsing="false" text="Launch" />
-                <MenuItem mnemonicParsing="false" text="Dinner" />
+                <MenuItem fx:id="colazione" mnemonicParsing="false" text="Breakfast" />
+                <MenuItem fx:id="pranzo" mnemonicParsing="false" text="Launch" />
+                <MenuItem fx:id="cena"  mnemonicParsing="false" text="Dinner" />
             </items>
             <font>
                 <Font name="System Italic" size="12.0" />
@@ -96,17 +96,17 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <Button layoutX="78.0" layoutY="611.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" style="-fx-background-color: #cfac5b;" text="APPLY CHANGES">
+        <Button fx:id="apply" layoutX="78.0" layoutY="611.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" style="-fx-background-color: #cfac5b;" text="APPLY CHANGES">
             <font>
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
-        <TextField layoutX="90.0" layoutY="189.0" prefHeight="26.0" prefWidth="152.0" promptText="write...">
+        <TextField fx:id="nomericetta" layoutX="90.0" layoutY="189.0" prefHeight="26.0" prefWidth="152.0" promptText="write...">
             <font>
                 <Font name="System Italic" size="12.0" />
             </font>
         </TextField>
-        <TextField layoutX="90.0" layoutY="498.0" prefHeight="26.0" prefWidth="483.0" promptText="Remember to write the preparation method and the quantities and kcal of the ingredients...">
+        <TextField fx:id="descrizione" layoutX="90.0" layoutY="498.0" prefHeight="26.0" prefWidth="483.0" promptText="Remember to write the preparation method and the quantities and kcal of the ingredients...">
             <font>
                 <Font name="System Italic" size="12.0" />
             </font>
@@ -116,12 +116,12 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField layoutX="90.0" layoutY="380.0" prefHeight="26.0" prefWidth="151.0" promptText="only numbers...">
+        <TextField fx:id="numeroing" layoutX="90.0" layoutY="380.0" prefHeight="26.0" prefWidth="151.0" promptText="only numbers...">
             <font>
                 <Font name="System Italic" size="12.0" />
             </font>
         </TextField>
-        <TextField layoutX="90.0" layoutY="440.0" prefHeight="26.0" prefWidth="149.0" promptText="in order please...">
+        <TextField fx:id="ingredienti" layoutX="90.0" layoutY="440.0" prefHeight="26.0" prefWidth="149.0" promptText="in order please...">
             <font>
                 <Font name="System Italic" size="12.0" />
             </font>
