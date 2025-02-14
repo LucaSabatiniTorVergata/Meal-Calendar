@@ -1,6 +1,8 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,8 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
-import javax.swing.text.html.ListView;
 
 public class RecipeEditViewController {
 
@@ -39,13 +41,43 @@ public class RecipeEditViewController {
 
     @FXML
     public void initialize() {
+
+        ricetteview.getItems().clear();
         String user=SessionManagerSLT.getInstance().getLoggedInUsername();
         RecipeEditBean bean=new RecipeEditBean(user);
         RecipeEditController controller=new RecipeEditController(bean);
+        List<RecipeReturnBean>returnricette=controller.mostraricette();
+        for (RecipeReturnBean ricetta : returnricette) {
+
+            String nomeRicetta = ricetta.getRecipeName();  // Prendi il nome
 
 
+            String tipodieta = ricetta.getTypeofDiet();    // Prendi il tipo di dieta
 
 
+            String tipopasto = ricetta.getTypeofMeal(); // Prendi il tipo di pasto
+
+
+            String numingredienti = ricetta.getNumIngredients();
+
+
+            String ingredienti = ricetta.getIngredients();
+
+
+            String descrizione = ricetta.getDescription();
+
+
+            String author = ricetta.getAuthor();
+
+
+            String riga = nomeRicetta + " - " + tipodieta + " - " + tipopasto
+                    + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
+
+
+            ricetteview.getItems().add(riga);
+
+
+        }
     }
 
 
