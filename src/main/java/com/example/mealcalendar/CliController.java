@@ -1,10 +1,14 @@
 package com.example.mealcalendar;
 
-
 public class CliController {
 
     public void navigateTo(String view) throws Exception {
         switch (view) {
+            case "recipeedit":
+                System.out.println("🔹 Navigazione alla schermata di modifica ricette (CLI).");
+                RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli();
+                recipeEditViewBoundaryCli.start();
+                break;
             case "fridge":
                 System.out.println("🔹 Navigazione alla schermata frigo (CLI).");
                 FridgeViewBoundaryCli frigorifero = new FridgeViewBoundaryCli();
@@ -58,9 +62,15 @@ public class CliController {
             default:
                 System.out.println("❌ Schermata non trovata.");
         }
-
-
     }
+
+    // Nuovo metodo per navigare alla modifica di una ricetta specifica
+    public void navigateToRecipeEditWithRecipe(RecipeReturnBean ricetta) throws Exception {
+        System.out.println("🔹 Navigazione alla schermata di modifica ricetta (CLI) con ricetta selezionata.");
+        RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli(ricetta);
+        recipeEditViewBoundaryCli.start();
+    }
+
     public void navigateToCalendarWithRecipe(RecipeReturnBean ricetta) throws Exception {
         System.out.println("🔹 Navigazione al calendario con la ricetta selezionata.");
         MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli(ricetta);

@@ -1,4 +1,4 @@
-pollo alla cacciatora:Vegetarian:Breakfast:1:pollo:palle:luca
+pollo senza palle:vegano:colazione:1:pomodoro:pollo ma senza le palle:luca
 gianluca alla cacciatora:Vegan:Breakfast:1:gianluca:gianluca che caccia tora:gianlucacazzogrosso
 Le palle quadrate di mazzillo:Vegan:Dinner:1:palle:delle palle:luca
 pollo manzo:Omnivorous:Lunch:1:pollo:pollo:luca
@@ -9,5 +9,5 @@ Edoardo:Vegan:Lunch:1:edoardo:edoardone:luca
 davide:Omnivorous:Lunch:1:davide:davide cotto:davide
 sajbdsaod:Vegan:Lunch:1:sadsadsa:sadsada:luca
 pierpaoloprolunga:Omnivorous:Breakfast:1:pomodoro:gianluca è entrato dentro uno al semaforo:null
-leonardo alato:Vegetarian:Breakfast:1:ali di leonardo:leonardo non vola quindi che ne so??:luca
-paolo vettura:Omnivorous:Breakfast:1:paolo:paolo vettura velocissimo:luca
+paolone vetturone:onnivoro:colazione:1:paolone:paolo vettura si è rotto il motore:luca
+pollo volante diversamente identificato:::1:pollo:pollo ma che vola:luca
