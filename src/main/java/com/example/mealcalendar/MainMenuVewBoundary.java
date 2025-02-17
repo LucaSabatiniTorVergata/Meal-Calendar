@@ -101,13 +101,6 @@ public class MainMenuVewBoundary {
     }
 
 
-    @FXML
-    private void enablePersistence(ActionEvent event)  {
-        usePersistence = true;
-    }
 
-    @FXML
-    private void disablePersistence(ActionEvent event)  {
-        usePersistence = false;
-    }
+
 }

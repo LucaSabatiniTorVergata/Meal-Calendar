@@ -80,4 +80,10 @@ public class HelloViewBoudary {
             messageLabel.setText("❌ Username già esistente.");
         }
     }
+
+    @FXML
+    public void useRam(ActionEvent event) {
+
+
+    }
 }
