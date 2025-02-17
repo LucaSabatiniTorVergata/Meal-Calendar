@@ -7,16 +7,16 @@ import java.util.*;
 public class UserDao implements UserDaoInterface {
 
     private static final String FILE_PATH = "users.txt";  // Percorso del file per il File System
-    private static boolean USE_DATABASE;  // Determina se usare il DB
-    private static boolean USE_DEMO;  // Determina se usare la modalità demo (ArrayList)
+    private static boolean USE_DATABASE;  // Determina se usare il DB o il File System
+    private static boolean USE_DEMO;  // Determina se usare la modalità demo
 
     // Configurazione Database
     private static String url;
     private static String dbuser;
     private static String password;
 
-    // ArrayList per la modalità demo
-    private static List<UserEntity> demoUserList = new ArrayList<>();
+    // Lista in memoria per la modalità demo
+    private static List<UserEntity> demoUsers = new ArrayList<>();
 
     static {
         Properties props = new Properties();
@@ -31,14 +31,9 @@ public class UserDao implements UserDaoInterface {
     }
 
     public UserDao(boolean useDatabase, boolean useDemo) {
-        UserDao.USE_DATABASE = useDatabase;
         UserDao.USE_DEMO = useDemo;
-
-        // Se si sceglie la modalità demo, non fare altro
-        if (USE_DEMO) return;
-
-        // Se non si usa il DB, si usa il File System
-        if (!USE_DATABASE) {
+        UserDao.USE_DATABASE = useDatabase;
+        if (!USE_DATABASE && !USE_DEMO) {
             File file = new File(FILE_PATH);
             try {
                 if (!file.exists()) {
@@ -53,30 +48,17 @@ public class UserDao implements UserDaoInterface {
     @Override
     public boolean registerUser(UserEntity user) throws IOException {
         try {
-            if (USE_DEMO) {
-                return registerUserDemo(user);  // Usa ArrayList in modalità demo
-            } else if (USE_DATABASE) {
+            if (USE_DATABASE && !USE_DEMO) {
                 return registerUserDB(user);
-            } else {
+            } else if (!USE_DATABASE && !USE_DEMO) {
                 return registerUserFS(user);
+            } else if (USE_DEMO) {
+                return registerUserDemo(user);  // Usa la lista demo in memoria
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-    }
-
-    // Metodo per registrare un utente in modalità demo
-    private boolean registerUserDemo(UserEntity user) {
-        // Controlla se l'utente esiste già (per evitare duplicati)
-        for (UserEntity u : demoUserList) {
-            if (u.getUsername().equalsIgnoreCase(user.getUsername())) {
-                return false;  // Utente già esistente
-            }
-        }
-        // Aggiunge l'utente alla lista
-        demoUserList.add(user);
-        return true;
     }
 
     private boolean registerUserFS(UserEntity user) throws IOException {
@@ -97,20 +79,26 @@ public class UserDao implements UserDaoInterface {
         }
     }
 
+    // Metodo per registrare un utente in modalità demo (in memoria)
+    private boolean registerUserDemo(UserEntity user) {
+        demoUsers.add(user);
+        return true;  // In modalità demo, aggiungiamo semplicemente l'utente alla lista
+    }
+
     @Override
     public List<UserEntity> getAllUsers() throws IOException {
         try {
             if (USE_DEMO) {
-                return new ArrayList<>(demoUserList);  // Ritorna una copia della lista demo
+                return getAllUsersDemo();  // Restituisce la lista demo
             } else if (USE_DATABASE) {
                 return getAllUsersDB();
-            } else {
+            } else if (!USE_DEMO && !USE_DATABASE) {
                 return getAllUsersFS();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return new ArrayList<>();
         }
+        return new ArrayList<>(); // Ritorno di lista vuota in caso di errore o se non esistono utenti
     }
 
     private List<UserEntity> getAllUsersFS() throws IOException {
@@ -140,32 +128,38 @@ public class UserDao implements UserDaoInterface {
         return users;
     }
 
+    // Metodo per ottenere gli utenti demo (in memoria)
+    private List<UserEntity> getAllUsersDemo() {
+        return new ArrayList<>(demoUsers);  // Restituiamo una copia della lista demo
+    }
+
     @Override
     public UserEntity getUserByUsername(String username) throws IOException {
         try {
             if (USE_DEMO) {
-                return getUserByUsernameDemo(username);  // Usa la modalità demo
+                return getUserByUsernameDemo(username);  // Cerca nell'elenco demo
             } else if (USE_DATABASE) {
-                return getUserByUsernameDB(username);
-            } else {
-                return getUserByUsernameFS(username);
+                return getUserByUsernameDB(username);  // Usa il DB
+            } else if (!USE_DEMO && !USE_DATABASE) {
+                return getUserByUsernameFS(username);  // Usa il File System
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;  // Ritorno null se non trovato
     }
 
-    // Metodo per ottenere un utente in modalità demo
+    // Metodo per cercare un utente nella lista demo (in memoria)
     private UserEntity getUserByUsernameDemo(String username) {
-        for (UserEntity user : demoUserList) {
+        for (UserEntity user : demoUsers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }
-        return null;
+        return null;  // Restituisce null se l'utente non viene trovato
     }
 
+    // Implementazione del metodo per il File System
     private UserEntity getUserByUsernameFS(String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -176,9 +170,10 @@ public class UserDao implements UserDaoInterface {
                 }
             }
         }
-        return null;
+        return null;  // Restituisce null se non trovato
     }
 
+    // Implementazione del metodo per il Database
     private UserEntity getUserByUsernameDB(String username) throws SQLException {
         String sql = "SELECT username, email, password FROM users WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(url, dbuser, password);
@@ -190,6 +185,6 @@ public class UserDao implements UserDaoInterface {
                 }
             }
         }
-        return null;
+        return null;  // Restituisce null se non trovato
     }
 }

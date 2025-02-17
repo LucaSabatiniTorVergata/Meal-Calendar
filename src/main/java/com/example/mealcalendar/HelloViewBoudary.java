@@ -55,6 +55,12 @@ public class HelloViewBoudary {
         messageLabel.setText("🔹 Utilizzando il Database per i dati utenti.");
     }
 
+    @FXML
+    private void useDemo(ActionEvent event) {
+        UserDaoFactory.useDemo(true); // Imposta l'uso del Database
+        messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
+    }
+
     // Metodo per registrare un nuovo utente
     @FXML
     private void register(ActionEvent event) throws IOException {

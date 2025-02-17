@@ -4,29 +4,22 @@ package com.example.mealcalendar;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
-import java.time.*;
-import java.time.temporal.ChronoUnit;
+
 import java.util.Properties;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 
 public class MealcalendarController {
 
     private MealcalendarBean mealcalendarBean;
-    private useDemo;
-    private useDb;
 
-    public MealcalendarController(MealcalendarBean bean,boolean useDemo,boolean useDb) {
+    public MealcalendarController(MealcalendarBean bean) {
         this.mealcalendarBean = bean;
-        this.useDemo;
-        this.useDb;
 
     }
 
     public String getMail() throws Exception {
-        UserDao dao = new UserDao(useDemo,useDb);
+        UserDao dao = new UserDao(false, false);
         UserEntity user = dao.getUserByUsername(mealcalendarBean.getUser());
         return user.getEmail();
     }
@@ -62,7 +55,7 @@ public class MealcalendarController {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("leo.polidori99@gmail.com")); // L'indirizzo del destinatario
                 message.setSubject("Email di coonferma posto dove mangiare"); // Oggetto dell'email
                 message.setText("Salve,hai appena deciso di mangiare a: " + mealcalendarBean.getScelta() + " il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra()); // Corpo dell'email
 
@@ -80,7 +73,7 @@ public class MealcalendarController {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lowcillo148@gmail.com")); // L'indirizzo del destinatario
                 message.setSubject("Conferma Posto dove mangiare"); // Oggetto dell'email
                 message.setText("Salve,la ricetta scelta da te per il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra() + " è: " + mealcalendarBean.getScelta()); // Corpo dell'email
 
