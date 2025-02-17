@@ -45,7 +45,7 @@ public class HelloViewBoudary {
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(false);
-        UserDaoFactory.setUseDemo(false);// Imposta l'uso del File System
+        UserDaoFactory.useDemo(false);// Imposta l'uso del File System
         messageLabel.setText("🔹 Utilizzando il File System per i dati utenti.");
     }
 
@@ -55,7 +55,7 @@ public class HelloViewBoudary {
         SessionManagerSLT.getInstance().setFSDataBase(true);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(true);
-        UserDaoFactory.setUseDemo(false);// Imposta l'uso del Database
+        UserDaoFactory.useDemo(false);// Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando il Database per i dati utenti.");
     }
 
@@ -94,6 +94,7 @@ public class HelloViewBoudary {
     public void useRam(ActionEvent event) {
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(true);
+        UserDaoFactory.setUseDatabase(false);
         UserDaoFactory.useDemo(true); // Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
     }
