@@ -7,14 +7,19 @@ import java.util.List;
 public class RecipeDaoFS implements RecipeDao {
 
     private static final String FILE_PATH = "ricette.txt";
+    private static boolean USE_DEMO = false; //di base non usa la demo
 
-    public RecipeDaoFS() {
+    // Lista per memorizzare le ricette in modalità demo
+    private static List<RecipeEntity> demoRecipes = new ArrayList<>();
+
+    public RecipeDaoFS(boolean useDemo) {
+        USE_DEMO = useDemo;
         createFileIfNotExists();
     }
 
     private void createFileIfNotExists() {
         File file = new File(FILE_PATH);
-        if (!file.exists()) {
+        if (!file.exists() && !USE_DEMO) {  // Se non è in modalità demo, crea il file
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -24,6 +29,14 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public boolean addRecipe(RecipeEntity recipe) {
+        if (USE_DEMO) {
+            return addRecipeDemo(recipe); // Usa la lista demo in memoria
+        } else {
+            return addRecipeFS(recipe);  // Usa il file system
+        }
+    }
+
+    private boolean addRecipeFS(RecipeEntity recipe) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(formatRecipe(recipe));
             writer.newLine();
@@ -34,13 +47,20 @@ public class RecipeDaoFS implements RecipeDao {
         }
     }
 
-    private String formatRecipe(RecipeEntity recipe) {
-        return String.join(":", recipe.getRecipeName(), recipe.getTypeofDiet(),
-                recipe.getTypeofMeal(), recipe.getNumIngredients(),
-                recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
+    private boolean addRecipeDemo(RecipeEntity recipe) {
+        demoRecipes.add(recipe);  // Aggiunge la ricetta alla lista in memoria
+        return true;
     }
 
     public List<RecipeEntity> getAllRecipes() {
+        if (USE_DEMO) {
+            return getAllRecipesDemo(); // Restituisce la lista demo
+        } else {
+            return getAllRecipesFS();  // Restituisce le ricette dal file
+        }
+    }
+
+    private List<RecipeEntity> getAllRecipesFS() {
         List<RecipeEntity> recipeList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -56,6 +76,10 @@ public class RecipeDaoFS implements RecipeDao {
         return recipeList;
     }
 
+    private List<RecipeEntity> getAllRecipesDemo() {
+        return new ArrayList<>(demoRecipes);  // Restituisce una copia della lista demo
+    }
+
     private RecipeEntity parseRecipe(String line) {
         String[] parts = line.split(":", 7);
         if (parts.length < 7) return null; // Verifica che la riga sia completa
@@ -63,14 +87,19 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
+        if (USE_DEMO) {
+            updateRecipeDemo(oldRecipe, newRecipe); // Usa la lista demo per aggiornare
+        } else {
+            updateRecipeFS(oldRecipe, newRecipe);  // Usa il file system per aggiornare
+        }
+    }
 
-        List<RecipeEntity> recipes = getAllRecipes(); // Legge il file
+    private void updateRecipeFS(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
+        List<RecipeEntity> recipes = getAllRecipesFS(); // Legge il file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-
             for (RecipeEntity recipe : recipes) {
                 if (formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
-                    writer.write(formatRecipe(newRecipe));// Scrive la versione aggiornata
-
+                    writer.write(formatRecipe(newRecipe)); // Scrive la versione aggiornata
                 } else {
                     writer.write(formatRecipe(recipe));
                 }
@@ -79,8 +108,25 @@ public class RecipeDaoFS implements RecipeDao {
         }
     }
 
+    private void updateRecipeDemo(RecipeEntity oldRecipe, RecipeEntity newRecipe) {
+        for (int i = 0; i < demoRecipes.size(); i++) {
+            if (formatRecipe(demoRecipes.get(i)).equals(formatRecipe(oldRecipe))) {
+                demoRecipes.set(i, newRecipe);  // Sostituisce la ricetta vecchia con quella nuova
+                return;
+            }
+        }
+    }
+
     public void removeRecipe(RecipeEntity recipeToRemove) throws IOException {
-        List<RecipeEntity> recipes = getAllRecipes(); // Legge il file
+        if (USE_DEMO) {
+            removeRecipeDemo(recipeToRemove); // Usa la lista demo per rimuovere
+        } else {
+            removeRecipeFS(recipeToRemove);  // Usa il file system per rimuovere
+        }
+    }
+
+    private void removeRecipeFS(RecipeEntity recipeToRemove) throws IOException {
+        List<RecipeEntity> recipes = getAllRecipesFS(); // Legge il file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (RecipeEntity recipe : recipes) {
                 if (!formatRecipe(recipe).equals(formatRecipe(recipeToRemove))) { // Salva tutte tranne quella da rimuovere
@@ -89,5 +135,15 @@ public class RecipeDaoFS implements RecipeDao {
                 }
             }
         }
+    }
+
+    private void removeRecipeDemo(RecipeEntity recipeToRemove) {
+        demoRecipes.removeIf(recipe -> formatRecipe(recipe).equals(formatRecipe(recipeToRemove))); // Rimuove dalla lista demo
+    }
+
+    private String formatRecipe(RecipeEntity recipe) {
+        return String.join(":", recipe.getRecipeName(), recipe.getTypeofDiet(),
+                recipe.getTypeofMeal(), recipe.getNumIngredients(),
+                recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
     }
 }

@@ -8,7 +8,7 @@ public class RecipeSearchController {
 
     private RecipeSearchFiltersBean filtri;
 
-    RecipeDaoFS dao=new RecipeDaoFS();
+    RecipeDaoFS dao= RecipeDaoFactory.createRecipeDao();
 
     public RecipeSearchController(RecipeSearchFiltersBean filters) {
         this.filtri=filters;
