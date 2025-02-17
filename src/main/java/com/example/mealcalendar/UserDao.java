@@ -49,17 +49,19 @@ public class UserDao implements UserDaoInterface {
     public boolean registerUser(UserEntity user) throws IOException {
         try {
             if (USE_DATABASE && !USE_DEMO) {
-                return registerUserDB(user);
+                return registerUserDB(user);  // Usa il DB
             } else if (!USE_DATABASE && !USE_DEMO) {
-                return registerUserFS(user);
+                return registerUserFS(user);  // Usa il File System
             } else if (USE_DEMO) {
-                return registerUserDemo(user);  // Usa la lista demo in memoria
+                return registerUserDemo(user);  // Usa la modalità demo (in memoria)
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return false;  // Restituisci false in caso di eccezione
         }
+        return false;  // Aggiungi un return di default per coprire ogni altro caso
     }
+
 
     private boolean registerUserFS(UserEntity user) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
