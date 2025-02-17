@@ -4,9 +4,8 @@ public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
     private String loggedInUsername;
-    private String loggedEmail;
-    private String preferenzaUtente;  // Nuovo campo per dati scelti all'inizio
-    private String altroDato;          // Aggiungi tutto quello che serve
+    private boolean FSDataBase;
+    private boolean demo;         // Aggiungi tutto quello che serve
 
     private SessionManagerSLT() {}
 
@@ -25,25 +24,24 @@ public class SessionManagerSLT {
         return loggedInUsername;
     }
 
-    public void setPreferenzaUtente(String preferenza) {
-        this.preferenzaUtente = preferenza;
+    public void setFSDataBase(boolean fSDataBase) {
+        this.FSDataBase=fSDataBase;
     }
 
-    public String getPreferenzaUtente() {
-        return preferenzaUtente;
+    public boolean getFSDataBase() {
+        return FSDataBase;
     }
 
-    public void setAltroDato(String dato) {
-        this.altroDato = dato;
+    public void setDemo(boolean altroDato) {
+        this.demo = altroDato;
     }
 
-    public String getAltroDato() {
-        return altroDato;
+    public boolean getDemo() {
+        return demo;
     }
 
     public void logout() {
         loggedInUsername = null;
-        preferenzaUtente = null;
-        altroDato = null;
+
     }
 }
