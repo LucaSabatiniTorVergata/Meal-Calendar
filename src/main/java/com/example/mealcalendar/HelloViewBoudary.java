@@ -25,6 +25,8 @@ public class HelloViewBoudary {
     @FXML
     private Label messageLabel;
 
+
+
     @FXML
     private void guestmenuview(ActionEvent event) throws IOException  {
         Stage stage = (Stage) quibutton.getScene().getWindow();
@@ -40,15 +42,23 @@ public class HelloViewBoudary {
     // Metodo per cambiare modalità su File System
     @FXML
     private void useFileSystem(ActionEvent event) {
-        UserDaoFactory.setUseDatabase(false); // Imposta l'uso del File System
+        UserDaoFactory.setUseDatabase(false);
+        UserDaoFactory.setUseDemo(false);// Imposta l'uso del File System
         messageLabel.setText("🔹 Utilizzando il File System per i dati utenti.");
     }
 
     // Metodo per cambiare modalità su Database
     @FXML
     private void useDatabase(ActionEvent event) {
-        UserDaoFactory.setUseDatabase(true); // Imposta l'uso del Database
+        UserDaoFactory.setUseDatabase(true);
+        UserDaoFactory.setUseDemo(false);// Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando il Database per i dati utenti.");
+    }
+
+    @FXML
+    private void useDemo(ActionEvent event) {
+        UserDaoFactory.useDemo(true); // Imposta l'uso del Database
+        messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
     }
 
     // Metodo per registrare un nuovo utente
@@ -80,4 +90,12 @@ public class HelloViewBoudary {
             messageLabel.setText("❌ Username già esistente.");
         }
     }
+
+    @FXML
+    public void useRam(ActionEvent event) {
+        UserDaoFactory.setUseDemo(true); // Imposta l'uso del File System
+        messageLabel.setText("🔹 Utilizzando senza Persistenza...");
+    }
+
+
 }
