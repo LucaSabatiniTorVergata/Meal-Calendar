@@ -29,7 +29,7 @@ public class GraphicController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            System.out.println("sborra");
+            System.out.println("sborrar");
         } catch (IOException e) {
             e.printStackTrace();
         }
