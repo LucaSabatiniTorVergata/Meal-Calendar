@@ -68,7 +68,5 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button layoutX="331.0" layoutY="40.0" mnemonicParsing="false" onAction="#enablePersistence" text="FS" />
-      <Button layoutX="408.0" layoutY="41.0" mnemonicParsing="false" onAction="#disablePersistence" text="RAM" />
     </children>
 </AnchorPane>

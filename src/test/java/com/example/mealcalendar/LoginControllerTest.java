@@ -28,7 +28,7 @@ class LoginControllerTest {
 
 
         public TestUserDao(boolean good) {
-            super(USE_DATABASE);
+            super(USE_DATABASE, false);
             this.good = good;
         }
 

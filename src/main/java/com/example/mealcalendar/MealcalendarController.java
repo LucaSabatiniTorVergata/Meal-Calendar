@@ -4,11 +4,8 @@ package com.example.mealcalendar;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
-import java.time.*;
-import java.time.temporal.ChronoUnit;
+
 import java.util.Properties;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 
@@ -22,7 +19,7 @@ public class MealcalendarController {
     }
 
     public String getMail() throws Exception {
-        UserDao dao = new UserDao(false);
+        UserDao dao = new UserDao(false, false);
         UserEntity user = dao.getUserByUsername(mealcalendarBean.getUser());
         return user.getEmail();
     }
