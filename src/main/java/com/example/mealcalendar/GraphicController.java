@@ -12,7 +12,7 @@ public class GraphicController {
     private GraphicController() {
     }
 
-    public static void cambiascena(Stage stage, String fxmlview, boolean useDB, boolean useDemo) {
+    public static void cambiascena(Stage stage, String fxmlview) {
         try {
             FXMLLoader loader = new FXMLLoader(GraphicController.class.getResource(fxmlview));
             Parent root = loader.load();
