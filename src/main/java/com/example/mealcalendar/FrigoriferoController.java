@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 public class FrigoriferoController {
     private static final Logger LOGGER = Logger.getLogger(FrigoriferoController.class.getName());
     private InventarioDao inventarioDao;
+    private boolean useDemo=false;
 
     public FrigoriferoController(boolean usePersistence) throws IOException {
         LOGGER.log(Level.INFO, "FrigoriferoController: Inizializzazione con persistenza {0}", usePersistence);
@@ -29,8 +30,4 @@ public class FrigoriferoController {
         return inventarioDao.getInventario();
     }
 
-    public boolean isPersistenceEnabled() {
-        LOGGER.log(Level.INFO, "FrigoriferoController: Verifica se la persistenza è abilitata");
-        return inventarioDao.isPersistenceEnabled();
-    }
 }

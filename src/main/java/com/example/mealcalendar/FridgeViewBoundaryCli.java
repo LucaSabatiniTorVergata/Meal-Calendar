@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
+
 
 
 public class FridgeViewBoundaryCli {
@@ -18,7 +18,7 @@ public class FridgeViewBoundaryCli {
     public void start() throws Exception {
         // Inizializzazione del controller
         try {
-            frigoriferoController = new FrigoriferoController(usePersistence);
+            frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
         } catch (IOException e) {
             logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
             return;
@@ -47,12 +47,6 @@ public class FridgeViewBoundaryCli {
                     mostraInventario();
                     break;
                 case "4":
-                    abilitaPersistenza();
-                    break;
-                case "5":
-                    disabilitaPersistenza();
-                    break;
-                case "6":
                     cliController.navigateTo("mainmenu");
                     return;
                 default:
@@ -123,24 +117,4 @@ public class FridgeViewBoundaryCli {
         }
     }
 
-    private void abilitaPersistenza() {
-        usePersistence = true;
-        aggiornaController();
-        System.out.println("✅ Persistenza abilitata.");
-    }
-
-    private void disabilitaPersistenza() {
-        usePersistence = false;
-        aggiornaController();
-        System.out.println("✅ Persistenza disabilitata.");
-    }
-
-    private void aggiornaController() {
-        try {
-            frigoriferoController = new FrigoriferoController(usePersistence);
-            logger.info("Persistenza impostata su: " + usePersistence);
-        } catch (IOException e) {
-            logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
-        }
-    }
 }

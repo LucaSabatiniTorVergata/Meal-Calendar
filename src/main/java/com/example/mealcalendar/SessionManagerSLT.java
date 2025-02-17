@@ -42,6 +42,8 @@ public class SessionManagerSLT {
 
     public void logout() {
         loggedInUsername = null;
+        FSDataBase = false;
+        demo = false;
 
     }
 }

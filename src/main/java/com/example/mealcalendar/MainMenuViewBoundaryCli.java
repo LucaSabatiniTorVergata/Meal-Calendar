@@ -2,7 +2,7 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.Scanner;
-import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
+
 
 
 public class MainMenuViewBoundaryCli {
@@ -73,14 +73,13 @@ public class MainMenuViewBoundaryCli {
         System.out.println("Vai a: Riempi Frigorifero");
     }
 
-    private void enablePersistence() throws Exception {
-        usePersistence = true;
+    private void enablePersistence() throws Exception{;
         System.out.println("✅ Persistenza abilitata.");
         start();
     }
 
     private void disablePersistence() throws Exception {
-        usePersistence = false;
+
         System.out.println("✅ Persistenza disabilitata.");
         start();
     }

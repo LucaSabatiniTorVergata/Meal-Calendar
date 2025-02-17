@@ -30,24 +30,13 @@ public class FridgeViewBoundary {
     Logger logger = Logger.getLogger(getClass().getName());
 
     // Variabile per la modalità di persistenza
-    public static boolean usePersistence = false; //smith ci sono delle cose da sistemare perchè di fatto non riesco a fare lo switching tra persistenza e non persistenza se domani mattina riesci cerca di sistemarlo
-
-    // Metodo per impostare la persistenza
-    public void setUsePersistence(boolean usePersistence) {
-        this.usePersistence = usePersistence;
-        try {
-            frigoriferoController = new FrigoriferoController(usePersistence); // Inizializza il controller con il flag
-            logger.info("Persistenza impostata su: " + usePersistence);
-        } catch (IOException e) {
-            logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
-        }
-    }
 
     @FXML
     public void initialize() {
+        listaInventario.getItems().clear();
         if (frigoriferoController == null) {
             try {
-                frigoriferoController = new FrigoriferoController(usePersistence);
+                frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
             } catch (IOException e) {
                 logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
             }

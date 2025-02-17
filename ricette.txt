@@ -9,3 +9,6 @@ sajbdsaod:Vegan:Lunch:1:sadsadsa:sadsada:luca
 pierpaoloprolunga:Omnivorous:Breakfast:1:pomodoro:gianluca è entrato dentro uno al semaforo:null
 paolone vetturone:onnivoro:colazione:1:paolone:paolo vettura si è rotto il motore:luca
 pollo volante diversamente identificato:::1:pollo:pollo ma che vola:luca
+palle:Vegetarian:Lunch:1:::luca
+palle:Vegetarian:Lunch:1:::luca
+palle:Vegetarian:Lunch:1:luca:palle:luca

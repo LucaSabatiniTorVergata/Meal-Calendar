@@ -12,15 +12,15 @@ public class InventarioDao implements InventarioDaoInterface {
 
     private static final Logger LOGGER = Logger.getLogger(InventarioDao.class.getName());
     private static InventarioDao instance;
-    private boolean usePersistence;
     private Map<String, Integer> inventario;
     private static final String FILE_PATH = "inventario.txt";
+    private boolean useDemo=false;
 
-    private InventarioDao(boolean usePersistence) {
-        LOGGER.log(Level.INFO, "InventarioDao: Inizializzazione con persistenza {0}", usePersistence);
-        this.usePersistence = usePersistence;
+    private InventarioDao(boolean useDemo) {
+        LOGGER.log(Level.INFO, "InventarioDao: Inizializzazione con persistenza {0}", useDemo);
+        this.useDemo= useDemo;
         this.inventario = new HashMap<>();
-        if (usePersistence) {
+        if (!useDemo) {
             loadInventario();
         }
     }
@@ -37,7 +37,7 @@ public class InventarioDao implements InventarioDaoInterface {
     public void aggiungiIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "InventarioDao: Aggiungi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
-        if (usePersistence) {
+        if (!useDemo) {
             LOGGER.log(Level.INFO, "InventarioDao: Persistenza abilitata, salvataggio...");
             salvaInventario();
         }
@@ -53,7 +53,7 @@ public class InventarioDao implements InventarioDaoInterface {
             } else {
                 inventario.remove(nome);
             }
-            if (usePersistence) {
+            if (!useDemo) {
                 LOGGER.log(Level.INFO, "InventarioDao: Persistenza abilitata, salvataggio...");
                 salvaInventario();
             }
@@ -93,10 +93,5 @@ public class InventarioDao implements InventarioDaoInterface {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "InventarioDao: Errore durante il caricamento dell'inventario", e);
         }
-    }
-
-    public boolean isPersistenceEnabled() {
-        LOGGER.log(Level.INFO, "InventarioDao: Verifica se la persistenza è abilitata: {0}", usePersistence);
-        return usePersistence;
     }
 }

@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-import static com.example.mealcalendar.FridgeViewBoundary.usePersistence;
 
 public class MainMenuVewBoundary {
 
@@ -76,8 +75,7 @@ public class MainMenuVewBoundary {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fridge-view.fxml"));
         Parent root = loader.load();
 
-        FridgeViewBoundary fridgeView = loader.getController();
-        fridgeView.setUsePersistence(usePersistence);  // Imposta il flag della persistenza
+        FridgeViewBoundary fridgeView = loader.getController();// Imposta il flag della persistenza
 
         Stage stage = (Stage) fillfridgebutton.getScene().getWindow();
         stage.setScene(new Scene(root));
