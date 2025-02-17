@@ -106,13 +106,13 @@ public class MealCalenderViewBoundary {
         if(sceltaLuogo){
 
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
-            MealcalendarController controller = new MealcalendarController(bean);
+            MealcalendarController controller = new MealcalendarController(bean,);
             controller.invioMail();
 
         }else{
 
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,SessionManagerSLT.getInstance().getLoggedInUsername(),ricettascelta);
-            MealcalendarController controller = new MealcalendarController(bean);
+            MealcalendarController controller = new MealcalendarController(bean,);
             controller.invioMail();
         }
 
