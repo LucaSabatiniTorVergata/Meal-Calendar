@@ -23,6 +23,7 @@ public class GraphicController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            System.out.println("sborra");
         } catch (IOException e) {
             e.printStackTrace();
 
