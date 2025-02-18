@@ -38,13 +38,13 @@ public class HelloViewBoudary {
 
 
     @FXML
-    private void guestmenuview(ActionEvent event) throws IOException  {
+    private void guestmenuview(ActionEvent event)  {
         Stage stage = (Stage) quibutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "guestmenu-view.fxml");
     }
 
     @FXML
-    private void loginview(ActionEvent event) throws IOException {
+    private void loginview(ActionEvent event) {
         Stage stage = (Stage) login.getScene().getWindow();
         GraphicController.cambiascena(stage, "login-view.fxml");
     }

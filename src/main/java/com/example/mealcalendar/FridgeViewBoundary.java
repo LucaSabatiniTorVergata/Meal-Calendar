@@ -51,7 +51,7 @@ public class FridgeViewBoundary {
 
     // Aggiunge un ingrediente all'inventario
     @FXML
-    private void aggiungiIngrediente(ActionEvent event) throws IOException {
+    private void aggiungiIngrediente(ActionEvent event)  {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
@@ -82,7 +82,7 @@ public class FridgeViewBoundary {
 
     // Rimuove un ingrediente dall'inventario
     @FXML
-    private void rimuoviIngrediente(ActionEvent event) throws IOException {
+    private void rimuoviIngrediente(ActionEvent event)  {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
@@ -120,7 +120,7 @@ public class FridgeViewBoundary {
     }
 
     @FXML
-    private void backview(ActionEvent event) throws IOException {
+    private void backview(ActionEvent event) {
         Stage stage = (Stage) home.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }

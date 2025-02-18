@@ -2,7 +2,6 @@ package com.example.mealcalendar;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -114,7 +112,7 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
 
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         if (username != null) {
@@ -152,7 +150,7 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
-    private void registerGuest(ActionEvent event) throws IOException {
+    private void registerGuest(ActionEvent event)  {
         Stage stage = (Stage)registerbutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "hello-view.fxml");
     }
@@ -165,32 +163,32 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
-    private void loadHomePageUser(ActionEvent event) throws IOException {
+    private void loadHomePageUser(ActionEvent event) {
         Stage stage = (Stage)homebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
 
     @FXML
-    private void recipeuser(ActionEvent event) throws IOException {
+    private void recipeuser(ActionEvent event) {
         Stage stage = (Stage)findrecipebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");
     }
 
     @FXML
-    private void fridgeuser(ActionEvent event) throws IOException {
+    private void fridgeuser(ActionEvent event){
         Stage stage = (Stage)fillfridgebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "fridge-view.fxml");
     }
 
     @FXML
-    private void calendaruser(ActionEvent event) throws IOException {
+    private void calendaruser(ActionEvent event) {
         Stage stage = (Stage)seteatingtimebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
     @FXML
-    private void handleclick(MouseEvent event) throws Exception {
+    private void handleclick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {

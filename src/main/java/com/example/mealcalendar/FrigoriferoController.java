@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,7 +7,6 @@ import java.util.logging.Logger;
 public class FrigoriferoController {
     private static final Logger LOGGER = Logger.getLogger(FrigoriferoController.class.getName());
     private InventarioDao inventarioDao;
-    private boolean useDemo=false;
 
     public FrigoriferoController(boolean usePersistence) {
         LOGGER.log(Level.INFO, "FrigoriferoController: Inizializzazione con persistenza {0}", usePersistence);

@@ -10,39 +10,45 @@ public class HelloViewBoundaryCli {
     private final CliController cliController = new CliController();
     private static final Logger LOGGER = Logger.getLogger(HelloViewBoundaryCli.class.getName());
 
-    public void start() throws Exception {
-        System.out.println("\n===== Calendario dei Pasti (CLI) =====");
-        System.out.println("1. Registrazione");
-        System.out.println("2. Login (se già registrato)");
-        System.out.println("3. Entra come Guest");
-        System.out.println("4. Utilizza File System");
-        System.out.println("5. Utilizza Database");
-        System.out.println("6. Utilizza Demo (RAM)");
-        System.out.println("0. Esci");
-        System.out.print("Scegli un'opzione: ");
-        String choice = scanner.nextLine();
+    // Rimuovi `throws Exception` e gestisci le eccezioni all'interno
+    public void start() {
+        try {
+            System.out.println("\n===== Calendario dei Pasti (CLI) =====");
+            System.out.println("1. Registrazione");
+            System.out.println("2. Login (se già registrato)");
+            System.out.println("3. Entra come Guest");
+            System.out.println("4. Utilizza File System");
+            System.out.println("5. Utilizza Database");
+            System.out.println("6. Utilizza Demo (RAM)");
+            System.out.println("0. Esci");
+            System.out.print("Scegli un'opzione: ");
+            String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1" -> register();
-            case "2" -> cliController.navigateTo("login");
-            case "3" -> cliController.navigateTo("guest");
-            case "4" -> {
-                useFileSystem();
-                start(); // Torna al menu principale
+            switch (choice) {
+                case "1" -> register();
+                case "2" -> cliController.navigateTo("login");
+                case "3" -> cliController.navigateTo("guest");
+                case "4" -> {
+                    useFileSystem();
+                    start(); // Torna al menu principale
+                }
+                case "5" -> {
+                    useDatabase();
+                    start(); // Torna al menu principale
+                }
+                case "6" -> {
+                    useRam();
+                    start(); // Torna al menu principale
+                }
+                case "0" -> System.out.println("👋 Uscita dal programma...");
+                default -> {
+                    System.out.println("❌ Scelta non valida.");
+                    start();
+                }
             }
-            case "5" -> {
-                useDatabase();
-                start(); // Torna al menu principale
-            }
-            case "6" -> {
-                useRam();
-                start(); // Torna al menu principale
-            }
-            case "0" -> System.out.println("👋 Uscita dal programma...");
-            default -> {
-                System.out.println("❌ Scelta non valida.");
-                start();
-            }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Errore nell'esecuzione dell'app.", e);
+            System.out.println("❌ Si è verificato un errore. Riprova.");
         }
     }
 
@@ -65,7 +71,7 @@ public class HelloViewBoundaryCli {
 
         UserBean userRegisterBean = new UserBean(username, email, password);
         try {
-            boolean result = controller.register(userRegisterBean);
+            boolean result = controller.register(userRegisterBean);  // Assicurati che questo ritorni un booleano
 
             if (result) {
                 System.out.println("✅ Registrazione completata!");
@@ -76,10 +82,12 @@ public class HelloViewBoundaryCli {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore durante la registrazione.", e);
             System.out.println("❌ Errore durante la registrazione.");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            LOGGER.log(Level.SEVERE, "Errore imprevisto durante la registrazione.", e);
+            System.out.println("❌ Errore imprevisto durante la registrazione.");
         }
     }
+
 
     // Metodo per utilizzare il File System
     private void useFileSystem() {

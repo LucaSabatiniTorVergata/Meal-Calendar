@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.json.JSONArray;
@@ -50,7 +49,7 @@ public class ChooseRestaurantController {
         RestaurantListSLTPat listaRistoranti = RestaurantListSLTPat.getInstance();
         listaRistoranti.svuotaLista();// Pulisce la lista prima di aggiungere nuovi ristoranti
 
-        List<ReturnRestaurantsBean> ristorantibeans = new ArrayList<>();
+        List<ReturnRestaurantsBean> ristorantibeans;
 
         if (results.length() > 0) {
             for (int i = 0; i < results.length(); i++) {
