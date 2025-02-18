@@ -9,6 +9,14 @@ import javafx.scene.control.*;
 
 public class HelloViewBoudary {
 
+
+    @FXML
+    private Button db;
+    @FXML
+    private Button ram;
+    @FXML
+    private Button fs;
+
     @FXML
     private Button quibutton;
     @FXML
@@ -42,6 +50,8 @@ public class HelloViewBoudary {
     // Metodo per cambiare modalità su File System
     @FXML
     private void useFileSystem(ActionEvent event) {
+        db.setVisible(false);
+        ram.setVisible(false);
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(false);
@@ -52,6 +62,8 @@ public class HelloViewBoudary {
     // Metodo per cambiare modalità su Database
     @FXML
     private void useDatabase(ActionEvent event) {
+        ram.setVisible(false);
+        fs.setVisible(false);
         SessionManagerSLT.getInstance().setFSDataBase(true);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(true);
@@ -92,11 +104,29 @@ public class HelloViewBoudary {
 
     @FXML
     public void useRam(ActionEvent event) {
+        db.setVisible(false);
+        fs.setVisible(false);
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(true);
         UserDaoFactory.setUseDatabase(false);
         UserDaoFactory.useDemo(true); // Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
+    }
+
+    @FXML
+    public void initialize(){
+        SessionManagerSLT.getInstance().setFSDataBase(true);
+        SessionManagerSLT.getInstance().setDemo(true);
+        boolean valore=SessionManagerSLT.getInstance().getFSDataBase();
+        boolean valore2=SessionManagerSLT.getInstance().getDemo();
+        if(valore){
+            db.setVisible(true);
+        }else{
+            fs.setVisible(false);
+        }
+        if(valore2){
+            ram.setVisible(true);
+        }
     }
 
 

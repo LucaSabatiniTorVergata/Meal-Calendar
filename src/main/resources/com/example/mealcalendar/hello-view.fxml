@@ -33,8 +33,8 @@
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font></Label>
-      <Button layoutX="34.0" layoutY="47.0" mnemonicParsing="false" onAction="#useDatabase" text="DB" />
-      <Button layoutX="100.0" layoutY="48.0" mnemonicParsing="false" onAction="#useFileSystem" text="FS" />
-      <Button layoutX="168.0" layoutY="48.0" mnemonicParsing="false" onAction="#useRam" text="RAM" />
+      <Button fx:id="db" layoutX="34.0" layoutY="47.0" mnemonicParsing="false" onAction="#useDatabase" text="DB" />
+      <Button fx:id="fs" layoutX="100.0" layoutY="48.0" mnemonicParsing="false" onAction="#useFileSystem" text="FS" />
+      <Button fx:id="ram" layoutX="168.0" layoutY="48.0" mnemonicParsing="false" onAction="#useRam" text="RAM" />
    </children>
 </AnchorPane>
