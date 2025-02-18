@@ -195,15 +195,38 @@ public class RecipeVewBoundaryCli {
             return;
         }
 
-        System.out.print("Sei sicuro di voler rimuovere la ricetta '" + ricettaSelezionata.getRecipeName() + "'? (S/N): ");
-        String confirmation = scanner.nextLine().trim();
-        if ("S".equalsIgnoreCase(confirmation)) {
-            RecipeEditController controller = new RecipeEditController();
-            controller.rimuovi(ricettaSelezionata.getRecipeName());
-            System.out.println("✅ Ricetta '" + ricettaSelezionata.getRecipeName() + "' rimossa con successo.");
-            ricettaSelezionata = null; // Clear the selected recipe
+        // Recupera lo username dell'utente loggato
+        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+
+        // Verifica se l'utente è l'autore della ricetta
+        if (ricettaSelezionata.getAuthor().equals(username)) {
+            // Crea la stringa completa della ricetta, con tutti i dettagli separati da trattini
+            String ricettaCompleta = ricettaSelezionata.getRecipeName() + " - "
+                    + ricettaSelezionata.getTypeofDiet() + " - "
+                    + ricettaSelezionata.getTypeofMeal() + " - "
+                    + ricettaSelezionata.getNumIngredients() + " - "
+                    + ricettaSelezionata.getIngredients() + " - "
+                    + ricettaSelezionata.getDescription() + " - "
+                    + ricettaSelezionata.getAuthor();
+
+            // Chiedi conferma per la rimozione
+            System.out.print("Sei sicuro di voler rimuovere la ricetta '" + ricettaSelezionata.getRecipeName() + "'? (S/N): ");
+            String confirmation = scanner.nextLine().trim();
+            if ("S".equalsIgnoreCase(confirmation)) {
+                // Passa l'intera stringa al controller per la rimozione
+                RecipeEditController controller = new RecipeEditController();
+                controller.rimuovi(ricettaCompleta); // Passa tutta la stringa
+                System.out.println("✅ Ricetta '" + ricettaSelezionata.getRecipeName() + "' rimossa con successo.");
+                ricettaSelezionata = null; // Clear the selected recipe
+            } else {
+                System.out.println("❌ Rimozione annullata.");
+            }
         } else {
-            System.out.println("❌ Rimozione annullata.");
+            // Se l'utente non è l'autore, mostra un messaggio di errore
+            System.out.println("❌ Non puoi rimuovere una ricetta che non hai creato.");
         }
     }
+
+
+
 }
