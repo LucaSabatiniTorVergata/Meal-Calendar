@@ -1,12 +1,12 @@
-pollo senza palle:vegan:colazione:1:pomodoro:pollo ma senza le palle:luca
+pollo senza palle:vegan:breakfast:1:pomodoro:pollo ma senza le palle:luca
 gianluca alla cacciatora:Vegan:Breakfast:1:gianluca:gianluca che caccia tora:gianlucacazzogrosso
 Lasagna:Omnivorous:Lunch:1:Pomodoro:Lasang:luca
 pollo con palle:Vegano:Pranzo:1:1:leonardo gay:luca
 ciuba avr:Omnivorous:Lunch:1:ciuba:the avr:luca
 davide:Omnivorous:Lunch:1:davide:davide cotto:davide
-pierpaoloprolunga:Omnivorous:Breakfast:1:pomodoro:gianluca è entrato dentro uno al semaforo:null
+pisello:omnivoro:colazione:1:pomodoro:pallone da calcio:luca
 paolone vetturone:onnivoro:colazione:1:paolone:paolo vettura si è rotto il motore:luca
-pollo volante diversamente identificato:::1:pollo:pollo ma che vola:luca
+pollo volante diversamente identificato:Vegano:Colazione:1:pollo:pollo ma che vola:luca
 palle:Vegetarian:Lunch:1:luca:palle:luca
-immanuel alla cacciatora:Omnivorous:Dinner:5:immanuel:è un negro che viene cotto in padella... è una spiegazione sufficente?:edonegro
-immanuel alla cacciatora:Omnivorous:Dinner:5:immanuel:è un negro che viene cotto in padella... è una spiegazione sufficente?:edonegro
+immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
+immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
