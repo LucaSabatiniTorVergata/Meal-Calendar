@@ -52,7 +52,7 @@ public class HelloViewBoundaryCli {
         }
     }
 
-    public void register() {
+    public void register() throws MealCalendarException {
         System.out.println("\n===== Registrazione =====");
         System.out.print("Username: ");
         String username = scanner.nextLine();
@@ -85,9 +85,10 @@ public class HelloViewBoundaryCli {
         } catch (RuntimeException e) {
             LOGGER.log(Level.SEVERE, "Errore imprevisto durante la registrazione.", e);
             System.out.println("❌ Errore imprevisto durante la registrazione.");
+        } catch (Exception e) {
+            throw new MealCalendarException("Errore durante la registrazione: " + e.getMessage(), e);
         }
     }
-
 
     // Metodo per utilizzare il File System
     private void useFileSystem() {
