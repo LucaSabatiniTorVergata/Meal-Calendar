@@ -1,7 +1,7 @@
 package com.example.mealcalendar;
 
 
-
+import java.util.logging.Logger;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 
@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 
 public class MealcalendarController {
+
+    private static final Logger LOGGER = Logger.getLogger(MealcalendarController.class.getName());
 
     private MealcalendarBean mealcalendarBean;
 
@@ -67,7 +69,7 @@ public class MealcalendarController {
                 // Invia il messaggio
                 Transport.send(message);
 
-                System.out.println("Email sent successfully");
+                LOGGER.info("Email sent successfully");
 
                 sendEmailProgrammataRistorante();
 
@@ -86,7 +88,7 @@ public class MealcalendarController {
                 // Invia il messaggio
                 Transport.send(message);
 
-                System.out.println("Email sent successfully");
+                LOGGER.info("Email sent successfully");
 
                 sendEmailProgrammataRicetta();
 
@@ -127,6 +129,7 @@ public class MealcalendarController {
                     String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
 
                     Session session = Session.getInstance(properties, new Authenticator() {
+                        @Override
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(user, password);
                         }
@@ -141,14 +144,14 @@ public class MealcalendarController {
 
                     // Inviare la mail
                     Transport.send(message);
-                    System.out.println("Email inviata!");
+                    LOGGER.info("Email inviata!");
 
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
             }, delay, TimeUnit.MILLISECONDS);
         } else {
-            System.out.println("L'orario selezionato è già passato!");
+            LOGGER.info("L'orario selezionato è già passato!");
         }
     }
 
@@ -182,6 +185,7 @@ public class MealcalendarController {
                     String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
 
                     Session session = Session.getInstance(properties, new Authenticator() {
+                        @Override
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(user, password);
                         }
@@ -196,14 +200,15 @@ public class MealcalendarController {
 
                     // Inviare la mail
                     Transport.send(message);
-                    System.out.println("Email inviata!");
+
+                    LOGGER.info("Email inviata!");
 
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
             }, delay, TimeUnit.MILLISECONDS);
         } else {
-            System.out.println("L'orario selezionato è già passato!");
+            LOGGER.info("L'orario selezionato è già passato!");
         }
 
     }

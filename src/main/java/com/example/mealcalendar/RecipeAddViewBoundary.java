@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 public class RecipeAddViewBoundary {
 
@@ -33,19 +32,29 @@ public class RecipeAddViewBoundary {
     private SplitMenuButton dietMenu;
 
     @FXML
-    private MenuItem omnivorous, vegetarian, vegan;
+    private MenuItem omnivorous;
+
+    @FXML
+    private MenuItem vegan;
+
+    @FXML
+    private MenuItem vegetarian;
 
     @FXML
     private SplitMenuButton mealMenu;
 
     @FXML
-    private MenuItem breakfast, lunch, dinner;
+    private MenuItem breakfast;
+
+    @FXML
+    private MenuItem lunch;
+
+    @FXML
+    private MenuItem dinner;
 
     @FXML
     private ListView<String> recipeListView;
 
-    private RecipeAddController controller = new RecipeAddController();
-    private RecipeListViewBoundary listController = new RecipeListViewBoundary();
 
     @FXML
     private void initialize() {
@@ -70,7 +79,7 @@ public class RecipeAddViewBoundary {
     }
 
     @FXML
-    private void handleAddRecipe(ActionEvent event) throws IOException {
+    private void handleAddRecipe(ActionEvent event) {
         String name = recipename.getText().trim();
         String diet = (dietMenu.getText().equals("Seleziona dieta")) ? "" : dietMenu.getText();
         String meal = (mealMenu.getText().equals("Seleziona pasto")) ? "" : mealMenu.getText();
@@ -80,11 +89,11 @@ public class RecipeAddViewBoundary {
         String author = SessionManagerSLT.getInstance().getLoggedInUsername();
         RecipeAddController controller= new RecipeAddController();
         AddRecipeBean bean = new AddRecipeBean(name, diet, meal, numIngredients, ingredients, description, author);
-        boolean result=controller.salvaRicetta(bean);
+        controller.salvaRicetta(bean);
     }
 
     @FXML
-    private void homeView(ActionEvent event) throws IOException {
+    private void homeView(ActionEvent event) {
 
         Stage stage = (Stage) homeview.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
@@ -92,7 +101,7 @@ public class RecipeAddViewBoundary {
 
 
     @FXML
-    private void backView(ActionEvent event) throws IOException {
+    private void backView(ActionEvent event) {
 
         Stage stage = (Stage) backview.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");

@@ -1,7 +1,6 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeSearchController {
@@ -28,10 +27,10 @@ public class RecipeSearchController {
             }
         }
         List<RecipeReturnBean> ricetteBeans = listaRicette.getrcicettereturn();
-        return ricetteBeans.size() > 0 ? ricetteBeans : null;
+        return ricetteBeans.size()> 0 ? ricetteBeans : null;
     }
 
-    public List<RecipeReturnBean> trovaricette() throws IOException {
+    public List<RecipeReturnBean> trovaricette() {
 
         List<RecipeReturnBean> result = recipeExists(filtri);
 

@@ -15,7 +15,6 @@ public class RecipeListViewBoundary {
     public void updateRecipeList() {
         if (recipeListView == null) {
             LOGGER.log(Level.SEVERE, "Errore: recipeListView è null! Verifica il caricamento della FXML.");
-            return;
         }
     }
 }

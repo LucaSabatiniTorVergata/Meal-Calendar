@@ -19,7 +19,7 @@ public class RecipeEditController {
     public List<RecipeReturnBean> mostraricette(){
         RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();
         List<RecipeEntity> ricette= dao.getAllRecipes();
-        List<RecipeReturnBean> lista= new ArrayList<RecipeReturnBean>();
+        List<RecipeReturnBean> lista= new ArrayList<>();
         for(RecipeEntity r:ricette){
             if(r.getAuthor().equals(bean.getUser()) ){
                 lista.add(new RecipeReturnBean(r.getRecipeName(),r.getTypeofDiet(),r.getTypeofMeal(),r.getNumIngredients(),r.getIngredients(),r.getDescription(),r.getAuthor()));

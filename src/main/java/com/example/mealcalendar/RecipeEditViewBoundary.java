@@ -35,14 +35,14 @@ public class RecipeEditViewBoundary {
     private String selectedRecipe;
 
     @FXML
-    private void recipeedit2view(ActionEvent event) throws IOException {
+    private void recipeedit2view(ActionEvent event) {
 
         Stage stage = (Stage) recipeEdit2.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipeedit2-view.fxml");
     }
 
     @FXML
-    private void backview(ActionEvent event) throws IOException {
+    private void backview(ActionEvent event)  {
 
         Stage stage = (Stage) ritorno.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");

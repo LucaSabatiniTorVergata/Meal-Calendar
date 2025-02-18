@@ -1,7 +1,5 @@
 package com.example.mealcalendar;
 
-import com.google.protobuf.StringValueOrBuilder;
-
 public class RecipeEdit2Bean {
 
      private String ricettapresa;

@@ -4,7 +4,7 @@ public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
     private String loggedInUsername;
-    private boolean FSDataBase;
+    private boolean fSDataBase;
     private boolean demo;
     private boolean ram=true;
     private boolean db=true;
@@ -28,11 +28,11 @@ public class SessionManagerSLT {
     }
 
     public void setFSDataBase(boolean fSDataBase) {
-        this.FSDataBase=fSDataBase;
+        this.fSDataBase=fSDataBase;
     }
 
     public boolean getFSDataBase() {
-        return FSDataBase;
+        return fSDataBase;
     }
 
     public void setDemo(boolean altroDato) {
@@ -45,7 +45,7 @@ public class SessionManagerSLT {
 
     public void logout() {
         loggedInUsername = null;
-        FSDataBase = false;
+        fSDataBase = false;
         demo = false;
 
     }

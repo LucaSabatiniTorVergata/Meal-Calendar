@@ -1,6 +1,6 @@
 package com.example.mealcalendar;
 
-import jakarta.mail.Session;
+
 
 public class RecipeDaoFactory {
 

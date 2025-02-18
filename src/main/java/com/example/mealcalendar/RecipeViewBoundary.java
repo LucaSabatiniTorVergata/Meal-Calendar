@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import java.util.List;
+import java.util.logging.Logger;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
@@ -23,6 +25,8 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.ricettascelta;
 
 
 public class RecipeViewBoundary {
+
+    private static final Logger LOGGER = Logger.getLogger(RecipeViewBoundary.class.getName());
 
     @FXML
     private Button addrecipe;
@@ -64,7 +68,6 @@ public class RecipeViewBoundary {
     @FXML
     private Label detailLabel;
 
-    private List<RecipeReturnBean> listaricette;
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
@@ -79,13 +82,13 @@ public class RecipeViewBoundary {
     }
 
     @FXML
-    private void editrecipeview(ActionEvent event) throws IOException {
+    private void editrecipeview(ActionEvent event){
 
         Stage stage = (Stage) editrecipe.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipeedit-view.fxml");
     }
     @FXML
-    private void homeView(ActionEvent event) throws IOException {
+    private void homeView(ActionEvent event) {
 
         Stage stage = (Stage) returnhome.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
@@ -113,7 +116,7 @@ public class RecipeViewBoundary {
 
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
 
 
         // Associare le azioni ai MenuItem (cambiano il testo del bottone)
@@ -139,7 +142,7 @@ public class RecipeViewBoundary {
             String author = ricetta.getAuthor();
             String riga = nomeRicetta + " - " + tipodieta + " - " + tipopasto
                     + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
-            System.out.println("riga: " + riga);
+            LOGGER.info("riga: " + riga);
 
             listaRicetteview.getItems().add(riga);
         }

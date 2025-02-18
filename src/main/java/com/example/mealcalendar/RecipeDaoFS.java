@@ -7,19 +7,19 @@ import java.util.List;
 public class RecipeDaoFS implements RecipeDao {
 
     private static final String FILE_PATH = "ricette.txt";
-    private static boolean USE_DEMO = false; //di base non usa la demo
+    private static boolean USEDEMO = false; //di base non usa la demo
 
     // Lista per memorizzare le ricette in modalità demo
     private static List<RecipeEntity> demoRecipes = new ArrayList<>();
 
     public RecipeDaoFS(boolean useDemo) {
-        USE_DEMO = useDemo;
+        USEDEMO = useDemo;
         createFileIfNotExists();
     }
 
     private void createFileIfNotExists() {
         File file = new File(FILE_PATH);
-        if (!file.exists() && !USE_DEMO) {  // Se non è in modalità demo, crea il file
+        if (!file.exists() && !USEDEMO) {  // Se non è in modalità demo, crea il file
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -29,7 +29,7 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public boolean addRecipe(RecipeEntity recipe) {
-        if (USE_DEMO) {
+        if (USEDEMO) {
             return addRecipeDemo(recipe); // Usa la lista demo in memoria
         } else {
             return addRecipeFS(recipe);  // Usa il file system
@@ -87,7 +87,7 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
-        if (USE_DEMO) {
+        if (USEDEMO) {
             updateRecipeDemo(oldRecipe, newRecipe); // Usa la lista demo per aggiornare
         } else {
             updateRecipeFS(oldRecipe, newRecipe);  // Usa il file system per aggiornare
@@ -118,7 +118,7 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public void removeRecipe(RecipeEntity recipeToRemove) throws IOException {
-        if (USE_DEMO) {
+        if (USEDEMO) {
             removeRecipeDemo(recipeToRemove); // Usa la lista demo per rimuovere
         } else {
             removeRecipeFS(recipeToRemove);  // Usa il file system per rimuovere
