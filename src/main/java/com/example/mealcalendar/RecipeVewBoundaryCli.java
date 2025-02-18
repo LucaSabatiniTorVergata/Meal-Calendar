@@ -120,12 +120,7 @@ public class RecipeVewBoundaryCli {
         RecipeSearchController controller = new RecipeSearchController(filters);
 
         List<RecipeReturnBean> listaRicette;
-        try {
-            listaRicette = controller.trovaricette();
-        } catch (IOException e) {
-            System.out.println("Errore durante la ricerca delle ricette: " + e.getMessage());
-            return;
-        }
+        listaRicette = controller.trovaricette();
 
         if (listaRicette == null || listaRicette.isEmpty()) {
             System.out.println("Nessuna ricetta trovata con i filtri specificati.");

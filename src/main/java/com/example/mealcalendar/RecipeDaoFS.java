@@ -53,7 +53,7 @@ public class RecipeDaoFS implements RecipeDao {
     }
 
     public List<RecipeEntity> getAllRecipes() {
-        if (USE_DEMO) {
+        if (USEDEMO) {
             return getAllRecipesDemo(); // Restituisce la lista demo
         } else {
             return getAllRecipesFS();  // Restituisce le ricette dal file

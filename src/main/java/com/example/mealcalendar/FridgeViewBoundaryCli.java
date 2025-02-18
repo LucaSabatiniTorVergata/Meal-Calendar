@@ -15,12 +15,7 @@ public class FridgeViewBoundaryCli {
 
     public void start() throws Exception {
         // Inizializzazione del controller
-        try {
-            frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
-        } catch (IOException e) {
-            logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
-            return;
-        }
+        frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
 
         while (true) {
             System.out.println("\n===== GESTIONE FRIGORIFERO =====");

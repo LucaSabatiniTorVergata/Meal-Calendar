@@ -40,11 +40,7 @@ public class FridgeViewBoundary {
         label.setText("Hi, " + SessionManagerSLT.getInstance().getLoggedInUsername() + "!");
         listaInventario.getItems().clear();
         if (frigoriferoController == null) {
-            try {
-                frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
-            } catch (IOException e) {
-                logger.severe("Errore nell'inizializzazione del controller: " + e.getMessage());
-            }
+            frigoriferoController = new FrigoriferoController(SessionManagerSLT.getInstance().getDemo());
         }
         aggiornaInventario();
     }

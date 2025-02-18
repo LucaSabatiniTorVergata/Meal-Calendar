@@ -102,7 +102,7 @@ public class FindRestaurantViewBoundaryCli {
         }
     }
 
-    private void gestisciSceltaRistorante(ReturnRestaurantsBean ristoranteSelezionato){
+    private void gestisciSceltaRistorante(ReturnRestaurantsBean ristoranteSelezionato) throws Exception {
         if (vengoDaCalendar) {
             System.out.println("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
             MealCalenderViewBoundaryCli.ristorantescelto = ristoranteSelezionato.getNome();
