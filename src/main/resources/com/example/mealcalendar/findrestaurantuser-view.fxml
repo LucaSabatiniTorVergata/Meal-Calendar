@@ -5,10 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -16,7 +15,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.FindRestaurantViewBoundary">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-        <Label fx:id="welcomelabel" layoutX="104.0" layoutY="37.0" >
+        <Label fx:id="welcomelabel" layoutX="104.0" layoutY="37.0">
             <font>
                 <Font size="21.0" />
             </font>
@@ -66,11 +65,6 @@
                 <Font size="24.0" />
             </font>
         </Label>
-      <ImageView fitHeight="82.0" fitWidth="126.0" layoutX="2.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../pictures/gulyx.png" />
-         </image>
-      </ImageView>
       <Button fx:id="homebutton" layoutX="710.0" layoutY="40.0" mnemonicParsing="false" onAction="#loadHomePageUser" text="BACK" />
       <ListView fx:id="ristorantiListView" layoutX="30.0" layoutY="124.0" onMouseClicked="#handleclick" prefHeight="480.0" prefWidth="882.0" />
       <Label layoutX="217.0" layoutY="23.0" prefHeight="59.0" prefWidth="490.0" text="FINDING RESTAURANT...">
@@ -81,6 +75,12 @@
       <Label layoutX="1210.0" layoutY="448.0" text="KM">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ProgressIndicator fx:id="loadingIndicator" layoutX="30.0" layoutY="648.0" prefHeight="48.0" prefWidth="114.0" progress="0.0" visible="false" />
+      <Label fx:id="lableemail" visible="false" layoutX="154.0" layoutY="668.0" prefHeight="18.0" prefWidth="134.0">
+         <font>
+            <Font name="System Italic" size="12.0" />
          </font>
       </Label>
     </children>

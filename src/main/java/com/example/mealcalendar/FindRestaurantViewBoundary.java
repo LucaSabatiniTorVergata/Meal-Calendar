@@ -1,5 +1,14 @@
 package com.example.mealcalendar;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
@@ -11,20 +20,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
+import javafx.util.Duration;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import javafx.scene.control.ListView;
 import java.util.regex.Pattern;
-import javafx.scene.control.TextFormatter;
 import java.util.function.UnaryOperator;
-import javafx.scene.control.Label;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.ristorantescelto;
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
@@ -35,8 +39,11 @@ public class FindRestaurantViewBoundary {
 
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
 
+    @FXML
+    private Label lableemail;
 
-
+    @FXML
+    private ProgressIndicator loadingIndicator;
 
     @FXML
     private SplitMenuButton tipoDieta;
@@ -189,14 +196,44 @@ public class FindRestaurantViewBoundary {
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
                 if(vengoDaCalendar){
-                    vengoDaCalendar = false;
-                    ristorantescelto="🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo();
-                    MealCalenderViewBoundary.inviomail();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();  // Prendi la finestra dalla nuova scena
-                    stage.setScene(new Scene(root));
+                    lableemail = new Label("Sending mail...");  // Crea la label
+                    lableemail.setVisible(true);
+                    loadingIndicator.setVisible(true);
+                    loadingIndicator.setProgress(0);  // Inizializza a 0%
+
+                    Timeline timeline = new Timeline();
+
+                    KeyFrame keyFrame = new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+                        private double progress = 0;
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            progress += 0.05;  // Incrementa progressivamente
+                            loadingIndicator.setProgress(progress);
+
+                            if (progress >= 1) {
+                                timeline.stop();  // Ferma quando arriva al 100%
+                                try {
+                                    lableemail.setVisible(false);
+                                    vengoDaCalendar = false;
+                                    ristorantescelto = "🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo();
+                                    MealCalenderViewBoundary.inviomail();
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
+                                    Parent root = loader.load();
+                                    Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
+                                    stage.setScene(new Scene(root));
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+
+                    timeline.getKeyFrames().add(keyFrame);
+                    timeline.setCycleCount(Timeline.INDEFINITE);
+                    timeline.play();
                 } else {
+                    loadingIndicator.setVisible(false);
                     apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
                 }
             }

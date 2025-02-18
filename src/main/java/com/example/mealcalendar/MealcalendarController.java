@@ -55,8 +55,8 @@ public class MealcalendarController {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("leo.polidori99@gmail.com")); // L'indirizzo del destinatario
-                message.setSubject("Email di coonferma posto dove mangiare"); // Oggetto dell'email
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
+                message.setSubject("Email di conferma posto dove mangiare"); // Oggetto dell'email
                 message.setText("Salve,hai appena deciso di mangiare a: " + mealcalendarBean.getScelta() + " il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra()); // Corpo dell'email
 
                 // Invia il messaggio
@@ -73,7 +73,7 @@ public class MealcalendarController {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lowcillo148@gmail.com")); // L'indirizzo del destinatario
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
                 message.setSubject("Conferma Posto dove mangiare"); // Oggetto dell'email
                 message.setText("Salve,la ricetta scelta da te per il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra() + " è: " + mealcalendarBean.getScelta()); // Corpo dell'email
 
