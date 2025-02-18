@@ -16,38 +16,43 @@ public class LoginViewBoundaryCli {
             String username = scanner.nextLine();
             System.out.print("Password: ");
             String password = scanner.nextLine();
-            System.out.println("Scegli un'opzione:");
+            System.out.println("\nScegli un'opzione:");
             System.out.println("1. Login");
             System.out.println("2. Torna indietro");
+            System.out.println("0. Esci");
             System.out.print("Opzione: ");
             String choice = scanner.nextLine();
 
-            if ("2".equals(choice)) {
-                cliController.navigateTo("registration");
-                return;  // Torna alla Home e termina il metodo
-            }
+            switch (choice) {
+                case "1" -> {
+                    // Se l'utente ha scelto Login
+                    LoginBean userLoginBean = new LoginBean(username, password);
+                    LoginController controller = new LoginController();
 
-            if ("1".equals(choice)) {
-                // Se l'utente ha scelto Login
-                LoginBean userLoginBean = new LoginBean(username, password);
-                LoginController controller = new LoginController();
-
-                try {
-                    boolean result = controller.login(userLoginBean);
-                    if (result) {
-                        SessionManagerSLT.getInstance().setLoggedInUsername(userLoginBean.getUsername());
-                        System.out.println("✅ Login avvenuto con successo!");
-                        cliController.navigateTo("mainmenu");
-                        return;  // Dopo il login, torna al menu principale e termina il metodo
-                    } else {
-                        System.out.println("❌ Credenziali errate.");
+                    try {
+                        boolean result = controller.login(userLoginBean);
+                        if (result) {
+                            SessionManagerSLT.getInstance().setLoggedInUsername(userLoginBean.getUsername());
+                            System.out.println("✅ Login avvenuto con successo!");
+                            cliController.navigateTo("mainmenu");
+                            return;  // Dopo il login, torna al menu principale e termina il metodo
+                        } else {
+                            System.out.println("❌ Credenziali errate.");
+                        }
+                    } catch (Exception e) {
+                        LOGGER.log(Level.SEVERE, "Errore durante il login.", e);
+                        System.out.println("❌ Errore durante il login.");
                     }
-                } catch (Exception e) {
-                    LOGGER.log(Level.SEVERE, "Errore durante il login.", e);
-                    System.out.println("❌ Errore durante il login.");
                 }
-            } else {
-                System.out.println("Opzione non valida, prova di nuovo.");
+                case "2" -> {
+                    cliController.navigateTo("hello");
+                    return;  // Torna alla Home e termina il metodo
+                }
+                case "0" -> {
+                    System.out.println("👋 Uscita dal programma...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Opzione non valida, prova di nuovo.");
             }
         }
     }

@@ -2,5 +2,7 @@ luca:lowcillo148@gmail.com:$2a$10$nvaN/cY0rifs2a7twYeQROv3p3N9D/caYUzSQ/hIAA0sTU
 davide:zul2:$2a$10$BQ1iDAK4jJAJSRladhKKpOcbZxkCYFeV1QgOhERiw4OyKTf7gKsWm
 matteotti:paolo:$2a$10$j7UUMi29DpG0wGIC.49O3.NsvY0l57z4rTVYO6j92I/IzObithugS
 smith :smith :$2a$10$zUtAtJT48rGhra8qvZWuAOc2uSP5sT02j8QPDhxCxeEUdwKRWlFBS
+steve:leo.polidori99@gmail.com:$2a$10$L/qXNcuCOoNDtlduwH99m.Plyota2WEy3nXvcIRTr5mVJ0MToAXRu
+edonegro:edoman9994gmail.com:$2a$10$g8oUpz2sQpuCNIv4nToDsev4m7noe9m0hc/gdykJB47rVxvPutyca
 gianlucanero:gianluca.q.rm@gmail.com:$2a$10$BpAf4mvZb2ed02KUDfUV4.ZVIEqYI3MkQZTbmPKWEytnvTp6yQHm6
 leo:leo.polidori99@gmail.com:$2a$10$gy8z64JpIY.em2/kAAlIeODWWYvn8Sk22MYsCQxQgBebpYhoakrEa

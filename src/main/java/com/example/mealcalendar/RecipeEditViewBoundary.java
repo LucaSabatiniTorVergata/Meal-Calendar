@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,7 +15,7 @@ import javafx.scene.control.ListView;
 
 
 
-public class RecipeEditViewController {
+public class RecipeEditViewBoundary {
 
     @FXML
     private Label welcomelabel;

@@ -5,9 +5,9 @@ import javafx.scene.control.ListView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RecipeListViewController {
+public class RecipeListViewBoundary {
 
-    private static final Logger LOGGER = Logger.getLogger(RecipeListViewController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RecipeListViewBoundary.class.getName());
 
     @FXML
     private ListView<String> recipeListView;

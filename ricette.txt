@@ -12,3 +12,5 @@ pollo volante diversamente identificato:::1:pollo:pollo ma che vola:luca
 palle:Vegetarian:Lunch:1:::luca
 palle:Vegetarian:Lunch:1:::luca
 palle:Vegetarian:Lunch:1:luca:palle:luca
+immanuel alla cacciatora:Omnivorous:Dinner:5:immanuel:è un negro che viene cotto in padella... è una spiegazione sufficente?:edonegro
+immanuel alla cacciatora:Omnivorous:Dinner:5:immanuel:è un negro che viene cotto in padella... è una spiegazione sufficente?:edonegro

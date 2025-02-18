@@ -16,7 +16,7 @@ public class FindRestaurantViewBoundaryCli {
         this.vengoDaCalendar = vengoDaCalendar;
     }
 
-    // Costruttore di default (assume che non venga da Calendar)
+    // Costruttore di default (assume che non venga dal Calendario)
     public FindRestaurantViewBoundaryCli() {
         this.vengoDaCalendar = false;
     }
@@ -24,22 +24,18 @@ public class FindRestaurantViewBoundaryCli {
     public void start() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        // Controlla se provengo dal calendario
-        boolean fromCalendar = this.vengoDaCalendar;
-
-        // Richiesta del tipo di dieta
+        // Chiediamo il tipo di dieta
         System.out.println("Inserisci il tipo di dieta (Vegano, Vegetariano, Onnivoro): ");
         String tipoDieta = scanner.nextLine().trim();
-        // Se il tipo di dieta è "Onnivoro", non viene applicato alcun filtro
         if (tipoDieta.equalsIgnoreCase("Onnivoro")) {
             tipoDieta = "";
         }
 
-        // Richiesta del pasto
-        System.out.println("Inserisci il pasto (Colazione, Pranzo, Cena): ");
+        // Chiediamo il tipo di pasto
+        System.out.println("Inserisci il tipo di pasto (Colazione, Pranzo, Cena): ");
         String pasto = scanner.nextLine().trim();
 
-        // Richiesta della distanza in km
+        // Chiediamo la distanza massima
         System.out.println("Inserisci la distanza massima (in km): ");
         double distanza = 0;
         try {
@@ -52,7 +48,7 @@ public class FindRestaurantViewBoundaryCli {
         // Creazione del bean dei filtri
         FiltersRestaurantBean filtro = new FiltersRestaurantBean(tipoDieta, pasto, distanza);
 
-        // Creazione del controller e chiamata al metodo per trovare i ristoranti
+        // Creazione del controller e recupero della lista di ristoranti
         ChooseRestaurantController controller = new ChooseRestaurantController(filtro);
         List<ReturnRestaurantsBean> listaRistoranti;
         try {
@@ -75,7 +71,7 @@ public class FindRestaurantViewBoundaryCli {
             System.out.println((i + 1) + ". " + ristorante.getNome() + " - " + ristorante.getIndirizzo());
         }
 
-        // Scelta del ristorante
+        // Chiediamo all'utente di scegliere un ristorante
         System.out.println("\nInserisci il numero del ristorante per selezionarlo, oppure 0 per uscire:");
         int scelta = 0;
         try {
@@ -88,8 +84,8 @@ public class FindRestaurantViewBoundaryCli {
         if (scelta > 0 && scelta <= listaRistoranti.size()) {
             ReturnRestaurantsBean ristoranteSelezionato = listaRistoranti.get(scelta - 1);
 
-            // Se provengo dal calendario, salvo il ristorante e torno al calendario
-            if (fromCalendar) {
+            // Se provieni dal calendario, salva il ristorante e torna al calendario
+            if (vengoDaCalendar) {
                 System.out.println("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
 
                 // Salva il ristorante selezionato nella variabile statica
@@ -99,11 +95,11 @@ public class FindRestaurantViewBoundaryCli {
 
                 // Usa il controller per navigare al calendario
                 CliController cliController = new CliController();
-                cliController.navigateTo("calendariopasti");
+                cliController.navigateTo("mealcalendar");
                 return;
             }
 
-            // Se NON provengo dal calendario, offro l'opzione di aprirlo su Google Maps
+            // Se NON provieni dal calendario, offriamo l'opzione di aprirlo su Google Maps
             String url = "https://www.google.com/maps/search/?api=1&query="
                     + ristoranteSelezionato.getLatitudine() + "," + ristoranteSelezionato.getLongitudine();
             System.out.println("Apro Google Maps per: " + ristoranteSelezionato.getNome());

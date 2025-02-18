@@ -1,1 +1,1 @@
-pomodoro:4
+pomodoro:3

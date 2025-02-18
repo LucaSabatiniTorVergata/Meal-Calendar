@@ -1,5 +1,6 @@
 package com.example.mealcalendar;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class RecipeEditViewBoundaryCli {

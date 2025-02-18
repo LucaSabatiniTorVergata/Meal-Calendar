@@ -1,86 +1,75 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
 import java.util.Scanner;
-
-
 
 public class MainMenuViewBoundaryCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
 
     public void start() throws Exception {
-        System.out.println("===== Menu Principale (CLI) =====");
+        System.out.println("\n===== Menu Principale (CLI) =====");
         System.out.println("1. Trova Ristorante (Guest)");
         System.out.println("2. Trova Ristorante (Utente Registrato)");
         System.out.println("3. Imposta Orario Pasto");
         System.out.println("4. Trova Ricetta");
         System.out.println("5. Riempi Frigorifero");
-        System.out.println("6. Abilita Persistenza");
-        System.out.println("7. Disabilita Persistenza");
-        System.out.println("8. Logout");
+        System.out.println("6. Logout");
         System.out.print("Scegli un'opzione: ");
 
         String choice = scanner.nextLine();
         switch (choice) {
-            case "1":
-                cliController.navigateTo("ristoranteguest");
-                break;
-            case "2":
-                cliController.navigateTo("ristoranteUser");
-                break;
-            case "3":
-                cliController.navigateTo("calendariopasti");
-                break;
-            case "4":
-                cliController.navigateTo("trovaricette");
-                break;
-            case "5":
-                cliController.navigateTo("fridge");
-                break;
-            case "6":
-                enablePersistence();
-                break;
-            case "7":
-                disablePersistence();
-                break;
-            case "8":
-                cliController.navigateTo("login");
-                break;
-            default:
+            case "1" -> findRestaurantGuest();
+            case "2" -> findRestaurantUser();
+            case "3" -> loadCalendarMenu();
+            case "4" -> loadFindRecipe();
+            case "5" -> loadFridgeMenu();
+            case "6" -> logout();
+            default -> {
                 System.out.println("❌ Scelta non valida.");
                 start();
+            }
         }
     }
 
-    private void findRestaurantGuest() {
-        System.out.println("Vai a: Trova Ristorante (Guest)");
+    // Metodi per le funzionalità disponibili per il guest
+    private void findRestaurantGuest() throws Exception {
+        System.out.println("\n🔍 Trova Ristorante (Guest)");
+        cliController.navigateTo("ristoranteguest");
     }
 
-    private void findRestaurantUser() {
-        System.out.println("Vai a: Trova Ristorante (Utente Registrato)");
+    // Metodi per le funzionalità disponibili per l'utente registrato
+    private void findRestaurantUser() throws Exception {
+        System.out.println("\n🔍 Trova Ristorante (Utente Registrato)");
+        cliController.navigateTo("ristoranteUser");
     }
 
-    private void loadCalendarMenu() {
-        System.out.println("Vai a: Imposta Orario Pasto");
+    private void loadCalendarMenu() throws Exception {
+        System.out.println("\n📅 Imposta Orario Pasto");
+        cliController.navigateTo("calendariopasti");
     }
 
-    private void loadFindRecipe() {
-        System.out.println("Vai a: Trova Ricetta");
+    private void loadFindRecipe() throws Exception {
+        System.out.println("\n🍲 Trova Ricetta");
+        cliController.navigateTo("trovaricette");
     }
 
-    private void loadFridgeMenu() {
-        System.out.println("Vai a: Riempi Frigorifero");
+    private void loadFridgeMenu() throws Exception {
+        System.out.println("\n🧊 Riempi Frigorifero");
+        cliController.navigateTo("fridge");
     }
 
-    private void enablePersistence() throws Exception{;
-        System.out.println("✅ Persistenza abilitata.");
-        start();
+    // Logout e ritorno alla schermata di login
+    private void logout() throws Exception {
+        SessionManagerSLT.getInstance().logout();
+        System.out.println("👋 Logout effettuato.");
+        cliController.navigateTo("login");
     }
 
-    private void disablePersistence() throws Exception {
-
-        System.out.println("✅ Persistenza disabilitata.");
-        start();
+    // Metodo di inizializzazione per visualizzare il nome utente (se loggato)
+    public void initialize() {
+        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+        if (username != null) {
+            System.out.println("\n👤 Benvenuto, " + username + "!");
+        }
     }
 }

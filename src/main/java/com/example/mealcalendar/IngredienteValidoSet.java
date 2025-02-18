@@ -14,6 +14,7 @@ public class IngredienteValidoSet {
         ingredientiValidi.add("burro");
         ingredientiValidi.add("uova");
         ingredientiValidi.add("pomodoro");
+        ingredientiValidi.add("farina");
         // Aggiungi altri ingredienti validi qui
     }
 

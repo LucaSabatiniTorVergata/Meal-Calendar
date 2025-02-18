@@ -1,9 +1,5 @@
 package com.example.mealcalendar;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import com.example.mealcalendar.RecipeEntity;
-import com.example.mealcalendar.RecipeEntityFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -49,7 +45,7 @@ public class RecipeAddViewBoundary {
     private ListView<String> recipeListView;
 
     private RecipeAddController controller = new RecipeAddController();
-    private RecipeListViewController listController = new RecipeListViewController();
+    private RecipeListViewBoundary listController = new RecipeListViewBoundary();
 
     @FXML
     private void initialize() {

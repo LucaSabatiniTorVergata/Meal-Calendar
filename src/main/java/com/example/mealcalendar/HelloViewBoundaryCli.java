@@ -1,11 +1,5 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.UserBean;
-import com.example.mealcalendar.UserDaoFactory;
-import com.example.mealcalendar.UserDaoInterface;
-import com.example.mealcalendar.RegisterController;
-import com.example.mealcalendar.LoginController;
-import com.example.mealcalendar.LoginBean;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -17,27 +11,38 @@ public class HelloViewBoundaryCli {
     private static final Logger LOGGER = Logger.getLogger(HelloViewBoundaryCli.class.getName());
 
     public void start() throws Exception {
-        System.out.println("===== Calendario dei Pasti (CLI) =====");
+        System.out.println("\n===== Calendario dei Pasti (CLI) =====");
         System.out.println("1. Registrazione");
         System.out.println("2. Login (se già registrato)");
         System.out.println("3. Entra come Guest");
+        System.out.println("4. Utilizza File System");
+        System.out.println("5. Utilizza Database");
+        System.out.println("6. Utilizza Demo (RAM)");
+        System.out.println("0. Esci");
         System.out.print("Scegli un'opzione: ");
         String choice = scanner.nextLine();
 
         switch (choice) {
-            case "1":
-                register();
-                break;
-            case "2":
-                cliController.navigateTo("login");
-                break;
-            case "3":
-                cliController.navigateTo("guest");
-                break;
-            default:
+            case "1" -> register();
+            case "2" -> cliController.navigateTo("login");
+            case "3" -> cliController.navigateTo("guest");
+            case "4" -> {
+                useFileSystem();
+                start(); // Torna al menu principale
+            }
+            case "5" -> {
+                useDatabase();
+                start(); // Torna al menu principale
+            }
+            case "6" -> {
+                useRam();
+                start(); // Torna al menu principale
+            }
+            case "0" -> System.out.println("👋 Uscita dal programma...");
+            default -> {
                 System.out.println("❌ Scelta non valida.");
                 start();
-                break;
+            }
         }
     }
 
@@ -74,5 +79,32 @@ public class HelloViewBoundaryCli {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // Metodo per utilizzare il File System
+    private void useFileSystem() {
+        SessionManagerSLT.getInstance().setFSDataBase(false);
+        SessionManagerSLT.getInstance().setDemo(false);
+        UserDaoFactory.setUseDatabase(false);
+        UserDaoFactory.useDemo(false);
+        System.out.println("🔹 Utilizzando il File System per i dati utenti.");
+    }
+
+    // Metodo per utilizzare il Database
+    private void useDatabase() {
+        SessionManagerSLT.getInstance().setFSDataBase(true);
+        SessionManagerSLT.getInstance().setDemo(false);
+        UserDaoFactory.setUseDatabase(true);
+        UserDaoFactory.useDemo(false);
+        System.out.println("🔹 Utilizzando il Database per i dati utenti.");
+    }
+
+    // Metodo per utilizzare la demo in RAM
+    private void useRam() {
+        SessionManagerSLT.getInstance().setFSDataBase(false);
+        SessionManagerSLT.getInstance().setDemo(true);
+        UserDaoFactory.setUseDatabase(false);
+        UserDaoFactory.useDemo(true);
+        System.out.println("🔹 Utilizzando la demo per i dati utenti.");
     }
 }

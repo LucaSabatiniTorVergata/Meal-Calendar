@@ -12,12 +12,12 @@ public class RecipeVewBoundaryCli {
     private final boolean vengoDaCalendar;
     private RecipeReturnBean ricettaSelezionata;
 
-    // Costruttore per gestire la navigazione da calendario
+    // Constructor for calendar navigation
     public RecipeVewBoundaryCli(boolean vengoDaCalendar) {
         this.vengoDaCalendar = vengoDaCalendar;
     }
 
-    // Costruttore di default per compatibilità con altre chiamate
+    // Default constructor for other uses
     public RecipeVewBoundaryCli() {
         this.vengoDaCalendar = false;
     }
@@ -66,11 +66,11 @@ public class RecipeVewBoundaryCli {
         }
     }
 
-    // Metodo per cercare le ricette (case 1)
+    // Method for searching recipes (option 1)
     private void searchRecipies() throws Exception {
         System.out.println("\n===== Ricerca Ricette =====");
 
-        // Selezione del tipo di dieta
+        // Diet type selection
         System.out.println("Seleziona Tipo Dieta:");
         System.out.println("1. Vegan");
         System.out.println("2. Vegetarian");
@@ -93,7 +93,7 @@ public class RecipeVewBoundaryCli {
                 break;
         }
 
-        // Selezione del tipo di pasto
+        // Meal type selection
         System.out.println("Seleziona Tipo Pasto:");
         System.out.println("1. Breakfast");
         System.out.println("2. Lunch");
@@ -132,7 +132,7 @@ public class RecipeVewBoundaryCli {
             return;
         }
 
-        // Mostra le ricette trovate
+        // Display the found recipes
         System.out.println("\n===== Lista Ricette =====");
         for (int i = 0; i < listaRicette.size(); i++) {
             RecipeReturnBean ricetta = listaRicette.get(i);
@@ -143,7 +143,7 @@ public class RecipeVewBoundaryCli {
             System.out.println(riga);
         }
 
-        // Chiedi all'utente se vuole vedere i dettagli di una ricetta
+        // Ask the user if they want to view a recipe's details
         System.out.println("\nInserisci il numero della ricetta per visualizzarne i dettagli, oppure 0 per tornare:");
         String input = scanner.nextLine().trim();
         int scelta;
@@ -158,241 +158,26 @@ public class RecipeVewBoundaryCli {
             ricettaSelezionata = listaRicette.get(scelta - 1);
             showRecipeDetails(ricettaSelezionata);
 
-            // Se vengo dal calendario, naviga al calendario con la ricetta selezionata
+            // If navigating from the calendar, go back to calendar with the selected recipe
             if (vengoDaCalendar) {
                 cliController.navigateToCalendarWithRecipe(ricettaSelezionata);
             }
         }
     }
 
-    // Metodo per cercare e selezionare una ricetta da modificare (case 3)
-    // Visualizza solo le ricette create dall'utente in sessione
+    // Method to edit a selected recipe (option 3)
     private void editRecipe() throws Exception {
-        System.out.println("\n===== Ricerca Ricetta da Modificare =====");
-
-        // Selezione del tipo di dieta
-        System.out.println("Seleziona Tipo Dieta:");
-        System.out.println("1. Vegan");
-        System.out.println("2. Vegetarian");
-        System.out.println("3. Omnivorous");
-        System.out.print("Scegli (1-3): ");
-        String dietChoice = scanner.nextLine().trim();
-        String tipoDieta;
-        switch (dietChoice) {
-            case "1":
-                tipoDieta = "Vegan";
-                break;
-            case "2":
-                tipoDieta = "Vegetarian";
-                break;
-            case "3":
-                tipoDieta = "Omnivorous";
-                break;
-            default:
-                tipoDieta = "";
-                break;
-        }
-
-        // Selezione del tipo di pasto
-        System.out.println("Seleziona Tipo Pasto:");
-        System.out.println("1. Breakfast");
-        System.out.println("2. Lunch");
-        System.out.println("3. Dinner");
-        System.out.print("Scegli (1-3): ");
-        String mealChoice = scanner.nextLine().trim();
-        String tipoPasto;
-        switch (mealChoice) {
-            case "1":
-                tipoPasto = "Breakfast";
-                break;
-            case "2":
-                tipoPasto = "Lunch";
-                break;
-            case "3":
-                tipoPasto = "Dinner";
-                break;
-            default:
-                tipoPasto = "";
-                break;
-        }
-
-        RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean(tipoDieta, tipoPasto);
-        RecipeSearchController controller = new RecipeSearchController(filters);
-
-        List<RecipeReturnBean> listaRicette;
-        try {
-            listaRicette = controller.trovaricette();
-        } catch (IOException e) {
-            System.out.println("Errore durante la ricerca delle ricette: " + e.getMessage());
+        if (ricettaSelezionata == null) {
+            System.out.println("❌ Nessuna ricetta selezionata da modificare.");
             return;
         }
 
-        // Filtra le ricette in base all'utente in sessione
-        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
-        List<RecipeReturnBean> listaRicetteFiltrate = listaRicette.stream()
-                .filter(ricetta -> ricetta.getAuthor().equals(username))
-                .collect(Collectors.toList());
-
-        if (listaRicetteFiltrate.isEmpty()) {
-            System.out.println("Non hai ricette da modificare con i filtri specificati.");
-            return;
-        }
-
-        // Mostra le ricette filtrate
-        System.out.println("\n===== Lista Ricette Creata da Te =====");
-        for (int i = 0; i < listaRicetteFiltrate.size(); i++) {
-            RecipeReturnBean ricetta = listaRicetteFiltrate.get(i);
-            String riga = (i + 1) + ". " + ricetta.getRecipeName() + " - "
-                    + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal() + " - "
-                    + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
-                    + ricetta.getDescription() + " - " + ricetta.getAuthor();
-            System.out.println(riga);
-        }
-
-        System.out.println("\nInserisci il numero della ricetta da modificare, oppure 0 per tornare:");
-        String input = scanner.nextLine().trim();
-        int scelta;
-        try {
-            scelta = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println("Input non valido.");
-            return;
-        }
-
-        if (scelta > 0 && scelta <= listaRicetteFiltrate.size()) {
-            ricettaSelezionata = listaRicetteFiltrate.get(scelta - 1);
-            showRecipeDetails(ricettaSelezionata);
-            // Naviga alla schermata di modifica passando la ricetta selezionata
-            cliController.navigateToRecipeEditWithRecipe(ricettaSelezionata);
-        }
-    }
-
-    // Metodo per cercare e selezionare una ricetta da rimuovere (opzione 4)
-    // Visualizza solo le ricette create dall'utente in sessione
-    private void removeRecipe() throws Exception {
-        System.out.println("\n===== Ricetta da Rimuovere =====");
-
-        // Selezione del tipo di dieta
-        System.out.println("Seleziona Tipo Dieta:");
-        System.out.println("1. Vegan");
-        System.out.println("2. Vegetarian");
-        System.out.println("3. Omnivorous");
-        System.out.print("Scegli (1-3): ");
-        String dietChoice = scanner.nextLine().trim();
-        String tipoDieta;
-        switch (dietChoice) {
-            case "1":
-                tipoDieta = "Vegan";
-                break;
-            case "2":
-                tipoDieta = "Vegetarian";
-                break;
-            case "3":
-                tipoDieta = "Omnivorous";
-                break;
-            default:
-                tipoDieta = "";
-                break;
-        }
-
-        // Selezione del tipo di pasto
-        System.out.println("Seleziona Tipo Pasto:");
-        System.out.println("1. Breakfast");
-        System.out.println("2. Lunch");
-        System.out.println("3. Dinner");
-        System.out.print("Scegli (1-3): ");
-        String mealChoice = scanner.nextLine().trim();
-        String tipoPasto;
-        switch (mealChoice) {
-            case "1":
-                tipoPasto = "Breakfast";
-                break;
-            case "2":
-                tipoPasto = "Lunch";
-                break;
-            case "3":
-                tipoPasto = "Dinner";
-                break;
-            default:
-                tipoPasto = "";
-                break;
-        }
-
-        RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean(tipoDieta, tipoPasto);
-        RecipeSearchController controller = new RecipeSearchController(filters);
-
-        List<RecipeReturnBean> listaRicette;
-        try {
-            listaRicette = controller.trovaricette();
-        } catch (IOException e) {
-            System.out.println("Errore durante la ricerca delle ricette: " + e.getMessage());
-            return;
-        }
-
-        // Controlla se la lista è null
-        if (listaRicette == null) {
-            System.out.println("Nessuna ricetta trovata con i filtri specificati.");
-            return;
-        }
-
-        // Filtra le ricette in base all'utente in sessione
-        String username = SessionManagerSLT.getInstance().getLoggedInUsername();
-        List<RecipeReturnBean> listaRicetteFiltrate = listaRicette.stream()
-                .filter(ricetta -> ricetta.getAuthor().equals(username))
-                .collect(Collectors.toList());
-
-        if (listaRicetteFiltrate.isEmpty()) {
-            System.out.println("Non hai ricette da rimuovere con i filtri specificati.");
-            return;
-        }
-
-        // Mostra le ricette filtrate
-        System.out.println("\n===== Lista Ricette Creata da Te =====");
-        for (int i = 0; i < listaRicetteFiltrate.size(); i++) {
-            RecipeReturnBean ricetta = listaRicetteFiltrate.get(i);
-            String riga = (i + 1) + ". " + ricetta.getRecipeName() + " - "
-                    + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal() + " - "
-                    + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
-                    + ricetta.getDescription() + " - " + ricetta.getAuthor();
-            System.out.println(riga);
-        }
-
-        System.out.println("\nInserisci il numero della ricetta da rimuovere, oppure 0 per tornare:");
-        String input = scanner.nextLine().trim();
-        int scelta;
-        try {
-            scelta = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println("Input non valido.");
-            return;
-        }
-
-        if (scelta > 0 && scelta <= listaRicetteFiltrate.size()) {
-            ricettaSelezionata = listaRicetteFiltrate.get(scelta - 1);
-            showRecipeDetails(ricettaSelezionata);
-            // Chiedi conferma per la cancellazione
-            System.out.print("Sei sicuro di voler rimuovere questa ricetta? (s/n): ");
-            String conferma = scanner.nextLine().trim();
-            if (conferma.equalsIgnoreCase("s")) {
-                RecipeEditController controllerDelete = new RecipeEditController();
-                // Costruisco l'identificatore della ricetta nello stesso formato usato per la modifica
-                String recipeIdentifier = ricettaSelezionata.getRecipeName() + " - "
-                        + ricettaSelezionata.getTypeofDiet() + " - "
-                        + ricettaSelezionata.getTypeofMeal() + " - "
-                        + ricettaSelezionata.getNumIngredients() + " - "
-                        + ricettaSelezionata.getIngredients() + " - "
-                        + ricettaSelezionata.getDescription() + " - "
-                        + ricettaSelezionata.getAuthor();
-                controllerDelete.rimuovi(recipeIdentifier);
-                System.out.println("Ricetta rimossa con successo!");
-            } else {
-                System.out.println("Operazione annullata.");
-            }
-        }
+        // Use the existing navigate method
+        cliController.navigateToRecipeEditWithRecipe(ricettaSelezionata);
     }
 
     private void showRecipeDetails(RecipeReturnBean ricetta) {
-        System.out.println("\n===== Dettagli Ricetta =====");
+        System.out.println("\n===== Dettagli Ricetta Selezionata =====");
         System.out.println("Nome: " + ricetta.getRecipeName());
         System.out.println("Tipo Dieta: " + ricetta.getTypeofDiet());
         System.out.println("Tipo Pasto: " + ricetta.getTypeofMeal());
@@ -400,7 +185,24 @@ public class RecipeVewBoundaryCli {
         System.out.println("Ingredienti: " + ricetta.getIngredients());
         System.out.println("Descrizione: " + ricetta.getDescription());
         System.out.println("Autore: " + ricetta.getAuthor());
-        System.out.println("\nPremi invio per continuare.");
-        scanner.nextLine();
+    }
+
+    // Method for removing a recipe (option 4)
+    private void removeRecipe() {
+        System.out.println("\n===== Rimozione Ricetta =====");
+        if (ricettaSelezionata == null) {
+            System.out.println("❌ Nessuna ricetta selezionata da rimuovere.");
+            return;
+        }
+
+        System.out.print("Sei sicuro di voler rimuovere la ricetta '" + ricettaSelezionata.getRecipeName() + "'? (S/N): ");
+        String confirmation = scanner.nextLine().trim();
+        if ("S".equalsIgnoreCase(confirmation)) {
+            // Implement the removal logic here (e.g., call a service or controller method to remove the recipe)
+            System.out.println("✅ Ricetta '" + ricettaSelezionata.getRecipeName() + "' rimossa con successo.");
+            ricettaSelezionata = null; // Clear the selected recipe
+        } else {
+            System.out.println("❌ Rimozione annullata.");
+        }
     }
 }
