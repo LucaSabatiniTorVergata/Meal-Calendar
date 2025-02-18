@@ -188,7 +188,7 @@ public class RecipeVewBoundaryCli {
     }
 
     // Method for removing a recipe (option 4)
-    private void removeRecipe() {
+    private void removeRecipe() throws IOException {
         System.out.println("\n===== Rimozione Ricetta =====");
         if (ricettaSelezionata == null) {
             System.out.println("❌ Nessuna ricetta selezionata da rimuovere.");
@@ -198,7 +198,8 @@ public class RecipeVewBoundaryCli {
         System.out.print("Sei sicuro di voler rimuovere la ricetta '" + ricettaSelezionata.getRecipeName() + "'? (S/N): ");
         String confirmation = scanner.nextLine().trim();
         if ("S".equalsIgnoreCase(confirmation)) {
-            // Implement the removal logic here (e.g., call a service or controller method to remove the recipe)
+            RecipeEditController controller = new RecipeEditController();
+            controller.rimuovi(ricettaSelezionata.getRecipeName());
             System.out.println("✅ Ricetta '" + ricettaSelezionata.getRecipeName() + "' rimossa con successo.");
             ricettaSelezionata = null; // Clear the selected recipe
         } else {

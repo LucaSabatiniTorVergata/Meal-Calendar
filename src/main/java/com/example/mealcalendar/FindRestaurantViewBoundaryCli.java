@@ -95,7 +95,7 @@ public class FindRestaurantViewBoundaryCli {
 
                 // Usa il controller per navigare al calendario
                 CliController cliController = new CliController();
-                cliController.navigateTo("mealcalendar");
+                cliController.navigateTo("calendariopasti");
                 return;
             }
 

@@ -73,7 +73,6 @@ public class RecipeEditViewBoundaryCli {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
 
         // Crea il bean con i dati:
-        // Il primo parametro (ricettascelta) è costruito a partire dai dati originali (modifica a tuo piacimento)
         RecipeEdit2Bean bean = new RecipeEdit2Bean(
                 ricetta.getRecipeName() + " - " + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal()
                         + " - " + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
@@ -90,5 +89,25 @@ public class RecipeEditViewBoundaryCli {
         controller.cambiaRicetta(); // Applica le modifiche
 
         System.out.println("Ricetta modificata con successo!");
+
+        // Menu per la navigazione successiva
+        System.out.println("\nCosa vuoi fare ora?");
+        System.out.println("1. Torna alla Lista delle Ricette");
+        System.out.println("2. Esci");
+        System.out.print("Opzione: ");
+        String scelta = scanner.nextLine().trim();
+
+        switch (scelta) {
+            case "1":
+                // Torna alla lista ricette
+                // In un'applicazione CLI, puoi invocare un altro metodo per visualizzare la lista delle ricette
+                break;
+            case "2":
+                System.out.println("Uscita dal menu.");
+                break;
+            default:
+                System.out.println("Opzione non valida.");
+                break;
+        }
     }
 }
