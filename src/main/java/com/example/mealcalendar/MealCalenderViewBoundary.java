@@ -114,6 +114,7 @@ public class MealCalenderViewBoundary {
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,SessionManagerSLT.getInstance().getLoggedInUsername(),ricettascelta);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
+
         }
 
     }

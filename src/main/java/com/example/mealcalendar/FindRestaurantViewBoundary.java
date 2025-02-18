@@ -196,7 +196,6 @@ public class FindRestaurantViewBoundary {
             if (selectedIndex >= 0) {
                 ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
                 if(vengoDaCalendar){
-                    lableemail = new Label("Sending mail...");  // Crea la label
                     lableemail.setVisible(true);
                     loadingIndicator.setVisible(true);
                     loadingIndicator.setProgress(0);  // Inizializza a 0%

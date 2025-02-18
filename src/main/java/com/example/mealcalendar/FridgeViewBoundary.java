@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -12,6 +13,8 @@ import javafx.scene.control.Button;
 
 public class FridgeViewBoundary {
 
+    @FXML
+    private Label label;
     @FXML
     private Button home;
     @FXML
@@ -33,6 +36,8 @@ public class FridgeViewBoundary {
 
     @FXML
     public void initialize() {
+
+        label.setText("Hi, " + SessionManagerSLT.getInstance().getLoggedInUsername() + "!");
         listaInventario.getItems().clear();
         if (frigoriferoController == null) {
             try {

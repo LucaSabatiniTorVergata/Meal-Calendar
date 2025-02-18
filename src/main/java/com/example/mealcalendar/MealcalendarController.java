@@ -5,7 +5,14 @@ package com.example.mealcalendar;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 
@@ -25,8 +32,6 @@ public class MealcalendarController {
     }
 
     public void invioMail() throws Exception {
-
-
 
         String mail = getMail();
 
@@ -50,7 +55,7 @@ public class MealcalendarController {
             }
         });
 
-        if(sceltaLuogo) {
+        if (sceltaLuogo) {
             try {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
@@ -64,11 +69,12 @@ public class MealcalendarController {
 
                 System.out.println("Email sent successfully");
 
+                sendEmailProgrammataRistorante();
+
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             try {
                 // Creare il messaggio
                 Message message = new MimeMessage(session);
@@ -82,9 +88,123 @@ public class MealcalendarController {
 
                 System.out.println("Email sent successfully");
 
+                sendEmailProgrammataRicetta();
+
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
         }
-    };
+    }
+
+
+    public void sendEmailProgrammataRicetta() throws Exception {
+
+        String mail = getMail();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime ora = LocalTime.parse(mealcalendarBean.getOra(), formatter);
+
+        // Combinare LocalDate e LocalTime in LocalDateTime
+        LocalDateTime dataOra = LocalDateTime.of(mealcalendarBean.getData(), ora);
+        LocalDateTime oraDiInvio = dataOra.minusMinutes(30);
+
+        // Calcola il ritardo in millisecondi
+        long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
+
+        if (delay > 0) {
+            // Pianifica l'invio
+            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            scheduler.schedule(() -> {
+                try {
+
+                    Properties properties = System.getProperties();
+                    properties.put("mail.smtp.host", "smtp.gmail.com");
+                    properties.put("mail.smtp.port", "587");
+                    properties.put("mail.smtp.starttls.enable", "true");
+                    properties.put("mail.smtp.auth", "true");
+
+                    String user = "smithvalenzuela324@gmail.com"; // Sostituisci con la tua email
+                    String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
+
+                    Session session = Session.getInstance(properties, new Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(user, password);
+                        }
+                    });
+
+                    // Creare il messaggio da inviare
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(user));
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+                    message.setSubject("Ricordo della tua scelta");
+                    message.setText("Ti ricordo che hai scelto di fare la ricetta " + mealcalendarBean.getScelta() + " tra mezz'ora ");
+
+                    // Inviare la mail
+                    Transport.send(message);
+                    System.out.println("Email inviata!");
+
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }, delay, TimeUnit.MILLISECONDS);
+        } else {
+            System.out.println("L'orario selezionato è già passato!");
+        }
+    }
+
+    public void sendEmailProgrammataRistorante() throws Exception {
+
+        String mail = getMail();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime ora = LocalTime.parse(mealcalendarBean.getOra(), formatter);
+
+        // Combinare LocalDate e LocalTime in LocalDateTime
+        LocalDateTime dataOra = LocalDateTime.of(mealcalendarBean.getData(), ora);
+        LocalDateTime oraDiInvio = dataOra.minusMinutes(30);
+
+        // Calcola il ritardo in millisecondi
+        long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
+
+        if (delay > 0) {
+            // Pianifica l'invio
+            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            scheduler.schedule(() -> {
+                try {
+
+                    Properties properties = System.getProperties();
+                    properties.put("mail.smtp.host", "smtp.gmail.com");
+                    properties.put("mail.smtp.port", "587");
+                    properties.put("mail.smtp.starttls.enable", "true");
+                    properties.put("mail.smtp.auth", "true");
+
+                    String user = "smithvalenzuela324@gmail.com"; // Sostituisci con la tua email
+                    String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
+
+                    Session session = Session.getInstance(properties, new Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(user, password);
+                        }
+                    });
+
+                    // Creare il messaggio da inviare
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(user));
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+                    message.setSubject("Ricordo della tua scelta");
+                    message.setText("Ti ricordo che hai scelto di mangiare a " + mealcalendarBean.getScelta() + " tra mezz'ora ");
+
+                    // Inviare la mail
+                    Transport.send(message);
+                    System.out.println("Email inviata!");
+
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }, delay, TimeUnit.MILLISECONDS);
+        } else {
+            System.out.println("L'orario selezionato è già passato!");
+        }
+
+    }
 }
