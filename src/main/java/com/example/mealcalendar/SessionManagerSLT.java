@@ -5,7 +5,10 @@ public class SessionManagerSLT {
     private static SessionManagerSLT instance = null;
     private String loggedInUsername;
     private boolean FSDataBase;
-    private boolean demo;         // Aggiungi tutto quello che serve
+    private boolean demo;
+    private boolean ram=true;
+    private boolean db=true;
+    private boolean fs=true;
 
     private SessionManagerSLT() {}
 
@@ -45,5 +48,24 @@ public class SessionManagerSLT {
         FSDataBase = false;
         demo = false;
 
+    }
+
+    public void setRam(boolean ram) {
+        this.ram = ram;
+    }
+    public boolean getRam() {
+        return ram;
+    }
+    public void setDB(boolean db) {
+        this.db = db;
+    }
+    public boolean getDB() {
+        return db;
+    }
+    public void setFs(boolean fs) {
+        this.fs = fs;
+    }
+    public boolean getFs() {
+        return fs;
     }
 }

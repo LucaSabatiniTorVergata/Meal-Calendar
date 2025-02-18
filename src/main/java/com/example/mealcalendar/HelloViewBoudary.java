@@ -2,6 +2,7 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -11,11 +12,11 @@ public class HelloViewBoudary {
 
 
     @FXML
-    private Button db;
+    private Button dbbutton;
     @FXML
-    private Button ram;
+    private Button rambutton;
     @FXML
-    private Button fs;
+    private Button fsbutton;
 
     @FXML
     private Button quibutton;
@@ -35,6 +36,7 @@ public class HelloViewBoudary {
 
 
 
+
     @FXML
     private void guestmenuview(ActionEvent event) throws IOException  {
         Stage stage = (Stage) quibutton.getScene().getWindow();
@@ -50,8 +52,10 @@ public class HelloViewBoudary {
     // Metodo per cambiare modalità su File System
     @FXML
     private void useFileSystem(ActionEvent event) {
-        db.setVisible(false);
-        ram.setVisible(false);
+        SessionManagerSLT.getInstance().setRam(false); // Nasconde il bottone ram
+        SessionManagerSLT.getInstance().setDB(false); // Nasconde il bottone db
+        SessionManagerSLT.getInstance().setFs(true);  // Nasconde il bottone fs
+        updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(false);
@@ -62,8 +66,10 @@ public class HelloViewBoudary {
     // Metodo per cambiare modalità su Database
     @FXML
     private void useDatabase(ActionEvent event) {
-        ram.setVisible(false);
-        fs.setVisible(false);
+        SessionManagerSLT.getInstance().setRam(false); // Nasconde il bottone ram
+        SessionManagerSLT.getInstance().setDB(true); // Nasconde il bottone db
+        SessionManagerSLT.getInstance().setFs(false);  // Nasconde il bottone fs
+        updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(true);
         SessionManagerSLT.getInstance().setDemo(false);
         UserDaoFactory.setUseDatabase(true);
@@ -104,8 +110,10 @@ public class HelloViewBoudary {
 
     @FXML
     public void useRam(ActionEvent event) {
-        db.setVisible(false);
-        fs.setVisible(false);
+        SessionManagerSLT.getInstance().setRam(true); // Nasconde il bottone ram
+        SessionManagerSLT.getInstance().setDB(false); // Nasconde il bottone db
+        SessionManagerSLT.getInstance().setFs(false); // Nasconde il bottone fs
+        updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(true);
         UserDaoFactory.setUseDatabase(false);
@@ -115,19 +123,18 @@ public class HelloViewBoudary {
 
     @FXML
     public void initialize(){
-        SessionManagerSLT.getInstance().setFSDataBase(true);
-        SessionManagerSLT.getInstance().setDemo(true);
-        boolean valore=SessionManagerSLT.getInstance().getFSDataBase();
-        boolean valore2=SessionManagerSLT.getInstance().getDemo();
-        if(valore){
-            db.setVisible(true);
-        }else{
-            fs.setVisible(false);
-        }
-        if(valore2){
-            ram.setVisible(true);
-        }
+
+        updateButtonVisibility();
+
+    }
+
+    private void updateButtonVisibility() {
+        rambutton.setVisible(SessionManagerSLT.getInstance().getRam());
+        dbbutton.setVisible(SessionManagerSLT.getInstance().getDB());
+        fsbutton.setVisible(SessionManagerSLT.getInstance().getFs());
     }
 
 
 }
+
+
