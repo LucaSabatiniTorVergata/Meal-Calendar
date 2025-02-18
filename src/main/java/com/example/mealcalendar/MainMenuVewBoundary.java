@@ -71,15 +71,8 @@ public class MainMenuVewBoundary {
 
     @FXML
     private void loadFrigeMenu(ActionEvent event) throws IOException {
-        // Passa la variabile usePersistence a FridgeView
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fridge-view.fxml"));
-        Parent root = loader.load();
-
-        FridgeViewBoundary fridgeView = loader.getController();// Imposta il flag della persistenza
-
         Stage stage = (Stage) fillfridgebutton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        GraphicController.cambiascena(stage, "fridge-view.fxml");
     }
 
     @FXML

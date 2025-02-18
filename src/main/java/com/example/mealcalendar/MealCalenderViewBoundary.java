@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import javafx.util.Callback;
-import java.time.LocalDate;
 
 public class MealCalenderViewBoundary {
 
@@ -63,7 +62,7 @@ public class MealCalenderViewBoundary {
             sceltaLuogo = true;
         });
 
-        Pattern pattern = Pattern.compile("([01]?[0-9]|2[0-3])?:?[0-5]?[0-9]?");
+        Pattern pattern = Pattern.compile("(\\d{1,2})?:?(\\d{1,2})?");
 
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (pattern.matcher(change.getControlNewText()).matches()) {

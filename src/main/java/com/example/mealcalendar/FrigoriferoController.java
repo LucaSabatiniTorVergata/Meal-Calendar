@@ -10,7 +10,7 @@ public class FrigoriferoController {
     private InventarioDao inventarioDao;
     private boolean useDemo=false;
 
-    public FrigoriferoController(boolean usePersistence) throws IOException {
+    public FrigoriferoController(boolean usePersistence) {
         LOGGER.log(Level.INFO, "FrigoriferoController: Inizializzazione con persistenza {0}", usePersistence);
         this.inventarioDao = InventarioDao.getInstance(usePersistence);
     }
