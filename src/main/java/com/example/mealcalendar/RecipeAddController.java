@@ -15,10 +15,11 @@ public class RecipeAddController {
         String descrizione = bean.getDescription();
         String autore = bean.getAuthor();
 
-        RecipeEntity newRecipe = new RecipeEntity(nome, dieta, pasto, numingredienti, ingredienti, descrizione, autore);
+        // Creiamo la ricetta utilizzando il Builder Pattern tramite la fabbrica
+        RecipeEntity newRecipe = RecipeEntityFactory.createRecipe(nome, dieta, pasto, numingredienti, ingredienti, descrizione, autore);
+
+        // Aggiungiamo la ricetta al DAO
         return dao.addRecipe(newRecipe);
     }
-
-    // Metodo spostato nel controller: verifica la presenza di ricette in base ai filtri
-
 }
+

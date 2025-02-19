@@ -72,19 +72,21 @@ public class RecipeEditViewBoundaryCli {
         // Recupera lo username dalla sessione
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
 
-        // Crea il bean con i dati:
-        RecipeEdit2Bean bean = new RecipeEdit2Bean(
-                ricetta.getRecipeName() + " - " + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal()
+        // Utilizzo del Builder Pattern per creare il bean con i dati
+        RecipeEdit2Bean bean = new RecipeEdit2Bean.Builder()
+                .setRicettapresa(ricetta.getRecipeName() + " - " + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal()
                         + " - " + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
-                        + ricetta.getDescription() + " - " + ricetta.getAuthor(),
-                nuovoNome,
-                nuovoTipoDieta,
-                nuovoTipoPasto,
-                nuovoNumIngredienti,
-                nuoviIngredienti,
-                nuovaDescrizione,
-                username
-        );
+                        + ricetta.getDescription() + " - " + ricetta.getAuthor())
+                .setRicetta(nuovoNome)
+                .setTdieta(nuovoTipoDieta)
+                .setTpasto(nuovoTipoPasto)
+                .setNumingred(nuovoNumIngredienti)
+                .setIngred(nuoviIngredienti)
+                .setDesrcip(nuovaDescrizione)
+                .setAutor(username)
+                .build();
+
+        // Passiamo il bean al controller
         RecipeEdit2Controller controller = new RecipeEdit2Controller(bean);
         controller.cambiaRicetta(); // Applica le modifiche
 

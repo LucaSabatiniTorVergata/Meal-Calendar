@@ -1,6 +1,6 @@
 package com.example.mealcalendar;
 
-
+import java.io.IOException;
 import java.util.logging.Logger;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
@@ -19,197 +19,109 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.sceltaLuogo;
 public class MealcalendarController {
 
     private static final Logger LOGGER = Logger.getLogger(MealcalendarController.class.getName());
+    private static final String SMTP_HOST = "smtp.gmail.com";
+    private static final String SMTP_PORT = "587";
+    private static final String EMAIL_SENDER = "smithvalenzuela324@gmail.com";
+    private static final String EMAIL_PASSWORD = System.getenv("EMAIL_PASSWORD"); // Usa variabili d'ambiente
+    private static final String DATE_TIME_PATTERN = "HH:mm";
+    private static final int REMINDER_MINUTES = 30;
 
-    private MealcalendarBean mealcalendarBean;
+    private final MealcalendarBean mealcalendarBean;
 
     public MealcalendarController(MealcalendarBean bean) {
         this.mealcalendarBean = bean;
-
     }
 
-    public String getMail() throws Exception {
+    public String getMail() throws UserNotFoundException, IOException {
         UserDao dao = new UserDao(false, false);
         UserEntity user = dao.getUserByUsername(mealcalendarBean.getUser());
+        if (user == null || user.getEmail() == null) {
+            throw new UserNotFoundException("User email not found");
+        }
         return user.getEmail();
     }
 
-    public void invioMail() throws Exception {
+    public void invioMail() {
+        try {
+            String mail = getMail();
+            String subject;
+            String messageBody;
 
-        String mail = getMail();
+            if (sceltaLuogo) {
+                subject = "Email di conferma posto dove mangiare";
+                messageBody = String.format("Salve, hai deciso di mangiare a: %s il giorno: %s alle ore: %s", mealcalendarBean.getScelta(), mealcalendarBean.getData(), mealcalendarBean.getOra());
+                sendEmail(mail, subject, messageBody);
+                sendEmailProgrammata(true);
+            } else {
+                subject = "Conferma Posto dove mangiare";
+                messageBody = String.format("Salve, la ricetta scelta da te per il giorno: %s alle ore: %s è: %s", mealcalendarBean.getData(), mealcalendarBean.getOra(), mealcalendarBean.getScelta());
+                sendEmail(mail, subject, messageBody);
+                sendEmailProgrammata(false);
+            }
+        } catch (Exception e) {
+            LOGGER.severe("Errore nell'invio della mail: " + e.getMessage());
+        }
+    }
 
-        final String user = "smithvalenzuela324@gmail.com"; // La tua email
-        final String password = "kbibyuksfhchryvs"; // La tua password o una password dell'app (se 2FA è abilitato)
-
-        // Impostazione delle proprietà del server SMTP
+    private void sendEmail(String recipient, String subject, String body) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true"); // Usato per STARTTLS
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");// Porta SMTP per TLS
-        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", SMTP_HOST);
+        properties.put("mail.smtp.port", SMTP_PORT);
+        properties.put("mail.smtp.ssl.trust", SMTP_HOST);
 
-
-        // Ottieni una sessione con l'autenticazione
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
+                return new PasswordAuthentication(EMAIL_SENDER, EMAIL_PASSWORD);
             }
         });
 
-        if (sceltaLuogo) {
-            try {
-                // Creare il messaggio
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
-                message.setSubject("Email di conferma posto dove mangiare"); // Oggetto dell'email
-                message.setText("Salve,hai appena deciso di mangiare a: " + mealcalendarBean.getScelta() + " il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra()); // Corpo dell'email
+        try (Transport transport = session.getTransport("smtp")) {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(EMAIL_SENDER));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(body);
+            transport.connect(SMTP_HOST, EMAIL_SENDER, EMAIL_PASSWORD);
+            transport.sendMessage(message, message.getAllRecipients());
+        }
+        LOGGER.info("Email inviata con successo a " + recipient);
+    }
 
-                // Invia il messaggio
-                Transport.send(message);
+    private void sendEmailProgrammata(boolean isRestaurant) {
+        try {
+            String mail = getMail();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+            LocalTime ora = LocalTime.parse(mealcalendarBean.getOra(), formatter);
+            LocalDateTime dataOra = LocalDateTime.of(mealcalendarBean.getData(), ora);
+            LocalDateTime oraDiInvio = dataOra.minusMinutes(REMINDER_MINUTES);
 
-                LOGGER.info("Email sent successfully");
-
-                sendEmailProgrammataRistorante();
-
-            } catch (MessagingException e) {
-                e.printStackTrace();
+            long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
+            if (delay > 0) {
+                try (ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor()) {
+                    scheduler.schedule(() -> {
+                        try {
+                            String subject = "Ricordo della tua scelta";
+                            String body = String.format("Ti ricordo che hai scelto di %s %s tra mezz'ora.", isRestaurant ? "mangiare a" : "preparare la ricetta", mealcalendarBean.getScelta());
+                            sendEmail(mail, subject, body);
+                        } catch (MessagingException e) {
+                            LOGGER.severe("Errore nell'invio dell'email programmata: " + e.getMessage());
+                        }
+                    }, delay, TimeUnit.MILLISECONDS);
+                }
+            } else {
+                LOGGER.info("L'orario selezionato è già passato!");
             }
-        } else {
-            try {
-                // Creare il messaggio
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(user)); // L'indirizzo del mittente
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // L'indirizzo del destinatario
-                message.setSubject("Conferma Posto dove mangiare"); // Oggetto dell'email
-                message.setText("Salve,la ricetta scelta da te per il giorno: " + mealcalendarBean.getData() + " alle ore: " + mealcalendarBean.getOra() + " è: " + mealcalendarBean.getScelta()); // Corpo dell'email
-
-                // Invia il messaggio
-                Transport.send(message);
-
-                LOGGER.info("Email sent successfully");
-
-                sendEmailProgrammataRicetta();
-
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            LOGGER.severe("Errore nella programmazione dell'email: " + e.getMessage());
         }
     }
 
-
-    public void sendEmailProgrammataRicetta() throws Exception {
-
-        String mail = getMail();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime ora = LocalTime.parse(mealcalendarBean.getOra(), formatter);
-
-        // Combinare LocalDate e LocalTime in LocalDateTime
-        LocalDateTime dataOra = LocalDateTime.of(mealcalendarBean.getData(), ora);
-        LocalDateTime oraDiInvio = dataOra.minusMinutes(30);
-
-        // Calcola il ritardo in millisecondi
-        long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
-
-        if (delay > 0) {
-            // Pianifica l'invio
-            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-            scheduler.schedule(() -> {
-                try {
-
-                    Properties properties = System.getProperties();
-                    properties.put("mail.smtp.host", "smtp.gmail.com");
-                    properties.put("mail.smtp.port", "587");
-                    properties.put("mail.smtp.starttls.enable", "true");
-                    properties.put("mail.smtp.auth", "true");
-
-                    String user = "smithvalenzuela324@gmail.com"; // Sostituisci con la tua email
-                    String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
-
-                    Session session = Session.getInstance(properties, new Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(user, password);
-                        }
-                    });
-
-                    // Creare il messaggio da inviare
-                    MimeMessage message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(user));
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
-                    message.setSubject("Ricordo della tua scelta");
-                    message.setText("Ti ricordo che hai scelto di fare la ricetta " + mealcalendarBean.getScelta() + " tra mezz'ora ");
-
-                    // Inviare la mail
-                    Transport.send(message);
-                    LOGGER.info("Email inviata!");
-
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            }, delay, TimeUnit.MILLISECONDS);
-        } else {
-            LOGGER.info("L'orario selezionato è già passato!");
+    public static class UserNotFoundException extends Exception {
+        public UserNotFoundException(String message) {
+            super(message);
         }
-    }
-
-    public void sendEmailProgrammataRistorante() throws Exception {
-
-        String mail = getMail();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime ora = LocalTime.parse(mealcalendarBean.getOra(), formatter);
-
-        // Combinare LocalDate e LocalTime in LocalDateTime
-        LocalDateTime dataOra = LocalDateTime.of(mealcalendarBean.getData(), ora);
-        LocalDateTime oraDiInvio = dataOra.minusMinutes(30);
-
-        // Calcola il ritardo in millisecondi
-        long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
-
-        if (delay > 0) {
-            // Pianifica l'invio
-            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-            scheduler.schedule(() -> {
-                try {
-
-                    Properties properties = System.getProperties();
-                    properties.put("mail.smtp.host", "smtp.gmail.com");
-                    properties.put("mail.smtp.port", "587");
-                    properties.put("mail.smtp.starttls.enable", "true");
-                    properties.put("mail.smtp.auth", "true");
-
-                    String user = "smithvalenzuela324@gmail.com"; // Sostituisci con la tua email
-                    String password = "kbibyuksfhchryvs"; // Sostituisci con la tua password
-
-                    Session session = Session.getInstance(properties, new Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(user, password);
-                        }
-                    });
-
-                    // Creare il messaggio da inviare
-                    MimeMessage message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(user));
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
-                    message.setSubject("Ricordo della tua scelta");
-                    message.setText("Ti ricordo che hai scelto di mangiare a " + mealcalendarBean.getScelta() + " tra mezz'ora ");
-
-                    // Inviare la mail
-                    Transport.send(message);
-
-                    LOGGER.info("Email inviata!");
-
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            }, delay, TimeUnit.MILLISECONDS);
-        } else {
-            LOGGER.info("L'orario selezionato è già passato!");
-        }
-
     }
 }

@@ -2,13 +2,10 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
-
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
 
 public class RecipeEdit2ViewController {
 
@@ -36,7 +33,6 @@ public class RecipeEdit2ViewController {
     @FXML
     private TextField ingredienti;
 
-
     @FXML
     private MenuItem vegan;
     @FXML
@@ -51,7 +47,6 @@ public class RecipeEdit2ViewController {
     @FXML
     private MenuItem cena;
 
-
     private String ricetta;
     private String numIngredienti;
     private String ingredientiRicetta;
@@ -59,26 +54,21 @@ public class RecipeEdit2ViewController {
     private String dieta;
     private String pasto;
 
-
-
     private String ricettascelta;
 
     @FXML
     private void homeview(ActionEvent event) {
-
         Stage stage = (Stage) homereturn.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
 
     @FXML
-    private void recipeeditview(ActionEvent event)  {
-
+    private void recipeeditview(ActionEvent event) {
         Stage stage = (Stage) returntoedit.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipeedit-view.fxml");
     }
 
     public void setRecipe(String recipe) {
-
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         if (username != null) {
             welcomelabel.setText("Hi, " + username + "!");
@@ -86,7 +76,6 @@ public class RecipeEdit2ViewController {
 
         this.ricettascelta = recipe;
         updateUI();
-
     }
 
     public void updateUI() {
@@ -113,7 +102,6 @@ public class RecipeEdit2ViewController {
         cena.setOnAction(e -> tipopasto.setText("Cena"));
     }
 
-
     @FXML
     private void applyview(ActionEvent event) throws IOException {
 
@@ -121,21 +109,27 @@ public class RecipeEdit2ViewController {
         numIngredienti = numeroing.getText();
         ingredientiRicetta = ingredienti.getText();
         descrizioneRicetta = descrizione.getText();
-        pasto=tipopasto.getText();
-        dieta=tipodieta.getText();
+        pasto = tipopasto.getText();
+        dieta = tipodieta.getText();
 
+        // Utilizzo del Builder Pattern per creare un nuovo oggetto RecipeEdit2Bean
+        RecipeEdit2Bean bean = new RecipeEdit2Bean.Builder()
+                .setRicettapresa(ricettascelta)
+                .setRicetta(ricetta)
+                .setTdieta(dieta)
+                .setTpasto(pasto)
+                .setNumingred(numIngredienti)
+                .setIngred(ingredientiRicetta)
+                .setDesrcip(descrizioneRicetta)
+                .setAutor(SessionManagerSLT.getInstance().getLoggedInUsername())
+                .build();
 
-        RecipeEdit2Bean bean=new RecipeEdit2Bean(ricettascelta,ricetta,dieta,pasto,numIngredienti,ingredientiRicetta,descrizioneRicetta,SessionManagerSLT.getInstance().getLoggedInUsername());
+        // Passiamo il bean al controller
         RecipeEdit2Controller controller = new RecipeEdit2Controller(bean);
         controller.cambiaRicetta();
 
-
+        // Cambiamo la scena
         Stage stage = (Stage) apply.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");
-
-
     }
-
-
-
 }

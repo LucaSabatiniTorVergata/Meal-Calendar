@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +12,47 @@ public class RecipeEditController {
         this.bean = bean;
     }
 
-    public RecipeEditController () {
+    public RecipeEditController() {
     }
 
     public List<RecipeReturnBean> mostraricette(){
-        RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();
-        List<RecipeEntity> ricette= dao.getAllRecipes();
-        List<RecipeReturnBean> lista= new ArrayList<>();
-        for(RecipeEntity r:ricette){
-            if(r.getAuthor().equals(bean.getUser()) ){
-                lista.add(new RecipeReturnBean(r.getRecipeName(),r.getTypeofDiet(),r.getTypeofMeal(),r.getNumIngredients(),r.getIngredients(),r.getDescription(),r.getAuthor()));
+        // Otteniamo il DAO
+        RecipeDaoFS dao = (RecipeDaoFS) RecipeDaoFactory.createRecipeDao();
+
+        // Recuperiamo tutte le ricette dal file
+        List<RecipeEntity> ricette = dao.getAllRecipes();
+        List<RecipeReturnBean> lista = new ArrayList<>();
+
+        // Filtriamo le ricette per autore
+        for (RecipeEntity r : ricette) {
+            if (r.getAuthor().equals(bean.getUser())) {
+                // Creiamo il RecipeReturnBean usando i dati della ricetta
+                lista.add(new RecipeReturnBean(
+                        r.getRecipeName(),
+                        r.getTypeofDiet(),
+                        r.getTypeofMeal(),
+                        r.getNumIngredients(),
+                        r.getIngredients(),
+                        r.getDescription(),
+                        r.getAuthor()
+                ));
             }
         }
         return lista;
     }
 
     public void rimuovi(String ricetta) throws IOException {
-
+        // Split della ricetta per ottenere i dettagli
         String[] parts = ricetta.split(" - ");
         if (parts.length >= 6) {
+            // Creazione della ricetta da rimuovere usando la fabbrica
+            RecipeEntity ricettarim = RecipeEntityFactory.createRecipe(
+                    parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], SessionManagerSLT.getInstance().getLoggedInUsername()
+            );
 
-            RecipeEntity ricettarim=new RecipeEntity(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],SessionManagerSLT.getInstance().getLoggedInUsername());
-            RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();
+            // Otteniamo il DAO e rimuoviamo la ricetta
+            RecipeDaoFS dao = (RecipeDaoFS) RecipeDaoFactory.createRecipeDao();
             dao.removeRecipe(ricettarim);
-
-
         }
     }
-
 }
