@@ -5,12 +5,13 @@ import java.util.Scanner;
 public class MainMenuViewBoundaryGuestCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
+    private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MainMenuViewBoundaryGuestCli");
 
     public void start() throws Exception {
-        System.out.println("===== Menu Ristorante Guest (CLI) =====");
-        System.out.println("1. Trova Ristorante (Guest)");
-        System.out.println("2. Torna alla Home");
-        System.out.print("Scegli un'opzione: ");
+        printer.print("===== Menu Ristorante Guest (CLI) =====");
+        printer.print("1. Trova Ristorante (Guest)");
+        printer.print("2. Torna alla Home");
+        printer.print("Scegli un'opzione: ");
 
         String choice = scanner.nextLine();
         switch (choice) {
@@ -21,9 +22,8 @@ public class MainMenuViewBoundaryGuestCli {
                 cliController.navigateTo("login");
                 break;
             default:
-                System.out.println("❌ Scelta non valida.");
+                printer.print("❌ Scelta non valida.");
                 start();
         }
     }
 }
-

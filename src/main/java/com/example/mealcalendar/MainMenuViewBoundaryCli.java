@@ -5,16 +5,17 @@ import java.util.Scanner;
 public class MainMenuViewBoundaryCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
+    private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MainMenuViewBoundaryCli");
 
     public void start() throws Exception {
-        System.out.println("\n===== Menu Principale (CLI) =====");
-        System.out.println("1. Trova Ristorante (Guest)");
-        System.out.println("2. Trova Ristorante (Utente Registrato)");
-        System.out.println("3. Imposta Orario Pasto");
-        System.out.println("4. Trova Ricetta");
-        System.out.println("5. Riempi Frigorifero");
-        System.out.println("6. Logout");
-        System.out.print("Scegli un'opzione: ");
+        printer.print("\n===== Menu Principale (CLI) =====");
+        printer.print("1. Trova Ristorante (Guest)");
+        printer.print("2. Trova Ristorante (Utente Registrato)");
+        printer.print("3. Imposta Orario Pasto");
+        printer.print("4. Trova Ricetta");
+        printer.print("5. Riempi Frigorifero");
+        printer.print("6. Logout");
+        printer.print("Scegli un'opzione: ");
 
         String choice = scanner.nextLine();
         switch (choice) {
@@ -25,7 +26,7 @@ public class MainMenuViewBoundaryCli {
             case "5" -> loadFridgeMenu();
             case "6" -> logout();
             default -> {
-                System.out.println("❌ Scelta non valida.");
+                printer.print("❌ Scelta non valida.");
                 start();
             }
         }
@@ -33,35 +34,35 @@ public class MainMenuViewBoundaryCli {
 
     // Metodi per le funzionalità disponibili per il guest
     private void findRestaurantGuest() throws Exception {
-        System.out.println("\n🔍 Trova Ristorante (Guest)");
+        printer.print("\n🔍 Trova Ristorante (Guest)");
         cliController.navigateTo("ristoranteguest");
     }
 
     // Metodi per le funzionalità disponibili per l'utente registrato
     private void findRestaurantUser() throws Exception {
-        System.out.println("\n🔍 Trova Ristorante (Utente Registrato)");
+        printer.print("\n🔍 Trova Ristorante (Utente Registrato)");
         cliController.navigateTo("ristoranteUser");
     }
 
     private void loadCalendarMenu() throws Exception {
-        System.out.println("\n📅 Imposta Orario Pasto");
+        printer.print("\n📅 Imposta Orario Pasto");
         cliController.navigateTo("calendariopasti");
     }
 
     private void loadFindRecipe() throws Exception {
-        System.out.println("\n🍲 Trova Ricetta");
+        printer.print("\n🍲 Trova Ricetta");
         cliController.navigateTo("trovaricette");
     }
 
     private void loadFridgeMenu() throws Exception {
-        System.out.println("\n🧊 Riempi Frigorifero");
+        printer.print("\n🧊 Riempi Frigorifero");
         cliController.navigateTo("fridge");
     }
 
     // Logout e ritorno alla schermata di login
     private void logout() throws Exception {
         SessionManagerSLT.getInstance().logout();
-        System.out.println("👋 Logout effettuato.");
+        printer.print("👋 Logout effettuato.");
         cliController.navigateTo("login");
     }
 
@@ -69,7 +70,7 @@ public class MainMenuViewBoundaryCli {
     public void initialize() {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         if (username != null) {
-            System.out.println("\n👤 Benvenuto, " + username + "!");
+            printer.print("\n👤 Benvenuto, " + username + "!");
         }
     }
 }
