@@ -67,12 +67,16 @@ public class CliController {
         }
     }
 
-    // Metodo per navigare alla modifica di una ricetta specifica
-    public void navigateToRecipeEditWithRecipe(RecipeReturnBean ricetta) throws Exception {
-        printer.print("🔹 Navigazione alla schermata di modifica ricetta (CLI) con ricetta selezionata.");
-        RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli(ricetta);
-        recipeEditViewBoundaryCli.start();
+    public void navigateToRecipeEditWithRecipe(RecipeReturnBean ricetta) throws RecipeNavigationException {
+        try {
+            printer.print("🔹 Navigazione alla schermata di modifica ricetta (CLI) con ricetta selezionata.");
+            RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli(ricetta);
+            recipeEditViewBoundaryCli.start();
+        } catch (Exception e) {  // Sostituire Exception con eccezioni più specifiche se possibile
+            throw new RecipeNavigationException("Errore durante la navigazione alla modifica ricetta.", e);
+        }
     }
+
 
     // Metodo per navigare al calendario con una ricetta specifica
     public void navigateToCalendarWithRecipe(RecipeReturnBean ricetta) throws Exception {
