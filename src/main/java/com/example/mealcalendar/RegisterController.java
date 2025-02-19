@@ -32,9 +32,9 @@ public class RegisterController {
         }
 
         // Hash della password con BCrypt
-        LOGGER.log(Level.INFO, "Password prima dell'hash: {0}", userRegisterBean.getPassword());
+        LOGGER.log(Level.INFO, "Password prima dell''hash: {0}", userRegisterBean.getPassword());
         String hashedPassword = BCrypt.hashpw(userRegisterBean.getPassword(), BCrypt.gensalt());
-        LOGGER.log(Level.INFO, "Password dopo l'hash: {0}", hashedPassword);
+        LOGGER.log(Level.INFO, "Password dopo l''hash: {0}", hashedPassword);
 
         // Creazione dell'oggetto utente
         UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword);
