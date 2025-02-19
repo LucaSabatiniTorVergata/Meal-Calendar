@@ -50,7 +50,7 @@ public class IngredienteSltpat {
             if (quantita >= currentQuantity) {
                 // Se la quantità da rimuovere è maggiore o uguale a quella presente, elimina l'ingrediente
                 inventario.remove(nome);
-                logger.log(Level.INFO, "Rimosso completamente l'ingrediente: {0}", nome);
+                logger.log(Level.INFO, "Rimosso completamente l''ingrediente: {0}", nome);
             } else {
                 // Altrimenti, diminuisci la quantità
                 inventario.put(nome, currentQuantity - quantita);
@@ -58,7 +58,8 @@ public class IngredienteSltpat {
                         new Object[]{nome, quantita, currentQuantity - quantita});
             }
         } else {
-            logger.log(Level.WARNING, "L'ingrediente {0} non esiste nell'inventario.", nome);
+            // Il singolo apostrofo viene duplicato per essere interpretato come carattere letterale
+            logger.log(Level.WARNING, "L''ingrediente {0} non esiste nell''inventario.", nome);
         }
     }
 
