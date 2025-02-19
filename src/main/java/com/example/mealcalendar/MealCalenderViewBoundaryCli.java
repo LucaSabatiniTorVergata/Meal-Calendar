@@ -52,6 +52,10 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private void printSelectionAndSendMail() throws Exception {
+        // Se né la ricetta né il ristorante sono stati selezionati, lanciamo l'eccezione personalizzata
+        if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
+            throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
+        }
         if (ricettaSelezionata != null) {
             printer.print("\n🍴 Ricetta Selezionata:");
             printer.print("Nome: " + ricettaSelezionata.getRecipeName());
