@@ -1,6 +1,6 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
+
 
 public class RecipeEdit2Controller {
 
@@ -10,7 +10,7 @@ public class RecipeEdit2Controller {
         this.bean = bean;
     }
 
-    public void cambiaRicetta() throws IOException {
+    public void cambiaRicetta() throws RecipeDaoException {
         // Splittiamo la ricetta presa per ottenere le informazioni della ricetta vecchia
         String[] parts = bean.getRicettapresa().split(" - ");
         if (parts.length >= 6) {

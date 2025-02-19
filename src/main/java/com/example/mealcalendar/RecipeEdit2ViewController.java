@@ -103,7 +103,7 @@ public class RecipeEdit2ViewController {
     }
 
     @FXML
-    private void applyview(ActionEvent event) throws IOException {
+    private void applyview(ActionEvent event) throws IOException, RecipeDaoException {
 
         ricetta = nomeRicetta.getText();
         numIngredienti = numeroing.getText();
