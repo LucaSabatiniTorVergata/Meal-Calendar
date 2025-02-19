@@ -46,7 +46,7 @@ public class MealCalenderViewBoundaryCli {
         readTime(scanner);
         readLocation(scanner);
 
-        LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
+        LOGGER.log(Level.INFO, String.format("Scelta luogo: %b", sceltaLuogo));
 
         try {
             confirmChoise();
@@ -56,25 +56,24 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
-        // Se né la ricetta né il ristorante sono stati selezionati, lanciamo l'eccezione personalizzata
         if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
             throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
         }
         try {
             if (ricettaSelezionata != null) {
                 printer.print("\n🍴 Ricetta Selezionata:");
-                printer.print("Nome: " + ricettaSelezionata.getRecipeName());
-                printer.print("Tipo Dieta: " + ricettaSelezionata.getTypeofDiet());
-                printer.print("Tipo Pasto: " + ricettaSelezionata.getTypeofMeal());
-                printer.print("Numero Ingredienti: " + ricettaSelezionata.getNumIngredients());
-                printer.print("Ingredienti: " + ricettaSelezionata.getIngredients());
-                printer.print("Descrizione: " + ricettaSelezionata.getDescription());
-                printer.print("Autore: " + ricettaSelezionata.getAuthor());
+                printer.print(String.format("Nome: %s", ricettaSelezionata.getRecipeName()));
+                printer.print(String.format("Tipo Dieta: %s", ricettaSelezionata.getTypeofDiet()));
+                printer.print(String.format("Tipo Pasto: %s", ricettaSelezionata.getTypeofMeal()));
+                printer.print(String.format("Numero Ingredienti: %s", ricettaSelezionata.getNumIngredients()));
+                printer.print(String.format("Ingredienti: %s", ricettaSelezionata.getIngredients()));
+                printer.print(String.format("Descrizione: %s", ricettaSelezionata.getDescription()));
+                printer.print(String.format("Autore: %s", ricettaSelezionata.getAuthor()));
                 setRicettaSelezionata(ricettaSelezionata);
                 inviomail();
             } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
                 printer.print("\n🍽 Ristorante Selezionato:");
-                printer.print("Ristorante: " + ristorantescelto);
+                printer.print(String.format("Ristorante: %s", ristorantescelto));
                 setRistoranteSelezionato(ristorantescelto);
                 inviomail();
             }
@@ -112,7 +111,6 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-
     private void readLocation(Scanner scanner) {
         while (true) {
             printer.print("Scegli il luogo (1. home, 2. restaurant): ");
@@ -145,7 +143,7 @@ public class MealCalenderViewBoundaryCli {
         findRestaurantView.start();
 
         if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
-            printer.print("Ristorante selezionato: " + ristorantescelto);
+            printer.print(String.format("Ristorante selezionato: %s", ristorantescelto));
             printer.print("Il ristorante selezionato non è nullo o vuoto.");
         } else {
             printer.print("Nessun ristorante selezionato.");
@@ -157,7 +155,7 @@ public class MealCalenderViewBoundaryCli {
         try {
             if (sceltaLuogo) {
                 localPrinter.print("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
-                localPrinter.print("Ristorante scelto: " + ristorantescelto);
+                localPrinter.print(String.format("Ristorante scelto: %s", ristorantescelto));
                 MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
                         SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
                 MealcalendarController controller = new MealcalendarController(bean);
