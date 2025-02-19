@@ -83,7 +83,7 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta con il nome: " + oldRecipe.getRecipeName(), e);
+                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta con il nome: {0}", oldRecipe.getRecipeName());
                 throw new RecipeDaoException("Errore durante l'aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
             }
         }
@@ -103,7 +103,7 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome: " + recipeToRemove.getRecipeName(), e);
+                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome: {0}", recipeToRemove.getRecipeName());
                 throw new RecipeDaoException("Errore durante la rimozione della ricetta con nome: " + recipeToRemove.getRecipeName(), e);
             }
         }
@@ -114,3 +114,4 @@ public class RecipeDaoFS implements RecipeDao {
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
     }
 }
+
