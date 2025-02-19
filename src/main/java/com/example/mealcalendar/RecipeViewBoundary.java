@@ -124,7 +124,7 @@ public class RecipeViewBoundary {
         for (RecipeReturnBean ricetta : listaRicette) {
             // Using Optional to avoid null checks
             String riga = buildRecipeString(ricetta);
-            LOGGER.info("riga: " + riga);
+            LOGGER.info("riga: {}");
             listaRicetteview.getItems().add(riga);
         }
     }
