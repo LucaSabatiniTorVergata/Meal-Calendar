@@ -41,7 +41,7 @@ public class RecipeEditController {
         return lista;
     }
 
-    public void rimuovi(String ricetta) throws RecipeDaoException {
+    public void rimuovi(String ricetta) throws RecipeDaoException, IOException {
         // Split della ricetta per ottenere i dettagli
         String[] parts = ricetta.split(" - ");
         if (parts.length >= 6) {

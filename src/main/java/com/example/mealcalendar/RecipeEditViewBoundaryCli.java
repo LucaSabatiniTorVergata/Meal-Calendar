@@ -17,7 +17,7 @@ public class RecipeEditViewBoundaryCli {
         this.ricetta = ricetta;
     }
 
-    public void start() throws RecipeNotSelectedException,RecipeDaoException {
+    public void start() throws RecipeNotSelectedException, IOException, RecipeDaoException {
         if (ricetta == null) {
             throw new RecipeNotSelectedException();
         }
