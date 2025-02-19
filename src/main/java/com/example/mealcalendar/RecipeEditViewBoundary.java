@@ -107,7 +107,7 @@ public class RecipeEditViewBoundary {
     }
 
     // Rimuove la ricetta selezionata
-    private void rimuoviricetta() throws IOException {
+    private void rimuoviricetta() throws IOException, RecipeDaoException {
         RecipeEditController controller = new RecipeEditController();
         controller.rimuovi(selectedRecipe);
         Stage stage = (Stage) ritorno.getScene().getWindow();
@@ -121,6 +121,8 @@ public class RecipeEditViewBoundary {
             rimuoviricetta();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (RecipeDaoException e) {
+            throw new RuntimeException(e);
         }
     }
 }

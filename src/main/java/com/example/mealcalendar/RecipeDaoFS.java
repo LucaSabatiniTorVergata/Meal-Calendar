@@ -23,32 +23,32 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.createFile(Paths.get(FILE_PATH));
             } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato", e);
+                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato");
             }
         }
     }
 
-    public boolean addRecipe(RecipeEntity recipe) {
+    public boolean addRecipe(RecipeEntity recipe) throws RecipeDaoException {
         return useDemo ? demoRecipes.add(recipe) : addRecipeFS(recipe);
     }
 
-    private boolean addRecipeFS(RecipeEntity recipe) {
+    private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
         try {
             Files.write(Paths.get(FILE_PATH),
                     (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", new Object[]{recipe.getRecipeName(), e});
-            throw new RuntimeException("Errore durante l''aggiunta della ricetta: " + recipe.getRecipeName(), e);
+            LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: " + recipe.getRecipeName());
+            throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
         }
     }
 
-    public List<RecipeEntity> getAllRecipes() {
+    public List<RecipeEntity> getAllRecipes() throws RecipeDaoException {
         return useDemo ? new ArrayList<>(demoRecipes) : getAllRecipesFS();
     }
 
-    private List<RecipeEntity> getAllRecipesFS() {
+    private List<RecipeEntity> getAllRecipesFS() throws RecipeDaoException {
         List<RecipeEntity> recipeList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
@@ -60,7 +60,7 @@ public class RecipeDaoFS implements RecipeDao {
             }
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore nella lettura delle ricette", e);
-            throw new RuntimeException("Errore durante la lettura delle ricette", e);
+            throw new RecipeDaoException("Errore durante la lettura delle ricette", e);
         }
         return recipeList;
     }
@@ -71,7 +71,7 @@ public class RecipeDaoFS implements RecipeDao {
                 parts[3], parts[4], parts[5], parts[6]) : null;
     }
 
-    public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
+    public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws RecipeDaoException {
         if (useDemo) {
             demoRecipes.replaceAll(recipe -> formatRecipe(recipe).equals(formatRecipe(oldRecipe)) ? newRecipe : recipe);
         } else {
@@ -83,13 +83,13 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nell''aggiornamento della ricetta con il nome {0}", new Object[]{oldRecipe.getRecipeName(), e});
-                throw new RuntimeException("Errore durante l''aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
+                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta con il nome: " + oldRecipe.getRecipeName(), e);
+                throw new RecipeDaoException("Errore durante l'aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
             }
         }
     }
 
-    public void removeRecipe(RecipeEntity recipeToRemove) throws IOException {
+    public void removeRecipe(RecipeEntity recipeToRemove) throws RecipeDaoException {
         if (useDemo) {
             demoRecipes.removeIf(recipe -> formatRecipe(recipe).equals(formatRecipe(recipeToRemove)));
         } else {
@@ -103,8 +103,8 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome {0}", new Object[]{recipeToRemove.getRecipeName(), e});
-                throw new RuntimeException("Errore durante la rimozione della ricetta con nome: " + recipeToRemove.getRecipeName(), e);
+                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome: " + recipeToRemove.getRecipeName(), e);
+                throw new RecipeDaoException("Errore durante la rimozione della ricetta con nome: " + recipeToRemove.getRecipeName(), e);
             }
         }
     }
