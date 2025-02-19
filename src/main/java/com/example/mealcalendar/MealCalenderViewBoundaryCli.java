@@ -143,21 +143,25 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    public static void inviomail() throws Exception {
+    public static void inviomail() throws MailSendingException {
         AntiCodeSmellPrinter localPrinter = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
-        if (sceltaLuogo) {
-            localPrinter.print("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
-            localPrinter.print("Ristorante scelto: " + ristorantescelto);
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
-                    SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
-            MealcalendarController controller = new MealcalendarController(bean);
-            controller.invioMail();
-        } else {
-            localPrinter.print("Scelta luogo = false. Inviamo la mail con la ricetta selezionata.");
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
-                    SessionManagerSLT.getInstance().getLoggedInUsername(), ricettascelta);
-            MealcalendarController controller = new MealcalendarController(bean);
-            controller.invioMail();
+        try {
+            if (sceltaLuogo) {
+                localPrinter.print("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
+                localPrinter.print("Ristorante scelto: " + ristorantescelto);
+                MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
+                        SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
+                MealcalendarController controller = new MealcalendarController(bean);
+                controller.invioMail();
+            } else {
+                localPrinter.print("Scelta luogo = false. Inviamo la mail con la ricetta selezionata.");
+                MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
+                        SessionManagerSLT.getInstance().getLoggedInUsername(), ricettascelta);
+                MealcalendarController controller = new MealcalendarController(bean);
+                controller.invioMail();
+            }
+        } catch (Exception e) {
+            throw new MailSendingException("Errore durante l'invio della mail.", e);
         }
     }
 
