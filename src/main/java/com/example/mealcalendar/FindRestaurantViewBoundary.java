@@ -9,10 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,8 +23,8 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.function.UnaryOperator;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.ristorantescelto;
-import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
+import static com.example.mealcalendar.MealCalenderViewBoundary.*;
+
 
 public class FindRestaurantViewBoundary {
 
@@ -145,6 +141,58 @@ public class FindRestaurantViewBoundary {
     }
 
     @FXML
+    private void handleclick(MouseEvent event) {
+        if (event.getClickCount() != 2) {
+            return;
+        }
+        int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex < 0) {
+            return;
+        }
+        ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
+        if (isVengoDaCalendar()) {
+            processCalendarSelection(ristorante);
+        } else {
+            loadingIndicator.setVisible(false);
+            apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
+        }
+    }
+
+    private void processCalendarSelection(ReturnRestaurantsBean ristorante) {
+        lableemail.setVisible(true);
+        loadingIndicator.setVisible(true);
+        loadingIndicator.setProgress(0);
+        final Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+            private double progress = 0;
+            @Override
+            public void handle(ActionEvent event) {
+                progress += 0.05;
+                loadingIndicator.setProgress(progress);
+                if (progress >= 1) {
+                    timeline.stop();
+                    try {
+                        lableemail.setVisible(false);
+                        // Resetto la modalità calendario e imposto il ristorante selezionato
+                        setVengoDaCalendar(false);
+                        setRistorantescelto("🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo());
+                        MealCalenderViewBoundary.inviomail();  // Chiamata al metodo che invia l'email
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    @FXML
     private void registerGuest(ActionEvent event)  {
         Stage stage = (Stage) registerbutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "hello-view.fxml");
@@ -178,57 +226,5 @@ public class FindRestaurantViewBoundary {
     private void calendaruser(ActionEvent event) {
         Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
-    }
-
-    @FXML
-    private void handleclick(MouseEvent event) {
-        if (event.getClickCount() != 2) {
-            return;
-        }
-        int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex < 0) {
-            return;
-        }
-        ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
-        if (vengoDaCalendar) {
-            processCalendarSelection(ristorante);
-        } else {
-            loadingIndicator.setVisible(false);
-            apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
-        }
-    }
-
-    private void processCalendarSelection(ReturnRestaurantsBean ristorante) {
-        lableemail.setVisible(true);
-        loadingIndicator.setVisible(true);
-        loadingIndicator.setProgress(0);
-        final Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
-            private double progress = 0;
-            @Override
-            public void handle(ActionEvent event) {
-                progress += 0.05;
-                loadingIndicator.setProgress(progress);
-                if (progress >= 1) {
-                    timeline.stop();
-                    try {
-                        lableemail.setVisible(false);
-                        // Resetto la modalità calendario e imposto il ristorante selezionato
-                        vengoDaCalendar = false;
-                        ristorantescelto = "🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo();
-                        MealCalenderViewBoundary.inviomail();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
-                        stage.setScene(new Scene(root));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        });
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
     }
 }

@@ -37,85 +37,47 @@ public class MealCalenderViewBoundary {
     @FXML
     private TextField orascelta;
 
-
-    public static boolean sceltaLuogo = false;
-    public static boolean vengoDaCalendar = false;
-    public static String ristorantescelto;
-    public static String ricettascelta;
-
+    private static boolean sceltaLuogo = false;
+    private static boolean vengoDaCalendar = false;
+    private static String ristorantescelto;
+    private static String ricettascelta;
     private static LocalDate dataselezionata;
     private static String oraselezionata;
 
-
     @FXML
     private void initialize() {
-
         calendar.setDayCellFactory(disablePastDates());
 
         home.setOnAction(e -> {
             posizione.setText("home");
-            sceltaLuogo = false;
+            setSceltaLuogo(false);
         });
 
         restaurant.setOnAction(e -> {
             posizione.setText("restaurant");
-            sceltaLuogo = true;
+            setSceltaLuogo(true);
         });
 
         Pattern pattern = Pattern.compile("(\\d{1,2})?:?(\\d{1,2})?");
-
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            if (pattern.matcher(change.getControlNewText()).matches()) {
-                return change;
-            }
-            return null;
-        };
-
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        orascelta.setTextFormatter(textFormatter);
-
+        UnaryOperator<TextFormatter.Change> filter = change -> pattern.matcher(change.getControlNewText()).matches() ? change : null;
+        orascelta.setTextFormatter(new TextFormatter<>(filter));
 
         LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
     }
 
     @FXML
-    private void confirmChoise(ActionEvent actionEvent)  {
-
-
+    private void confirmChoise(ActionEvent actionEvent) {
         dataselezionata = calendar.getValue();
-        oraselezionata=orascelta.getText();
-
-        if(sceltaLuogo){
-            vengoDaCalendar=true;
-            Stage stage = (Stage) confirmButton.getScene().getWindow();
-            GraphicController.cambiascena(stage, "findrestaurantuser-view.fxml");
-
-
-        }else{
-            vengoDaCalendar=true;
-            Stage stage = (Stage) confirmButton.getScene().getWindow();
-            GraphicController.cambiascena(stage, "recipe-view.fxml");
-
-        }
-
+        oraselezionata = orascelta.getText();
+        setVengoDaCalendar(true);
+        Stage stage = (Stage) confirmButton.getScene().getWindow();
+        GraphicController.cambiascena(stage, sceltaLuogo ? "findrestaurantuser-view.fxml" : "recipe-view.fxml");
     }
 
-    public static void inviomail()  {
-
-        if(sceltaLuogo){
-
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
-            MealcalendarController controller = new MealcalendarController(bean);
-            controller.invioMail();
-
-        }else{
-
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,SessionManagerSLT.getInstance().getLoggedInUsername(),ricettascelta);
-            MealcalendarController controller = new MealcalendarController(bean);
-            controller.invioMail();
-
-        }
-
+    public static void inviomail() {
+        MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(),
+                sceltaLuogo ? getRistorantescelto() : getRicettascelta());
+        new MealcalendarController(bean).invioMail();
     }
 
     @FXML
@@ -129,13 +91,44 @@ public class MealCalenderViewBoundary {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-
-                // Disabilita le date passate
                 if (item.isBefore(LocalDate.now())) {
                     setDisable(true);
-                    setStyle("-fx-background-color: #ffaaaa;"); // Sfondo rosso chiaro per evidenziare
+                    setStyle("-fx-background-color: #ffaaaa;");
                 }
             }
         };
+    }
+
+    // Getter e Setter per variabili statiche
+    public static boolean isSceltaLuogo() {
+        return sceltaLuogo;
+    }
+
+    public static void setSceltaLuogo(boolean scelta) {
+        sceltaLuogo = scelta;
+    }
+
+    public static boolean isVengoDaCalendar() {
+        return vengoDaCalendar;
+    }
+
+    public static void setVengoDaCalendar(boolean value) {
+        vengoDaCalendar = value;
+    }
+
+    public static String getRistorantescelto() {
+        return ristorantescelto;
+    }
+
+    public static void setRistorantescelto(String value) {
+        ristorantescelto = value;
+    }
+
+    public static String getRicettascelta() {
+        return ricettascelta;
+    }
+
+    public static void setRicettascelta(String value) {
+        ricettascelta = value;
     }
 }

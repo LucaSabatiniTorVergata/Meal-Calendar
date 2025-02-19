@@ -19,8 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
-import static com.example.mealcalendar.MealCalenderViewBoundary.ricettascelta;
+import static com.example.mealcalendar.MealCalenderViewBoundary.*;
 
 public class RecipeViewBoundary {
 
@@ -124,7 +123,7 @@ public class RecipeViewBoundary {
         for (RecipeReturnBean ricetta : listaRicette) {
             // Using Optional to avoid null checks
             String riga = buildRecipeString(ricetta);
-            LOGGER.info("riga: {}");
+            LOGGER.info(riga);
             listaRicetteview.getItems().add(riga);
         }
     }
@@ -136,9 +135,9 @@ public class RecipeViewBoundary {
             Optional.ofNullable(listaRicetteview.getSelectionModel().getSelectedItem())
                     .ifPresent(selectedItem -> {
                         try {
-                            if (vengoDaCalendar) {
-                                vengoDaCalendar = false;
-                                ricettascelta = selectedItem;
+                            if (isVengoDaCalendar()) {
+                                setVengoDaCalendar(false);
+                                setRicettascelta(selectedItem);
                                 MealCalenderViewBoundary.inviomail();
                                 loadMealCalendarView();
                             } else {
