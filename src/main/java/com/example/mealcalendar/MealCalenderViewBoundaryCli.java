@@ -12,9 +12,6 @@ public class MealCalenderViewBoundaryCli {
     private static final Logger LOGGER = Logger.getLogger(MealCalenderViewBoundaryCli.class.getName());
     private static boolean sceltaLuogo = false;
     private static boolean vengoDaCalendar = false;
-    public static String ristorantescelto;
-    public static String ricettascelta;
-
     private static LocalDate dataselezionata;
     private static String oraselezionata;
 
@@ -22,16 +19,21 @@ public class MealCalenderViewBoundaryCli {
     private RecipeReturnBean ricettaSelezionata;
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
 
+    private static String ristorantescelto;
+    private static String ricettascelta;
+
     public MealCalenderViewBoundaryCli() {}
 
     public MealCalenderViewBoundaryCli(RecipeReturnBean ricettaSelezionata) {
         this.ricettaSelezionata = ricettaSelezionata;
     }
 
-    // Rimosso costruttore che imposta direttamente ristorantescelto
-    // Aggiunto metodo per impostare ristorantescelto
-    public void setRistoranteSelezionato(String ristoranteSelezionato) {
+    public static void setRistoranteSelezionato(String ristoranteSelezionato) {
         ristorantescelto = ristoranteSelezionato;
+    }
+
+    public String getRistoranteSelezionato() {
+        return ristorantescelto;
     }
 
     public void start() throws Exception {
@@ -58,7 +60,6 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
-        // Se né la ricetta né il ristorante sono stati selezionati, lanciamo l'eccezione personalizzata
         if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
             throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
         }
@@ -72,18 +73,17 @@ public class MealCalenderViewBoundaryCli {
                 printer.print("Ingredienti: " + ricettaSelezionata.getIngredients());
                 printer.print("Descrizione: " + ricettaSelezionata.getDescription());
                 printer.print("Autore: " + ricettaSelezionata.getAuthor());
-                setRicettaSelezionata(ricettaSelezionata);
                 inviomail();
             } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
                 printer.print("\n🍽 Ristorante Selezionato:");
                 printer.print("Ristorante: " + ristorantescelto);
-                setRistoranteSelezionato(ristorantescelto);
                 inviomail();
             }
         } catch (Exception e) {
             throw new MailSendingException("Errore durante la selezione della ricetta o del ristorante.", e);
         }
     }
+
 
     private void readDate(Scanner scanner) {
         while (dataselezionata == null) {
@@ -175,8 +175,4 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    public void setRicettaSelezionata(RecipeReturnBean ricetta) {
-        this.ricettaSelezionata = ricetta;
-        ricettascelta = ricetta.getRecipeName();
-    }
 }

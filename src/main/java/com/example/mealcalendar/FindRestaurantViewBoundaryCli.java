@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.example.mealcalendar.MealCalenderViewBoundaryCli.*;
+
 public class FindRestaurantViewBoundaryCli {
 
     private final boolean vengoDaCalendar;
@@ -106,7 +108,7 @@ public class FindRestaurantViewBoundaryCli {
     private void gestisciSceltaRistorante(ReturnRestaurantsBean ristoranteSelezionato) throws Exception {
         if (vengoDaCalendar) {
             printer.print("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
-            MealCalenderViewBoundaryCli.ristorantescelto = ristoranteSelezionato.getNome();
+            setRistoranteSelezionato(ristoranteSelezionato.getNome());
             printer.print("\n🔄 Sto tornando al calendario con il ristorante selezionato...");
             new CliController().navigateTo("calendariopasti");
         } else {
