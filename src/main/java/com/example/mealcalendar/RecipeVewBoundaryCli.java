@@ -166,13 +166,18 @@ public class RecipeVewBoundaryCli {
     }
 
     // Metodo per modificare una ricetta selezionata (opzione 3)
-    private void editRecipe() throws Exception {
+    private void editRecipe() throws RecipeEditException {
         if (ricettaSelezionata == null) {
             printer.print("❌ Nessuna ricetta selezionata da modificare.");
             return;
         }
-        cliController.navigateToRecipeEditWithRecipe(ricettaSelezionata);
+        try {
+            cliController.navigateToRecipeEditWithRecipe(ricettaSelezionata);
+        } catch (Exception e) { // Sostituisci con le eccezioni specifiche che può generare
+            throw new RecipeEditException("Errore durante la modifica della ricetta.", e);
+        }
     }
+
 
     // Metodo per mostrare i dettagli di una ricetta
     private void showRecipeDetails(RecipeReturnBean ricetta) {
