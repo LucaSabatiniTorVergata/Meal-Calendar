@@ -32,7 +32,7 @@ public class RecipeEditViewBoundary {
     private static final Logger LOGGER = Logger.getLogger(RecipeEditViewBoundary.class.getName());
 
     @FXML
-    private void initialize() {
+    private void initialize() throws RecipeDaoException {
         initializeWelcomeLabel();
         loadRecipes();
         setupListViewListener();
@@ -47,7 +47,7 @@ public class RecipeEditViewBoundary {
     }
 
     // Caricamento delle ricette nell'interfaccia
-    private void loadRecipes() {
+    private void loadRecipes() throws RecipeDaoException {
         ricetteview.getItems().clear();
         String user = SessionManagerSLT.getInstance().getLoggedInUsername();
         RecipeEditBean bean = new RecipeEditBean(user);

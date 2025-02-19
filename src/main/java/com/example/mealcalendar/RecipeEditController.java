@@ -16,8 +16,8 @@ public class RecipeEditController {
     }
 
     public List<RecipeReturnBean> mostraricette() throws RecipeDaoException {
-        // Otteniamo il DAO
-        RecipeDaoFS dao = (RecipeDaoFS) RecipeDaoFactory.createRecipeDao();
+        // Otteniamo il DAO in modo generico, senza il cast esplicito
+        RecipeDao dao = RecipeDaoFactory.createRecipeDao();
 
         // Recuperiamo tutte le ricette dal file
         List<RecipeEntity> ricette = dao.getAllRecipes();
@@ -50,8 +50,8 @@ public class RecipeEditController {
                     parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], SessionManagerSLT.getInstance().getLoggedInUsername()
             );
 
-            // Otteniamo il DAO e rimuoviamo la ricetta
-            RecipeDaoFS dao = (RecipeDaoFS) RecipeDaoFactory.createRecipeDao();
+            // Otteniamo il DAO in modo generico, senza il cast esplicito
+            RecipeDao dao = RecipeDaoFactory.createRecipeDao();
             dao.removeRecipe(ricettarim);
         }
     }
