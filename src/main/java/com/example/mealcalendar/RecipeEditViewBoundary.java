@@ -67,7 +67,7 @@ public class RecipeEditViewBoundary {
     // Imposta il listener per la ListView
     private void setupListViewListener() {
         ricetteview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            selectedRecipe = (String) newValue; // Salva la ricetta selezionata
+            selectedRecipe = newValue; // Non c'è bisogno del cast
             updateButtonsState();
         });
     }

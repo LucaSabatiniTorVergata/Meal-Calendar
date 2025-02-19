@@ -18,11 +18,13 @@ public class RecipeDaoFS implements RecipeDao {
         createFileIfNotExists();
     }
 
+    // Crea il file se non esiste già
     private void createFileIfNotExists() {
         if (!useDemo) {
             try {
                 Files.createFile(Paths.get(FILE_PATH));
             } catch (IOException e) {
+                // Log di un avviso se il file esiste già o non può essere creato
                 LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato", e);
             }
         }
@@ -32,9 +34,11 @@ public class RecipeDaoFS implements RecipeDao {
         return useDemo ? demoRecipes.add(recipe) : addRecipeFS(recipe);
     }
 
+    // Aggiungi una ricetta al file di sistema
     private boolean addRecipeFS(RecipeEntity recipe) {
         try {
-            Files.write(Paths.get(FILE_PATH), (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
+            Files.write(Paths.get(FILE_PATH),
+                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
@@ -47,6 +51,7 @@ public class RecipeDaoFS implements RecipeDao {
         return useDemo ? new ArrayList<>(demoRecipes) : getAllRecipesFS();
     }
 
+    // Ottieni tutte le ricette dal file di sistema
     private List<RecipeEntity> getAllRecipesFS() {
         List<RecipeEntity> recipeList = new ArrayList<>();
         try {
@@ -65,9 +70,11 @@ public class RecipeDaoFS implements RecipeDao {
 
     private RecipeEntity parseRecipe(String line) {
         String[] parts = line.split(":", 7);
-        return (parts.length == 7) ? RecipeEntityFactory.createRecipe(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]) : null;
+        return (parts.length == 7) ? RecipeEntityFactory.createRecipe(parts[0], parts[1], parts[2],
+                parts[3], parts[4], parts[5], parts[6]) : null;
     }
 
+    // Aggiorna una ricetta esistente
     public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws IOException {
         if (useDemo) {
             demoRecipes.replaceAll(recipe -> formatRecipe(recipe).equals(formatRecipe(oldRecipe)) ? newRecipe : recipe);
@@ -80,12 +87,14 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta", e);
-                throw e;
+                // Log e rilancia eccezione con dettagli contestuali
+                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta con il nome " + oldRecipe.getRecipeName(), e);
+                throw new IOException("Errore durante l'aggiornamento della ricetta: " + oldRecipe.getRecipeName(), e);
             }
         }
     }
 
+    // Rimuove una ricetta
     public void removeRecipe(RecipeEntity recipeToRemove) throws IOException {
         if (useDemo) {
             demoRecipes.removeIf(recipe -> formatRecipe(recipe).equals(formatRecipe(recipeToRemove)));
@@ -100,12 +109,14 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta", e);
-                throw e;
+                // Log e rilancia eccezione con dettagli contestuali
+                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome " + recipeToRemove.getRecipeName(), e);
+                throw new IOException("Errore durante la rimozione della ricetta: " + recipeToRemove.getRecipeName(), e);
             }
         }
     }
 
+    // Format per la visualizzazione della ricetta
     private String formatRecipe(RecipeEntity recipe) {
         return String.join(":", recipe.getRecipeName(), recipe.getTypeofDiet(), recipe.getTypeofMeal(),
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());

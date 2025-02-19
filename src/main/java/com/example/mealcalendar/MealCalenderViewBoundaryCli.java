@@ -104,13 +104,14 @@ public class MealCalenderViewBoundaryCli {
         while (oraselezionata == null) {
             printer.print("Inserisci l'ora (HH:mm): ");
             String oraInput = scanner.nextLine();
-            if (oraInput.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
+            if (oraInput.matches("(\\d{2}):(\\d{2})") && oraInput.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
                 oraselezionata = oraInput;
             } else {
                 printer.print("Formato ora non valido. Riprova.");
             }
         }
     }
+
 
     private void readLocation(Scanner scanner) {
         while (true) {
