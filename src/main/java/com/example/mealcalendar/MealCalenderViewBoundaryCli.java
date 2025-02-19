@@ -36,7 +36,11 @@ public class MealCalenderViewBoundaryCli {
         Scanner scanner = new Scanner(System.in);
         printer.print("=== CALENDARIO PASTI ===");
 
-        printSelectionAndSendMail();
+        try {
+            printSelectionAndSendMail();
+        } catch (MailSendingException e) {
+            LOGGER.log(Level.SEVERE, "Errore durante la selezione della ricetta o del ristorante", e);
+        }
 
         readDate(scanner);
         readTime(scanner);
@@ -51,27 +55,31 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    private void printSelectionAndSendMail() throws Exception {
+    private void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
         // Se né la ricetta né il ristorante sono stati selezionati, lanciamo l'eccezione personalizzata
         if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
             throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
         }
-        if (ricettaSelezionata != null) {
-            printer.print("\n🍴 Ricetta Selezionata:");
-            printer.print("Nome: " + ricettaSelezionata.getRecipeName());
-            printer.print("Tipo Dieta: " + ricettaSelezionata.getTypeofDiet());
-            printer.print("Tipo Pasto: " + ricettaSelezionata.getTypeofMeal());
-            printer.print("Numero Ingredienti: " + ricettaSelezionata.getNumIngredients());
-            printer.print("Ingredienti: " + ricettaSelezionata.getIngredients());
-            printer.print("Descrizione: " + ricettaSelezionata.getDescription());
-            printer.print("Autore: " + ricettaSelezionata.getAuthor());
-            setRicettaSelezionata(ricettaSelezionata);
-            inviomail();
-        } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
-            printer.print("\n🍽 Ristorante Selezionato:");
-            printer.print("Ristorante: " + ristorantescelto);
-            setRistoranteSelezionato(ristorantescelto);
-            inviomail();
+        try {
+            if (ricettaSelezionata != null) {
+                printer.print("\n🍴 Ricetta Selezionata:");
+                printer.print("Nome: " + ricettaSelezionata.getRecipeName());
+                printer.print("Tipo Dieta: " + ricettaSelezionata.getTypeofDiet());
+                printer.print("Tipo Pasto: " + ricettaSelezionata.getTypeofMeal());
+                printer.print("Numero Ingredienti: " + ricettaSelezionata.getNumIngredients());
+                printer.print("Ingredienti: " + ricettaSelezionata.getIngredients());
+                printer.print("Descrizione: " + ricettaSelezionata.getDescription());
+                printer.print("Autore: " + ricettaSelezionata.getAuthor());
+                setRicettaSelezionata(ricettaSelezionata);
+                inviomail();
+            } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
+                printer.print("\n🍽 Ristorante Selezionato:");
+                printer.print("Ristorante: " + ristorantescelto);
+                setRistoranteSelezionato(ristorantescelto);
+                inviomail();
+            }
+        } catch (Exception e) {
+            throw new MailSendingException("Errore durante la selezione della ricetta o del ristorante.", e);
         }
     }
 
