@@ -15,7 +15,7 @@ public class RecipeEditController {
     public RecipeEditController() {
     }
 
-    public List<RecipeReturnBean> mostraricette(){
+    public List<RecipeReturnBean> mostraricette() throws RecipeDaoException {
         // Otteniamo il DAO
         RecipeDaoFS dao = (RecipeDaoFS) RecipeDaoFactory.createRecipeDao();
 

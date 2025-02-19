@@ -13,13 +13,13 @@ public class RecipeSearchController {
     }
 
     // Metodo per cercare ricette che corrispondono ai filtri
-    public Optional<List<RecipeReturnBean>> trovaricette() {
+    public Optional<List<RecipeReturnBean>> trovaricette() throws RecipeDaoException {
         List<RecipeReturnBean> result = filterRecipes(filtri);
         return Optional.ofNullable(result);
     }
 
     // Metodo che applica i filtri per ottenere le ricette
-    private List<RecipeReturnBean> filterRecipes(RecipeSearchFiltersBean filters) {
+    private List<RecipeReturnBean> filterRecipes(RecipeSearchFiltersBean filters) throws RecipeDaoException {
         // Supponiamo che RecipeListSLT sia un singleton che gestisce la lista filtrata
         RecipeListSLT listaRicette = RecipeListSLT.getInstance();
         listaRicette.svuotaLista();

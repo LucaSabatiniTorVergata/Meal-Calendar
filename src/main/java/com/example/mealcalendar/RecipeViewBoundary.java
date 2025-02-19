@@ -87,7 +87,7 @@ public class RecipeViewBoundary {
 
     // Handle searching recipes based on selected filters
     @FXML
-    private void searchrecipies(ActionEvent event) throws IOException {
+    private void searchrecipies(ActionEvent event) throws IOException, RecipeDaoException {
         tipoDietaSelezionato = tipoDieta.getText();
         pastoSelezionato = tipoPasto.getText();
         RecipeSearchFiltersBean bean = new RecipeSearchFiltersBean(tipoDietaSelezionato, pastoSelezionato);
