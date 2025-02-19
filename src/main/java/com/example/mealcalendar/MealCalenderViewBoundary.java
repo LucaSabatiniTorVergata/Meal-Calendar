@@ -23,10 +23,10 @@ public class MealCalenderViewBoundary {
     private SplitMenuButton posizione;
 
     @FXML
-    private static DatePicker calendar;
+    private DatePicker calendar;
 
     @FXML
-    private static Button confirmButton;
+    private Button confirmButton;
 
     @FXML
     private MenuItem home;
@@ -35,7 +35,7 @@ public class MealCalenderViewBoundary {
     private MenuItem restaurant;
 
     @FXML
-    private static TextField orascelta;
+    private TextField orascelta;
 
     private static boolean sceltaLuogo = false;
     private static boolean vengoDaCalendar = false;
@@ -66,7 +66,11 @@ public class MealCalenderViewBoundary {
     }
 
     @FXML
-    private static void confirmChoise(ActionEvent actionEvent) {
+    private void trick(ActionEvent actionEvent){
+        confirmChoise();
+    }
+
+    private void confirmChoise() {
         dataselezionata = calendar.getValue();
         oraselezionata = orascelta.getText();
         setVengoDaCalendar(true);
