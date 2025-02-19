@@ -7,7 +7,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class MealCalenderViewBoundaryCli {
+
+    private static final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
 
     private static final Logger LOGGER = Logger.getLogger(MealCalenderViewBoundaryCli.class.getName());
     private static boolean sceltaLuogo = false;
@@ -17,7 +20,6 @@ public class MealCalenderViewBoundaryCli {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private RecipeReturnBean ricettaSelezionata;
-    private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
 
     private static String ristorantescelto;
     private static String ricettascelta;
@@ -82,36 +84,36 @@ public class MealCalenderViewBoundaryCli {
 
     private static void readDate(Scanner scanner) {
         while (dataselezionata == null) {
-            System.out.print("Inserisci la data (dd/MM/yyyy): ");
+            printer.print("Inserisci la data (dd/MM/yyyy): ");
             String dataInput = scanner.nextLine();
             try {
                 LocalDate data = LocalDate.parse(dataInput, DATE_FORMATTER);
                 if (data.isBefore(LocalDate.now())) {
-                    System.out.println("Non puoi selezionare una data passata. Riprova.");
+                    printer.print("Non puoi selezionare una data passata. Riprova.");
                 } else {
                     dataselezionata = data;
                 }
             } catch (DateTimeParseException e) {
-                System.out.println("Formato data non valido. Riprova.");
+                printer.print("Formato data non valido. Riprova.");
             }
         }
     }
 
     private static void readTime(Scanner scanner) {
         while (oraselezionata == null) {
-            System.out.print("Inserisci l'ora (HH:mm): ");
+            printer.print("Inserisci l'ora (HH:mm): ");
             String oraInput = scanner.nextLine();
             if (oraInput.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
                 oraselezionata = oraInput;
             } else {
-                System.out.println("Formato ora non valido. Riprova.");
+                printer.print("Formato ora non valido. Riprova.");
             }
         }
     }
 
     private static void readLocation(Scanner scanner) {
         while (true) {
-            System.out.print("Scegli il luogo (1. home, 2. restaurant): ");
+            printer.print("Scegli il luogo (1. home, 2. restaurant): ");
             String luogoInput = scanner.nextLine();
             if (luogoInput.equals("1")) {
                 sceltaLuogo = false;
@@ -120,7 +122,7 @@ public class MealCalenderViewBoundaryCli {
                 sceltaLuogo = true;
                 break;
             } else {
-                System.out.println("Scelta non valida. Riprova.");
+                printer.print("Scelta non valida. Riprova.");
             }
         }
     }
