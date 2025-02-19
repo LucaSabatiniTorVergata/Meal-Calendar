@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 public class FridgeViewBoundaryCli {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final Logger logger = Logger.getLogger(getClass().getName());
     private FrigoriferoController frigoriferoController;
     private final IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     private final CliController cliController = new CliController();

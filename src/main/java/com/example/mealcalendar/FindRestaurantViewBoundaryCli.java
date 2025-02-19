@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class FindRestaurantViewBoundaryCli {
 
     private final boolean vengoDaCalendar;
+    private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("FindRestaurantViewBoundaryCli");
 
     public FindRestaurantViewBoundaryCli(boolean vengoDaCalendar) {
         this.vengoDaCalendar = vengoDaCalendar;
@@ -36,7 +37,7 @@ public class FindRestaurantViewBoundaryCli {
         List<ReturnRestaurantsBean> listaRistoranti = trovaRistoranti(filtro);
 
         if (listaRistoranti.isEmpty()) {
-            System.out.println("Nessun ristorante trovato con i filtri specificati.");
+            printer.print("Nessun ristorante trovato con i filtri specificati.");
             return;
         }
 
@@ -51,22 +52,22 @@ public class FindRestaurantViewBoundaryCli {
     }
 
     private String chiediTipoDieta(Scanner scanner) {
-        System.out.println("Inserisci il tipo di dieta (Vegano, Vegetariano, Onnivoro): ");
+        printer.print("Inserisci il tipo di dieta (Vegano, Vegetariano, Onnivoro): ");
         String tipoDieta = scanner.nextLine().trim();
         return tipoDieta.equalsIgnoreCase("Onnivoro") ? "" : tipoDieta;
     }
 
     private String chiediTipoPasto(Scanner scanner) {
-        System.out.println("Inserisci il tipo di pasto (Colazione, Pranzo, Cena): ");
+        printer.print("Inserisci il tipo di pasto (Colazione, Pranzo, Cena): ");
         return scanner.nextLine().trim();
     }
 
     private double chiediDistanza(Scanner scanner) {
-        System.out.println("Inserisci la distanza massima (in km): ");
+        printer.print("Inserisci la distanza massima (in km): ");
         try {
             return Double.parseDouble(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
-            System.out.println("Valore di distanza non valido. Inserisci un numero.");
+            printer.print("Valore di distanza non valido. Inserisci un numero.");
             return -1;
         }
     }
@@ -77,19 +78,19 @@ public class FindRestaurantViewBoundaryCli {
     }
 
     private ReturnRestaurantsBean scegliRistorante(Scanner scanner, List<ReturnRestaurantsBean> listaRistoranti) {
-        System.out.println("\nRistoranti trovati:");
+        printer.print("\nRistoranti trovati:");
         for (int i = 0; i < listaRistoranti.size(); i++) {
             ReturnRestaurantsBean ristorante = listaRistoranti.get(i);
-            System.out.println((i + 1) + ". " + ristorante.getNome() + " - " + ristorante.getIndirizzo());
+            printer.print((i + 1) + ". " + ristorante.getNome() + " - " + ristorante.getIndirizzo());
         }
 
-        System.out.println("\nInserisci il numero del ristorante per selezionarlo, oppure 0 per uscire:");
+        printer.print("\nInserisci il numero del ristorante per selezionarlo, oppure 0 per uscire:");
         int scelta = leggiScelta(scanner);
 
         if (scelta > 0 && scelta <= listaRistoranti.size()) {
             return listaRistoranti.get(scelta - 1);
         }
-        System.out.println("Nessun ristorante selezionato.");
+        printer.print("Nessun ristorante selezionato.");
         return null;
     }
 
@@ -97,16 +98,16 @@ public class FindRestaurantViewBoundaryCli {
         try {
             return Integer.parseInt(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
-            System.out.println("Scelta non valida.");
+            printer.print("Scelta non valida.");
             return 0;
         }
     }
 
     private void gestisciSceltaRistorante(ReturnRestaurantsBean ristoranteSelezionato) throws Exception {
         if (vengoDaCalendar) {
-            System.out.println("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
+            printer.print("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
             MealCalenderViewBoundaryCli.ristorantescelto = ristoranteSelezionato.getNome();
-            System.out.println("\n🔄 Sto tornando al calendario con il ristorante selezionato...");
+            printer.print("\n🔄 Sto tornando al calendario con il ristorante selezionato...");
             new CliController().navigateTo("calendariopasti");
         } else {
             apriGoogleMaps(ristoranteSelezionato);
@@ -116,16 +117,16 @@ public class FindRestaurantViewBoundaryCli {
     private void apriGoogleMaps(ReturnRestaurantsBean ristoranteSelezionato) {
         String url = "https://www.google.com/maps/search/?api=1&query="
                 + ristoranteSelezionato.getLatitudine() + "," + ristoranteSelezionato.getLongitudine();
-        System.out.println("Apro Google Maps per: " + ristoranteSelezionato.getNome());
+        printer.print("Apro Google Maps per: " + ristoranteSelezionato.getNome());
         if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI(url));
             } catch (IOException | URISyntaxException e) {
-                System.err.println("Errore nell'apertura di Google Maps: " + e.getMessage());
+                printer.print("Errore nell'apertura di Google Maps: " + e.getMessage());
             }
         } else {
-            System.out.println("Desktop non supportato. Copia e incolla il seguente URL nel tuo browser:");
-            System.out.println(url);
+            printer.print("Desktop non supportato. Copia e incolla il seguente URL nel tuo browser:");
+            printer.print(url);
         }
     }
 }

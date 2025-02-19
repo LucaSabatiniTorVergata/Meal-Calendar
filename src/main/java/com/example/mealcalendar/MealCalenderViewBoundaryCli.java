@@ -104,7 +104,6 @@ public class MealCalenderViewBoundaryCli {
 
     private void confirmChoise() throws Exception {
         vengoDaCalendar = true;
-        CliController cliController = new CliController();
 
         if (sceltaLuogo) {
             navigateToRestaurant();

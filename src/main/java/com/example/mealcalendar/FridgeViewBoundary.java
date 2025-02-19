@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;

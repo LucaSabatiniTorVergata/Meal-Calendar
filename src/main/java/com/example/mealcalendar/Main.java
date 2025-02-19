@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public class Main extends Application {
 
-    private static Stage stg;
+    // Istanza di AntiCodeSmellPrinter per l'output
+    private static final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("Main");
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -23,10 +24,10 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("===== Calendario dei Pasti =====");
-        System.out.println("1. Avvia interfaccia grafica (JavaFX)");
-        System.out.println("2. Avvia interfaccia a linea di comando (CLI)");
-        System.out.print("Scegli un'opzione: ");
+        printer.print("===== Calendario dei Pasti =====");
+        printer.print("1. Avvia interfaccia grafica (JavaFX)");
+        printer.print("2. Avvia interfaccia a linea di comando (CLI)");
+        printer.print("Scegli un'opzione: ");
         String choice = scanner.nextLine();
 
         if ("2".equals(choice)) {

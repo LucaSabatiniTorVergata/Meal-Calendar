@@ -2,7 +2,6 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;

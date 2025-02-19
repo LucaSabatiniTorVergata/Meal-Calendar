@@ -2,10 +2,6 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -32,7 +28,7 @@ public class LoginViewBoundary {
 
 
     @FXML
-        private void indietroview(ActionEvent event) throws IOException {
+        private void indietroview(ActionEvent event)  {
 
             Stage stage = (Stage) indietro.getScene().getWindow();
             GraphicController.cambiascena(stage, "hello-view.fxml");
@@ -62,7 +58,7 @@ public class LoginViewBoundary {
             }
         }
         @FXML
-        private void here(ActionEvent event) throws IOException {
+        private void here(ActionEvent event) {
 
             Stage stage = (Stage) guest.getScene().getWindow();
             GraphicController.cambiascena(stage, "guestmenu-view.fxml");
