@@ -1,7 +1,7 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 
@@ -27,6 +27,13 @@ public class MealcalendarController {
     private static final int REMINDER_MINUTES = 30;
 
     private final MealcalendarBean mealcalendarBean;
+
+    static {
+        // Configura il logger con un formatter standard
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new SimpleFormatter());
+        LOGGER.addHandler(consoleHandler);
+    }
 
     public MealcalendarController(MealcalendarBean bean) {
         this.mealcalendarBean = bean;
@@ -59,7 +66,7 @@ public class MealcalendarController {
                 sendEmailProgrammata(false);
             }
         } catch (Exception e) {
-            LOGGER.severe("Errore nell'invio della mail: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore nell''invio della mail: {0}", e.getMessage());
         }
     }
 
@@ -87,7 +94,7 @@ public class MealcalendarController {
             transport.connect(SMTP_HOST, EMAIL_SENDER, EMAIL_PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
         }
-        LOGGER.info("Email inviata con successo a " + recipient);
+        LOGGER.log(Level.INFO, "Email inviata con successo a {0}", recipient);
     }
 
     private void sendEmailProgrammata(boolean isRestaurant) {
@@ -100,22 +107,25 @@ public class MealcalendarController {
 
             long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), oraDiInvio);
             if (delay > 0) {
-                try (ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor()) {
-                    scheduler.schedule(() -> {
-                        try {
-                            String subject = "Ricordo della tua scelta";
-                            String body = String.format("Ti ricordo che hai scelto di %s %s tra mezz'ora.", isRestaurant ? "mangiare a" : "preparare la ricetta", mealcalendarBean.getScelta());
-                            sendEmail(mail, subject, body);
-                        } catch (MessagingException e) {
-                            LOGGER.severe("Errore nell'invio dell'email programmata: " + e.getMessage());
-                        }
-                    }, delay, TimeUnit.MILLISECONDS);
-                }
+                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                // Schedule the task
+                scheduler.schedule(() -> {
+                    try {
+                        String subject = "Ricordo della tua scelta";
+                        String body = String.format("Ti ricordo che hai scelto di %s %s tra mezz'ora.", isRestaurant ? "mangiare a" : "preparare la ricetta", mealcalendarBean.getScelta());
+                        sendEmail(mail, subject, body);
+                    } catch (MessagingException e) {
+                        LOGGER.log(Level.SEVERE, "Errore nell'invio dell'email programmata: {0}", e.getMessage());
+                    }
+                }, delay, TimeUnit.MILLISECONDS);
+
+                // Gracefully shut down the scheduler after the task is done
+                scheduler.shutdown();
             } else {
-                LOGGER.info("L'orario selezionato è già passato!");
+                LOGGER.log(Level.INFO, "L'orario selezionato è già passato!");
             }
         } catch (Exception e) {
-            LOGGER.severe("Errore nella programmazione dell'email: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore nella programmazione dell''email: {0}", e.getMessage());
         }
     }
 
