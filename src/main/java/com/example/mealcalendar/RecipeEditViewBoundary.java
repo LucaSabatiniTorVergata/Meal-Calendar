@@ -2,6 +2,7 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,8 @@ public class RecipeEditViewBoundary {
     private Button rimuovi;
 
     private String selectedRecipe;
+
+    private static final Logger LOGGER = Logger.getLogger(RecipeEditViewBoundary.class.getName());
 
     @FXML
     private void initialize() {
@@ -107,22 +110,25 @@ public class RecipeEditViewBoundary {
     }
 
     // Rimuove la ricetta selezionata
-    private void rimuoviricetta() throws IOException, RecipeDaoException {
-        RecipeEditController controller = new RecipeEditController();
-        controller.rimuovi(selectedRecipe);
-        Stage stage = (Stage) ritorno.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipe-view.fxml");
+    private void rimuoviricetta() throws IOException, RecipeDaoException, RecipeDeletionException {
+        try {
+            RecipeEditController controller = new RecipeEditController();
+            controller.rimuovi(selectedRecipe);
+        } catch (IOException | RecipeDaoException e) {
+            throw new RecipeDeletionException("Errore durante la rimozione della ricetta", e);
+        }
     }
 
-    // Gestisce l'azione di rimozione della ricetta
     @FXML
     private void removeRecipe(ActionEvent event) {
         try {
             rimuoviricetta();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (RecipeDaoException e) {
-            throw new RuntimeException(e);
+        } catch (RecipeDaoException | RecipeDeletionException e) {
+            // Gestione specifica dell'eccezione, ad esempio log o messaggio utente
+            LOGGER.severe("Errore durante la rimozione della ricetta: " + e.getMessage());
         }
     }
+
 }
