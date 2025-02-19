@@ -32,9 +32,6 @@ public class MealCalenderViewBoundaryCli {
         ristorantescelto = ristoranteSelezionato;
     }
 
-    public static String getRistoranteSelezionato() {
-        return ristorantescelto;
-    }
 
     public void start() throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -130,7 +127,7 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private void confirmChoise() throws Exception {
-        vengoDaCalendar = true;
+        setVengoDaCalendar(true);
         if (sceltaLuogo) {
             navigateToRestaurant();
         } else {
@@ -158,5 +155,9 @@ public class MealCalenderViewBoundaryCli {
         } catch (Exception e) {
             throw new MailSendingException("Errore durante l'invio della mail.", e);
         }
+    }
+
+    private static void setVengoDaCalendar(boolean value) {
+        vengoDaCalendar = value;
     }
 }
