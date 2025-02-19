@@ -187,7 +187,7 @@ public class RecipeVewBoundaryCli {
     }
 
     // Metodo per rimuovere una ricetta (opzione 4)
-    private void removeRecipe() throws IOException {
+    private void removeRecipe() throws IOException, RecipeDaoException {
         printer.print("\n===== Rimozione Ricetta =====");
         if (ricettaSelezionata == null) {
             printer.print("❌ Nessuna ricetta selezionata da rimuovere.");
