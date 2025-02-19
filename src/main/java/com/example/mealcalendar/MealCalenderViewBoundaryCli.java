@@ -32,7 +32,6 @@ public class MealCalenderViewBoundaryCli {
         ristorantescelto = ristoranteSelezionato;
     }
 
-
     public void start() throws Exception {
         Scanner scanner = new Scanner(System.in);
         printer.print("=== CALENDARIO PASTI ===");
@@ -102,7 +101,7 @@ public class MealCalenderViewBoundaryCli {
         while (oraselezionata == null) {
             System.out.print("Inserisci l'ora (HH:mm): ");
             String oraInput = scanner.nextLine();
-            if (oraInput.matches("(\\d{2}):(\\d{2})") && oraInput.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
+            if (oraInput.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
                 oraselezionata = oraInput;
             } else {
                 System.out.println("Formato ora non valido. Riprova.");
