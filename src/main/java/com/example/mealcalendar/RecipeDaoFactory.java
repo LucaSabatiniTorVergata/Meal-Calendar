@@ -6,8 +6,6 @@ public class RecipeDaoFactory {
 
     private RecipeDaoFactory() {}
 
-    private RecipeDaoFactory() {
-    }
 
     private static boolean useDemo = SessionManagerSLT.getInstance().getDemo();
 
