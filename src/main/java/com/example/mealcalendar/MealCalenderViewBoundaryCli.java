@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class MealCalenderViewBoundaryCli {
 
     private static final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
@@ -112,15 +111,18 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private static void readLocation(Scanner scanner) {
+        String luogoInput;
         while (true) {
             printer.print("Scegli il luogo (1. home, 2. restaurant): ");
-            String luogoInput = scanner.nextLine();
+            luogoInput = scanner.nextLine();
+
+            // Verifica dell'input
             if (luogoInput.equals("1")) {
                 sceltaLuogo = false;
-                break;
+                return;  // Esci dal metodo direttamente
             } else if (luogoInput.equals("2")) {
                 sceltaLuogo = true;
-                break;
+                return;  // Esci dal metodo direttamente
             } else {
                 printer.print("Scelta non valida. Riprova.");
             }
