@@ -113,7 +113,7 @@ public class MealcalendarController {
                 LOGGER.log(Level.INFO, "L''orario selezionato è già passato!");
             }
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Errore nella programmazione dell'email: {0}", e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore nella programmazione dell''email: {0}", e.getMessage());
         }
     }
 
