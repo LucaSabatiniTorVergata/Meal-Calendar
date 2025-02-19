@@ -3,6 +3,7 @@ package com.example.mealcalendar;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.*;
 
 public class UserDao implements UserDaoInterface {
 
@@ -13,6 +14,9 @@ public class UserDao implements UserDaoInterface {
     private static String url;
     private static String dbuser;
     private static String password;
+
+    // Logger setup
+    private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
     // In-memory user list for demo mode
     private static List<UserEntity> demoUsers = new ArrayList<>();
@@ -26,7 +30,7 @@ public class UserDao implements UserDaoInterface {
             dbuser = props.getProperty("db.dbuser");
             password = props.getProperty("db.password");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error loading database properties", ex);
         }
     }
 
@@ -39,13 +43,13 @@ public class UserDao implements UserDaoInterface {
                 if (!file.exists()) {
                     boolean fileCreated = file.createNewFile();
                     if (fileCreated) {
-                        System.out.println("File created successfully.");
+                        logger.info("File created successfully.");
                     } else {
-                        System.out.println("File already exists.");
+                        logger.info("File already exists.");
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error creating file", e);
             }
         }
     }
@@ -61,7 +65,7 @@ public class UserDao implements UserDaoInterface {
                 return registerUserFS(user);  // Use File System
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error registering user", e);
             return false;  // Return false on exception
         }
     }
@@ -103,7 +107,7 @@ public class UserDao implements UserDaoInterface {
                 return getAllUsersFS();  // Fetch users from file system
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error retrieving all users", e);
         }
         return new ArrayList<>();  // Return empty list in case of error
     }
@@ -153,7 +157,7 @@ public class UserDao implements UserDaoInterface {
                 return getUserByUsernameFS(username);  // Search in file system
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error retrieving user by username", e);
         }
         return null;  // Return null if not found
     }
