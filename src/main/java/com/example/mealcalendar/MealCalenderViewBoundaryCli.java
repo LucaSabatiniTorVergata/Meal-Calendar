@@ -59,15 +59,6 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    private void readLocation(Scanner scanner) {
-    }
-
-    private void readTime(Scanner scanner) {
-    }
-
-    private void readDate(Scanner scanner) {
-    }
-
     private void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
         if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
             throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
@@ -83,7 +74,7 @@ public class MealCalenderViewBoundaryCli {
                 printer.print("Descrizione: " + ricettaSelezionata.getDescription());
                 printer.print("Autore: " + ricettaSelezionata.getAuthor());
                 inviomail();
-            } else if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
+            } else {
                 printer.print("\n🍽 Ristorante Selezionato:");
                 printer.print("Ristorante: " + ristorantescelto);
                 inviomail();
@@ -93,9 +84,53 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    private static void confirmChoise() throws Exception {
-        vengoDaCalendar = true;
+    private static void readDate(Scanner scanner) {
+        while (dataselezionata == null) {
+            System.out.print("Inserisci la data (dd/MM/yyyy): ");
+            String dataInput = scanner.nextLine();
+            try {
+                LocalDate data = LocalDate.parse(dataInput, DATE_FORMATTER);
+                if (data.isBefore(LocalDate.now())) {
+                    System.out.println("Non puoi selezionare una data passata. Riprova.");
+                } else {
+                    dataselezionata = data;
+                }
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato data non valido. Riprova.");
+            }
+        }
+    }
 
+    private static void readTime(Scanner scanner) {
+        while (oraselezionata == null) {
+            System.out.print("Inserisci l'ora (HH:mm): ");
+            String oraInput = scanner.nextLine();
+            if (oraInput.matches("(\\d{2}):(\\d{2})") && oraInput.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
+                oraselezionata = oraInput;
+            } else {
+                System.out.println("Formato ora non valido. Riprova.");
+            }
+        }
+    }
+
+    private static void readLocation(Scanner scanner) {
+        while (true) {
+            System.out.print("Scegli il luogo (1. home, 2. restaurant): ");
+            String luogoInput = scanner.nextLine();
+            if (luogoInput.equals("1")) {
+                sceltaLuogo = false;
+                break;
+            } else if (luogoInput.equals("2")) {
+                sceltaLuogo = true;
+                break;
+            } else {
+                System.out.println("Scelta non valida. Riprova.");
+            }
+        }
+    }
+
+    private void confirmChoise() throws Exception {
+        vengoDaCalendar = true;
         if (sceltaLuogo) {
             navigateToRestaurant();
         } else {
@@ -104,23 +139,20 @@ public class MealCalenderViewBoundaryCli {
         }
     }
 
-    private static void navigateToRestaurant() throws Exception {
+    private void navigateToRestaurant() throws Exception {
         FindRestaurantViewBoundaryCli findRestaurantView = new FindRestaurantViewBoundaryCli(true);
         findRestaurantView.start();
-
         if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
-            System.out.println("Ristorante selezionato: " + ristorantescelto);
+            printer.print("Ristorante selezionato: " + ristorantescelto);
         } else {
-            System.out.println("Nessun ristorante selezionato.");
+            printer.print("Nessun ristorante selezionato.");
         }
     }
 
     public static void inviomail() throws MailSendingException {
-        AntiCodeSmellPrinter localPrinter = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
         try {
             MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
-                    SessionManagerSLT.getInstance().getLoggedInUsername(),
-                    sceltaLuogo ? ristorantescelto : ricettascelta);
+                    SessionManagerSLT.getInstance().getLoggedInUsername(), sceltaLuogo ? ristorantescelto : ricettascelta);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
         } catch (Exception e) {
