@@ -28,7 +28,9 @@ public class MealCalenderViewBoundaryCli {
         this.ricettaSelezionata = ricettaSelezionata;
     }
 
-    public MealCalenderViewBoundaryCli(String ristoranteSelezionato) {
+    // Rimosso costruttore che imposta direttamente ristorantescelto
+    // Aggiunto metodo per impostare ristorantescelto
+    public void setRistoranteSelezionato(String ristoranteSelezionato) {
         ristorantescelto = ristoranteSelezionato;
     }
 
@@ -176,9 +178,5 @@ public class MealCalenderViewBoundaryCli {
     public void setRicettaSelezionata(RecipeReturnBean ricetta) {
         this.ricettaSelezionata = ricetta;
         ricettascelta = ricetta.getRecipeName();
-    }
-
-    public void setRistoranteSelezionato(String ristorante) {
-        ristorantescelto = ristorante;
     }
 }
