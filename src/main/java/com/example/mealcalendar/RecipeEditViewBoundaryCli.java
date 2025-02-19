@@ -1,5 +1,6 @@
 package com.example.mealcalendar;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class RecipeEditViewBoundaryCli {
@@ -16,7 +17,7 @@ public class RecipeEditViewBoundaryCli {
         this.ricetta = ricetta;
     }
 
-    public void start() throws Exception {
+    public void start() throws RecipeNotSelectedException, IOException {
         if (ricetta == null) {
             throw new RecipeNotSelectedException();
         }
