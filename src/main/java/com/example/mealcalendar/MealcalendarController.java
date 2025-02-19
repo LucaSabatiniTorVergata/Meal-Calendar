@@ -57,7 +57,7 @@ public class MealcalendarController {
             sendEmail(mail, subject, messageBody);
             sendEmailProgrammata(isRestaurant);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Errore nell'invio della mail: {0}", e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore nell''invio della mail: {0}", e.getMessage());
         }
     }
 
@@ -110,7 +110,7 @@ public class MealcalendarController {
                 }, delay, TimeUnit.MILLISECONDS);
                 scheduler.shutdown();
             } else {
-                LOGGER.log(Level.INFO, "L'orario selezionato è già passato!");
+                LOGGER.log(Level.INFO, "L''orario selezionato è già passato!");
             }
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore nella programmazione dell'email: {0}", e.getMessage());
