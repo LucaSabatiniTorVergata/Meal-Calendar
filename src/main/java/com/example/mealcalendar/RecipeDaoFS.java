@@ -59,12 +59,9 @@ public class RecipeDaoFS implements RecipeDao {
                 }
             }
         } catch (IOException e) {
-            // Aggiungi più dettagli contestuali nel messaggio di errore
-            String errorMessage = "Impossibile creare o leggere il file delle ricette: " + FILE_PATH;
-            // Log dell'errore con il messaggio contestualizzato
-            LOGGER.log(Level.SEVERE, errorMessage, e);
-            // Rilancia l'eccezione con informazioni contestuali
-            throw new RecipeDaoException(errorMessage, e);
+            throw new RecipeDaoException(
+                    "Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e
+            );
         }
         return recipeList;
     }
