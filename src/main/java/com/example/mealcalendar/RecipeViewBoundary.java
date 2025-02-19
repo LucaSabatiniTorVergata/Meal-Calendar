@@ -1,6 +1,7 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -10,11 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -65,6 +62,10 @@ public class RecipeViewBoundary {
 
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
+
+    // Aggiungi un campo DatePicker per calendar
+    @FXML
+    private DatePicker calendar;
 
     // Handle adding recipe view
     @FXML
@@ -135,11 +136,18 @@ public class RecipeViewBoundary {
             Optional.ofNullable(listaRicetteview.getSelectionModel().getSelectedItem())
                     .ifPresent(selectedItem -> {
                         try {
+                            // Passa la data selezionata alla funzione
                             if (isVengoDaCalendar()) {
                                 setVengoDaCalendar(false);
                                 setRicettascelta(selectedItem);
-                                MealCalenderViewBoundary.inviomail();
-                                loadMealCalendarView();
+
+                                // Qui viene passata la data selezionata dal calendar
+                                LocalDate selectedDate = calendar.getValue();
+                                if (selectedDate != null) {
+                                    // Passa la data alla funzione che invia la mail
+                                    MealCalenderViewBoundary.inviomail();
+                                    loadMealCalendarView();
+                                }
                             } else {
                                 showRecipeDetails(selectedItem);
                             }
