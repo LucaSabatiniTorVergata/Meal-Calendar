@@ -79,7 +79,7 @@ public class MealCalenderViewBoundary {
     }
 
     @FXML
-    private void confirmChoise(ActionEvent actionEvent) throws Exception {
+    private void confirmChoise(ActionEvent actionEvent)  {
 
 
         dataselezionata = calendar.getValue();
@@ -100,7 +100,7 @@ public class MealCalenderViewBoundary {
 
     }
 
-    public static void inviomail() throws Exception {
+    public static void inviomail()  {
 
         if(sceltaLuogo){
 
