@@ -18,8 +18,7 @@ public class RecipeEditViewBoundaryCli {
 
     public void start() throws Exception {
         if (ricetta == null) {
-            printer.print("Nessuna ricetta selezionata per la modifica.");
-            return;
+            throw new RecipeNotSelectedException();
         }
 
         printer.print("\n===== Modifica Ricetta (CLI) =====");
