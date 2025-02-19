@@ -39,7 +39,7 @@ public class RecipeDaoFS implements RecipeDao {
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: " + recipe.getRecipeName());
+            LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
             throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
         }
     }
