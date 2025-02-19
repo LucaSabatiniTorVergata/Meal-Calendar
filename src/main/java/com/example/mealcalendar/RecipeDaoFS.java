@@ -40,7 +40,7 @@ public class RecipeDaoFS implements RecipeDao {
             return true;
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", new Object[]{recipe.getRecipeName(), e});
-            throw new RuntimeException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
+            throw new RuntimeException("Errore durante l''aggiunta della ricetta: " + recipe.getRecipeName(), e);
         }
     }
 
@@ -83,8 +83,8 @@ public class RecipeDaoFS implements RecipeDao {
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nell'aggiornamento della ricetta con il nome {0}", new Object[]{oldRecipe.getRecipeName(), e});
-                throw new RuntimeException("Errore durante l'aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
+                LOGGER.log(Level.SEVERE, "Errore nell''aggiornamento della ricetta con il nome {0}", new Object[]{oldRecipe.getRecipeName(), e});
+                throw new RuntimeException("Errore durante l''aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
             }
         }
     }
