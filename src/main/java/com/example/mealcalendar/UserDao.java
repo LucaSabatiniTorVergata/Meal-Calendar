@@ -7,8 +7,8 @@ import java.util.*;
 public class UserDao implements UserDaoInterface {
 
     private static final String FILE_PATH = "users.txt";  // Path for file storage
-    private static boolean USE_DATABASE;  // Flag for DB usage
-    private static boolean USE_DEMO;  // Flag for demo mode
+    private boolean USE_DATABASE;  // Flag for DB usage
+    private boolean USE_DEMO;  // Flag for demo mode
 
     private static String url;
     private static String dbuser;
@@ -31,8 +31,8 @@ public class UserDao implements UserDaoInterface {
     }
 
     public UserDao(boolean useDatabase, boolean useDemo) {
-        UserDao.USE_DEMO = useDemo;
-        UserDao.USE_DATABASE = useDatabase;
+        this.USE_DEMO = useDemo;
+        this.USE_DATABASE = useDatabase;
         if (!USE_DATABASE && !USE_DEMO) {
             File file = new File(FILE_PATH);
             try {
