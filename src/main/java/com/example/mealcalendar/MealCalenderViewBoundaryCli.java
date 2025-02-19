@@ -36,6 +36,22 @@ public class MealCalenderViewBoundaryCli {
         Scanner scanner = new Scanner(System.in);
         printer.print("=== CALENDARIO PASTI ===");
 
+        printSelectionAndSendMail();
+
+        readDate(scanner);
+        readTime(scanner);
+        readLocation(scanner);
+
+        LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
+
+        try {
+            confirmChoise();
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Errore durante la conferma della scelta", e);
+        }
+    }
+
+    private void printSelectionAndSendMail() throws Exception {
         if (ricettaSelezionata != null) {
             printer.print("\n🍴 Ricetta Selezionata:");
             printer.print("Nome: " + ricettaSelezionata.getRecipeName());
@@ -53,7 +69,9 @@ public class MealCalenderViewBoundaryCli {
             setRistoranteSelezionato(ristorantescelto);
             inviomail();
         }
+    }
 
+    private void readDate(Scanner scanner) {
         while (dataselezionata == null) {
             printer.print("Inserisci la data (dd/MM/yyyy): ");
             String dataInput = scanner.nextLine();
@@ -68,7 +86,9 @@ public class MealCalenderViewBoundaryCli {
                 printer.print("Formato data non valido. Riprova.");
             }
         }
+    }
 
+    private void readTime(Scanner scanner) {
         while (oraselezionata == null) {
             printer.print("Inserisci l'ora (HH:mm): ");
             String oraInput = scanner.nextLine();
@@ -78,7 +98,9 @@ public class MealCalenderViewBoundaryCli {
                 printer.print("Formato ora non valido. Riprova.");
             }
         }
+    }
 
+    private void readLocation(Scanner scanner) {
         while (true) {
             printer.print("Scegli il luogo (1. home, 2. restaurant): ");
             String luogoInput = scanner.nextLine();
@@ -91,14 +113,6 @@ public class MealCalenderViewBoundaryCli {
             } else {
                 printer.print("Scelta non valida. Riprova.");
             }
-        }
-
-        LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
-
-        try {
-            confirmChoise();
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Errore durante la conferma della scelta", e);
         }
     }
 
@@ -126,15 +140,18 @@ public class MealCalenderViewBoundaryCli {
     }
 
     public static void inviomail() throws Exception {
+        AntiCodeSmellPrinter localPrinter = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
         if (sceltaLuogo) {
-            printer.print("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
-            printer.print("Ristorante scelto: " + ristorantescelto);
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
+            localPrinter.print("Scelta luogo = true. Inviamo la mail con il ristorante selezionato.");
+            localPrinter.print("Ristorante scelto: " + ristorantescelto);
+            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
+                    SessionManagerSLT.getInstance().getLoggedInUsername(), ristorantescelto);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
         } else {
-            printer.print("Scelta luogo = false. Inviamo la mail con la ricetta selezionata.");
-            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(), ricettascelta);
+            localPrinter.print("Scelta luogo = false. Inviamo la mail con la ricetta selezionata.");
+            MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata,
+                    SessionManagerSLT.getInstance().getLoggedInUsername(), ricettascelta);
             MealcalendarController controller = new MealcalendarController(bean);
             controller.invioMail();
         }

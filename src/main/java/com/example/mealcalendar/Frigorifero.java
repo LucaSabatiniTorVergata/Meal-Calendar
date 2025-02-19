@@ -1,18 +1,22 @@
 package com.example.mealcalendar;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 
 public class Frigorifero {
 
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Map<String, Integer> inventario;
+
 
     public Frigorifero() {
-        Map<String, Integer> inventario = new HashMap<>();
+        this.inventario  =  new HashMap<>();
     }
 
-
-
+    public Map<String, Integer> getInventario() {
+        return inventario;
+    }
+    public void setInventario(Map<String, Integer> inventario) {
+        this.inventario = inventario;
+    }
 }
