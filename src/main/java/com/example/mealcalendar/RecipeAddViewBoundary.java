@@ -79,7 +79,7 @@ public class RecipeAddViewBoundary {
     }
 
     @FXML
-    private void handleAddRecipe(ActionEvent event) {
+    private void handleAddRecipe(ActionEvent event) throws RecipeDaoException {
         String name = recipename.getText().trim();
         String diet = (dietMenu.getText().equals("Seleziona dieta")) ? "" : dietMenu.getText();
         String meal = (mealMenu.getText().equals("Seleziona pasto")) ? "" : mealMenu.getText();

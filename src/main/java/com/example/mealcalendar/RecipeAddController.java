@@ -6,7 +6,7 @@ public class RecipeAddController {
     private RecipeDao dao = RecipeDaoFactory.createRecipeDao();
 
     // Metodo per salvare una ricetta
-    public boolean salvaRicetta(AddRecipeBean bean)  {
+    public boolean salvaRicetta(AddRecipeBean bean) throws RecipeDaoException {
         String nome = bean.getRecipeName();
         String dieta = bean.getTypeofDiet();
         String pasto = bean.getTypeofMeal();
