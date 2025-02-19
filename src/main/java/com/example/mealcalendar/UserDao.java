@@ -7,8 +7,8 @@ import java.util.*;
 public class UserDao implements UserDaoInterface {
 
     private static final String FILE_PATH = "users.txt";  // Path for file storage
-    private boolean USE_DATABASE;  // Flag for DB usage
-    private boolean USE_DEMO;  // Flag for demo mode
+    private boolean useDatabase;  // Flag for DB usage
+    private boolean useDemo;  // Flag for demo mode
 
     private static String url;
     private static String dbuser;
@@ -31,13 +31,18 @@ public class UserDao implements UserDaoInterface {
     }
 
     public UserDao(boolean useDatabase, boolean useDemo) {
-        this.USE_DEMO = useDemo;
-        this.USE_DATABASE = useDatabase;
-        if (!USE_DATABASE && !USE_DEMO) {
+        this.useDemo = useDemo;
+        this.useDatabase = useDatabase;
+        if (!useDatabase && !useDemo) {
             File file = new File(FILE_PATH);
             try {
                 if (!file.exists()) {
-                    file.createNewFile();
+                    boolean fileCreated = file.createNewFile();
+                    if (fileCreated) {
+                        System.out.println("File created successfully.");
+                    } else {
+                        System.out.println("File already exists.");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -48,9 +53,9 @@ public class UserDao implements UserDaoInterface {
     @Override
     public boolean registerUser(UserEntity user) throws IOException {
         try {
-            if (USE_DATABASE) {
+            if (useDatabase) {
                 return registerUserDB(user);  // Use DB
-            } else if (USE_DEMO) {
+            } else if (useDemo) {
                 return registerUserDemo(user);  // Use in-memory demo
             } else {
                 return registerUserFS(user);  // Use File System
@@ -90,9 +95,9 @@ public class UserDao implements UserDaoInterface {
     @Override
     public List<UserEntity> getAllUsers() throws IOException {
         try {
-            if (USE_DEMO) {
+            if (useDemo) {
                 return getAllUsersDemo();  // Return demo users list
-            } else if (USE_DATABASE) {
+            } else if (useDatabase) {
                 return getAllUsersDB();  // Fetch users from DB
             } else {
                 return getAllUsersFS();  // Fetch users from file system
@@ -140,9 +145,9 @@ public class UserDao implements UserDaoInterface {
     @Override
     public UserEntity getUserByUsername(String username) throws IOException {
         try {
-            if (USE_DEMO) {
+            if (useDemo) {
                 return getUserByUsernameDemo(username);  // Search in demo list
-            } else if (USE_DATABASE) {
+            } else if (useDatabase) {
                 return getUserByUsernameDB(username);  // Search in DB
             } else {
                 return getUserByUsernameFS(username);  // Search in file system
