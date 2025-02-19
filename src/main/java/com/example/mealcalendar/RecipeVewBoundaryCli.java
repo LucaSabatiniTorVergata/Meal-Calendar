@@ -2,6 +2,7 @@ package com.example.mealcalendar;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class RecipeVewBoundaryCli {
@@ -121,12 +122,17 @@ public class RecipeVewBoundaryCli {
         RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean(tipoDieta, tipoPasto);
         RecipeSearchController controller = new RecipeSearchController(filters);
 
-        List<RecipeReturnBean> listaRicette = controller.trovaricette();
+        // Ottieni una lista di ricette come Optional
+        Optional<List<RecipeReturnBean>> optionalListaRicette = controller.trovaricette();
 
-        if (listaRicette == null || listaRicette.isEmpty()) {
+        // Controlla se l'Optional contiene un valore
+        if (optionalListaRicette.isEmpty() || optionalListaRicette.get().isEmpty()) {
             printer.print("Nessuna ricetta trovata con i filtri specificati.");
             return;
         }
+
+        // Ottieni la lista di ricette dal Optional
+        List<RecipeReturnBean> listaRicette = optionalListaRicette.get();
 
         // Visualizza le ricette trovate
         printer.print("\n===== Lista Ricette =====");

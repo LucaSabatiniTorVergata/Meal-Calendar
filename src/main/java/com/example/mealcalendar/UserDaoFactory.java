@@ -2,6 +2,8 @@ package com.example.mealcalendar;
 
 public class UserDaoFactory {
 
+    private UserDaoFactory() {}
+
     private static boolean useDatabase = false; // Impostazione predefinita su fs
     private static boolean demoMode = false;
 

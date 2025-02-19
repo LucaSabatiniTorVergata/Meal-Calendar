@@ -1,28 +1,26 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import java.util.List;
-import java.util.logging.Logger;
-
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.Label;
-
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import static com.example.mealcalendar.MealCalenderViewBoundary.vengoDaCalendar;
 import static com.example.mealcalendar.MealCalenderViewBoundary.ricettascelta;
-
 
 public class RecipeViewBoundary {
 
@@ -35,15 +33,13 @@ public class RecipeViewBoundary {
     @FXML
     private Button returnhome;
 
-
     @FXML
     private SplitMenuButton tipoDieta;
     @FXML
     private SplitMenuButton tipoPasto;
 
-
     @FXML
-    private MenuItem omnivorous ;
+    private MenuItem omnivorous;
     @FXML
     private MenuItem vegetarian;
     @FXML
@@ -68,58 +64,51 @@ public class RecipeViewBoundary {
     @FXML
     private Label detailLabel;
 
-
     private String tipoDietaSelezionato;
     private String pastoSelezionato;
 
-
-
+    // Handle adding recipe view
     @FXML
     private void addrecipeview(ActionEvent event) {
-
-        Stage stage = (Stage) addrecipe.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipeadd-view.fxml");
+        changeScene("recipeadd-view.fxml", event);
     }
 
+    // Handle editing recipe view
     @FXML
-    private void editrecipeview(ActionEvent event){
-
-        Stage stage = (Stage) editrecipe.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipeedit-view.fxml");
+    private void editrecipeview(ActionEvent event) {
+        changeScene("recipeedit-view.fxml", event);
     }
+
+    // Handle returning to home menu
     @FXML
     private void homeView(ActionEvent event) {
-
-        Stage stage = (Stage) returnhome.getScene().getWindow();
-        GraphicController.cambiascena(stage, "usermenu-view.fxml");
+        changeScene("usermenu-view.fxml", event);
     }
 
-
+    // Handle searching recipes based on selected filters
     @FXML
     private void searchrecipies(ActionEvent event) throws IOException {
-
         tipoDietaSelezionato = tipoDieta.getText();
-        pastoSelezionato= tipoPasto.getText();
-        RecipeSearchFiltersBean bean=new RecipeSearchFiltersBean(tipoDietaSelezionato,pastoSelezionato);
-        RecipeSearchController controller=new RecipeSearchController(bean);
-        List<RecipeReturnBean> ricettereturnbean=controller.trovaricette();
+        pastoSelezionato = tipoPasto.getText();
+        RecipeSearchFiltersBean bean = new RecipeSearchFiltersBean(tipoDietaSelezionato, pastoSelezionato);
+        RecipeSearchController controller = new RecipeSearchController(bean);
 
-        if(ricettereturnbean!=null){
-            label.setVisible(false);
-            mostraricette(ricettereturnbean);
-        }else{
-            listaRicetteview.getItems().clear();
-            label.setVisible(true);
-        }
+        // Using Optional for handling possible null results
+        Optional<List<RecipeReturnBean>> ricettereturnbean = controller.trovaricette();
+
+        // If results are present, display them; otherwise, show a label
+        ricettereturnbean.ifPresentOrElse(
+                this::mostraricette,
+                () -> {
+                    listaRicetteview.getItems().clear();
+                    label.setVisible(true);
+                }
+        );
     }
 
-
-
+    // Initialize menu actions for diet and meal types
     @FXML
     public void initialize() {
-
-
-        // Associare le azioni ai MenuItem (cambiano il testo del bottone)
         vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
         vegetarian.setOnAction(e -> tipoDieta.setText("Vegetarian"));
         omnivorous.setOnAction(e -> tipoDieta.setText("Omnivorous"));
@@ -129,55 +118,78 @@ public class RecipeViewBoundary {
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
     }
 
+    // Display the list of recipes
     public void mostraricette(List<RecipeReturnBean> listaRicette) {
         listaRicetteview.getItems().clear();
         for (RecipeReturnBean ricetta : listaRicette) {
-            String nomeRicetta = ricetta.getRecipeName();  // Prendi il nome
-
-            String tipodieta = ricetta.getTypeofDiet();    // Prendi il tipo di dieta
-            String tipopasto = ricetta.getTypeofMeal(); // Prendi il tipo di pasto
-            String numingredienti = ricetta.getNumIngredients();
-            String ingredienti = ricetta.getIngredients();
-            String descrizione = ricetta.getDescription();
-            String author = ricetta.getAuthor();
-            String riga = nomeRicetta + " - " + tipodieta + " - " + tipopasto
-                    + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
+            // Using Optional to avoid null checks
+            String riga = buildRecipeString(ricetta);
             LOGGER.info("riga: " + riga);
-
             listaRicetteview.getItems().add(riga);
         }
     }
 
-
+    // Handle recipe item click (double click)
     @FXML
     private void handleItemClick(MouseEvent event) throws Exception {
-        if (event.getClickCount() == 2) {  // Controlla se è un doppio click
-            String selectedItem = listaRicetteview.getSelectionModel().getSelectedItem();
-
-            if (selectedItem != null) {
-                if(vengoDaCalendar){
-                    vengoDaCalendar=false;
-                    ricettascelta=selectedItem;
-                    MealCalenderViewBoundary.inviomail();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) returnhome.getScene().getWindow();  // Prendi la finestra dalla nuova scena
-                    stage.setScene(new Scene(root));
-
-
-                }else {
-
-                    detailpane.setVisible(true);
-                    listaRicetteview.setVisible(false);
-                    detailLabel.setText(selectedItem);
-                }
-            }
+        if (event.getClickCount() == 2) {
+            Optional.ofNullable(listaRicetteview.getSelectionModel().getSelectedItem())
+                    .ifPresent(selectedItem -> {
+                        try {
+                            if (vengoDaCalendar) {
+                                vengoDaCalendar = false;
+                                ricettascelta = selectedItem;
+                                MealCalenderViewBoundary.inviomail();
+                                loadMealCalendarView();
+                            } else {
+                                showRecipeDetails(selectedItem);
+                            }
+                        } catch (Exception e) {
+                            LOGGER.severe("Error while handling item click: " + e.getMessage());
+                        }
+                    });
         }
     }
 
+    // Handle back button in recipe details view
     @FXML
     private void handleback() {
         detailpane.setVisible(false);
         listaRicetteview.setVisible(true);
+    }
+
+    // Helper method to change scenes
+    private void changeScene(String fxmlFile, ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        GraphicController.cambiascena(stage, fxmlFile);
+    }
+
+    // Helper method to build recipe string for display using Optional
+    private String buildRecipeString(RecipeReturnBean ricetta) {
+        String nomeRicetta = Optional.ofNullable(ricetta.getRecipeName()).orElse("Unknown Recipe");
+        String tipodieta = Optional.ofNullable(ricetta.getTypeofDiet()).orElse("Unknown Diet");
+        String tipopasto = Optional.ofNullable(ricetta.getTypeofMeal()).orElse("Unknown Meal");
+        String numingredienti = Optional.ofNullable(ricetta.getNumIngredients()).orElse("N/A");
+        String ingredienti = Optional.ofNullable(ricetta.getIngredients()).orElse("No ingredients listed");
+        String descrizione = Optional.ofNullable(ricetta.getDescription()).orElse("No description available");
+        String author = Optional.ofNullable(ricetta.getAuthor()).orElse("Unknown Author");
+
+        return nomeRicetta + " - " + tipodieta + " - " + tipopasto
+                + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;
+    }
+
+    // Helper method to load the Meal Calendar view
+    private void loadMealCalendarView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) returnhome.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
+
+    // Show recipe details in a separate pane
+    private void showRecipeDetails(String selectedItem) {
+        detailpane.setVisible(true);
+        listaRicetteview.setVisible(false);
+        detailLabel.setText(selectedItem);
     }
 }

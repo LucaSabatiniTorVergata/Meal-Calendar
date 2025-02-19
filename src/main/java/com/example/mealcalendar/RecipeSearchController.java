@@ -1,44 +1,44 @@
 package com.example.mealcalendar;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RecipeSearchController {
 
     private RecipeSearchFiltersBean filtri;
-
-    RecipeDaoFS dao=RecipeDaoFactory.createRecipeDao();
+    private RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();
 
     public RecipeSearchController(RecipeSearchFiltersBean filters) {
-        this.filtri=filters;
+        this.filtri = filters;
     }
-    public List<RecipeReturnBean> recipeExists(RecipeSearchFiltersBean bean)  {
+
+    // Metodo per cercare ricette che corrispondono ai filtri
+    public Optional<List<RecipeReturnBean>> trovaricette() {
+        List<RecipeReturnBean> result = filterRecipes(filtri);
+        return Optional.ofNullable(result);
+    }
+
+    // Metodo che applica i filtri per ottenere le ricette
+    private List<RecipeReturnBean> filterRecipes(RecipeSearchFiltersBean filters) {
         // Supponiamo che RecipeListSLT sia un singleton che gestisce la lista filtrata
         RecipeListSLT listaRicette = RecipeListSLT.getInstance();
         listaRicette.svuotaLista();
 
         List<RecipeEntity> recipeEntityList = dao.getAllRecipes();
 
+        // Aggiungi ricette che corrispondono ai filtri
         for (RecipeEntity recipe : recipeEntityList) {
-            // Confronta i filtri: per esempio, tipo di dieta e tipo di pasto
-            if (recipe.getTypeofDiet().equalsIgnoreCase(bean.getTipoDieta()) &&
-                    recipe.getTypeofMeal().equalsIgnoreCase(bean.getTipoPasto())) {
+            if (isRecipeMatchingFilters(recipe, filters)) {
                 listaRicette.aggiungiRicette(recipe);
             }
         }
-        List<RecipeReturnBean> ricetteBeans = listaRicette.getrcicettereturn();
-        return ricetteBeans.size()> 0 ? ricetteBeans : null;
+
+        return listaRicette.getrcicettereturn();
     }
 
-    public List<RecipeReturnBean> trovaricette() {
-
-        List<RecipeReturnBean> result = recipeExists(filtri);
-
-         if(result!=null){
-            return result;
-         }
-         return null;
-
+    // Metodo che verifica se una ricetta corrisponde ai filtri
+    private boolean isRecipeMatchingFilters(RecipeEntity recipe, RecipeSearchFiltersBean filters) {
+        return recipe.getTypeofDiet().equalsIgnoreCase(filters.getTipoDieta()) &&
+                recipe.getTypeofMeal().equalsIgnoreCase(filters.getTipoPasto());
     }
-
-
 }

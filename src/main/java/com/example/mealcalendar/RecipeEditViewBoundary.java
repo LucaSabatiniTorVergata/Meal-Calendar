@@ -13,120 +13,92 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
-
-
 public class RecipeEditViewBoundary {
 
     @FXML
     private Label welcomelabel;
     @FXML
     private Button recipeEdit2;
-
     @FXML
     private Button ritorno;
-
     @FXML
-    private ListView ricetteview;
-
+    private ListView<String> ricetteview;
     @FXML
     private Button rimuovi;
-
 
     private String selectedRecipe;
 
     @FXML
-    private void recipeedit2view(ActionEvent event) {
-
-        Stage stage = (Stage) recipeEdit2.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipeedit2-view.fxml");
+    private void initialize() {
+        initializeWelcomeLabel();
+        loadRecipes();
+        setupListViewListener();
     }
 
-    @FXML
-    private void backview(ActionEvent event)  {
-
-        Stage stage = (Stage) ritorno.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipe-view.fxml");
-    }
-
-    @FXML
-    public void initialize() {
-
+    // Inizializzazione del welcome label
+    private void initializeWelcomeLabel() {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         if (username != null) {
             welcomelabel.setText("Hi, " + username + "!");
         }
+    }
 
+    // Caricamento delle ricette nell'interfaccia
+    private void loadRecipes() {
         ricetteview.getItems().clear();
         String user = SessionManagerSLT.getInstance().getLoggedInUsername();
         RecipeEditBean bean = new RecipeEditBean(user);
         RecipeEditController controller = new RecipeEditController(bean);
         List<RecipeReturnBean> returnricette = controller.mostraricette();
+
         for (RecipeReturnBean ricetta : returnricette) {
-
-            String nomeRicetta = ricetta.getRecipeName();  // Prendi il nome
-
-
-            String tipodieta = ricetta.getTypeofDiet();    // Prendi il tipo di dieta
-
-
-            String tipopasto = ricetta.getTypeofMeal(); // Prendi il tipo di pasto
-
-
-            String numingredienti = ricetta.getNumIngredients();
-
-
-            String ingredienti = ricetta.getIngredients();
-
-
-            String descrizione = ricetta.getDescription();
-
-
-            String author = ricetta.getAuthor();
-
-
-            String riga = nomeRicetta + " - " + tipodieta + " - " + tipopasto
-                    + " - " + numingredienti + " - " + ingredienti + " - " + descrizione + " - " + author;  // Stringa da mostrare
-
-
+            String riga = formatRecipeForDisplay(ricetta);
             ricetteview.getItems().add(riga);
-
-            recipeEdit2.setDisable(true);
-            rimuovi.setDisable(true);
-
-            // Ascolta il cambiamento nella selezione della ListView
-            ricetteview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-                selectedRecipe = (String) newValue;// Prendi la ricetta selezionata
-
-                recipeEdit2.setDisable(selectedRecipe == null);
-                rimuovi.setDisable(selectedRecipe == null);// Abilita il bottone se c'è una selezione
-            });
-
-            // Aggiungi l'azione al bottone
-            recipeEdit2.setOnAction(event -> showRecipeDetails());
-            rimuovi.setOnAction(event -> {
-                try {
-                    rimuoviricetta();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
         }
     }
 
+    // Formatta una ricetta in una stringa per visualizzazione
+    private String formatRecipeForDisplay(RecipeReturnBean ricetta) {
+        return ricetta.getRecipeName() + " - " + ricetta.getTypeofDiet() + " - " + ricetta.getTypeofMeal()
+                + " - " + ricetta.getNumIngredients() + " - " + ricetta.getIngredients() + " - "
+                + ricetta.getDescription() + " - " + ricetta.getAuthor();
+    }
+
+    // Imposta il listener per la ListView
+    private void setupListViewListener() {
+        ricetteview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedRecipe = (String) newValue; // Salva la ricetta selezionata
+            updateButtonsState();
+        });
+    }
+
+    // Aggiorna lo stato dei pulsanti (abilita/disabilita)
+    private void updateButtonsState() {
+        boolean isRecipeSelected = selectedRecipe != null;
+        recipeEdit2.setDisable(!isRecipeSelected);
+        rimuovi.setDisable(!isRecipeSelected);
+    }
+
+    // Naviga alla vista per modificare la ricetta
+    @FXML
+    private void recipeedit2view(ActionEvent event) {
+        showRecipeDetails();
+    }
+
+    // Naviga indietro alla vista principale delle ricette
+    @FXML
+    private void backview(ActionEvent event) {
+        Stage stage = (Stage) ritorno.getScene().getWindow();
+        GraphicController.cambiascena(stage, "recipe-view.fxml");
+    }
+
+    // Mostra i dettagli della ricetta selezionata
     private void showRecipeDetails() {
         try {
-            // Carica il FXML della nuova schermata (dettagli della ricetta)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("recipeedit2-View.fxml"));
             Parent root = loader.load();
-
-            // Prendi il controller della nuova schermata
             RecipeEdit2ViewController controller = loader.getController();
-            controller.setRecipe(selectedRecipe);// Passa la ricetta selezionata
-
-
-            // Mostra la nuova scena
+            controller.setRecipe(selectedRecipe); // Passa la ricetta selezionata
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {
@@ -134,18 +106,21 @@ public class RecipeEditViewBoundary {
         }
     }
 
-
+    // Rimuove la ricetta selezionata
     private void rimuoviricetta() throws IOException {
-
         RecipeEditController controller = new RecipeEditController();
         controller.rimuovi(selectedRecipe);
         Stage stage = (Stage) ritorno.getScene().getWindow();
         GraphicController.cambiascena(stage, "recipe-view.fxml");
-
     }
 
-
+    // Gestisce l'azione di rimozione della ricetta
+    @FXML
+    private void removeRecipe(ActionEvent event) {
+        try {
+            rimuoviricetta();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-
