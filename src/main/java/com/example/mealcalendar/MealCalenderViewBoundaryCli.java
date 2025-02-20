@@ -45,18 +45,15 @@ public class MealCalenderViewBoundaryCli {
 
         try {
             confirmChoise();
+
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore durante la conferma della scelta", e);
         }
 
-        try {
-            printSelectionAndSendMail();
-        } catch (MailSendingException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante la selezione della ricetta o del ristorante", e);
-        }
+
     }
 
-    private void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
+    public void printSelectionAndSendMail() throws MailSendingException, RecipeNotSelectedException {
         if (ricettaSelezionata == null && (ristorantescelto == null || ristorantescelto.isEmpty())) {
             throw new RecipeNotSelectedException("Nessuna ricetta o ristorante selezionato per il calendario.");
         }

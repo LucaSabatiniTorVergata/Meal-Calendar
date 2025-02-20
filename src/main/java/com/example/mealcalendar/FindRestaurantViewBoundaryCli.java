@@ -110,7 +110,7 @@ public class FindRestaurantViewBoundaryCli {
             printer.print("✅ Hai selezionato: " + ristoranteSelezionato.getNome());
             setRistoranteSelezionato(ristoranteSelezionato.getNome());
             printer.print("\n🔄 Sto tornando al calendario con il ristorante selezionato...");
-            new CliController().navigateTo("calendariopasti");
+            new CliController().navigateTo("calendari");
         } else {
             apriGoogleMaps(ristoranteSelezionato);
         }
