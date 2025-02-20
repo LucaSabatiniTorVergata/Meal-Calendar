@@ -7,9 +7,10 @@ import java.util.logging.*;
 
 public class UserDao implements UserDaoInterface {
 
-    private static final String FILE_PATH = "users.txt";  // Path for file storage
+    private static final String DIR="/Users/lucasabatini/git/ispw/Meal-Calendar/";
+    private static final String FILE_PATH = DIR + "users.txt";  // Path for file storage
     private boolean useDatabase;  // Flag for DB usage
-    private boolean useDemo;  // Flag for demo mode
+    private boolean useDemo;  // Flag for de   mo mode
 
     private static String url;
     private static String dbuser;
@@ -71,25 +72,7 @@ public class UserDao implements UserDaoInterface {
     }
 
     // Register user in file system
-    private boolean registerUserFS(UserEntity user) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword());
-            writer.newLine();
-        }
-        return true;
-    }
 
-    // Register user in database
-    private boolean registerUserDB(UserEntity user) throws SQLException {
-        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(url, dbuser, password);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
-            return stmt.executeUpdate() > 0;
-        }
-    }
 
     // Register user in demo mode (in-memory)
     private boolean registerUserDemo(UserEntity user) {
@@ -200,5 +183,25 @@ public class UserDao implements UserDaoInterface {
             }
         }
         return null;  // Return null if not found
+    }
+
+    private boolean registerUserFS(UserEntity user) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword());
+            writer.newLine();
+        }
+        return true;
+    }
+
+    // Register user in database
+    private boolean registerUserDB(UserEntity user) throws SQLException {
+        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(url, dbuser, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            return stmt.executeUpdate() > 0;
+        }
     }
 }
