@@ -28,7 +28,7 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.*;
 
 public class FindRestaurantViewBoundary {
 
-    private static final boolean debugMode = true;
+    private static final boolean debug = true;
 
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
 
@@ -161,7 +161,7 @@ public class FindRestaurantViewBoundary {
     }
 
     private void processCalendarSelection(ReturnRestaurantsBean ristorante) {
-        if (!debugMode) {
+        if (!debug) {
             // In modalità produzione, non mostrare il progresso di caricamento
             return;
         }
