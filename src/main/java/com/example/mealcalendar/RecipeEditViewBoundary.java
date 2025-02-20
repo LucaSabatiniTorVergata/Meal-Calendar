@@ -1,6 +1,6 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -110,11 +110,11 @@ public class RecipeEditViewBoundary {
     }
 
     // Rimuove la ricetta selezionata
-    private void rimuoviricetta() throws IOException, RecipeDaoException, RecipeDeletionException {
+    private void rimuoviricetta() throws  RecipeDaoException, RecipeDeletionException {
         try {
             RecipeEditController controller = new RecipeEditController();
             controller.rimuovi(selectedRecipe);
-        } catch (IOException | RecipeDaoException e) {
+        } catch ( RecipeDaoException e) {
             throw new RecipeDeletionException("Errore durante la rimozione della ricetta", e);
         }
     }
@@ -123,8 +123,6 @@ public class RecipeEditViewBoundary {
     private void removeRecipe(ActionEvent event) {
         try {
             rimuoviricetta();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (RecipeDaoException | RecipeDeletionException e) {
             // Gestione specifica dell'eccezione, ad esempio log o messaggio utente
             LOGGER.severe("Errore durante la rimozione della ricetta: " + e.getMessage());

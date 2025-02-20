@@ -1,6 +1,6 @@
 package com.example.mealcalendar;
 
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -192,7 +192,7 @@ public class RecipeVewBoundaryCli {
     }
 
     // Metodo per rimuovere una ricetta (opzione 4)
-    private void removeRecipe() throws IOException, RecipeDaoException {
+    private void removeRecipe() throws RecipeDaoException {
         printer.print("\n===== Rimozione Ricetta =====");
         if (ricettaSelezionata == null) {
             printer.print("❌ Nessuna ricetta selezionata da rimuovere.");
