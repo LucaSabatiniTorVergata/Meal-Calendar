@@ -33,7 +33,7 @@ public class RegisterController {
 
         // Hash della password con BCrypt
         LOGGER.log(Level.INFO, "Password prima dell''hash: {0}", userRegisterBean.getPassword());
-        String hashedPassword = BCrypt.hashpw(userRegisterBean.getPassword(), BCrypt.gensalt());
+        String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(userRegisterBean.getPassword(),org.mindrot.jbcrypt.BCrypt.gensalt());
         LOGGER.log(Level.INFO, "Password dopo l''hash: {0}", hashedPassword);
 
         // Creazione dell'oggetto utente
