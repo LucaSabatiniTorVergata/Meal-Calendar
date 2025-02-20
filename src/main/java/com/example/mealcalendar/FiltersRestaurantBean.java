@@ -6,7 +6,7 @@ public class FiltersRestaurantBean {
     private String pasto;
     private double distanza;
 
-
+   public FiltersRestaurantBean() {}
 
     public FiltersRestaurantBean(String tipoDieta, String pasto, double distanza) {
         this.tipoDieta = tipoDieta;
@@ -25,4 +25,15 @@ public class FiltersRestaurantBean {
     public double getDistanza() {
         return distanza;
     }
+
+    public void setTipoDieta(String tipoDieta) {
+       this.tipoDieta = tipoDieta;
+    }
+    public void setPasto(String pasto) {
+       this.pasto = pasto;
+    }
+    public void setDistanza(double distanza) {
+       this.distanza = distanza;
+    }
+
 }

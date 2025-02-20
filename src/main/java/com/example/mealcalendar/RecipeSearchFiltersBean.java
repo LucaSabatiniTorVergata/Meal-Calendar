@@ -9,6 +9,7 @@ public class RecipeSearchFiltersBean {
            this.tipoDieta = tipoDieta;
            this.tipoPasto = tipoPasto;
     }
+    public RecipeSearchFiltersBean() {}
 
     public String getTipoDieta() {
         return tipoDieta;
@@ -16,6 +17,13 @@ public class RecipeSearchFiltersBean {
 
     public String getTipoPasto() {
         return tipoPasto;
+    }
+
+    public void setTipoDieta(String tipoDieta) {
+        this.tipoDieta = tipoDieta;
+    }
+    public void setTipoPasto(String tipoPasto) {
+        this.tipoPasto = tipoPasto;
     }
 
 }

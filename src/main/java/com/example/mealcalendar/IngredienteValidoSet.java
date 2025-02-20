@@ -15,6 +15,8 @@ public class IngredienteValidoSet {
         ingredientiValidi.add("uova");
         ingredientiValidi.add("pomodoro");
         ingredientiValidi.add("farina");
+        ingredientiValidi.add("mela");
+        ingredientiValidi.add("banana");
         // Aggiungi altri ingredienti validi qui
     }
 
