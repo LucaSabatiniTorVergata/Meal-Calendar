@@ -41,8 +41,8 @@ public class MealCalenderViewBoundary {
     private static boolean vengoDaCalendar = false;
     private static String ristorantescelto;
     private static String ricettascelta;
-    private static LocalDate dataselezionata;
-    private static String oraselezionata;
+    private LocalDate dataselezionata;
+    private String oraselezionata;
 
     @FXML
     private void initialize() {
@@ -71,15 +71,15 @@ public class MealCalenderViewBoundary {
     }
 
     private void confirmChoise() {
-        dataselezionata = calendar.getValue();
-        oraselezionata = orascelta.getText();
+        SessionManagerSLT.getInstance().setDatas(calendar.getValue());
+        SessionManagerSLT.getInstance().setOras(orascelta.getText());
         setVengoDaCalendar(true);
         Stage stage = (Stage) confirmButton.getScene().getWindow();
         GraphicController.cambiascena(stage, sceltaLuogo ? "findrestaurantuser-view.fxml" : "recipe-view.fxml");
     }
 
     public static void inviomail() {
-        MealcalendarBean bean = new MealcalendarBean(dataselezionata, oraselezionata, SessionManagerSLT.getInstance().getLoggedInUsername(),
+        MealcalendarBean bean = new MealcalendarBean(SessionManagerSLT.getInstance().getDatas(), SessionManagerSLT.getInstance().getOras(), SessionManagerSLT.getInstance().getLoggedInUsername(),
                 sceltaLuogo ? getRistorantescelto() : getRicettascelta());
         new MealcalendarController(bean).invioMail();
     }

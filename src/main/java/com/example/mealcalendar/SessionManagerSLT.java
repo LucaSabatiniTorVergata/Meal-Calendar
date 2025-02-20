@@ -1,5 +1,7 @@
 package com.example.mealcalendar;
 
+import java.time.LocalDate;
+
 public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
@@ -9,6 +11,8 @@ public class SessionManagerSLT {
     private boolean ram=true;
     private boolean db=true;
     private boolean fs=true;
+    private LocalDate datas;
+    private String oras;
 
     private SessionManagerSLT() {}
 
@@ -67,5 +71,17 @@ public class SessionManagerSLT {
     }
     public boolean getFs() {
         return fs;
+    }
+    public void setDatas(LocalDate datas) {
+        this.datas = datas;
+    }
+    public LocalDate getDatas() {
+        return datas;
+    }
+    public void setOras(String oras) {
+        this.oras = oras;
+    }
+    public String getOras() {
+        return oras;
     }
 }
