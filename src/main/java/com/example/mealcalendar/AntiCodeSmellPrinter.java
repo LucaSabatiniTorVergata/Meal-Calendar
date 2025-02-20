@@ -1,15 +1,11 @@
 package com.example.mealcalendar;
 
-import java.io.BufferedWriter;
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class AntiCodeSmellPrinter {
 
-    private static final PrintWriter OUT = new PrintWriter(new BufferedWriter(
-            new OutputStreamWriter(new FileOutputStream(FileDescriptor.out))), true);
+    private static final PrintWriter OUT = new PrintWriter(new OutputStreamWriter(System.out), true);
 
     private final String name;
 
