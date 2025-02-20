@@ -20,7 +20,7 @@ class LoginControllerTest {
 
     private static String url;
     private static String dbuser;
-    private static String password;
+    private static String dbpassword;
 
     private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
@@ -102,7 +102,7 @@ class LoginControllerTest {
             props.load(input);
             url = props.getProperty("db.url");
             dbuser = props.getProperty("db.dbuser");
-            password = props.getProperty("db.password");
+            dbpassword = props.getProperty("db.password");
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Error loading database properties", ex);
         }
@@ -113,7 +113,7 @@ class LoginControllerTest {
         String sql = "DELETE FROM users WHERE username = ?";
 
 
-        try (Connection conn = DriverManager.getConnection(url, dbuser, password);
+        try (Connection conn = DriverManager.getConnection(url, dbuser, dbpassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.executeUpdate();
