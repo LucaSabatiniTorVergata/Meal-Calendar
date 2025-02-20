@@ -1,7 +1,5 @@
-pollo senza palle:vegan:breakfast:1:pomodoro:pollo ma senza le palle:luca
 gianluca alla cacciatora:Vegan:Breakfast:1:gianluca:gianluca che caccia tora:gianlucacazzogrosso
 Lasagna:Omnivorous:Lunch:1:Pomodoro:Lasang:luca
-pollo con palle:Vegano:Pranzo:1:1:leonardo gay:luca
 ciuba avr:Omnivorous:Lunch:1:ciuba:the avr:luca
 davide:Omnivorous:Lunch:1:davide:davide cotto:davide
 pisello:omnivoro:colazione:1:pomodoro:pallone da calcio:luca
@@ -10,3 +8,4 @@ pollo volante diversamente identificato:Vegano:Colazione:1:pollo:pollo ma che vo
 palle:Vegetarian:Lunch:1:luca:palle:luca
 immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
 immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
+

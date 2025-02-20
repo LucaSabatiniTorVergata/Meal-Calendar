@@ -41,6 +41,7 @@ public class RecipeEditController {
     }
 
     public void rimuovi(String ricetta) throws RecipeDaoException {
+
         // Split della ricetta per ottenere i dettagli
         String[] parts = ricetta.split(" - ");
         if (parts.length >= 6) {
