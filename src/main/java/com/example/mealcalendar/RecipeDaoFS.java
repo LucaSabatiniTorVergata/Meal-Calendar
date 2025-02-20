@@ -21,19 +21,9 @@ public class RecipeDaoFS implements RecipeDao {
     private void createFileIfNotExists() {
         if (!useDemo) {
             try {
-                // Creiamo la cartella se non esiste
-                Files.createDirectories(Paths.get(FILE_PATH).getParent());
-
-                // Creiamo il file solo se non esiste, senza cifratura
-                if (!Files.exists(Paths.get(FILE_PATH))) {
-                    Files.createFile(Paths.get(FILE_PATH));
-                    // Impostiamo i permessi di lettura/scrittura solo per l'utente
-                    File file = Paths.get(FILE_PATH).toFile();
-                    file.setReadable(true, false);
-                    file.setWritable(true, false);
-                }
+                Files.createFile(Paths.get(FILE_PATH));
             } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato", e);
+                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato");
             }
         }
     }
@@ -44,9 +34,9 @@ public class RecipeDaoFS implements RecipeDao {
 
     private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
         try {
-            // Scrittura del file senza cifratura
-            String formattedRecipe = formatRecipe(recipe) + System.lineSeparator();
-            Files.write(Paths.get(FILE_PATH), formattedRecipe.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get(FILE_PATH),
+                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
@@ -69,7 +59,9 @@ public class RecipeDaoFS implements RecipeDao {
                 }
             }
         } catch (IOException e) {
-            throw new RecipeDaoException("Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e);
+            throw new RecipeDaoException(
+                    "Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e
+            );
         }
         return recipeList;
     }
@@ -123,3 +115,4 @@ public class RecipeDaoFS implements RecipeDao {
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
     }
 }
+
