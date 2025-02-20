@@ -44,7 +44,7 @@ public class RecipeViewBoundary {
     @FXML
     private MenuItem breakfast;
     @FXML
-    private MenuItem launch;
+    private MenuItem lunch;
     @FXML
     private MenuItem dinner;
 
@@ -114,7 +114,7 @@ public class RecipeViewBoundary {
         omnivorous.setOnAction(e -> tipoDieta.setText("Omnivorous"));
 
         breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
-        launch.setOnAction(e -> tipoPasto.setText("Lunch"));
+        lunch.setOnAction(e -> tipoPasto.setText("Lunch"));
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
     }
 

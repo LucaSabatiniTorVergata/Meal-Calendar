@@ -1,1 +1,1 @@
-pollo:Vegan:Lunch:3:pollo:pollo:leonero
+pollo:vegano:Pranzo:4:pollo:pollo:leonero

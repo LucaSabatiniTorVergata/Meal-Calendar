@@ -38,13 +38,13 @@ public class RecipeEditViewBoundaryCli {
             nuovoNome = ricetta.getRecipeName();
         }
 
-        printer.print("Nuovo Tipo Dieta (es. Vegano, Vegetariano, Omnivoro): ");
+        printer.print("Nuovo Tipo Dieta (es. Vegan, Vegetarian Omnivorous): ");
         String nuovoTipoDieta = scanner.nextLine();
         if (nuovoTipoDieta.isEmpty()) {
             nuovoTipoDieta = ricetta.getTypeofDiet();
         }
 
-        printer.print("Nuovo Tipo Pasto (es. Colazione, Pranzo, Cena): ");
+        printer.print("Nuovo Tipo Pasto (es. Breakfast, Lunch, Dinner): ");
         String nuovoTipoPasto = scanner.nextLine();
         if (nuovoTipoPasto.isEmpty()) {
             nuovoTipoPasto = ricetta.getTypeofMeal();

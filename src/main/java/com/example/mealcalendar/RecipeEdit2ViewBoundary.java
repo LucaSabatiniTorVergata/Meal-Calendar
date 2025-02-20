@@ -7,9 +7,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class RecipeEdit2ViewController {
+public class RecipeEdit2ViewBoundary {
 
-    private static final Logger LOGGER = Logger.getLogger(RecipeEdit2ViewController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RecipeEdit2ViewBoundary.class.getName());
 
     @FXML
     private Label welcomelabel;
@@ -93,13 +93,13 @@ public class RecipeEdit2ViewController {
             LOGGER.info("Errore: ricettascelta è null!");
         }
 
-        vegan.setOnAction(e -> tipodieta.setText("Vegano"));
-        vegetariana.setOnAction(e -> tipodieta.setText("Vegetariano"));
-        omnivora.setOnAction(e -> tipodieta.setText("Onnivoro"));
+        vegan.setOnAction(e -> tipodieta.setText("Vegan"));
+        vegetariana.setOnAction(e -> tipodieta.setText("Vegetarian"));
+        omnivora.setOnAction(e -> tipodieta.setText("Omnivorous"));
 
-        colazione.setOnAction(e -> tipopasto.setText("Colazione"));
-        pranzo.setOnAction(e -> tipopasto.setText("Pranzo"));
-        cena.setOnAction(e -> tipopasto.setText("Cena"));
+        colazione.setOnAction(e -> tipopasto.setText("Breakfast"));
+        pranzo.setOnAction(e -> tipopasto.setText("Lunch"));
+        cena.setOnAction(e -> tipopasto.setText("Dinnner"));
     }
 
     @FXML

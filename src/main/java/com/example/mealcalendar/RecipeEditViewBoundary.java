@@ -101,7 +101,7 @@ public class RecipeEditViewBoundary {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("recipeedit2-View.fxml"));
             Parent root = loader.load();
-            RecipeEdit2ViewController controller = loader.getController();
+            RecipeEdit2ViewBoundary controller = loader.getController();
             controller.setRecipe(selectedRecipe); // Passa la ricetta selezionata
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
             stage.setScene(new Scene(root));
