@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FindRestaurantTestController {
+class FindRestaurantControllerTest {
 
     private ChooseRestaurantController controller;
     private RestaurantListSLTPat listaRistoranti;
