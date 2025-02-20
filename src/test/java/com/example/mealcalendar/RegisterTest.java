@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RegisterTest {
 
+    //Luca Sabatini
+
     private RegisterController registerController;
     private UserDao userDao;
 

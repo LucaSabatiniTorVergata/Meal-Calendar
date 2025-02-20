@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FindRestaurantControllerTest {
 
+    //Smith Fidel Valenzuela Santana
+
     private ChooseRestaurantController controller;
     private RestaurantListSLTPat listaRistoranti;
 

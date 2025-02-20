@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FrigoriferoControllerTest {
 
+    //Smith Fidel Valenzuela Santana
+
     private FrigoriferoController frigoriferoController;
 
     @BeforeEach

@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 
 class LoginControllerTest {
 
+    //Smith Fidel Valenzuela Santana
+
     private static String url;
     private static String dbuser;
     private static String dbpassword;

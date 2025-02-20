@@ -130,7 +130,7 @@ public class RecipeDaoFS implements RecipeDao {
             LOGGER.log(Level.SEVERE, "Secondo tentativo fallito per la ricetta: {0}", recipe.getRecipeName());
 
 
-            // Lancia comunque l'eccezione per notificare il problema
+            // Lancio comunque l'eccezione per notificare il problema
             throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
         } catch (InterruptedException interruptedException) {
             Thread.currentThread().interrupt();

@@ -22,7 +22,7 @@
          </font>
       </Label>
       <Button fx:id="registerbutton" layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#registerGuest" style="-fx-background-color: 000000;" text="Find recipe" textFill="#9e8686" />
-      <Button fx:id="registerbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#registerGuest" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
+      <Button layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#registerGuest" style="-fx-background-color: 000000;" text="Fill fridge" textFill="#9e8686" />
       <Button layoutX="1068.0" layoutY="37.0" mnemonicParsing="false" onAction="#registerGuest" style="-fx-background-color: 000000;" text="Set eating time" textFill="#9e8686" />
       <Button layoutX="1169.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: 000000;" text="Help">
          <cursor>
@@ -34,7 +34,7 @@
             <Font name="Chalkboard" size="44.0" />
          </font>
       </Label>
-      <Button fx:id="registerbutton" layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" onAction="#registerGuest" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
+      <Button layoutX="1128.0" layoutY="653.0" mnemonicParsing="false" onAction="#registerGuest" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: FFF000;" text="join" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="34.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="861.0" />
       <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="466.0" layoutX="939.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="341.0" />
       <Label layoutX="981.0" layoutY="235.0" prefHeight="17.0" prefWidth="134.0" text="Type of diet " />
@@ -48,7 +48,7 @@
       <SplitMenuButton fx:id="pasto" layoutX="982.0" layoutY="342.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Choose">
          <items>
             <MenuItem fx:id="colazione" mnemonicParsing="false" text="Breakfast" />
-            <MenuItem fx:id="pranzo" mnemonicParsing="false" text="Launch" />
+            <MenuItem fx:id="pranzo" mnemonicParsing="false" text="Lunch" />
             <MenuItem fx:id="cena" mnemonicParsing="false" text="Dinner" />
          </items>
       </SplitMenuButton>
