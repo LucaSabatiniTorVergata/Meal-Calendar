@@ -1,6 +1,8 @@
 package com.example.mealcalendar;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.*;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
@@ -14,17 +16,30 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+
 public class MealcalendarController {
+
 
     private static final Logger LOGGER = Logger.getLogger(MealcalendarController.class.getName());
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     private static final String EMAIL_SENDER = "smithvalenzuela324@gmail.com";
-    private static final String EMAIL_PASSWORD = "dhpzkrizrslvticm"; // Usa variabili d'ambiente
+    private static String password;
     private static final String DATE_TIME_PATTERN = "HH:mm";
     private static final int REMINDER_MINUTES = 30;
 
     private final MealcalendarBean mealcalendarBean;
+
+
+    static {
+        Properties props = new Properties();
+        try (InputStream input = new FileInputStream("Password.properties")) {
+            props.load(input);
+            password= props.getProperty("jakpassword");
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading database properties", ex);
+        }
+    }
 
     static {
         // Configura il logger con un formatter standard
@@ -72,7 +87,7 @@ public class MealcalendarController {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(EMAIL_SENDER, EMAIL_PASSWORD);
+                return new PasswordAuthentication(EMAIL_SENDER, password);
             }
         });
 
@@ -82,7 +97,7 @@ public class MealcalendarController {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(body);
-            transport.connect(SMTP_HOST, EMAIL_SENDER, EMAIL_PASSWORD);
+            transport.connect(SMTP_HOST, EMAIL_SENDER, password);
             transport.sendMessage(message, message.getAllRecipients());
         }
         LOGGER.log(Level.INFO, "Email inviata con successo a {0}", recipient);
