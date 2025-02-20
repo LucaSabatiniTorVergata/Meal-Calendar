@@ -58,9 +58,7 @@ public class RecipeDaoFS implements RecipeDao {
                 }
             }
         } catch (IOException e) {
-            throw new RecipeDaoException(
-                    "Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e
-            );
+            return handle();
         }
         return recipeList;
     }
@@ -136,6 +134,12 @@ public class RecipeDaoFS implements RecipeDao {
             Thread.currentThread().interrupt();
             throw new RecipeDaoException("Interruzione durante la gestione dell'errore", interruptedException);
         }
+    }
+
+    private List<RecipeEntity> handle(){
+        List<RecipeEntity> recipes = new ArrayList<>();
+        LOGGER.log(Level.SEVERE,"Letture da file non riuscita tornera una lista vuota");
+        return recipes;
     }
 }
 
