@@ -42,7 +42,7 @@
       <SplitMenuButton fx:id="tipoPasto" layoutX="93.0" layoutY="419.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="206.0" text="Choose">
         <items>
           <MenuItem fx:id="breakfast" mnemonicParsing="false" text="Breakfast" />
-          <MenuItem fx:id="lunch" mnemonicParsing="false" text="Launch" />
+          <MenuItem fx:id="lunch" mnemonicParsing="false" text="Lunch" />
             <MenuItem fx:id="dinner" mnemonicParsing="false" text="Dinner" />
         </items>
          <font>
