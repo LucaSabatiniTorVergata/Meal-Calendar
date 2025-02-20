@@ -50,10 +50,28 @@ public class UserDao implements UserDaoInterface {
                     }
                 }
             } catch (IOException e) {
-                logger.log(Level.SEVERE, "Error creating file", e);
+                exceptionHandler();
             }
         }
     }
+
+   private void exceptionHandler(){
+       logger.log(Level.SEVERE, "Errore nella creazione del file tento di crearne uno nuovo");
+       File file = new File(FILE_PATH);
+       try {
+           if (!file.exists()) {
+               boolean fileCreated = file.createNewFile();
+               if (fileCreated) {
+                   logger.info("File created successfully.");
+               } else {
+                   logger.info("File already exists.");
+               }
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+   }
 
     @Override
     public boolean registerUser(UserEntity user) throws IOException {
