@@ -62,12 +62,6 @@ public class CliController {
                 MealCalenderViewBoundaryCli mealcalendarView = new MealCalenderViewBoundaryCli();
                 mealcalendarView.start();
                 break;
-            case "calendari":
-                printer.print("🔹 Navigazione alla schermata di calendario pasti (CLI).");
-                MealCalenderViewBoundaryCli calendar = new MealCalenderViewBoundaryCli();
-                calendar.printSelectionAndSendMail();
-                calendar.start();
-                break;
             default:
                 printer.print("❌ Schermata non trovata.");
         }
@@ -88,6 +82,13 @@ public class CliController {
     public void navigateToCalendarWithRecipe(RecipeReturnBean ricetta) throws Exception {
         printer.print("🔹 Navigazione al calendario con la ricetta selezionata.");
         MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli(ricetta);
+        calendario.printSelectionAndSendMail();
+        calendario.start();
+    }
+    public void navigateToCalendarWithRestaurant() throws Exception {
+        printer.print("🔹 Navigazione al calendario con la ricetta selezionata.");
+        MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli();
+        calendario.printSelectionAndSendMail();
         calendario.start();
     }
 }
