@@ -4,7 +4,7 @@ public class UserEntity {
 
     private String username;
     private String email;
-    private String password;
+    private transient String password;
 
     public UserEntity(String username, String email, String password) {
         this.username = username;
