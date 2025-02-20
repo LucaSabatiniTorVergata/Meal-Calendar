@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class RecipeRimuoviTest {
+class RecipeRimuoviTest {
 
     private RecipeEditController recipeEditController;
     private RecipeDaoFS recipeDao;
@@ -19,14 +19,14 @@ public class RecipeRimuoviTest {
 
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // Usa il file system (useDemo = false) per il test
         recipeDao = new RecipeDaoFS(false);  // Inizializziamo con useDemo = false per il test con il file system
         recipeEditController = new RecipeEditController();
 
     }
     @Test
-    public void testRemoveNonExistingRecipe() throws RecipeDaoException {
+    void testRemoveNonExistingRecipe() throws RecipeDaoException {
 
         int count = recipeDao.getAllRecipes().size();
         // Proviamo a rimuovere una ricetta che non esiste

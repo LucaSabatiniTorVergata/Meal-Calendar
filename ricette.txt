@@ -8,4 +8,3 @@ pollo volante diversamente identificato:Vegano:Colazione:1:pollo:pollo ma che vo
 palle:Vegetarian:Lunch:1:luca:palle:luca
 immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
 immanuelozzodiddio:omnivoro:cena:1:pomodoro:questo:luca
-
