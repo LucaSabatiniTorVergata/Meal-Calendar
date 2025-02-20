@@ -21,9 +21,11 @@ public class RecipeDaoFS implements RecipeDao {
     private void createFileIfNotExists() {
         if (!useDemo) {
             try {
+                // Usa Files.createDirectories per garantire che la directory esista
+                Files.createDirectories(Paths.get(FILE_PATH).getParent());
                 Files.createFile(Paths.get(FILE_PATH));
             } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato");
+                LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato", e);
             }
         }
     }
@@ -34,6 +36,7 @@ public class RecipeDaoFS implements RecipeDao {
 
     private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
         try {
+            // Scrittura sicura sul file
             Files.write(Paths.get(FILE_PATH),
                     (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -59,9 +62,7 @@ public class RecipeDaoFS implements RecipeDao {
                 }
             }
         } catch (IOException e) {
-            throw new RecipeDaoException(
-                    "Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e
-            );
+            throw new RecipeDaoException("Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e);
         }
         return recipeList;
     }
@@ -115,4 +116,3 @@ public class RecipeDaoFS implements RecipeDao {
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
     }
 }
-
