@@ -47,7 +47,7 @@ public class RecipeDaoFS implements RecipeDao {
         return useDemo ? new ArrayList<>(demoRecipes) : getAllRecipesFS();
     }
 
-    private List<RecipeEntity> getAllRecipesFS() throws RecipeDaoException {
+    private List<RecipeEntity> getAllRecipesFS() {
         List<RecipeEntity> recipeList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
