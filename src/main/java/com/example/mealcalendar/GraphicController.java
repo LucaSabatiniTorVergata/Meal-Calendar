@@ -1,12 +1,18 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GraphicController {
+
+    private static final Logger LOGGER = Logger.getLogger(GraphicController.class.getName());
+
 
     private GraphicController() {
     }
@@ -19,7 +25,7 @@ public class GraphicController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento della scena: " + fxmlview, e);
 
         }
     }

@@ -28,6 +28,8 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.*;
 
 public class FindRestaurantViewBoundary {
 
+    private final boolean debugMode = true;
+
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
 
     @FXML
@@ -159,6 +161,11 @@ public class FindRestaurantViewBoundary {
     }
 
     private void processCalendarSelection(ReturnRestaurantsBean ristorante) {
+        if (!debugMode) {
+            // In modalità produzione, non mostrare il progresso di caricamento
+            return;
+        }
+
         lableemail.setVisible(true);
         loadingIndicator.setVisible(true);
         loadingIndicator.setProgress(0);
@@ -182,7 +189,7 @@ public class FindRestaurantViewBoundary {
                         Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
                         stage.setScene(new Scene(root));
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        LOGGER.log(Level.SEVERE, "Errore nel processo", ex);
                     }
                 }
             }
