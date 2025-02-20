@@ -1,19 +1,23 @@
 package com.example.mealcalendar;
 
+import java.io.BufferedWriter;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 public class AntiCodeSmellPrinter {
 
-    private static final  PrintStream OUT =  new PrintStream(new FileOutputStream(FileDescriptor.out));
-    private String name;
+    private static final PrintWriter OUT = new PrintWriter(new BufferedWriter(
+            new OutputStreamWriter(new FileOutputStream(FileDescriptor.out))), true);
+
+    private final String name;
+
     public AntiCodeSmellPrinter(String name) {
         this.name = name;
     }
 
-    public synchronized void print(String msg){
-        OUT.println('[' + name + "]: " + msg);
+    public void print(String msg) {
+        OUT.println("[" + name + "]: " + msg);
     }
-
 }
