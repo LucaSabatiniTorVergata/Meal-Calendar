@@ -4,36 +4,25 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import java.util.Properties;
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
-import javax.crypto.spec.IvParameterSpec;
-import java.security.SecureRandom;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 public class UserDao implements UserDaoInterface {
 
-    private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
-    private static final String FILE_PATH = "users.txt";  // Path per il file di backup
-    private boolean useDatabase;  // Usa DB?
-    private boolean useDemo;      // Demo in-memory?
+    private static final String FILE_PATH ="users.txt";  // Path for file storage
+    private boolean useDatabase;  // Flag for DB usage
+    private boolean useDemo;  // Flag for de   mo mode
 
-    // Proprietà DB
     private static String url;
     private static String dbuser;
     private static String password;
 
-    // Chiave segreta (16 byte per AES-128)
-    // In un contesto reale, andrebbe gestita su un keystore o un vault sicuro
-    private static final String SECRET_KEY = "0123456789ABCDEF";
+    // Logger setup
+    private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
-    // In-memory demo
+    // In-memory user list for demo mode
     private static List<UserEntity> demoUsers = new ArrayList<>();
 
-    // Caricamento configurazione DB
+    // Load database properties
     static {
         Properties props = new Properties();
         try (InputStream input = new FileInputStream("src/main/resources/sqlData.properties")) {
@@ -47,23 +36,21 @@ public class UserDao implements UserDaoInterface {
     }
 
     public UserDao(boolean useDatabase, boolean useDemo) {
-        this.useDatabase = useDatabase;
         this.useDemo = useDemo;
-
-        // Se non usiamo DB e non siamo in DEMO, usiamo un file e lo creiamo se non esiste
+        this.useDatabase = useDatabase;
         if (!useDatabase && !useDemo) {
             File file = new File(FILE_PATH);
             try {
                 if (!file.exists()) {
                     boolean fileCreated = file.createNewFile();
                     if (fileCreated) {
-                        logger.info("File creato con successo.");
+                        logger.info("File created successfully.");
                     } else {
-                        logger.info("Il file esisteva già.");
+                        logger.info("File already exists.");
                     }
                 }
             } catch (IOException e) {
-                logger.log(Level.SEVERE, "Errore nella creazione del file", e);
+                logger.log(Level.SEVERE, "Error creating file", e);
             }
         }
     }
@@ -72,65 +59,44 @@ public class UserDao implements UserDaoInterface {
     public boolean registerUser(UserEntity user) throws IOException {
         try {
             if (useDatabase) {
-                return registerUserDB(user);   // Usa il DB
+                return registerUserDB(user);  // Use DB
             } else if (useDemo) {
-                return registerUserDemo(user); // Demo in-memory
+                return registerUserDemo(user);  // Use in-memory demo
             } else {
-                return registerUserFS(user);   // Salva su File System (con cifratura)
+                return registerUserFS(user);  // Use File System
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Errore nella registrazione utente", e);
-            return false;
+            logger.log(Level.SEVERE, "Error registering user", e);
+            return false;  // Return false on exception
         }
     }
 
-    // Demo in-memory
+    // Register user in file system
+
+
+    // Register user in demo mode (in-memory)
     private boolean registerUserDemo(UserEntity user) {
         demoUsers.add(user);
-        return true;
-    }
-
-    // File System (con cifratura password)
-    private boolean registerUserFS(UserEntity user) throws IOException {
-        // Cifriamo la password prima di salvarla
-        String encryptedPassword = EncryptionUtils.encrypt(user.getPassword(), SECRET_KEY);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            // Scriviamo: username:email:password_cifrata
-            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + encryptedPassword);
-            writer.newLine();
-        }
-        return true;
-    }
-
-    // DB (eventualmente si potrebbe qui usare la cifratura o un hash)
-    private boolean registerUserDB(UserEntity user) throws SQLException {
-        // ***BEST PRACTICE***: sarebbe meglio salvare un hash (bcrypt, PBKDF2, etc.)
-        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(url, dbuser, password);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
-            return stmt.executeUpdate() > 0;
-        }
+        return true;  // Simply add the user to the demo list
     }
 
     @Override
     public List<UserEntity> getAllUsers() throws IOException {
         try {
             if (useDemo) {
-                return new ArrayList<>(demoUsers);
+                return getAllUsersDemo();  // Return demo users list
             } else if (useDatabase) {
-                return getAllUsersDB();
+                return getAllUsersDB();  // Fetch users from DB
             } else {
-                return getAllUsersFS();  // da file system (password saranno decifrate in memoria)
+                return getAllUsersFS();  // Fetch users from file system
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Errore nel recupero di tutti gli utenti", e);
+            logger.log(Level.SEVERE, "Error retrieving all users", e);
         }
-        return new ArrayList<>();
+        return new ArrayList<>();  // Return empty list in case of error
     }
 
+    // Fetch all users from file system
     private List<UserEntity> getAllUsersFS() throws IOException {
         List<UserEntity> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -138,20 +104,14 @@ public class UserDao implements UserDaoInterface {
             while ((line = reader.readLine()) != null) {
                 String[] userParts = line.split(":");
                 if (userParts.length >= 3) {
-                    String username = userParts[0];
-                    String email = userParts[1];
-                    String encryptedPass = userParts[2];
-
-                    // Decifriamo la password prima di creare l'oggetto
-                    String decryptedPass = EncryptionUtils.decrypt(encryptedPass, SECRET_KEY);
-
-                    users.add(new UserEntity(username, email, decryptedPass));
+                    users.add(new UserEntity(userParts[0], userParts[1], userParts[2]));
                 }
             }
         }
         return users;
     }
 
+    // Fetch all users from database
     private List<UserEntity> getAllUsersDB() throws SQLException {
         List<UserEntity> users = new ArrayList<>();
         String sql = "SELECT username, email, password FROM users";
@@ -159,56 +119,58 @@ public class UserDao implements UserDaoInterface {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                users.add(new UserEntity(
-                        rs.getString("username"),
-                        rs.getString("email"),
-                        rs.getString("password") // attualmente è in chiaro
-                ));
+                users.add(new UserEntity(rs.getString("username"), rs.getString("email"), rs.getString("password")));
             }
         }
         return users;
+    }
+
+    // Fetch all users from demo (in-memory)
+    private List<UserEntity> getAllUsersDemo() {
+        return new ArrayList<>(demoUsers);  // Return a copy of the demo users list
     }
 
     @Override
     public UserEntity getUserByUsername(String username) throws IOException {
         try {
             if (useDemo) {
-                return getUserByUsernameDemo(username);
+                return getUserByUsernameDemo(username);  // Search in demo list
             } else if (useDatabase) {
-                return getUserByUsernameDB(username);
+                return getUserByUsernameDB(username);  // Search in DB
             } else {
-                return getUserByUsernameFS(username);
+                return getUserByUsernameFS(username);  // Search in file system
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Errore nel recupero utente per username", e);
+            logger.log(Level.SEVERE, "Error retrieving user by username", e);
         }
-        return null;
+        return null;  // Return null if not found
     }
 
+    // Search user in demo (in-memory)
     private UserEntity getUserByUsernameDemo(String username) {
         for (UserEntity user : demoUsers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }
-        return null;
+        return null;  // Return null if not found
     }
 
+    // Search user in file system
     private UserEntity getUserByUsernameFS(String username) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] userParts = line.split(":");
                 if (userParts.length >= 3 && userParts[0].trim().equalsIgnoreCase(username.trim())) {
-                    // Decifriamo la password prima di restituire l'oggetto
-                    String decryptedPass = EncryptionUtils.decrypt(userParts[2], SECRET_KEY);
-                    return new UserEntity(userParts[0], userParts[1], decryptedPass);
+                    return new UserEntity(userParts[0], userParts[1], userParts[2]);
                 }
             }
         }
-        return null;
+        return null;  // Return null if not found
     }
 
+    // Search user in database
     private UserEntity getUserByUsernameDB(String username) throws SQLException {
         String sql = "SELECT username, email, password FROM users WHERE username = ?";
         try (Connection conn = DriverManager.getConnection(url, dbuser, password);
@@ -216,83 +178,30 @@ public class UserDao implements UserDaoInterface {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new UserEntity(
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password") // attualmente non cifrata in DB
-                    );
+                    return new UserEntity(rs.getString("username"), rs.getString("email"), rs.getString("password"));
                 }
             }
         }
-        return null;
+        return null;  // Return null if not found
     }
 
-    /**
-     * Classe di utilità per crittografia AES.
-     * Esempio semplice con AES/CBC/PKCS5Padding + IV random.
-     * In un caso reale, si consiglia di custodire la chiave altrove (KeyStore, Vault, ecc.)
-     */
-    private static class EncryptionUtils {
-
-        private static final String ALGORITHM = "AES";
-        private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
-
-        // Cifra la stringa in input (plaintext) e restituisce Base64( IV + testoCifrato )
-        public static String encrypt(String plainText, String secretKey) {
-            try {
-                // Genera IV random
-                SecureRandom secureRandom = new SecureRandom();
-                byte[] iv = new byte[16];
-                secureRandom.nextBytes(iv);
-
-                // Imposta chiave e cipher
-                Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-                SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), ALGORITHM);
-                IvParameterSpec ivSpec = new IvParameterSpec(iv);
-
-                cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
-                byte[] encrypted = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
-
-                // Concatena IV + dati cifrati in un unico array di byte
-                ByteBuffer byteBuffer = ByteBuffer.allocate(iv.length + encrypted.length);
-                byteBuffer.put(iv);
-                byteBuffer.put(encrypted);
-
-                // Codifica in Base64 per poterlo salvare come stringa
-                return Base64.getEncoder().encodeToString(byteBuffer.array());
-
-            } catch (Exception e) {
-                // In produzione, gestire l'eccezione in modo più appropriato
-                throw new RuntimeException("Errore in fase di crittografia", e);
-            }
+    private boolean registerUserFS(UserEntity user) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword());
+            writer.newLine();
         }
+        return true;
+    }
 
-        // Decifra la stringa in input (Base64(IV + testoCifrato)) e restituisce il plaintext
-        public static String decrypt(String cipherText, String secretKey) {
-            try {
-                byte[] cipherData = Base64.getDecoder().decode(cipherText);
-
-                // Estrae IV (primi 16 byte) e testo cifrato (resto)
-                ByteBuffer byteBuffer = ByteBuffer.wrap(cipherData);
-                byte[] iv = new byte[16];
-                byteBuffer.get(iv);
-
-                byte[] encryptedBytes = new byte[byteBuffer.remaining()];
-                byteBuffer.get(encryptedBytes);
-
-                // Imposta chiave e cipher
-                Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-                SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), ALGORITHM);
-                IvParameterSpec ivSpec = new IvParameterSpec(iv);
-
-                cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-                byte[] decrypted = cipher.doFinal(encryptedBytes);
-
-                return new String(decrypted, StandardCharsets.UTF_8);
-
-            } catch (Exception e) {
-                throw new RuntimeException("Errore in fase di decrittazione", e);
-            }
+    // Register user in database
+    private boolean registerUserDB(UserEntity user) throws SQLException {
+        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(url, dbuser, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            return stmt.executeUpdate() > 0;
         }
     }
 }
