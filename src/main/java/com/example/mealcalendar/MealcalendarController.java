@@ -20,7 +20,7 @@ public class MealcalendarController {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     private static final String EMAIL_SENDER = "smithvalenzuela324@gmail.com";
-    private static final String EMAIL_PASSWORD = System.getenv("EMAIL_PASSWORD"); // Usa variabili d'ambiente
+    private static final String EMAIL_PASSWORD = "dhpzkrizrslvticm"; // Usa variabili d'ambiente
     private static final String DATE_TIME_PATTERN = "HH:mm";
     private static final int REMINDER_MINUTES = 30;
 
