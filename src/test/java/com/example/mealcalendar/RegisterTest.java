@@ -1,4 +1,4 @@
-/*package com.example.mealcalendar;
+package com.example.mealcalendar;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -93,4 +93,4 @@ public class RegisterTest {
         // Verifica che la registrazione fallisca (l'username è già stato registrato)
         assertFalse(result);
     }
-}*/
+}

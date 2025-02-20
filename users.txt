@@ -6,3 +6,5 @@ steve:leo.polidori99@gmail.com:$2a$10$L/qXNcuCOoNDtlduwH99m.Plyota2WEy3nXvcIRTr5
 edonegro:edoman9994gmail.com:$2a$10$g8oUpz2sQpuCNIv4nToDsev4m7noe9m0hc/gdykJB47rVxvPutyca
 gianlucanero:gianluca.q.rm@gmail.com:$2a$10$BpAf4mvZb2ed02KUDfUV4.ZVIEqYI3MkQZTbmPKWEytnvTp6yQHm6
 leo:leo.polidori99@gmail.com:$2a$10$gy8z64JpIY.em2/kAAlIeODWWYvn8Sk22MYsCQxQgBebpYhoakrEa
+newuser:newuser@example.com:$2a$10$73hql4zfldK1WnrhNDlPz.DeyOv4ZuRgZJaXUOqRVeLgdL.W4Couy
+existinguser:existinguser@example.com:$2a$10$zygg4QTigOjQRPXYvz5RjeYg3v8lrV9a0z8UYoYW96.nyxIg41dLy

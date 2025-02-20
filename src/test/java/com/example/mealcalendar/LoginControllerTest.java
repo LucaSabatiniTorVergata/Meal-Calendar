@@ -1,4 +1,4 @@
-/*package com.example.mealcalendar;
+package com.example.mealcalendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -119,4 +119,4 @@ class LoginControllerTest {
             stmt.executeUpdate();
         }
     }
-}*/
+}
