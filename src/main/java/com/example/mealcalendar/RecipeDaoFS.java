@@ -21,9 +21,17 @@ public class RecipeDaoFS implements RecipeDao {
     private void createFileIfNotExists() {
         if (!useDemo) {
             try {
-                // Usa Files.createDirectories per garantire che la directory esista
+                // Creiamo la cartella se non esiste
                 Files.createDirectories(Paths.get(FILE_PATH).getParent());
-                Files.createFile(Paths.get(FILE_PATH));
+
+                // Creiamo il file solo se non esiste, senza cifratura
+                if (!Files.exists(Paths.get(FILE_PATH))) {
+                    Files.createFile(Paths.get(FILE_PATH));
+                    // Impostiamo i permessi di lettura/scrittura solo per l'utente
+                    File file = Paths.get(FILE_PATH).toFile();
+                    file.setReadable(true, false);
+                    file.setWritable(true, false);
+                }
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Il file esiste già o non può essere creato", e);
             }
@@ -36,10 +44,9 @@ public class RecipeDaoFS implements RecipeDao {
 
     private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
         try {
-            // Scrittura sicura sul file
-            Files.write(Paths.get(FILE_PATH),
-                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            // Scrittura del file senza cifratura
+            String formattedRecipe = formatRecipe(recipe) + System.lineSeparator();
+            Files.write(Paths.get(FILE_PATH), formattedRecipe.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
