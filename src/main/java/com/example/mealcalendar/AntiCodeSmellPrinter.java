@@ -1,11 +1,11 @@
 package com.example.mealcalendar;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AntiCodeSmellPrinter {
 
-    private static final PrintWriter OUT = new PrintWriter(new OutputStreamWriter(System.out), true);
+    private static final Logger LOGGER = Logger.getLogger(AntiCodeSmellPrinter.class.getName());
 
     private final String name;
 
@@ -14,6 +14,6 @@ public class AntiCodeSmellPrinter {
     }
 
     public void print(String msg) {
-        OUT.println("[" + name + "]: " + msg);
+        LOGGER.log(Level.INFO, "[{0}]: {1}", new Object[]{name, msg});
     }
 }
