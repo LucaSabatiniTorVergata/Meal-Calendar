@@ -2,6 +2,7 @@ package com.example.mealcalendar;
 
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -105,7 +106,7 @@ public class RecipeEditViewBoundary {
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento della vista per modificare la ricetta", e);
         }
     }
 
