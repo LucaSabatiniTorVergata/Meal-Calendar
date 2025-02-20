@@ -7,8 +7,8 @@ import java.util.logging.*;
 
 public class UserDao implements UserDaoInterface {
 
-    private static final String DIR="/Users/lucasabatini/git/ispw/Meal-Calendar/";
-    private static final String FILE_PATH = DIR + "users.txt";  // Path for file storage
+
+    private static final String FILE_PATH ="users.txt";  // Path for file storage
     private boolean useDatabase;  // Flag for DB usage
     private boolean useDemo;  // Flag for de   mo mode
 
