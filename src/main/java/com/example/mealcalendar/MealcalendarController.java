@@ -48,7 +48,6 @@ public class MealcalendarController {
 
     public void invioMail() {
         try {
-            System.out.println(EMAIL_PASSWORD);
             String mail = getMail();
             boolean isRestaurant = MealCalenderViewBoundary.isSceltaLuogo();
             String subject = isRestaurant ? "Email di conferma posto dove mangiare" : "Conferma Posto dove mangiare";
