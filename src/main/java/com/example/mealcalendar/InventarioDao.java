@@ -1,7 +1,9 @@
 package com.example.mealcalendar;
 
-
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -11,14 +13,16 @@ public class InventarioDao implements InventarioDaoInterface {
 
     private static final Logger LOGGER = Logger.getLogger(InventarioDao.class.getName());
     private static InventarioDao instance;
+
     private Map<String, Integer> inventario;
     private static final String FILE_PATH = "inventario.txt";
-    private boolean useDemo=false;
+    private boolean useDemo = false;
 
     private InventarioDao(boolean useDemo) {
         LOGGER.log(Level.INFO, "InventarioDao: Inizializzazione con persistenza {0}", useDemo);
-        this.useDemo= useDemo;
+        this.useDemo = useDemo;
         this.inventario = new HashMap<>();
+
         if (!useDemo) {
             loadInventario();
         }
@@ -36,6 +40,7 @@ public class InventarioDao implements InventarioDaoInterface {
     public void aggiungiIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "InventarioDao: Aggiungi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
         inventario.put(nome, inventario.getOrDefault(nome, 0) + quantita);
+
         if (!useDemo) {
             LOGGER.log(Level.INFO, "InventarioDao: Persistenza abilitata, salvataggio...");
             salvaInventario();
@@ -45,6 +50,7 @@ public class InventarioDao implements InventarioDaoInterface {
     @Override
     public void rimuoviIngrediente(String nome, int quantita) {
         LOGGER.log(Level.INFO, "InventarioDao: Rimuovi ingrediente {0} con quantità {1}", new Object[]{nome, quantita});
+
         if (inventario.containsKey(nome)) {
             int currentQuantity = inventario.get(nome);
             if (currentQuantity > quantita) {
@@ -52,6 +58,7 @@ public class InventarioDao implements InventarioDaoInterface {
             } else {
                 inventario.remove(nome);
             }
+
             if (!useDemo) {
                 LOGGER.log(Level.INFO, "InventarioDao: Persistenza abilitata, salvataggio...");
                 salvaInventario();
@@ -66,19 +73,25 @@ public class InventarioDao implements InventarioDaoInterface {
     }
 
     private void salvaInventario() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                Path.of(FILE_PATH),
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING)) {
+
             LOGGER.log(Level.INFO, "InventarioDao: Salvataggio inventario su file...");
+
             for (Map.Entry<String, Integer> entry : inventario.entrySet()) {
                 writer.write(entry.getKey() + ":" + entry.getValue());
                 writer.newLine();
             }
+
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "InventarioDao: Errore durante il salvataggio dell'inventario", e);
         }
     }
 
     private void loadInventario() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(FILE_PATH))) {
             LOGGER.log(Level.INFO, "InventarioDao: Caricamento inventario dal file...");
             String line;
             while ((line = reader.readLine()) != null) {
