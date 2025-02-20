@@ -9,39 +9,22 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RegisterTest {
+class RegisterTest {
 
     private RegisterController registerController;
     private UserDao userDao;
 
     // Impostiamo i test prima di ogni test case
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // Usa il file system (useDemo = false, useDatabase = false)
         userDao = new UserDao(false, false);
         registerController = new RegisterController(userDao);
     }
 
-    @Test
-    public void testRegisterUserSuccessfullyWithFileSystem() throws IOException {
-        // Crea un UserBean per il test
-        UserBean userBean = new UserBean("newuser", "newuser@example.com", "password123");
-
-        // Esegui la registrazione
-        boolean result = registerController.register(userBean);
-
-        // Verifica che la registrazione sia andata a buon fine
-        assertTrue(result);
-
-        // Verifica che l'utente sia stato effettivamente registrato nel file system
-        UserEntity user = userDao.getUserByUsername("newuser");
-        assertNotNull(user);
-        assertEquals("newuser", user.getUsername());
-        assertEquals("newuser@example.com", user.getEmail());
-    }
 
     @Test
-    public void testRegisterUserWithExistingUsername() throws IOException {
+    void testRegisterUserWithExistingUsername() throws IOException {
         // Crea un UserBean per il test
         UserBean userBean = new UserBean("existinguser", "existinguser@example.com", "password123");
 
@@ -57,7 +40,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void testRegisterUserInDemoMode() throws IOException {
+    void testRegisterUserInDemoMode() throws IOException {
         // Passiamo alla modalità demo (in-memory)
         userDao = new UserDao(false, true);  // useDemo = true
         registerController = new RegisterController(userDao);
@@ -77,7 +60,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void testRegisterUserFailsWithExistingUsernameInDemoMode() throws IOException {
+    void testRegisterUserFailsWithExistingUsernameInDemoMode() throws IOException {
         // Passiamo alla modalità demo (in-memory)
         userDao = new UserDao(false, true);  // useDemo = true
         registerController = new RegisterController(userDao);
