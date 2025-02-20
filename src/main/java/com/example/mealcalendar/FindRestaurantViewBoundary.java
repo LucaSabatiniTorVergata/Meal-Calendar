@@ -28,7 +28,7 @@ import static com.example.mealcalendar.MealCalenderViewBoundary.*;
 
 public class FindRestaurantViewBoundary {
 
-    private final boolean debugMode = true;
+    private static final boolean debugMode = true;
 
     private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
 
