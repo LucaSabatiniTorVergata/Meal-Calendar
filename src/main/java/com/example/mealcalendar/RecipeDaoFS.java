@@ -1,14 +1,26 @@
 package com.example.mealcalendar;
 
+import javax.crypto.SecretKey;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class RecipeDaoFS implements RecipeDao {
 
     private static final String FILE_PATH = "ricette.txt";
+    private static final SecretKey SECRET_KEY; // Usa la chiave segreta per AES
+
+    static {
+        try {
+            SECRET_KEY = EncriptionUtil.generateSecretKey();
+        } catch (Exception e) {
+            throw new EncryptionRuntimeException("Errore durante la generazione della chiave segreta: " + e.getMessage(), e);
+        }
+    }
+
     private final boolean useDemo;
     private static final Logger LOGGER = Logger.getLogger(RecipeDaoFS.class.getName());
     private final List<RecipeEntity> demoRecipes = new ArrayList<>();
@@ -34,11 +46,12 @@ public class RecipeDaoFS implements RecipeDao {
 
     private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
         try {
+            String encryptedRecipe = EncriptionUtil.encrypt(formatRecipe(recipe), SECRET_KEY);  // Cifra la ricetta
             Files.write(Paths.get(FILE_PATH),
-                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
+                    (encryptedRecipe + System.lineSeparator()).getBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
             throw new RecipeDaoException("Errore durante l''aggiunta della ricetta: " + recipe.getRecipeName(), e);
         }
@@ -53,12 +66,13 @@ public class RecipeDaoFS implements RecipeDao {
         try {
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
             for (String line : lines) {
-                RecipeEntity recipe = parseRecipe(line);
+                String decryptedLine = EncriptionUtil.decrypt(line, SECRET_KEY);  // Decifra la ricetta
+                RecipeEntity recipe = parseRecipe(decryptedLine);
                 if (recipe != null) {
                     recipeList.add(recipe);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RecipeDaoException(
                     "Errore durante la lettura o scrittura del file delle ricette: " + FILE_PATH, e
             );
