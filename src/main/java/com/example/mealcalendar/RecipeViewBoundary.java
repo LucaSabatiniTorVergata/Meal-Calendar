@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -152,12 +153,18 @@ public class RecipeViewBoundary {
                                 showRecipeDetails(selectedItem);
                             }
                         } catch (Exception e) {
-                            LOGGER.severe("Error while handling item click: " + e.getMessage());
+                            erroreException();
                         }
                     });
         }
     }
 
+
+    private int erroreException() {
+
+        LOGGER.log(Level.SEVERE, "impossibile catturare il doppio click dal mouse");
+        return -1;
+    }
     // Handle back button in recipe details view
     @FXML
     private void handleback() {
