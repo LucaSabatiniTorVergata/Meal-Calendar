@@ -124,6 +124,7 @@ public class RecipeEdit2ViewController {
                 .setAutor(SessionManagerSLT.getInstance().getLoggedInUsername())
                 .build();
 
+
         // Passiamo il bean al controller
         RecipeEdit2Controller controller = new RecipeEdit2Controller(bean);
         controller.cambiaRicetta();

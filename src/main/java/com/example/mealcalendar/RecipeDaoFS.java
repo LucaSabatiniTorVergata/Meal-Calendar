@@ -79,7 +79,9 @@ public class RecipeDaoFS implements RecipeDao {
             List<RecipeEntity> recipes = getAllRecipesFS();
             List<String> updatedRecipes = new ArrayList<>();
             for (RecipeEntity recipe : recipes) {
-                updatedRecipes.add(formatRecipe(recipe.equals(oldRecipe) ? newRecipe : recipe));
+                if(formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
+                    updatedRecipes.add(formatRecipe(newRecipe));
+                }
             }
             try {
                 Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);

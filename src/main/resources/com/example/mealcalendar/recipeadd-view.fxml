@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +13,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.RecipeAddViewBoundary">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
-        <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="448.0" layoutX="72.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="485.0" />
+        <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="448.0" layoutX="72.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="552.0" />
         <Button fx:id="backview" layoutX="10.0" layoutY="18.0" mnemonicParsing="false" onAction="#backView" style="-fx-background-color: #ffffff;" text="BACK">
             <font>
                 <Font name="System Bold" size="14.0" />
@@ -116,7 +115,6 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </TextField>
-      <ListView fx:id="recipeListView" layoutX="630.0" layoutY="129.0" prefHeight="448.0" prefWidth="530.0" />
       <Label fx:id="welcomelabel" layoutX="164.0" layoutY="39.0" prefHeight="30.0" prefWidth="120.0" text="Label">
          <font>
             <Font name="System Bold Italic" size="23.0" />

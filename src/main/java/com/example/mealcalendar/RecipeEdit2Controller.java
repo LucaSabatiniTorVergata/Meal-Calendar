@@ -29,8 +29,8 @@ public class RecipeEdit2Controller {
             );
 
             // Otteniamo il DAO e aggiorniamo la ricetta
-            RecipeDao dao = RecipeDaoFactory.createRecipeDao();  // Non è più necessario il cast
-            ((RecipeDaoFS) dao).updateRecipe(ricettavecchia, ricetta);
+            RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();  // Non è più necessario il cast
+            dao.updateRecipe(ricettavecchia, ricetta);
         }
     }
 

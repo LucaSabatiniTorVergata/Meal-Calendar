@@ -37,12 +37,6 @@ public class MealCalenderViewBoundaryCli {
         Scanner scanner = new Scanner(System.in);
         printer.print("=== CALENDARIO PASTI ===");
 
-        try {
-            printSelectionAndSendMail();
-        } catch (MailSendingException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante la selezione della ricetta o del ristorante", e);
-        }
-
         readDate(scanner);
         readTime(scanner);
         readLocation(scanner);
@@ -53,6 +47,12 @@ public class MealCalenderViewBoundaryCli {
             confirmChoise();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore durante la conferma della scelta", e);
+        }
+
+        try {
+            printSelectionAndSendMail();
+        } catch (MailSendingException e) {
+            LOGGER.log(Level.SEVERE, "Errore durante la selezione della ricetta o del ristorante", e);
         }
     }
 
