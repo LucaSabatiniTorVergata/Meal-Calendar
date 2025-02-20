@@ -64,7 +64,7 @@ public class RecipeVewBoundaryCli {
                     exit = true;
                     break;
                 default:
-                    printer.print("❌ Opzione non valida.");
+                    printer.print(" Opzione non valida.");
             }
         }
     }
@@ -168,7 +168,7 @@ public class RecipeVewBoundaryCli {
     // Metodo per modificare una ricetta selezionata (opzione 3)
     private void editRecipe() throws RecipeEditException {
         if (ricettaSelezionata == null) {
-            printer.print("❌ Nessuna ricetta selezionata da modificare.");
+            printer.print(" Nessuna ricetta selezionata da modificare.");
             return;
         }
         try {
@@ -195,7 +195,7 @@ public class RecipeVewBoundaryCli {
     private void removeRecipe() throws RecipeDaoException {
         printer.print("\n===== Rimozione Ricetta =====");
         if (ricettaSelezionata == null) {
-            printer.print("❌ Nessuna ricetta selezionata da rimuovere.");
+            printer.print(" Nessuna ricetta selezionata da rimuovere.");
             return;
         }
 
@@ -220,10 +220,10 @@ public class RecipeVewBoundaryCli {
                 printer.print("✅ Ricetta '" + ricettaSelezionata.getRecipeName() + "' rimossa con successo.");
                 ricettaSelezionata = null;
             } else {
-                printer.print("❌ Rimozione annullata.");
+                printer.print(" Rimozione annullata.");
             }
         } else {
-            printer.print("❌ Non puoi rimuovere una ricetta che non hai creato.");
+            printer.print(" Non puoi rimuovere una ricetta che non hai creato.");
         }
     }
 }

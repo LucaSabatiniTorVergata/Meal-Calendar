@@ -39,8 +39,7 @@ public class RecipeDaoFS implements RecipeDao {
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             return true;
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
-            throw new RecipeDaoException("Errore durante l''aggiunta della ricetta: " + recipe.getRecipeName(), e);
+            return handleWriteError(recipe, e);
         }
     }
 
@@ -79,7 +78,7 @@ public class RecipeDaoFS implements RecipeDao {
             List<RecipeEntity> recipes = getAllRecipesFS();
             List<String> updatedRecipes = new ArrayList<>();
             for (RecipeEntity recipe : recipes) {
-                if(formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
+                if (formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
                     updatedRecipes.add(formatRecipe(newRecipe));
                 }
             }
@@ -115,6 +114,28 @@ public class RecipeDaoFS implements RecipeDao {
     private String formatRecipe(RecipeEntity recipe) {
         return String.join(":", recipe.getRecipeName(), recipe.getTypeofDiet(), recipe.getTypeofMeal(),
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
+    }
+
+    private boolean handleWriteError(RecipeEntity recipe, IOException e) throws RecipeDaoException {
+        LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
+
+        // Proviamo a riscrivere il file una seconda volta dopo qualche secondo
+        try {
+            Thread.sleep(2000); // Aspetta 2 secondi prima di ritentare
+            Files.write(Paths.get(FILE_PATH),
+                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            return true;
+        } catch (IOException retryException) {
+            LOGGER.log(Level.SEVERE, "Secondo tentativo fallito per la ricetta: {0}", recipe.getRecipeName());
+
+
+            // Lancia comunque l'eccezione per notificare il problema
+            throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
+        } catch (InterruptedException interruptedException) {
+            Thread.currentThread().interrupt();
+            throw new RecipeDaoException("Interruzione durante la gestione dell'errore", interruptedException);
+        }
     }
 }
 

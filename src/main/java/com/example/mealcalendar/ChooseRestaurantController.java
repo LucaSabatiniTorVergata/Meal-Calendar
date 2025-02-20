@@ -26,7 +26,7 @@ public class ChooseRestaurantController {
 
         //Costruzione della query API
         String urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-                "location=41.9028,12.4964" +  // 📍 Posizione fissa (Roma) → Puoi sostituirlo con la posizione dell’utente
+                "location=41.9028,12.4964" +  // 📍 Posizione fissa (Roma)
                 "&radius=" + (filtro.getDistanza() * 1000) +  // 🔁 Convertiamo km in metri
                 "&type=restaurant" +
                 "&keyword=" + filtro.getTipoDieta() + "+" + filtro.getPasto() +  // 🏷️ Filtri della ricerca
