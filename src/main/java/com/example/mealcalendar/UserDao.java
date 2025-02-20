@@ -73,7 +73,8 @@ public class UserDao implements UserDaoInterface {
     // Register user in file system
     private boolean registerUserFS(UserEntity user) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword() + "\n");
+            writer.write(user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword());
+            writer.newLine();
         }
         return true;
     }
