@@ -68,7 +68,7 @@ public class UserDao implements UserDaoInterface {
                }
            }
        } catch (IOException e) {
-           e.printStackTrace();
+           logger.log(Level.SEVERE,"impossibile creare il file");
        }
 
    }
