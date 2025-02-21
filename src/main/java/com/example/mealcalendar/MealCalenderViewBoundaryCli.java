@@ -35,7 +35,7 @@ public class MealCalenderViewBoundaryCli {
 
     public void start() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        printer.print("=== CALENDARIO PASTI ===");
+        printer.print("=== CALENDARIO PASTI(Se si vuole tornare alla schemata iniziale riavviare il programma) ===");
 
         readDate(scanner);
         readTime(scanner);
