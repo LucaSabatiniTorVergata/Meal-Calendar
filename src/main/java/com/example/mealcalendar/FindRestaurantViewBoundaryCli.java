@@ -75,7 +75,7 @@ public class FindRestaurantViewBoundaryCli {
     }
 
     private List<ReturnRestaurantsBean> trovaRistoranti(FiltersRestaurantBean filtro) throws IOException {
-        ChooseRestaurantController controller = new ChooseRestaurantController(filtro);
+        ChooseRestaurantController controller = new ChooseRestaurantController(filtro,new FindRestaurantApiBoundary());
         return controller.trovaRistorante();
     }
 

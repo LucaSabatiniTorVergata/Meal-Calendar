@@ -27,7 +27,7 @@ class FindRestaurantControllerTest {
         filters.setTipoDieta("vegan");
         filters.setPasto("lunch");
 
-        controller = new ChooseRestaurantController(filters);
+        controller = new ChooseRestaurantController(filters,new FindRestaurantApiBoundary());
     }
 
     @Test
