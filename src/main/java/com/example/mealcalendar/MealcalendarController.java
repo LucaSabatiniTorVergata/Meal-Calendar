@@ -49,7 +49,7 @@ public class MealcalendarController {
     public void invioMail() {
         try {
             String mail = getMail();
-            boolean isRestaurant = MealCalenderViewBoundary.isSceltaLuogo();
+            boolean isRestaurant = MealCalenderViewController.isSceltaLuogo();
             String subject = isRestaurant ? "Email di conferma posto dove mangiare" : "Conferma Posto dove mangiare";
             String messageBody = isRestaurant ?
                     String.format("Salve, hai deciso di mangiare a: %s il giorno: %s alle ore: %s", mealcalendarBean.getScelta(), mealcalendarBean.getData(), mealcalendarBean.getOra()) :

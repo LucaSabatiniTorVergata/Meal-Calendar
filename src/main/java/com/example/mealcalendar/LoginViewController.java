@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 
-public class LoginViewBoundary {
+public class LoginViewController {
 
         @FXML
         private Button guest;

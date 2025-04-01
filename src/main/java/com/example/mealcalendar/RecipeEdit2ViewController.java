@@ -7,9 +7,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class RecipeEdit2ViewBoundary {
+public class RecipeEdit2ViewController {
 
-    private static final Logger LOGGER = Logger.getLogger(RecipeEdit2ViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RecipeEdit2ViewController.class.getName());
 
     @FXML
     private Label welcomelabel;

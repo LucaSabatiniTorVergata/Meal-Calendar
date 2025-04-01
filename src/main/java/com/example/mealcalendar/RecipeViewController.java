@@ -17,11 +17,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.*;
+import static com.example.mealcalendar.MealCalenderViewController.*;
 
-public class RecipeViewBoundary {
+public class RecipeViewController {
 
-    private static final Logger LOGGER = Logger.getLogger(RecipeViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RecipeViewController.class.getName());
 
     @FXML
     private Button addrecipe;
@@ -146,7 +146,7 @@ public class RecipeViewBoundary {
                                 LocalDate selectedDate = calendar.getValue();
                                 if (selectedDate != null) {
                                     // Passa la data alla funzione che invia la mail
-                                    MealCalenderViewBoundary.inviomail();
+                                    MealCalenderViewController.inviomail();
                                     loadMealCalendarView();
                                 }
                             } else {

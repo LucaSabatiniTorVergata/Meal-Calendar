@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 
-public class MainMenuVewBoundary {
+public class MainMenuViewController {
 
     @FXML
     private Button backbutton;

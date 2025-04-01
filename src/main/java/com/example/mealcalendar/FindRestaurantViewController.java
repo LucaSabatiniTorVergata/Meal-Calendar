@@ -23,14 +23,14 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.function.UnaryOperator;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.*;
+import static com.example.mealcalendar.MealCalenderViewController.*;
 
 
-public class FindRestaurantViewBoundary {
+public class FindRestaurantViewController {
 
     private static final boolean DEBUG = true;
 
-    private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewController.class.getName());
 
     @FXML
     private Label lableemail;
@@ -183,7 +183,7 @@ public class FindRestaurantViewBoundary {
                         // Resetto la modalità calendario e imposto il ristorante selezionato
                         setVengoDaCalendar(false);
                         setRistorantescelto("🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo());
-                        MealCalenderViewBoundary.inviomail();  // Chiamata al metodo che invia l'email
+                        MealCalenderViewController.inviomail();  // Chiamata al metodo che invia l'email
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
                         Parent root = loader.load();
                         Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();

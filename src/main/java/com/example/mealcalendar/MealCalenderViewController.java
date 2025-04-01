@@ -12,9 +12,9 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import javafx.util.Callback;
 
-public class MealCalenderViewBoundary {
+public class MealCalenderViewController {
 
-    private static final Logger LOGGER = Logger.getLogger(MealCalenderViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(MealCalenderViewController.class.getName());
 
     @FXML
     private Button backhome;
