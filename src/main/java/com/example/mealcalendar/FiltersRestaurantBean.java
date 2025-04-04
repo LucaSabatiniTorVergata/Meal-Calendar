@@ -1,18 +1,18 @@
 package com.example.mealcalendar;
 
+import java.util.Set;
+
 public class FiltersRestaurantBean {
 
     private String tipoDieta;
     private String pasto;
     private double distanza;
 
-   public FiltersRestaurantBean() {}
+    private static final Set<String> DIETE_VALIDE = Set.of("vegano", "vegetariano","onnivoro");
 
-    public FiltersRestaurantBean(String tipoDieta, String pasto, double distanza) {
-        this.tipoDieta = tipoDieta;
-        this.pasto = pasto;
-        this.distanza = distanza;
-    }
+    private static final Set<String> PASTI_VALIDI = Set.of("colazione", "pranzo", "cena");
+
+   public FiltersRestaurantBean() {}
 
     public String getTipoDieta() {
         return tipoDieta;
@@ -26,14 +26,26 @@ public class FiltersRestaurantBean {
         return distanza;
     }
 
-    public void setTipoDieta(String tipoDieta) {
-       this.tipoDieta = tipoDieta;
+    public void setTipoDieta(String tipoDieta)
+    {
+        if (tipoDieta == null || !DIETE_VALIDE.contains(tipoDieta.toLowerCase())) {
+            throw new IllegalArgumentException("Dieta non valida! Scelte: " + DIETE_VALIDE);
+        }
+        this.tipoDieta = tipoDieta;
     }
-    public void setPasto(String pasto) {
-       this.pasto = pasto;
+    public void setPasto(String pasto)
+    {
+        if (pasto == null || !PASTI_VALIDI.contains(pasto.toLowerCase())) {
+            throw new IllegalArgumentException("Pasto non valido! Scelte: " + PASTI_VALIDI);
+        }
+        this.pasto = pasto;
     }
     public void setDistanza(double distanza) {
-       this.distanza = distanza;
+
+        if (distanza < 0) {
+            throw new IllegalArgumentException("La distanza non può essere negativa!");
+        }
+        this.distanza = distanza;
     }
 
 }

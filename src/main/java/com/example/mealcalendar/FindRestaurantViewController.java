@@ -100,7 +100,10 @@ public class FindRestaurantViewController {
         LOGGER.log(Level.INFO, "Pasto: {0}", pastoSelezionato);
         LOGGER.log(Level.INFO, "Distanza: {0} km", distanzaInserita);
 
-        FiltersRestaurantBean filtro = new FiltersRestaurantBean(tipoDietaSelezionato, pastoSelezionato, distanzaInserita);
+        FiltersRestaurantBean filtro = new FiltersRestaurantBean();
+        filtro.setPasto(pastoSelezionato);
+        filtro.setDistanza(distanzaInserita);
+        filtro.setTipoDieta(tipoDietaSelezionato);
         ChooseRestaurantController controller = new ChooseRestaurantController(filtro,new FindRestaurantApiBoundary());
         List<ReturnRestaurantsBean> ristorantiBeans = controller.trovaRistorante();
         mostraRistoranti(ristorantiBeans);
