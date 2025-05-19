@@ -1,1 +1,3 @@
-pollo:vegano:Pranzo:5:pollo:pollo:leonero
+Alessio 6 Gay:Vegan:Lunch:2:Alessio, Gay:Alessio che possiede il gay:ale
+pollo alle palle:Vegan:Lunch:1:pollo:alessio gay:ale
+pollo alle palle:Vegan:Lunch:1:pollo:alessio gay:ale

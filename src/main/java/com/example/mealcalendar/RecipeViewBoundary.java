@@ -117,6 +117,7 @@ public class RecipeViewBoundary {
         breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
         lunch.setOnAction(e -> tipoPasto.setText("Lunch"));
         dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
+
     }
 
     // Display the list of recipes
@@ -143,7 +144,7 @@ public class RecipeViewBoundary {
                                 setRicettascelta(selectedItem);
 
                                 // Qui viene passata la data selezionata dal calendar
-                                LocalDate selectedDate = calendar.getValue();
+                                LocalDate selectedDate = SessionManagerSLT.getInstance().getDatas();
                                 if (selectedDate != null) {
                                     // Passa la data alla funzione che invia la mail
                                     MealCalenderViewBoundary.inviomail();
@@ -154,6 +155,7 @@ public class RecipeViewBoundary {
                             }
                         } catch (Exception e) {
                             erroreException();
+                            e.printStackTrace();
                         }
                     });
         }

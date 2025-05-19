@@ -1,3 +1,8 @@
-leonero:leo.polidori99@gmail.com:$2a$10$8zmdYVntJ6uSD25HjBtCIuJ41iZxABIdC1HWpc1p5hIVyD.mBZY7C
-alenero:alessiodemar@gmail.com:$2a$10$hIu9.4ULG50WqRcInNAUteEjy2fCJphxWau94Ft94/EnhrcFqJSIG
+luca:lowcillo148@gmail.com:$2a$10$6196N8h2lFmlsktkksrPguqRAUx8djSlWhKV0MW/CX3YfCEtvEPy6
+existinguser:existinguser@example.com:$2a$10$z0jiOVpC62evVmAjE4MqF.FohtxK2Q/01.671l.v4CLHnTrfr25s.
+gigi:aurorapaionniara@gmail.com:$2a$10$EvDcCov5IAXgZyZmJFCyPeI.Lp.abZormxcXuVzyNHHE1KQDXF/qq
 ale:alessiodemar@gmail.com:$2a$10$cKBfJemyEBfxTex6MWnJPuEyi3IXTl27KkoG8J9Sm3509wDp6ZlrG
+palla:palla:$2a$10$ikJ8Ewn45daWpAD0.3liI.yxMDpKKiVHzpmToogMzuSdHS0t7A..C
+gay:leo.polidori99@gmail.com:$2a$10$EIve7YVOyGpgHQylrWWdpeEkg20SZsT5Ldpfy.4K/xvAvcEbaMfuy
+dissan:pc.dissan@gmail.com:$2a$10$8NbwIRRxvIF5Jzm1IQ.azuRCSftS7a7JhfP3zff2xSDagLIRDuYUi
+materassio:alessiomatera3105@gmail.com:$2a$10$wL5Ft6FtWdFQjhpoU4ZbXeDOo9D3LQnId7zMllf5e2ne8VRkl.2HK
