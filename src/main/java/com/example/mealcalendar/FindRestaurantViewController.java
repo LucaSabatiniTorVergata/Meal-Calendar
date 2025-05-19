@@ -86,11 +86,9 @@ public class FindRestaurantViewController {
 
     @FXML
     private void confermafiltri(ActionEvent event) throws IOException {
-        if (tipoDieta.getText().equalsIgnoreCase("Onnivoro")) {
-            tipoDietaSelezionato = "";
-        } else {
-            tipoDietaSelezionato = tipoDieta.getText();
-        }
+
+        tipoDietaSelezionato = tipoDieta.getText();
+
 
         pastoSelezionato = pasto.getText();
         distanzaInserita = Double.parseDouble(distanza.getText());

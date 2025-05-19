@@ -12,8 +12,6 @@ public class FiltersRestaurantBean {
 
     private static final Set<String> PASTI_VALIDI = Set.of("colazione", "pranzo", "cena");
 
-   public FiltersRestaurantBean() {}
-
     public String getTipoDieta() {
         return tipoDieta;
     }
