@@ -23,14 +23,14 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.function.UnaryOperator;
 
-import static com.example.mealcalendar.MealCalenderViewBoundary.*;
+import static com.example.mealcalendar.MealCalenderViewController.*;
 
 
-public class FindRestaurantViewBoundary {
+public class FindRestaurantViewController {
 
     private static final boolean DEBUG = true;
 
-    private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FindRestaurantViewController.class.getName());
 
     @FXML
     private Label lableemail;
@@ -100,7 +100,10 @@ public class FindRestaurantViewBoundary {
         LOGGER.log(Level.INFO, "Pasto: {0}", pastoSelezionato);
         LOGGER.log(Level.INFO, "Distanza: {0} km", distanzaInserita);
 
-        FiltersRestaurantBean filtro = new FiltersRestaurantBean(tipoDietaSelezionato, pastoSelezionato, distanzaInserita);
+        FiltersRestaurantBean filtro = new FiltersRestaurantBean();
+        filtro.setPasto(pastoSelezionato);
+        filtro.setDistanza(distanzaInserita);
+        filtro.setTipoDieta(tipoDietaSelezionato);
         ChooseRestaurantController controller = new ChooseRestaurantController(filtro,new FindRestaurantApiBoundary());
         List<ReturnRestaurantsBean> ristorantiBeans = controller.trovaRistorante();
         mostraRistoranti(ristorantiBeans);
@@ -183,7 +186,7 @@ public class FindRestaurantViewBoundary {
                         // Resetto la modalità calendario e imposto il ristorante selezionato
                         setVengoDaCalendar(false);
                         setRistorantescelto("🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo());
-                        MealCalenderViewBoundary.inviomail();  // Chiamata al metodo che invia l'email
+                        MealCalenderViewController.inviomail();  // Chiamata al metodo che invia l'email
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
                         Parent root = loader.load();
                         Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();

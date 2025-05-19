@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 
-public class HelloViewBoudary {
+public class HelloViewController {
 
 
     @FXML

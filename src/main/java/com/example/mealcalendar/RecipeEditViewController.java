@@ -15,7 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
-public class RecipeEditViewBoundary {
+public class RecipeEditViewController {
 
     @FXML
     private Label welcomelabel;
@@ -30,7 +30,7 @@ public class RecipeEditViewBoundary {
 
     private String selectedRecipe;
 
-    private static final Logger LOGGER = Logger.getLogger(RecipeEditViewBoundary.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RecipeEditViewController.class.getName());
 
     @FXML
     private void initialize() throws RecipeDaoException {
@@ -101,7 +101,7 @@ public class RecipeEditViewBoundary {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("recipeedit2-View.fxml"));
             Parent root = loader.load();
-            RecipeEdit2ViewBoundary controller = loader.getController();
+            RecipeEdit2ViewController controller = loader.getController();
             controller.setRecipe(selectedRecipe); // Passa la ricetta selezionata
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
             stage.setScene(new Scene(root));

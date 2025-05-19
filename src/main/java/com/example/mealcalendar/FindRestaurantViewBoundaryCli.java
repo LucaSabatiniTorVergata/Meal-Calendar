@@ -35,7 +35,10 @@ public class FindRestaurantViewBoundaryCli {
         }
 
         // Crea filtro e ottieni lista ristoranti
-        FiltersRestaurantBean filtro = new FiltersRestaurantBean(tipoDieta, pasto, distanza);
+        FiltersRestaurantBean filtro = new FiltersRestaurantBean();
+        filtro.setDistanza(distanza);
+        filtro.setTipoDieta(tipoDieta);
+        filtro.setPasto(pasto);
         List<ReturnRestaurantsBean> listaRistoranti = trovaRistoranti(filtro);
 
         if (listaRistoranti.isEmpty()) {
