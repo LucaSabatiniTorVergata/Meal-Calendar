@@ -29,7 +29,16 @@ public class FiltersRestaurantBean {
         if (tipoDieta == null || !DIETE_VALIDE.contains(tipoDieta.toLowerCase())) {
             throw new IllegalArgumentException("Dieta non valida! Scelte: " + DIETE_VALIDE);
         }
-        this.tipoDieta = tipoDieta;
+        else{
+            if (tipoDieta.equals("Onnivoro") ){
+              this.tipoDieta = null;
+            }
+            else{
+                this.tipoDieta = tipoDieta;
+            }
+
+        }
+
     }
     public void setPasto(String pasto)
     {
