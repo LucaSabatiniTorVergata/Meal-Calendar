@@ -30,8 +30,8 @@ public class FiltersRestaurantBean {
             throw new IllegalArgumentException("Dieta non valida! Scelte: " + DIETE_VALIDE);
         }
         else{
-            if (tipoDieta.equals("Onnivoro") ){
-              this.tipoDieta = null;
+            if (tipoDieta.equalsIgnoreCase("Onnivoro") ){
+              this.tipoDieta = "";
             }
             else{
                 this.tipoDieta = tipoDieta;

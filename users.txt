@@ -6,5 +6,6 @@ palla:palla:$2a$10$ikJ8Ewn45daWpAD0.3liI.yxMDpKKiVHzpmToogMzuSdHS0t7A..C
 gay:leo.polidori99@gmail.com:$2a$10$EIve7YVOyGpgHQylrWWdpeEkg20SZsT5Ldpfy.4K/xvAvcEbaMfuy
 dissan:pc.dissan@gmail.com:$2a$10$8NbwIRRxvIF5Jzm1IQ.azuRCSftS7a7JhfP3zff2xSDagLIRDuYUi
 materassio:alessiomatera3105@gmail.com:$2a$10$wL5Ft6FtWdFQjhpoU4ZbXeDOo9D3LQnId7zMllf5e2ne8VRkl.2HK
+cri.strana:cristianagiustiniani@gmail.com:$2a$10$1RwObRM8Id.NTarY5a08luJ0WmBIyZOG/c6b5yBhJkZqZlzFDRlq.
 amalia:amalia.9co7@gmail.com:$2a$10$B6Hn5FxcBbvZqLF02KChq.tGFzRj1M113Ga.ebg/9DydfaWfe8uIi
 edo:edoardo.marchionni99@gmail.com:$2a$10$yLc9jGT7Ijlb3xcdYaPfXOIja/RfUxVxTPzsJAMqBO5d.rRMtGgja
