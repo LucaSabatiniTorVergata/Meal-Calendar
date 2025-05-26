@@ -22,7 +22,7 @@ public class RecipeEditController {
         this.managerController = new RecipeManagerController(dao);
     }
 
-    public List<RecipeReturnBean> mostraricette() throws RecipeDaoException {
+    public List<RecipeReturnBean> mostraricette()  {
         List<RecipeReturnBean> lista = new ArrayList<>();
         List<RecipeEntity> ricette = managerController.getAllRecipes();
 

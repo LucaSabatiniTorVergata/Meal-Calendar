@@ -16,7 +16,7 @@ public class RecipeSearchController {
     }
 
     // Metodo per cercare ricette che corrispondono ai filtri
-    public Optional<List<RecipeReturnBean>> trovaricette() throws RecipeDaoException, IOException {
+    public Optional<List<RecipeReturnBean>> trovaricette() throws IOException {
         List<RecipeReturnBean> result = managerController.searchRecipesByFilters(
                 filtri.getTipoDieta(),
                 filtri.getTipoPasto()

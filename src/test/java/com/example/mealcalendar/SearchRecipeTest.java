@@ -17,7 +17,7 @@ class SearchRecipeTest {
     private RecipeDaoFS recipeDao;
 
     @BeforeEach
-    void setUp() throws RecipeDaoException, IOException {
+    void setUp() throws IOException {
         // Inizializziamo il DAO senza persistenza su file
         recipeDao = new RecipeDaoFS(true);
 
@@ -54,7 +54,7 @@ class SearchRecipeTest {
     }
 
     @Test
-    void testFilterRecipes_CorrectDietAndMealType() throws RecipeDaoException {
+    void testFilterRecipes_CorrectDietAndMealType() throws IOException {
         RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean();
         filters.setTipoDieta("Vegan");
         filters.setTipoPasto("Lunch");
