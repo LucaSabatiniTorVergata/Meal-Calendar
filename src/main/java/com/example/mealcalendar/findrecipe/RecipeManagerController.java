@@ -23,12 +23,15 @@ public class RecipeManagerController {
             try {
                 Thread.sleep(2000);
                 return dao.addRecipe(recipe);
-            } catch (IOException | InterruptedException ex) {
-                if (ex instanceof InterruptedException) Thread.currentThread().interrupt();
-                throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), ex);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+                throw new RecipeDaoException("Thread interrotto durante retry per la ricetta: " + recipe.getRecipeName(), ie);
+            } catch (IOException retryEx) {
+                throw new RecipeDaoException("Errore durante l'aggiunta della ricetta dopo retry: " + recipe.getRecipeName(), retryEx);
             }
         }
     }
+
 
     public List<RecipeEntity> getAllRecipes() throws RecipeDaoException {
         try {

@@ -4,11 +4,12 @@ import java.io.IOException;
 
 public class RecipeAddController {
 
-    // Istanza del DAO per interagire con il file
-    private RecipeDao dao = RecipeDaoFactory.createRecipeDao();
+    // Inizializziamo il manager passando il DAO
+    private final RecipeManagerController manager =
+            new RecipeManagerController(RecipeDaoFactory.createRecipeDao());
 
-    // Metodo per salvare una ricetta
-    public boolean salvaRicetta(AddRecipeBean bean) throws RecipeDaoException, IOException {
+    // Metodo per salvare una ricetta usando il manager
+    public boolean salvaRicetta(AddRecipeBean bean) throws RecipeDaoException {
         String nome = bean.getRecipeName();
         String dieta = bean.getTypeofDiet();
         String pasto = bean.getTypeofMeal();
@@ -17,11 +18,12 @@ public class RecipeAddController {
         String descrizione = bean.getDescription();
         String autore = bean.getAuthor();
 
-        // Creiamo la ricetta utilizzando il Builder Pattern tramite la fabbrica
-        RecipeEntity newRecipe = RecipeEntityFactory.createRecipe(nome, dieta, pasto, numingredienti, ingredienti, descrizione, autore);
+        // Creiamo la ricetta con il Builder tramite la factory
+        RecipeEntity newRecipe = RecipeEntityFactory.createRecipe(
+                nome, dieta, pasto, numingredienti, ingredienti, descrizione, autore
+        );
 
-        // Aggiungiamo la ricetta al DAO
-        return dao.addRecipe(newRecipe);
+        // Usiamo il manager per aggiungere la ricetta
+        return manager.addRecipe(newRecipe);
     }
 }
-
