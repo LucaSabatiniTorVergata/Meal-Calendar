@@ -1,6 +1,10 @@
 package com.example.mealcalendar;
 
 
+import com.example.mealcalendar.login.RegisterController;
+import com.example.mealcalendar.login.UserBean;
+import com.example.mealcalendar.login.UserDao;
+import com.example.mealcalendar.login.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,11 @@
 package com.example.mealcalendar;
 
 import java.io.IOException;
+
+import com.example.mealcalendar.login.RegisterController;
+import com.example.mealcalendar.login.UserBean;
+import com.example.mealcalendar.login.UserDaoFactory;
+import com.example.mealcalendar.login.UserDaoInterface;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;

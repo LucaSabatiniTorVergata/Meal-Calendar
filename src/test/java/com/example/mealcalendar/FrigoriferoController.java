@@ -1,5 +1,6 @@
 package com.example.mealcalendar;
 
+import com.example.mealcalendar.fillfridge.FrigoriferoController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,11 @@
 package com.example.mealcalendar;
 
+import com.example.mealcalendar.fillfridge.FridgeViewBoundaryCli;
+import com.example.mealcalendar.findrecipe.*;
+import com.example.mealcalendar.findrest.FindRestaurantViewBoundaryCli;
+import com.example.mealcalendar.login.LoginViewBoundaryCli;
+import com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli;
+
 public class CliController {
 
     // Istanza di AntiCodeSmellPrinter per sostituire System.out.println

@@ -11,4 +11,14 @@ module demo {
 
     exports com.example.mealcalendar;
     opens com.example.mealcalendar to javafx.fxml;
+    exports com.example.mealcalendar.login;
+    opens com.example.mealcalendar.login to javafx.fxml;
+    exports com.example.mealcalendar.findrest;
+    opens com.example.mealcalendar.findrest to javafx.fxml;
+    exports com.example.mealcalendar.findrecipe;
+    opens com.example.mealcalendar.findrecipe to javafx.fxml;
+    exports com.example.mealcalendar.fillfridge;
+    opens com.example.mealcalendar.fillfridge to javafx.fxml;
+    exports com.example.mealcalendar.seteatingtime;
+    opens com.example.mealcalendar.seteatingtime to javafx.fxml;
 }

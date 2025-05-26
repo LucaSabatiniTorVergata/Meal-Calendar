@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.findrecipe.RecipeViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+      <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="342.0" layoutX="66.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
+      <Label layoutX="97.0" layoutY="15.0" prefHeight="70.0" prefWidth="398.0" text="FINDING RECIPE...">
+         <font>
+            <Font name="System Bold Italic" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="238.0" prefHeight="35.0" prefWidth="187.0" text="Type of diet">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <SplitMenuButton fx:id="tipoDieta" layoutX="91.0" layoutY="283.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="212.0" text="Choose">
+        <items>
+            <MenuItem fx:id="omnivorous" mnemonicParsing="false" text="omnivorous" />
+          <MenuItem fx:id="vegetarian" mnemonicParsing="false" text="vegetarian" />
+          <MenuItem fx:id="vegan" mnemonicParsing="false" text="vegan" />
+        </items>
+         <font>
+            <Font name="System Italic" size="22.0" />
+         </font>
+      </SplitMenuButton>
+      <Label layoutX="89.0" layoutY="364.0" prefHeight="46.0" prefWidth="223.0" text="Select type of meal">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <SplitMenuButton fx:id="tipoPasto" layoutX="93.0" layoutY="419.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="206.0" text="Choose">
+        <items>
+          <MenuItem fx:id="breakfast" mnemonicParsing="false" text="Breakfast" />
+          <MenuItem fx:id="lunch" mnemonicParsing="false" text="Lunch" />
+            <MenuItem fx:id="dinner" mnemonicParsing="false" text="Dinner" />
+        </items>
+         <font>
+            <Font name="System Italic" size="22.0" />
+         </font>
+      </SplitMenuButton>
+      <Button layoutX="70.0" layoutY="602.0" mnemonicParsing="false" onAction="#searchrecipies" prefHeight="63.0" prefWidth="248.0" style="-fx-background-color: #cfac5b;" text="SEARCH">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="addrecipe" layoutX="882.0" layoutY="39.0" mnemonicParsing="false" onAction="#addrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Add Recipe">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editrecipe" layoutX="1026.0" layoutY="39.0" mnemonicParsing="false" onAction="#editrecipeview" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Edit Recipe">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnhome" layoutX="19.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeView" text="HOME">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listaRicetteview" layoutX="622.0" layoutY="170.0" onMouseClicked="#handleItemClick" prefHeight="496.0" prefWidth="608.0" visible="true" />
+      <Pane fx:id="detailpane" layoutX="622.0" layoutY="173.0" prefHeight="490.0" prefWidth="608.0" visible="false">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleback" text="BACK" />
+            <Label fx:id="detailLabel" layoutX="8.0" layoutY="43.0" maxWidth="595.0" prefHeight="408.0" prefWidth="595.0" textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="label" layoutX="632.0" layoutY="387.0" prefHeight="66.0" prefWidth="588.0" textFill="RED" text="❌ Nessuna ricetta trovata!" visible="false">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
