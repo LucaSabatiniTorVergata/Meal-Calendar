@@ -28,85 +28,33 @@ public class RecipeDaoFS implements RecipeDao {
         }
     }
 
-    public boolean addRecipe(RecipeEntity recipe) throws RecipeDaoException {
-        return useDemo ? demoRecipes.add(recipe) : addRecipeFS(recipe);
+    @Override
+    public boolean addRecipe(RecipeEntity recipe) throws IOException {
+        if (useDemo) return demoRecipes.add(recipe);
+        Files.write(Paths.get(FILE_PATH),
+                (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        return true;
     }
 
-    private boolean addRecipeFS(RecipeEntity recipe) throws RecipeDaoException {
-        try {
-            Files.write(Paths.get(FILE_PATH),
-                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            return true;
-        } catch (IOException e) {
-            return handleWriteError(recipe, e);
-        }
-    }
-
-    public List<RecipeEntity> getAllRecipes() throws RecipeDaoException {
-        return useDemo ? new ArrayList<>(demoRecipes) : getAllRecipesFS();
-    }
-
-    private List<RecipeEntity> getAllRecipesFS() {
+    @Override
+    public List<RecipeEntity> getAllRecipes() throws IOException {
+        if (useDemo) return new ArrayList<>(demoRecipes);
         List<RecipeEntity> recipeList = new ArrayList<>();
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
-            for (String line : lines) {
-                RecipeEntity recipe = parseRecipe(line);
-                if (recipe != null) {
-                    recipeList.add(recipe);
-                }
+        List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
+        for (String line : lines) {
+            RecipeEntity recipe = parseRecipe(line);
+            if (recipe != null) {
+                recipeList.add(recipe);
             }
-        } catch (IOException e) {
-            return handle();
         }
         return recipeList;
     }
 
-    private RecipeEntity parseRecipe(String line) {
-        String[] parts = line.split(":", 7);
-        return (parts.length == 7) ? RecipeEntityFactory.createRecipe(parts[0], parts[1], parts[2],
-                parts[3], parts[4], parts[5], parts[6]) : null;
-    }
-
-    public void updateRecipe(RecipeEntity oldRecipe, RecipeEntity newRecipe) throws RecipeDaoException {
-        if (useDemo) {
-            demoRecipes.replaceAll(recipe -> formatRecipe(recipe).equals(formatRecipe(oldRecipe)) ? newRecipe : recipe);
-        } else {
-            List<RecipeEntity> recipes = getAllRecipesFS();
-            List<String> updatedRecipes = new ArrayList<>();
-            for (RecipeEntity recipe : recipes) {
-                if (formatRecipe(recipe).equals(formatRecipe(oldRecipe))) {
-                    updatedRecipes.add(formatRecipe(newRecipe));
-                }
-            }
-            try {
-                Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-            } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nell''aggiornamento della ricetta con il nome: {0}", oldRecipe.getRecipeName());
-                throw new RecipeDaoException("Errore durante l''aggiornamento della ricetta con nome: " + oldRecipe.getRecipeName(), e);
-            }
-        }
-    }
-
-    public void removeRecipe(RecipeEntity recipeToRemove) throws RecipeDaoException {
-        if (useDemo) {
-            demoRecipes.removeIf(recipe -> formatRecipe(recipe).equals(formatRecipe(recipeToRemove)));
-        } else {
-            List<RecipeEntity> recipes = getAllRecipesFS();
-            List<String> updatedRecipes = new ArrayList<>();
-            for (RecipeEntity recipe : recipes) {
-                if (!formatRecipe(recipe).equals(formatRecipe(recipeToRemove))) {
-                    updatedRecipes.add(formatRecipe(recipe));
-                }
-            }
-            try {
-                Files.write(Paths.get(FILE_PATH), updatedRecipes, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-            } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Errore nella rimozione della ricetta con il nome: {0}", recipeToRemove.getRecipeName());
-                throw new RecipeDaoException("Errore durante la rimozione della ricetta con nome: " + recipeToRemove.getRecipeName(), e);
-            }
-        }
+    @Override
+    public void saveAllRecipes(List<RecipeEntity> recipes) throws IOException {
+        List<String> formatted = recipes.stream().map(this::formatRecipe).toList();
+        Files.write(Paths.get(FILE_PATH), formatted, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
     }
 
     private String formatRecipe(RecipeEntity recipe) {
@@ -114,32 +62,11 @@ public class RecipeDaoFS implements RecipeDao {
                 recipe.getNumIngredients(), recipe.getIngredients(), recipe.getDescription(), recipe.getAuthor());
     }
 
-    private boolean handleWriteError(RecipeEntity recipe, IOException e) throws RecipeDaoException {
-        LOGGER.log(Level.SEVERE, "Errore nella scrittura della ricetta: {0}", recipe.getRecipeName());
-
-        // Proviamo a riscrivere il file una seconda volta dopo qualche secondo
-        try {
-            Thread.sleep(2000); // Aspetta 2 secondi prima di ritentare
-            Files.write(Paths.get(FILE_PATH),
-                    (formatRecipe(recipe) + System.lineSeparator()).getBytes(),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            return true;
-        } catch (IOException retryException) {
-            LOGGER.log(Level.SEVERE, "Secondo tentativo fallito per la ricetta: {0}", recipe.getRecipeName());
-
-
-            // Lancio comunque l'eccezione per notificare il problema
-            throw new RecipeDaoException("Errore durante l'aggiunta della ricetta: " + recipe.getRecipeName(), e);
-        } catch (InterruptedException interruptedException) {
-            Thread.currentThread().interrupt();
-            throw new RecipeDaoException("Interruzione durante la gestione dell'errore", interruptedException);
-        }
-    }
-
-    private List<RecipeEntity> handle(){
-        List<RecipeEntity> recipes = new ArrayList<>();
-        LOGGER.log(Level.SEVERE,"Letture da file non riuscita tornera una lista vuota");
-        return recipes;
+    private RecipeEntity parseRecipe(String line) {
+        String[] parts = line.split(":", 7);
+        return (parts.length == 7) ? RecipeEntityFactory.createRecipe(parts[0], parts[1], parts[2],
+                parts[3], parts[4], parts[5], parts[6]) : null;
     }
 }
+
 

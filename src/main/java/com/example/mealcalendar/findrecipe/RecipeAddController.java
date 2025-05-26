@@ -1,12 +1,14 @@
 package com.example.mealcalendar.findrecipe;
 
+import java.io.IOException;
+
 public class RecipeAddController {
 
     // Istanza del DAO per interagire con il file
     private RecipeDao dao = RecipeDaoFactory.createRecipeDao();
 
     // Metodo per salvare una ricetta
-    public boolean salvaRicetta(AddRecipeBean bean) throws RecipeDaoException {
+    public boolean salvaRicetta(AddRecipeBean bean) throws RecipeDaoException, IOException {
         String nome = bean.getRecipeName();
         String dieta = bean.getTypeofDiet();
         String pasto = bean.getTypeofMeal();

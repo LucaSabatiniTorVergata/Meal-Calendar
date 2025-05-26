@@ -4,6 +4,7 @@ import com.example.mealcalendar.findrecipe.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ class SearchRecipeTest {
     private RecipeDaoFS recipeDao;
 
     @BeforeEach
-    void setUp() throws RecipeDaoException {
+    void setUp() throws RecipeDaoException, IOException {
         // Inizializziamo il DAO senza persistenza su file
         recipeDao = new RecipeDaoFS(true);
 

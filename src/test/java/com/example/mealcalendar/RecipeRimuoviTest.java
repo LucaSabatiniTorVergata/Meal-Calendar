@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.io.IOException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +33,7 @@ class RecipeRimuoviTest {
 
     }
     @Test
-    void testRemoveNonExistingRecipe() throws RecipeDaoException {
+    void testRemoveNonExistingRecipe() throws RecipeDaoException, IOException {
 
         int count = recipeDao.getAllRecipes().size();
         // Proviamo a rimuovere una ricetta che non esiste

@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class RecipeAddViewController {
 
@@ -81,7 +83,7 @@ public class RecipeAddViewController {
     }
 
     @FXML
-    private void handleAddRecipe(ActionEvent event) throws RecipeDaoException {
+    private void handleAddRecipe(ActionEvent event) throws RecipeDaoException, IOException {
         String name = recipename.getText().trim();
         String diet = (dietMenu.getText().equals("Seleziona dieta")) ? "" : dietMenu.getText();
         String meal = (mealMenu.getText().equals("Seleziona pasto")) ? "" : mealMenu.getText();

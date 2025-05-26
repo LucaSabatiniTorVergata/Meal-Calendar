@@ -1,25 +1,30 @@
 package com.example.mealcalendar.findrecipe;
 
-
 import com.example.mealcalendar.SessionManagerSLT;
 
 public class RecipeEdit2Controller {
 
     private RecipeEdit2Bean bean;
+    private final RecipeManagerController managerController;
 
     public RecipeEdit2Controller(RecipeEdit2Bean bean) {
         this.bean = bean;
+        RecipeDao dao = RecipeDaoFactory.createRecipeDao();
+        this.managerController = new RecipeManagerController(dao);
     }
 
     public void cambiaRicetta() throws RecipeDaoException {
         // Splittiamo la ricetta presa per ottenere le informazioni della ricetta vecchia
         String[] parts = bean.getRicettapresa().split(" - ");
         if (parts.length >= 6) {
-            // Creiamo l'oggetto RecipeEntity per la ricetta vecchia usando la fabbrica con il Builder
-            RecipeEntity ricettavecchia = RecipeEntityFactory.createRecipe(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], SessionManagerSLT.getInstance().getLoggedInUsername());
+            // Ricetta originale da aggiornare
+            RecipeEntity ricettavecchia = RecipeEntityFactory.createRecipe(
+                    parts[0], parts[1], parts[2], parts[3], parts[4], parts[5],
+                    SessionManagerSLT.getInstance().getLoggedInUsername()
+            );
 
-            // Creiamo l'oggetto RecipeEntity per la nuova ricetta usando i dati nel bean
-            RecipeEntity ricetta = RecipeEntityFactory.createRecipe(
+            // Nuova versione della ricetta
+            RecipeEntity ricettaAggiornata = RecipeEntityFactory.createRecipe(
                     bean.getricetta(),
                     bean.getTdieta(),
                     bean.getTpasto(),
@@ -29,11 +34,8 @@ public class RecipeEdit2Controller {
                     bean.getAutor()
             );
 
-            // Otteniamo il DAO e aggiorniamo la ricetta
-            RecipeDaoFS dao = RecipeDaoFactory.createRecipeDao();  // Non è più necessario il cast
-            dao.updateRecipe(ricettavecchia, ricetta);
+            // Usiamo il manager per fare l’update
+            managerController.updateRecipe(ricettavecchia, ricettaAggiornata);
         }
     }
-
 }
-

@@ -101,13 +101,8 @@ public class RecipeEditViewController {
     // Mostra i dettagli della ricetta selezionata
     private void showRecipeDetails() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("recipeedit2-View.fxml"));
-            Parent root = loader.load();
-            RecipeEdit2ViewController controller = loader.getController();
-            controller.setRecipe(selectedRecipe); // Passa la ricetta selezionata
             Stage stage = (Stage) recipeEdit2.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
+            GraphicController.cambiascena(stage, "recipeedit2-View.fxml" );      } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore durante il caricamento della vista per modificare la ricetta", e);
         }
     }
