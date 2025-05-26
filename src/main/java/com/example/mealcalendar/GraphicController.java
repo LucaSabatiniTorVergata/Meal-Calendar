@@ -25,7 +25,7 @@ public class GraphicController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Errore durante il caricamento della scena: " + "recipeedit2-View.fxml");
+            LOGGER.log(Level.SEVERE, e, () -> "Errore durante il caricamento della scena: ");
 
         }
     }
