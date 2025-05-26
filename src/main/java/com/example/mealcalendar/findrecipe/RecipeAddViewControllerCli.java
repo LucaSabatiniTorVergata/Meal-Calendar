@@ -6,7 +6,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 
 import java.util.Scanner;
 
-public class RecipeAddViewBoundaryCli {
+public class RecipeAddViewControllerCli {
 
     private final Scanner scanner = new Scanner(System.in);
     private final RecipeAddController controller = new RecipeAddController();

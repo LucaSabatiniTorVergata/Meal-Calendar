@@ -15,8 +15,8 @@ public class CliController {
         switch (view) {
             case "recipeedit":
                 printer.print("🔹 Navigazione alla schermata di modifica ricette (CLI).");
-                RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli();
-                recipeEditViewBoundaryCli.start();
+                RecipeEditViewControllerCli recipeEditViewControllerCli = new RecipeEditViewControllerCli();
+                recipeEditViewControllerCli.start();
                 break;
             case "fridge":
                 printer.print("🔹 Navigazione alla schermata frigo (CLI).");
@@ -30,7 +30,7 @@ public class CliController {
                 break;
             case "addrecipe":
                 printer.print("🔹 Navigazione alla schermata aggiunta ricetta (CLI).");
-                RecipeAddViewBoundaryCli addrecipeboundary = new RecipeAddViewBoundaryCli();
+                RecipeAddViewControllerCli addrecipeboundary = new RecipeAddViewControllerCli();
                 addrecipeboundary.start();
                 break;
             case "login":
@@ -60,7 +60,7 @@ public class CliController {
                 break;
             case "trovaricette":
                 printer.print("🔹 Navigazione alla schermata di trova ricette (CLI).");
-                RecipeVewBoundaryCli recipeView = new RecipeVewBoundaryCli();
+                RecipeVewControllerCli recipeView = new RecipeVewControllerCli();
                 recipeView.start();
                 break;
             case "calendariopasti":
@@ -76,8 +76,8 @@ public class CliController {
     public void navigateToRecipeEditWithRecipe(RecipeReturnBean ricetta) throws RecipeNavigationException {
         try {
             printer.print("🔹 Navigazione alla schermata di modifica ricetta (CLI) con ricetta selezionata.");
-            RecipeEditViewBoundaryCli recipeEditViewBoundaryCli = new RecipeEditViewBoundaryCli(ricetta);
-            recipeEditViewBoundaryCli.start();
+            RecipeEditViewControllerCli recipeEditViewControllerCli = new RecipeEditViewControllerCli(ricetta);
+            recipeEditViewControllerCli.start();
         } catch (Exception e) {  // Sostituire Exception con eccezioni più specifiche se possibile
             throw new RecipeNavigationException("Errore durante la navigazione alla modifica ricetta.", e);
         }

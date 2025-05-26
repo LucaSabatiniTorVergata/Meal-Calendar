@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class RecipeVewBoundaryCli {
+public class RecipeVewControllerCli {
 
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
@@ -20,12 +20,12 @@ public class RecipeVewBoundaryCli {
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("RecipeVewBoundaryCli");
 
     // Costruttore per navigazione dal calendario
-    public RecipeVewBoundaryCli(boolean vengoDaCalendar) {
+    public RecipeVewControllerCli(boolean vengoDaCalendar) {
         this.vengoDaCalendar = vengoDaCalendar;
     }
 
     // Costruttore di default per altri usi
-    public RecipeVewBoundaryCli() {
+    public RecipeVewControllerCli() {
         this.vengoDaCalendar = false;
     }
 

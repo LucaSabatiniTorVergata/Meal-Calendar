@@ -5,17 +5,17 @@ import com.example.mealcalendar.SessionManagerSLT;
 
 import java.util.Scanner;
 
-public class RecipeEditViewBoundaryCli {
+public class RecipeEditViewControllerCli {
 
     private RecipeReturnBean ricetta;
     private Scanner scanner = new Scanner(System.in);
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("RecipeEditViewBoundaryCli");
 
     // Costruttore senza parametri (eventuale modifica “a vuoto”)
-    public RecipeEditViewBoundaryCli() {}
+    public RecipeEditViewControllerCli() {}
 
     // Costruttore che riceve la ricetta selezionata
-    public RecipeEditViewBoundaryCli(RecipeReturnBean ricetta) {
+    public RecipeEditViewControllerCli(RecipeReturnBean ricetta) {
         this.ricetta = ricetta;
     }
 
