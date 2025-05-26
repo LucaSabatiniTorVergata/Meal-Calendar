@@ -2,8 +2,8 @@ package com.example.mealcalendar;
 
 import com.example.mealcalendar.fillfridge.FridgeViewBoundaryCli;
 import com.example.mealcalendar.findrecipe.*;
-import com.example.mealcalendar.findrest.FindRestaurantViewBoundaryCli;
-import com.example.mealcalendar.login.LoginViewBoundaryCli;
+import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
+import com.example.mealcalendar.login.LoginViewControllerCli;
 import com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli;
 
 public class CliController {
@@ -25,7 +25,7 @@ public class CliController {
                 break;
             case "registration":
                 printer.print("🔹 Navigazione alla schermata hello (CLI).");
-                HelloViewBoundaryCli helloview = new HelloViewBoundaryCli();
+                HelloViewControllerCli helloview = new HelloViewControllerCli();
                 helloview.start();
                 break;
             case "addrecipe":
@@ -35,27 +35,27 @@ public class CliController {
                 break;
             case "login":
                 printer.print("🔹 Navigazione alla schermata di login (CLI).");
-                LoginViewBoundaryCli loginView = new LoginViewBoundaryCli();
+                LoginViewControllerCli loginView = new LoginViewControllerCli();
                 loginView.start();
                 break;
             case "guest":
                 printer.print("🔹 Navigazione alla schermata principale guest (CLI).");
-                MainMenuViewBoundaryGuestCli mainMenuViewGuest = new MainMenuViewBoundaryGuestCli();
+                MainMenuViewControllerGuestCli mainMenuViewGuest = new MainMenuViewControllerGuestCli();
                 mainMenuViewGuest.start();
                 break;
             case "mainmenu":
                 printer.print("🔹 Navigazione alla schermata principale (CLI).");
-                MainMenuViewBoundaryCli mainMenuView = new MainMenuViewBoundaryCli();
+                MainMenuViewControllerCli mainMenuView = new MainMenuViewControllerCli();
                 mainMenuView.start();
                 break;
             case "ristoranteUser":
                 printer.print("🔹 Navigazione alla schermata di ristorante user (CLI).");
-                FindRestaurantViewBoundaryCli findRestaurantView = new FindRestaurantViewBoundaryCli();
+                FindRestaurantViewControllerCli findRestaurantView = new FindRestaurantViewControllerCli();
                 findRestaurantView.start();
                 break;
             case "ristoranteguest":
                 printer.print("🔹 Navigazione alla schermata di ristorante guest (CLI).");
-                FindRestaurantViewBoundaryCli findRestaurantViewGuest = new FindRestaurantViewBoundaryCli();
+                FindRestaurantViewControllerCli findRestaurantViewGuest = new FindRestaurantViewControllerCli();
                 findRestaurantViewGuest.start();
                 break;
             case "trovaricette":

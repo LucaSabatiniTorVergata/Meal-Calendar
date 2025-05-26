@@ -12,16 +12,16 @@ import java.util.Scanner;
 
 import static com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli.*;
 
-public class FindRestaurantViewBoundaryCli {
+public class FindRestaurantViewControllerCli {
 
     private final boolean vengoDaCalendar;
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("FindRestaurantViewBoundaryCli");
 
-    public FindRestaurantViewBoundaryCli(boolean vengoDaCalendar) {
+    public FindRestaurantViewControllerCli(boolean vengoDaCalendar) {
         this.vengoDaCalendar = vengoDaCalendar;
     }
 
-    public FindRestaurantViewBoundaryCli() {
+    public FindRestaurantViewControllerCli() {
         this.vengoDaCalendar = false;
     }
 

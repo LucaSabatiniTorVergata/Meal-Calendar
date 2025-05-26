@@ -6,7 +6,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.findrecipe.RecipeNotSelectedException;
 import com.example.mealcalendar.findrecipe.RecipeReturnBean;
 import com.example.mealcalendar.findrecipe.RecipeVewBoundaryCli;
-import com.example.mealcalendar.findrest.FindRestaurantViewBoundaryCli;
+import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -145,7 +145,7 @@ public class MealCalenderViewBoundaryCli {
     }
 
     private void navigateToRestaurant() throws Exception {
-        FindRestaurantViewBoundaryCli findRestaurantView = new FindRestaurantViewBoundaryCli(true);
+        FindRestaurantViewControllerCli findRestaurantView = new FindRestaurantViewControllerCli(true);
         findRestaurantView.start();
         if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
             printer.print("Ristorante selezionato: " + ristorantescelto);

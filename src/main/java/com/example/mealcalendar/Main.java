@@ -31,7 +31,7 @@ public class Main extends Application {
         String choice = scanner.nextLine();
 
         if ("2".equals(choice)) {
-            HelloViewBoundaryCli cli = new HelloViewBoundaryCli();
+            HelloViewControllerCli cli = new HelloViewControllerCli();
             cli.start();
         } else {
             launch();

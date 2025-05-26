@@ -8,9 +8,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LoginViewBoundaryCli {
+public class LoginViewControllerCli {
     private final Scanner scanner = new Scanner(System.in);
-    private static final Logger LOGGER = Logger.getLogger(LoginViewBoundaryCli.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LoginViewControllerCli.class.getName());
     private final CliController cliController = new CliController();
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("LoginView");
 

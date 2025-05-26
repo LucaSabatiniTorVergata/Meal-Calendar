@@ -11,10 +11,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HelloViewBoundaryCli {
+public class HelloViewControllerCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
-    private static final Logger LOGGER = Logger.getLogger(HelloViewBoundaryCli.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HelloViewControllerCli.class.getName());
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalendarCLI");
 
     public void start() {

@@ -2,7 +2,7 @@ package com.example.mealcalendar;
 
 import java.util.Scanner;
 
-public class MainMenuViewBoundaryGuestCli {
+public class MainMenuViewControllerGuestCli {
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MainMenuViewBoundaryGuestCli");
