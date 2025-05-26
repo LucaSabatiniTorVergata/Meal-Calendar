@@ -22,7 +22,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
         printer.print("===== Calendario dei Pasti =====");
         printer.print("1. Avvia interfaccia grafica (JavaFX)");
