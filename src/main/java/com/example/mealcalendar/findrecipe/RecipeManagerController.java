@@ -33,7 +33,7 @@ public class RecipeManagerController {
     }
 
 
-    public List<RecipeEntity> getAllRecipes() throws RecipeDaoException {
+    public List<RecipeEntity> getAllRecipes()  {
         try {
             return dao.getAllRecipes();
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class RecipeManagerController {
         }
     }
 
-    public List<RecipeReturnBean> searchRecipesByFilters(String tipoDieta, String tipoPasto) throws RecipeDaoException, IOException {
+    public List<RecipeReturnBean> searchRecipesByFilters(String tipoDieta, String tipoPasto) throws IOException {
         List<RecipeEntity> allRecipes = dao.getAllRecipes();
         List<RecipeReturnBean> filtered = new ArrayList<>();
 
