@@ -1,5 +1,7 @@
 package com.example.mealcalendar.findrecipe;
 
+import java.util.Objects;
+
 public class RecipeEntity {
     private String recipeName;
     private String typeofDiet;
@@ -9,7 +11,6 @@ public class RecipeEntity {
     private String description;
     private String author;
 
-    // Costruttore privato, sarà usato dal Builder
     private RecipeEntity(RecipeEntityBuilder builder) {
         this.recipeName = builder.recipeName;
         this.typeofDiet = builder.typeofDiet;
@@ -20,7 +21,6 @@ public class RecipeEntity {
         this.author = builder.author;
     }
 
-    // Classe statica del Builder
     public static class RecipeEntityBuilder {
         private String recipeName;
         private String typeofDiet;
@@ -30,7 +30,6 @@ public class RecipeEntity {
         private String description;
         private String author;
 
-        // Metodi di configurazione per ogni campo
         public RecipeEntityBuilder recipeName(String recipeName) {
             this.recipeName = recipeName;
             return this;
@@ -66,13 +65,11 @@ public class RecipeEntity {
             return this;
         }
 
-        // Costruisci l'oggetto RecipeEntity
         public RecipeEntity build() {
             return new RecipeEntity(this);
         }
     }
 
-    // Getter per tutti i campi
     public String getRecipeName() { return recipeName; }
     public String getTypeofDiet() { return typeofDiet; }
     public String getTypeofMeal() { return typeofMeal; }
@@ -80,5 +77,18 @@ public class RecipeEntity {
     public String getIngredients() { return ingredients; }
     public String getDescription() { return description; }
     public String getAuthor() { return author; }
-}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RecipeEntity)) return false;
+        RecipeEntity that = (RecipeEntity) o;
+        return recipeName.equalsIgnoreCase(that.recipeName) &&
+                author.equalsIgnoreCase(that.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(recipeName.toLowerCase(), author.toLowerCase());
+    }
+}

@@ -57,11 +57,9 @@ public class RecipeManagerController {
 
     public void removeRecipe(RecipeEntity recipeToRemove) throws RecipeDaoException {
         try {
-            System.out.println("sono nel removerecipe");
             List<RecipeEntity> recipes = dao.getAllRecipes();
             recipes.removeIf(recipe -> recipe.equals(recipeToRemove));
             dao.saveAllRecipes(recipes);
-            System.out.println("ricetta rimossa");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Errore rimozione ricetta: {0}", recipeToRemove.getRecipeName());
             throw new RecipeDaoException("Errore rimozione ricetta: " + recipeToRemove.getRecipeName(), e);
