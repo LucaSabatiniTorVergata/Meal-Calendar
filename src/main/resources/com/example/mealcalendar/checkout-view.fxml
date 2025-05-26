@@ -31,12 +31,12 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="862.0" layoutY="498.0" mnemonicParsing="false" onAction="#payWithCard" prefHeight="47.0" prefWidth="198.0" text="CARTE DI CREDITO">
+      <Button layoutX="862.0" layoutY="498.0" mnemonicParsing="false" onAction="#payWithCard" prefHeight="47.0" prefWidth="198.0" text="CARTE DI CREDITO" fx:id="carta" >
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#goBack" text="BACK">
+      <Button layoutX="50.0" layoutY="33.0" mnemonicParsing="false" onAction="#goBack" text="BACK" fx:id="indietro">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>

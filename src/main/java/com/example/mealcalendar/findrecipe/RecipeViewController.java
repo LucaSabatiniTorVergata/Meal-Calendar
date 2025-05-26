@@ -199,10 +199,8 @@ public class RecipeViewController {
 
     // Helper method to load the Meal Calendar view
     private void loadMealCalendarView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
-        Parent root = loader.load();
         Stage stage = (Stage) returnhome.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
     // Show recipe details in a separate pane

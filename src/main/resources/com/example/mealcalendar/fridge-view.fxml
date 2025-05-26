@@ -23,7 +23,7 @@
         </ImageView>
       <ImageView fitHeight="483.0" fitWidth="331.0" layoutX="84.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../pictures/FrigoRifo.png" />
+            <Image url="@../../../pictures/FrigoRifo.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="351.0" layoutX="146.0" layoutY="232.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />

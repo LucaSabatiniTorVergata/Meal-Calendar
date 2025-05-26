@@ -50,7 +50,7 @@ public class HelloViewController {
     @FXML
     private void loginview(ActionEvent event) {
         Stage stage = (Stage) login.getScene().getWindow();
-        GraphicController.cambiascena(stage, "login-view.fxml");
+        GraphicController.cambiascena(stage,"login-view.fxml");
     }
 
     // Metodo per cambiare modalità su File System
