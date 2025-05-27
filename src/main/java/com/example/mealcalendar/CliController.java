@@ -3,6 +3,7 @@ package com.example.mealcalendar;
 import com.example.mealcalendar.fillfridge.FridgeViewBoundaryCli;
 import com.example.mealcalendar.findrecipe.*;
 import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
+import com.example.mealcalendar.login.HelloViewControllerCli;
 import com.example.mealcalendar.login.LoginViewControllerCli;
 import com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli;
 

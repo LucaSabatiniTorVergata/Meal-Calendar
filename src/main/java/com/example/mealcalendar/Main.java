@@ -1,5 +1,6 @@
 package com.example.mealcalendar;
 
+import com.example.mealcalendar.login.HelloViewControllerCli;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

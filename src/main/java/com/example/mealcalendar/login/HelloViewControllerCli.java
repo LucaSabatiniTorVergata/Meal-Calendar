@@ -1,9 +1,8 @@
-package com.example.mealcalendar;
+package com.example.mealcalendar.login;
 
-import com.example.mealcalendar.login.RegisterController;
-import com.example.mealcalendar.login.UserBean;
-import com.example.mealcalendar.login.UserDaoFactory;
-import com.example.mealcalendar.login.UserDaoInterface;
+import com.example.mealcalendar.AntiCodeSmellPrinter;
+import com.example.mealcalendar.CliController;
+import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.seteatingtime.MealCalendarException;
 
 import java.io.IOException;
@@ -99,24 +98,18 @@ public class HelloViewControllerCli {
     private void useFileSystem() {
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(false);
-        UserDaoFactory.setUseDatabase(false);
-        UserDaoFactory.useDemo(false);
         printer.print("🔹 Utilizzando il File System per i dati utenti.");
     }
 
     private void useDatabase() {
         SessionManagerSLT.getInstance().setFSDataBase(true);
         SessionManagerSLT.getInstance().setDemo(false);
-        UserDaoFactory.setUseDatabase(true);
-        UserDaoFactory.useDemo(false);
         printer.print("🔹 Utilizzando il Database per i dati utenti.");
     }
 
     private void useRam() {
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(true);
-        UserDaoFactory.setUseDatabase(false);
-        UserDaoFactory.useDemo(true);
         printer.print("🔹 Utilizzando la demo per i dati utenti.");
     }
 }

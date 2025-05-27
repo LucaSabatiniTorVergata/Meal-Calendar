@@ -145,7 +145,7 @@ public class RecipeViewController {
                             if (isVengoDaCalendar()) {
                                 setVengoDaCalendar(false);
                                 setRicettascelta(selectedItem);
-
+//gay
                                 // Qui viene passata la data selezionata dal calendar
                                 LocalDate selectedDate = SessionManagerSLT.getInstance().getDatas();
                                 if (selectedDate != null) {

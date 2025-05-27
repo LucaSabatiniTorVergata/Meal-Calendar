@@ -3,7 +3,9 @@ package com.example.mealcalendar.seteatingtime;
 import java.io.IOException;
 import java.util.logging.*;
 
-import com.example.mealcalendar.login.UserDao;
+
+import com.example.mealcalendar.login.UserDaoFactory;
+import com.example.mealcalendar.login.UserDaoInterface;
 import com.example.mealcalendar.login.UserEntity;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
@@ -26,6 +28,7 @@ public class MealcalendarController {
     private static final String EMAIL_PASSWORD = System.getenv("EMAIL_PASSWORD");// Usa variabili d'ambiente
     private static final String DATE_TIME_PATTERN = "HH:mm";
     private static final int REMINDER_MINUTES = 30;
+    private UserDaoInterface userDAO;
 
     private final MealcalendarBean mealcalendarBean;
 
@@ -38,16 +41,10 @@ public class MealcalendarController {
 
     public MealcalendarController(MealcalendarBean bean) {
         this.mealcalendarBean = bean;
+        this.userDAO=UserDaoFactory.createUserDao();
     }
 
-    public String getMail() throws UserNotFoundException, IOException {
-        UserDao dao = new UserDao(false, false);
-        UserEntity user = dao.getUserByUsername(mealcalendarBean.getUser());
-        if (user == null || user.getEmail() == null) {
-            throw new UserNotFoundException("User email not found");
-        }
-        return user.getEmail();
-    }
+
 
     public void invioMail() {
         try {
@@ -62,6 +59,15 @@ public class MealcalendarController {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore nell''invio della mail: {0}", e.getMessage());
         }
+    }
+
+    public String getMail() throws UserNotFoundException, IOException {
+        UserEntity user = userDAO.getUserByUsername(mealcalendarBean.getUser());
+
+        if (user == null || user.getEmail() == null) {
+            throw new UserNotFoundException("User email not found");
+        }
+        return user.getEmail();
     }
 
     private void sendEmail(String recipient, String subject, String body) throws MessagingException {

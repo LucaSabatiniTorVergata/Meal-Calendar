@@ -62,10 +62,7 @@ public class LoginViewController {
         }
         @FXML
         private void here(ActionEvent event) {
-
             Stage stage = (Stage) guest.getScene().getWindow();
             GraphicController.cambiascena(stage, "guestmenu-view.fxml");
-
-
-        }
+         }
     }

@@ -1,23 +1,20 @@
 package com.example.mealcalendar.login;
+import com.example.mealcalendar.SessionManagerSLT;
 
 
 public class UserDaoFactory {
 
     private UserDaoFactory() {}
 
-    private static boolean useDatabase = false; // Impostazione predefinita su fs
-    private static boolean demoMode = false;
-
-    // Metodo per cambiare modalità tra File System e Database
-    public static void setUseDatabase(boolean value) {
-        useDatabase = value;
-        demoMode = false;
-    }
-    public static void useDemo(boolean value) {
-        demoMode = value;
-    }
-
     public static UserDaoInterface createUserDao() {
-        return new UserDao(useDatabase, demoMode);
+        SessionManagerSLT session = SessionManagerSLT.getInstance();
+
+        if (session.getDemo()) {
+            return new UserDaoRam(); // in-memory
+        } else if (session.getFSDataBase()) {
+            return new UserDaoDB(); // database
+        } else {
+            return new UserDaoFS(); // filesystem
+        }
     }
 }

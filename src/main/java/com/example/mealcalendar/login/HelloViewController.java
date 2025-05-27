@@ -1,11 +1,9 @@
-package com.example.mealcalendar;
+package com.example.mealcalendar.login;
 
 import java.io.IOException;
 
-import com.example.mealcalendar.login.RegisterController;
-import com.example.mealcalendar.login.UserBean;
-import com.example.mealcalendar.login.UserDaoFactory;
-import com.example.mealcalendar.login.UserDaoInterface;
+import com.example.mealcalendar.GraphicController;
+import com.example.mealcalendar.SessionManagerSLT;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -62,8 +60,6 @@ public class HelloViewController {
         updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(false);
-        UserDaoFactory.setUseDatabase(false);
-        UserDaoFactory.useDemo(false);// Imposta l'uso del File System
         messageLabel.setText("🔹 Utilizzando il File System per i dati utenti.");
     }
 
@@ -76,8 +72,6 @@ public class HelloViewController {
         updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(true);
         SessionManagerSLT.getInstance().setDemo(false);
-        UserDaoFactory.setUseDatabase(true);
-        UserDaoFactory.useDemo(false);// Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando il Database per i dati utenti.");
     }
 
@@ -94,11 +88,8 @@ public class HelloViewController {
             return;
         }
 
-        // Crea il DAO tramite la Factory (già configurato con FS o DB)
-        UserDaoInterface userDao = UserDaoFactory.createUserDao();
 
-        // Passiamo il DAO al RegisterController
-        RegisterController controller = new RegisterController(userDao);
+        RegisterController controller = new RegisterController();
 
         UserBean userRegisterBean = new UserBean(username, email, password);
         boolean results = controller.register(userRegisterBean);
@@ -120,8 +111,6 @@ public class HelloViewController {
         updateButtonVisibility();
         SessionManagerSLT.getInstance().setFSDataBase(false);
         SessionManagerSLT.getInstance().setDemo(true);
-        UserDaoFactory.setUseDatabase(false);
-        UserDaoFactory.useDemo(true); // Imposta l'uso del Database
         messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
     }
 

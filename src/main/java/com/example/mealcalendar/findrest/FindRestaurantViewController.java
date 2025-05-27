@@ -187,10 +187,8 @@ public class FindRestaurantViewController {
                         setVengoDaCalendar(false);
                         setRistorantescelto("🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo());
                         MealCalenderViewController.inviomail();  // Chiamata al metodo che invia l'email
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("mealcalendar-view.fxml"));
-                        Parent root = loader.load();
                         Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
-                        stage.setScene(new Scene(root));
+                        GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
                     } catch (Exception ex) {
                         LOGGER.log(Level.SEVERE, "Errore nel processo", ex);
                     }

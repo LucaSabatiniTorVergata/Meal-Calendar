@@ -11,12 +11,9 @@ public class LoginController {
     private UserDaoInterface userDAO;
 
     public LoginController() {
-        this(UserDaoFactory.createUserDao());
+        this.userDAO=UserDaoFactory.createUserDao();
     }
 
-    public LoginController(UserDaoInterface userDao) {
-        this.userDAO = userDao;
-    }
 
     public boolean login(LoginBean userLoginBean) throws IOException {
         return checkPassword(userLoginBean.getUsername(), userLoginBean.getPassword());
