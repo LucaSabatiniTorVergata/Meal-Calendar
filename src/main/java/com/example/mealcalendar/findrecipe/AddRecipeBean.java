@@ -9,7 +9,7 @@ public class AddRecipeBean {
     private String ingredients;
     private String description;
     private String author;
-
+//pisello e palle
     public AddRecipeBean(String recipeName, String typeofDiet, String typeofMeal,
                         String numIngredients, String ingredients, String description,String author) {
         this.recipeName = recipeName;
