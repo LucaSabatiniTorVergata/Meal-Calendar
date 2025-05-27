@@ -22,17 +22,21 @@ public class RegisterController {
     public boolean usernameExists(String username) throws IOException {
 
         if (userDAO instanceof UserDaoFS) {
-            System.out.println("È un File System DAO!");
+            LOGGER.log(Level.INFO,"È un File System DAO!");
             for (UserEntity user : userDAO.getAllUsers()) {
                 if (user.getUsername().equalsIgnoreCase(username)) {
                     return true;
                 }
             }
         } else if (userDAO instanceof UserDaoDB) {
-            System.out.println("È un Database DAO!");
-
+            LOGGER.log(Level.INFO,"È un Database DAO!");
+            for (UserEntity user : userDAO.getAllUsers()) {
+                if (user.getUsername().equalsIgnoreCase(username)) {
+                    return true;
+                }
+            }
         } else if (userDAO instanceof UserDaoRam) {
-            System.out.println("È un Demo DAO!");
+            LOGGER.log(Level.INFO,"È un Demo DAO!");
             for (UserEntity user : userDAO.getAllUsers()) {
                 if (user.getUsername().equalsIgnoreCase(username)) {
                     return true;
