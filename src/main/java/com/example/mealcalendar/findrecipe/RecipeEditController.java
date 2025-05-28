@@ -22,6 +22,14 @@ public class RecipeEditController {
         this.managerController = new RecipeManagerController(dao);
     }
 
+
+    //usato per il test
+
+    public RecipeEditController(RecipeEditBean bean, RecipeManagerController managerController) {
+        this.bean = bean;
+        this.managerController = managerController;
+    }
+
     public List<RecipeReturnBean> mostraricette()  {
         List<RecipeReturnBean> lista = new ArrayList<>();
         List<RecipeEntity> ricette = managerController.getAllRecipes();
