@@ -89,7 +89,6 @@ public class RecipeViewController {
         changeScene("usermenu-view.fxml", event);
     }
 
-    // Handle searching recipes based on selected filters
     @FXML
     private void searchrecipies(ActionEvent event) throws IOException, RecipeDaoException {
         tipoDietaSelezionato = tipoDieta.getText();
@@ -97,10 +96,9 @@ public class RecipeViewController {
         RecipeSearchFiltersBean bean = new RecipeSearchFiltersBean(tipoDietaSelezionato, pastoSelezionato);
         RecipeSearchController controller = new RecipeSearchController(bean);
 
-        // Using Optional for handling possible null results
+
         Optional<List<RecipeReturnBean>> ricettereturnbean = controller.trovaricette();
 
-        // If results are present, display them; otherwise, show a label
         ricettereturnbean.ifPresentOrElse(
                 this::mostraricette,
                 () -> {
@@ -110,7 +108,6 @@ public class RecipeViewController {
         );
     }
 
-    // Initialize menu actions for diet and meal types
     @FXML
     public void initialize() {
         vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
@@ -145,7 +142,6 @@ public class RecipeViewController {
                             if (isVengoDaCalendar()) {
                                 setVengoDaCalendar(false);
                                 setRicettascelta(selectedItem);
-//gay
                                 // Qui viene passata la data selezionata dal calendar
                                 LocalDate selectedDate = SessionManagerSLT.getInstance().getDatas();
                                 if (selectedDate != null) {
