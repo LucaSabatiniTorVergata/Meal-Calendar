@@ -10,7 +10,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli.*;
+import static com.example.mealcalendar.seteatingtime.MealCalenderViewControllerCli.*;
 
 public class FindRestaurantViewControllerCli {
 
