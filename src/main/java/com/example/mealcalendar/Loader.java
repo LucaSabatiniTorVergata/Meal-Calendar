@@ -5,6 +5,11 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Loader {
+
+    private Loader() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static final Properties queries = new Properties();
 
     static {
