@@ -1,30 +1,27 @@
 package com.example.mealcalendar.findrecipe;
 
-import com.example.mealcalendar.SessionManagerSLT;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-public class TestFindRecipe2 {
+class TestFindRecipe2 {
 
     private RecipeEditController controller;
     private RecipeEditBean beanMock;
     private RecipeManagerController managerMock;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         beanMock = mock(RecipeEditBean.class);
         managerMock = mock(RecipeManagerController.class);
         controller = new RecipeEditController(beanMock, managerMock);
     }
 
     @Test
-    public void testRimuovi_EsegueRemoveRecipe() throws RecipeDaoException {
+    void testRimuovi_EsegueRemoveRecipe() throws RecipeDaoException {
         // Arrange
         // Simuliamo utente loggato
-        SessionManagerSLT sessionManager = SessionManagerSLT.getInstance();
-        String username = sessionManager.getLoggedInUsername();
 
         String input = "Pizza - Veg - Dinner - 4 - Farina, Pomodoro - Classica";
 

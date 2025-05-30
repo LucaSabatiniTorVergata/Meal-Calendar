@@ -15,10 +15,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TestFindRestaurant1 {
+class TestFindRestaurant1 {
 
     @Test
-    public void testRistorantePresenteInLista() throws IOException {
+    void testRistorantePresenteInLista() throws IOException {
         // Filtro fittizio
         FiltersRestaurantBean filtro = new FiltersRestaurantBean();
 

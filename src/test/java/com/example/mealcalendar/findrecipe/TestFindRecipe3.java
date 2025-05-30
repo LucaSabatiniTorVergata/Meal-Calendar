@@ -7,10 +7,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class TestFindRecipe3 {
+class TestFindRecipe3 {
 
     @Test
-    public void testMostraricette_ConBeanNonNull_RitornaLista() {
+    void testMostraricette_ConBeanNonNull_RitornaLista() {
         // Creo un mock di RecipeEditBean
         RecipeEditBean beanMock = mock(RecipeEditBean.class);
         // Quando getUser() viene chiamato, ritorna "utenteDiTest"

@@ -8,10 +8,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class TestFindRecipe1 {
+class TestFindRecipe1 {
 
     @Test
-    public void testMostraricette_FiltraSoloRicetteUtenteLoggato() {
+    void testMostraricette_FiltraSoloRicetteUtenteLoggato() {
         // Arrange
         RecipeEditBean beanMock = mock(RecipeEditBean.class);
         when(beanMock.getUser()).thenReturn("utente123");

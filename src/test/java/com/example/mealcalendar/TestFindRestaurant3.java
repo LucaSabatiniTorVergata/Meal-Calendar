@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestFindRestaurant3 {
+class TestFindRestaurant3 {
 
     @Test
-    public void testListaVuota() throws IOException {
+    void testListaVuota() throws IOException {
         FiltersRestaurantBean filtro = new FiltersRestaurantBean();
         FindRestaurantApiBoundary apiStub = new FindRestaurantApiBoundary() {
             @Override

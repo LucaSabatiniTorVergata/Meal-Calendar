@@ -14,11 +14,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TestFindRestaurant2 {
+class TestFindRestaurant2 {
 
 
     @Test
-    public void testRistoranteConDatiMancanti() throws IOException {
+    void testRistoranteConDatiMancanti() throws IOException {
         FiltersRestaurantBean filtro = new FiltersRestaurantBean();
         FindRestaurantApiBoundary apiStub = new FindRestaurantApiBoundary() {
             @Override
