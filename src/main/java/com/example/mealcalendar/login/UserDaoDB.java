@@ -34,7 +34,7 @@ public class UserDaoDB implements UserDaoInterface {
     @Override
     public List<UserEntity> getAllUsers() {
         List<UserEntity> users = new ArrayList<>();
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT username, email, password FROM users";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement stmt = conn.createStatement();
@@ -58,7 +58,7 @@ public class UserDaoDB implements UserDaoInterface {
 
     @Override
     public UserEntity getUserByUsername(String username) {
-        String sql = "SELECT * FROM users WHERE username = ?";
+        String sql = "SELECT username, email, password FROM users WHERE username = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
