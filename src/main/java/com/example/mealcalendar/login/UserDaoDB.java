@@ -10,7 +10,6 @@ public class UserDaoDB implements UserDaoInterface {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/mealcalendar";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = System.getenv("DBPASS");
-    private static final String FILE_PATH    = "Query";
 
     @Override
     public boolean registerUser(UserEntity user) {
