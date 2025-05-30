@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class RecipeVewControllerCli {
+public class RecipeViewControllerCli {
 
     private final Scanner scanner = new Scanner(System.in);
     private final CliController cliController = new CliController();
@@ -20,12 +20,12 @@ public class RecipeVewControllerCli {
     private final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("RecipeVewBoundaryCli");
 
     // Costruttore per navigazione dal calendario
-    public RecipeVewControllerCli(boolean vengoDaCalendar) {
+    public RecipeViewControllerCli(boolean vengoDaCalendar) {
         this.vengoDaCalendar = vengoDaCalendar;
     }
 
     // Costruttore di default per altri usi
-    public RecipeVewControllerCli() {
+    public RecipeViewControllerCli() {
         this.vengoDaCalendar = false;
     }
 
@@ -135,7 +135,6 @@ public class RecipeVewControllerCli {
             return;
         }
 
-        // Ottieni la lista di ricette dal Optional
         List<RecipeReturnBean> listaRicette = optionalListaRicette.get();
 
         // Visualizza le ricette trovate

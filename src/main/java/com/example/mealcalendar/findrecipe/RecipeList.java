@@ -3,18 +3,18 @@ package com.example.mealcalendar.findrecipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeListSLT {
+public class RecipeList {
 
-    private static RecipeListSLT instance = null;
+    private static RecipeList instance = null;
     private List<RecipeEntity> listaRicette;
 
-    private RecipeListSLT() {
+    private RecipeList() {
         listaRicette = new ArrayList<>();
     }
 
-    public static RecipeListSLT getInstance () {
+    public static RecipeList getInstance () {
         if (instance == null) {
-            instance = new RecipeListSLT();
+            instance = new RecipeList();
         }
         return instance;
     }

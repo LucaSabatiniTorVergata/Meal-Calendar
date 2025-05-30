@@ -5,7 +5,7 @@ import com.example.mealcalendar.MailSendingException;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.findrecipe.RecipeNotSelectedException;
 import com.example.mealcalendar.findrecipe.RecipeReturnBean;
-import com.example.mealcalendar.findrecipe.RecipeVewControllerCli;
+import com.example.mealcalendar.findrecipe.RecipeViewControllerCli;
 import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
 
 import java.time.LocalDate;
@@ -139,7 +139,7 @@ public class MealCalenderViewControllerCli {
         if (sceltaLuogo) {
             navigateToRestaurant();
         } else {
-            RecipeVewControllerCli ricercaRicette = new RecipeVewControllerCli(true);
+            RecipeViewControllerCli ricercaRicette = new RecipeViewControllerCli(true);
             ricercaRicette.start();
         }
     }

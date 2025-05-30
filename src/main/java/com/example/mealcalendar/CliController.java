@@ -61,7 +61,7 @@ public class CliController {
                 break;
             case "trovaricette":
                 printer.print("🔹 Navigazione alla schermata di trova ricette (CLI).");
-                RecipeVewControllerCli recipeView = new RecipeVewControllerCli();
+                RecipeViewControllerCli recipeView = new RecipeViewControllerCli();
                 recipeView.start();
                 break;
             case "calendariopasti":
