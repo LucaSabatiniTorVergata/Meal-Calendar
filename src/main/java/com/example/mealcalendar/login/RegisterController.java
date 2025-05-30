@@ -19,31 +19,23 @@ public class RegisterController {
 
     // Metodo per verificare se l'username esiste già
     public boolean usernameExists(String username) throws IOException {
-
         if (userDAO instanceof UserDaoFS) {
-            LOGGER.log(Level.INFO,"È un File System DAO!");
-            for (UserEntity user : userDAO.getAllUsers()) {
-                if (user.getUsername().equalsIgnoreCase(username)) {
-                    return true;
-                }
-            }
+            LOGGER.log(Level.INFO, "È un File System DAO!");
         } else if (userDAO instanceof UserDaoDB) {
-            LOGGER.log(Level.INFO,"È un Database DAO!");
-            for (UserEntity user : userDAO.getAllUsers()) {
-                if (user.getUsername().equalsIgnoreCase(username)) {
-                    return true;
-                }
-            }
+            LOGGER.log(Level.INFO, "È un Database DAO!");
         } else if (userDAO instanceof UserDaoRam) {
-            LOGGER.log(Level.INFO,"È un Demo DAO!");
-            for (UserEntity user : userDAO.getAllUsers()) {
-                if (user.getUsername().equalsIgnoreCase(username)) {
-                    return true;
-                }
+            LOGGER.log(Level.INFO, "È un Demo DAO!");
+        }
+
+        for (UserEntity user : userDAO.getAllUsers()) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
+                return true;
             }
         }
+
         return false;
     }
+
 
     // Metodo per registrare un nuovo utente
     public boolean register(UserBean userRegisterBean) throws IOException {
