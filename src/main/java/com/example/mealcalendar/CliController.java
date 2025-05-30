@@ -5,7 +5,7 @@ import com.example.mealcalendar.findrecipe.*;
 import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
 import com.example.mealcalendar.login.HelloViewControllerCli;
 import com.example.mealcalendar.login.LoginViewControllerCli;
-import com.example.mealcalendar.seteatingtime.MealCalenderViewBoundaryCli;
+import com.example.mealcalendar.seteatingtime.MealCalenderViewControllerCli;
 
 public class CliController {
 
@@ -66,7 +66,7 @@ public class CliController {
                 break;
             case "calendariopasti":
                 printer.print("🔹 Navigazione alla schermata di calendario pasti (CLI).");
-                MealCalenderViewBoundaryCli mealcalendarView = new MealCalenderViewBoundaryCli();
+                MealCalenderViewControllerCli mealcalendarView = new MealCalenderViewControllerCli();
                 mealcalendarView.start();
                 break;
             default:
@@ -88,13 +88,13 @@ public class CliController {
     // Metodo per navigare al calendario con una ricetta specifica
     public void navigateToCalendarWithRecipe(RecipeReturnBean ricetta) throws Exception {
         printer.print("🔹 Navigazione al calendario con la ricetta selezionata.");
-        MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli(ricetta);
+        MealCalenderViewControllerCli calendario = new MealCalenderViewControllerCli(ricetta);
         calendario.printSelectionAndSendMail();
         calendario.start();
     }
     public void navigateToCalendarWithRestaurant() throws Exception {
         printer.print("🔹 Navigazione al calendario con la ricetta selezionata.");
-        MealCalenderViewBoundaryCli calendario = new MealCalenderViewBoundaryCli();
+        MealCalenderViewControllerCli calendario = new MealCalenderViewControllerCli();
         calendario.printSelectionAndSendMail();
         calendario.start();
     }

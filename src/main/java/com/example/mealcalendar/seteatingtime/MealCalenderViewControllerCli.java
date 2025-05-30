@@ -15,11 +15,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MealCalenderViewBoundaryCli {
+public class MealCalenderViewControllerCli {
 
     private static final AntiCodeSmellPrinter printer = new AntiCodeSmellPrinter("MealCalenderViewBoundaryCli");
 
-    private static final Logger LOGGER = Logger.getLogger(MealCalenderViewBoundaryCli.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(MealCalenderViewControllerCli.class.getName());
     private static boolean sceltaLuogo = false;
     private static boolean vengoDaCalendar = false;
     private static LocalDate dataselezionata;
@@ -31,9 +31,9 @@ public class MealCalenderViewBoundaryCli {
     private static String ristorantescelto;
     private static String ricettascelta;
 
-    public MealCalenderViewBoundaryCli() {}
+    public MealCalenderViewControllerCli() {}
 
-    public MealCalenderViewBoundaryCli(RecipeReturnBean ricettaSelezionata) {
+    public MealCalenderViewControllerCli(RecipeReturnBean ricettaSelezionata) {
         this.ricettaSelezionata = ricettaSelezionata;
     }
 
