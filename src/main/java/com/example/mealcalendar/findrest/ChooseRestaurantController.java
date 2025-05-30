@@ -4,6 +4,7 @@ package com.example.mealcalendar.findrest;
 import java.io.IOException;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -21,8 +22,7 @@ public class ChooseRestaurantController {
 
     public List<ReturnRestaurantsBean> trovaRistorante() throws IOException {
         List<JSONObject> results = googlePlacesBoundary.cercaRistoranti(filtro);
-        RestaurantListSLTPat listaRistoranti = RestaurantListSLTPat.getInstance();
-        listaRistoranti.svuotaLista();
+        List<RestaurantEntity>listaRistoranti=new ArrayList<>();
 
         for (JSONObject ristorante : results) {
             String nome = ristorante.getString("name");
@@ -34,9 +34,21 @@ public class ChooseRestaurantController {
                 lat = location.getDouble("lat");
                 lng = location.getDouble("lng");
             }
-            listaRistoranti.aggiungiRistorante(RestaurantFactory.creaRistorante(nome, indirizzo, lat, lng));
+            listaRistoranti.add(RestaurantFactory.creaRistorante(nome, indirizzo, lat, lng));
         }
+        return getBeansList(listaRistoranti);
+    }
 
-        return listaRistoranti.getBeansList();
+    public List<ReturnRestaurantsBean> getBeansList(List<RestaurantEntity>lista) {
+        List<ReturnRestaurantsBean> beansList = new ArrayList<>();
+        for (RestaurantEntity ristorante : lista) {
+            beansList.add(new ReturnRestaurantsBean(
+                    ristorante.getnome(),
+                    ristorante.getindirizzo(),
+                    ristorante.getlatitudine(),
+                    ristorante.getlongitudine()
+            ));
+        }
+        return beansList;
     }
 }
