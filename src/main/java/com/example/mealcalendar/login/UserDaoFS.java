@@ -9,12 +9,8 @@ import java.util.logging.Logger;
 public class UserDaoFS implements UserDaoInterface {
 
     private static final String FILE_PATH    = "users.txt";
-    private Map<String, UserEntity> users;
     private static final Logger logger = Logger.getLogger(UserDaoFS.class.getName());
 
-
-    public UserDaoFS() {
-    }
 
     @Override
     public boolean registerUser(UserEntity user) throws IOException {
