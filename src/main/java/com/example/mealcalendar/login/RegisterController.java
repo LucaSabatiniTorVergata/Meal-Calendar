@@ -1,7 +1,6 @@
 package com.example.mealcalendar.login;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,7 +48,6 @@ public class RegisterController {
     // Metodo per registrare un nuovo utente
     public boolean register(UserBean userRegisterBean) throws IOException {
 
-        System.out.println(userRegisterBean.getUsername());
         if (usernameExists(userRegisterBean.getUsername())) {
             return false; // Username già in uso
         }
