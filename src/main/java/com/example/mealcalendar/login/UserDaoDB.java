@@ -1,5 +1,7 @@
 package com.example.mealcalendar.login;
 
+import com.example.mealcalendar.Loader;
+
 import java.sql.*;
 import java.util.*;
 
@@ -8,12 +10,13 @@ public class UserDaoDB implements UserDaoInterface {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/mealcalendar";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = System.getenv("DBPASS");
+    private static final String FILE_PATH    = "Query";
 
     @Override
     public boolean registerUser(UserEntity user) {
         if (getUserByUsername(user.getUsername()) != null) return false;
 
-        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        String sql = Loader.getQuery("registerUser");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -34,7 +37,7 @@ public class UserDaoDB implements UserDaoInterface {
     @Override
     public List<UserEntity> getAllUsers() {
         List<UserEntity> users = new ArrayList<>();
-        String sql = "SELECT username, email, password FROM users";
+        String sql = Loader.getQuery("getUserByUsername");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement stmt = conn.createStatement();
@@ -58,7 +61,7 @@ public class UserDaoDB implements UserDaoInterface {
 
     @Override
     public UserEntity getUserByUsername(String username) {
-        String sql = "SELECT username, email, password FROM users WHERE username = ?";
+        String sql = Loader.getQuery("getAllUsers");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {

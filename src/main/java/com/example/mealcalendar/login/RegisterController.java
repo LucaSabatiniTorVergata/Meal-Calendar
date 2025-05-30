@@ -55,4 +55,5 @@ public class RegisterController {
         // Registrazione utente tramite il DAO
         return userDAO.registerUser(newUser);
     }
+
 }
