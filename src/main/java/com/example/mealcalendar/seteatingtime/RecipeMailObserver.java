@@ -13,17 +13,18 @@ public class RecipeMailObserver implements MailObserver {
 
     @Override
     public void sendConfirmation(MealcalendarBean bean) throws MessagingException, IOException {
-        String subject = "Email di conferma ricetta scelta";
-        String body = String.format("Hai deciso di mangiare la ricetta : %s il giorno: %s alle ore: %s",
-                bean.getScelta(), bean.getData(), bean.getOra());
-        mailService.send(bean.getUser(), subject, body);
+        String user=bean.getUser();
+        sendTemplate(user,bean,"Email di conferma ricetta scelta", "Hai deciso di mangiare la ricetta : %s il giorno: %s alle ore: %s");
     }
 
     @Override
     public void sendReminder(MealcalendarBean bean) throws MessagingException, IOException {
-        String subject = "Ricordo della tua scelta";
-        String body = String.format("Ti ricordo che hai scelto di mangiare :s%s tra mezz'ora.",
-                bean.getScelta());
-        mailService.send(bean.getUser(), subject, body);
+        String user=bean.getUser();
+        sendTemplate(user,bean, "Ricordo della tua scelta", "Ti ricordo che hai scelto di mangiare :s%s tra mezz'ora.");
+    }
+
+    private void sendTemplate(String user,MealcalendarBean bean, String subject, String body) throws MessagingException, IOException {
+        String nbody=String.format(body,bean.getScelta(), bean.getData(), bean.getOra());
+        mailService.send(user,subject,nbody);
     }
 }
