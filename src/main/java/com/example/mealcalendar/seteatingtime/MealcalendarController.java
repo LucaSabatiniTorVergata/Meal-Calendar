@@ -34,7 +34,6 @@ public class MealcalendarController {
         try {
             mailObserver.sendConfirmation(bean);
             sendReminder();
-            logger.log(Level.SEVERE, "invio riuscito dell'email: {0}");
         } catch (Exception e) {
             // log errore
         }
