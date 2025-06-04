@@ -27,3 +27,5 @@ public class FrigoBean {
         this.quantita = quantita;
     }
 }
+
+//ISPW project DM
