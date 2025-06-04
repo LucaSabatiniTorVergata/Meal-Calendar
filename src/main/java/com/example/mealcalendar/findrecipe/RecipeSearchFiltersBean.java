@@ -26,4 +26,6 @@ public class RecipeSearchFiltersBean {
         this.tipoPasto = tipoPasto;
     }
 
+
+    //Ultimo push (speriamo)
 }
