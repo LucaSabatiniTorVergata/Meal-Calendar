@@ -9,8 +9,7 @@ public class RecipeReturnBean {
     private String description;
     private String author;
 
-    public RecipeReturnBean(String recipeName, String typeofDiet, String typeofMeal,
-                        String numIngredients, String ingredients, String description,String author) {
+    public RecipeReturnBean(String recipeName, String typeofDiet, String typeofMeal,String numIngredients, String ingredients, String description,String author) {
         this.recipeName = recipeName;
         this.typeofDiet = typeofDiet;
         this.typeofMeal = typeofMeal;

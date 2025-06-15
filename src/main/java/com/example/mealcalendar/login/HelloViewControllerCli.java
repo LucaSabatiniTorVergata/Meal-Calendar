@@ -71,8 +71,7 @@ public class HelloViewControllerCli {
             return;
         }
 
-        UserDaoInterface userDao = UserDaoFactory.createUserDao();
-        RegisterController controller = new RegisterController(userDao);
+        RegisterController controller = new RegisterController();
 
         UserBean userRegisterBean = new UserBean(username, email, password);
         try {

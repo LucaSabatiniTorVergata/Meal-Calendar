@@ -8,9 +8,9 @@ public class SessionManagerSLT {
     private String loggedInUsername;
     private boolean fSDataBase;
     private boolean demo;
-    private boolean ram=true;
-    private boolean db=true;
-    private boolean fs=true;
+    private boolean ram=true;//solo per gui
+    private boolean db=true;//solo per gui
+    private boolean fs=true;//solo per gui
     private LocalDate datas;
     private String oras;
 
