@@ -166,7 +166,6 @@ public class RecipeViewController {
         LOGGER.log(Level.SEVERE, "impossibile catturare il doppio click dal mouse");
         return -1;
     }
-    // Handle back button in recipe details view
     @FXML
     private void handleback() {
         detailpane.setVisible(false);
