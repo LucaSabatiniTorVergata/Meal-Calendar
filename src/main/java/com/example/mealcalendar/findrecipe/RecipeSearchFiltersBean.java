@@ -12,7 +12,9 @@ public class RecipeSearchFiltersBean {
     private String tipoDieta;
     private String tipoPasto;
 
-    public RecipeSearchFiltersBean() {}
+    public RecipeSearchFiltersBean() {
+        //uso i set e get
+    }
 
     public String getTipoDieta() {
         return tipoDieta;
@@ -43,7 +45,7 @@ public class RecipeSearchFiltersBean {
         if (pasto == null || !PASTI_VALIDI.contains(pasto.toLowerCase())) {
             throw new IllegalArgumentException("Pasto non valido! Scelte: " + PASTI_VALIDI);
         }
-        this.tipoPasto = tipoPasto;
+        this.tipoPasto = pasto;
     }
 
 
