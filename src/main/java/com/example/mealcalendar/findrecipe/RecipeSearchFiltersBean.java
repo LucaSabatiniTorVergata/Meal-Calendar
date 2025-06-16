@@ -12,10 +12,6 @@ public class RecipeSearchFiltersBean {
     private String tipoDieta;
     private String tipoPasto;
 
-    public RecipeSearchFiltersBean(String tipoDieta, String tipoPasto) {
-           this.tipoDieta = tipoDieta;
-           this.tipoPasto = tipoPasto;
-    }
     public RecipeSearchFiltersBean() {}
 
     public String getTipoDieta() {

@@ -93,7 +93,9 @@ public class RecipeViewController {
     private void searchrecipies(ActionEvent event) throws IOException, RecipeDaoException {
         tipoDietaSelezionato = tipoDieta.getText();
         pastoSelezionato = tipoPasto.getText();
-        RecipeSearchFiltersBean bean = new RecipeSearchFiltersBean(tipoDietaSelezionato, pastoSelezionato);
+        RecipeSearchFiltersBean bean = new RecipeSearchFiltersBean();
+        bean.setTipoDieta(tipoDietaSelezionato);
+        bean.setTipoPasto(tipoDietaSelezionato);
         RecipeSearchController controller = new RecipeSearchController(bean);
 
 
