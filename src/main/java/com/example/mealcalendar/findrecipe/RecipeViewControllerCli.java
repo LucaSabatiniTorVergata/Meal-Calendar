@@ -123,7 +123,9 @@ public class RecipeViewControllerCli {
                 break;
         }
 
-        RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean(tipoDieta, tipoPasto);
+        RecipeSearchFiltersBean filters = new RecipeSearchFiltersBean();
+        filters.setTipoPasto(tipoPasto);
+        filters.setTipoDieta(tipoDieta);
         RecipeSearchController controller = new RecipeSearchController(filters);
 
         // Ottieni una lista di ricette come Optional
