@@ -33,7 +33,7 @@ public class CartaCreditoViewController {
     @FXML
     private void goBackHome(ActionEvent event) throws IOException {
         Stage stage = (Stage) home.getScene().getWindow();
-        GraphicController.cambiascena(stage, "hello-view.fxml");
+        GraphicController.cambiascena(stage, "register-view.fxml");
 
     }
     @FXML

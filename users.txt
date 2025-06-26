@@ -1,2 +1,1 @@
-leo:leo.polidori99@gmail.com:$2a$10$zglCtndpiu2ACJbs5Tjl5eSOPkk2F.vHYO2JzACzb/i2LmMgy9JyC
-arianna:ariannabonini98@gmail.com:$2a$10$14/Nf1ndzyGzMQYOaVa3YOPbf383UirM7RSFZyvdfAf5N51uS1VHO
+smith:1:$2a$10$c3VOUHC.5OgRA8j7RDsdSeCPUcJwSY9KtK1ujCxLMwHzssck1oRr2:nutrizionista

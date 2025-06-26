@@ -31,6 +31,9 @@ public class MainMenuViewController {
     @FXML
     private Label welcomelabel;
 
+    @FXML
+    private Label rolelabel;
+
     // Aggiungi un flag per la persistenza, per esempio
 
 
@@ -44,7 +47,7 @@ public class MainMenuViewController {
     @FXML
     private void goHome(ActionEvent event) {
         Stage stage = (Stage) homebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "hello-view.fxml");
+        GraphicController.cambiascena(stage, "register-view.fxml");
     }
 
     //metodi eseguibili dall'user
@@ -83,8 +86,12 @@ public class MainMenuViewController {
     @FXML
     public void initialize()  {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
+        String role=SessionManagerSLT.getInstance().getLoggedRole();
         if (username != null) {
-            welcomelabel.setText("Hi, " + username + "!");
+            welcomelabel.setText("Ciao, " + username + "!");
+        }
+        if (role != null) {
+            rolelabel.setText("Sei un "+role);
         }
     }
 

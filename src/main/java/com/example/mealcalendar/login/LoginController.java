@@ -16,18 +16,21 @@ public class LoginController {
 
 
     public boolean login(LoginBean userLoginBean) throws IOException {
-        return checkPassword(userLoginBean.getUsername(), userLoginBean.getPassword());
+        return check(userLoginBean.getUsername(), userLoginBean.getPassword(),userLoginBean.getRuolo());
     }
 
-    private boolean checkPassword(String username, String password) throws IOException {
+    private boolean check(String username, String password,String ruolo) throws IOException {
         UserEntity user = userDAO.getUserByUsername(username);
-        if (user != null) {
+        if (user != null && user.getRole().equals(ruolo)) {
+
             LOGGER.log(Level.INFO, "User: {0}", user.getUsername());
             LOGGER.log(Level.INFO, "Password inserita: {0}", password);
             LOGGER.log(Level.INFO, "Password memorizzata: {0}", user.getPassword());
             LOGGER.log(Level.INFO, "Password corretta: {0}", BCrypt.checkpw(password, user.getPassword()));
+            LOGGER.log(Level.INFO, "Ruolo:{0}", ruolo);
             return BCrypt.checkpw(password, user.getPassword());
         }
         return false;
     }
 }
+

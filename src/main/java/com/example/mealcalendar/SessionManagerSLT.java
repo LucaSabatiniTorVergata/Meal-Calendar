@@ -6,6 +6,7 @@ public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
     private String loggedInUsername;
+    private String loggedrole;
     private boolean fSDataBase;
     private boolean demo;
     private boolean ram=true;//solo per gui
@@ -13,6 +14,7 @@ public class SessionManagerSLT {
     private boolean fs=true;//solo per gui
     private LocalDate datas;
     private String oras;
+    private String ruolo;
 
     private SessionManagerSLT() {}
 
@@ -30,6 +32,10 @@ public class SessionManagerSLT {
     public String getLoggedInUsername() {
         return loggedInUsername;
     }
+
+    public void setLoggedRole(String role) {this.loggedrole = role;}
+
+    public String getLoggedRole() {return loggedrole;}
 
     public void setFSDataBase(boolean fSDataBase) {
         this.fSDataBase=fSDataBase;
@@ -49,8 +55,7 @@ public class SessionManagerSLT {
 
     public void logout() {
         loggedInUsername = null;
-        fSDataBase = false;
-        demo = false;
+        loggedrole = null;
 
     }
 
@@ -83,5 +88,11 @@ public class SessionManagerSLT {
     }
     public String getOras() {
         return oras;
+    }
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
+    public String getRuolo() {
+        return ruolo;
     }
 }

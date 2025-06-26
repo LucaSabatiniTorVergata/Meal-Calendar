@@ -203,7 +203,7 @@ public class FindRestaurantViewController {
     @FXML
     private void registerGuest(ActionEvent event)  {
         Stage stage = (Stage) registerbutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "hello-view.fxml");
+        GraphicController.cambiascena(stage, "register-view.fxml");
     }
 
     @FXML

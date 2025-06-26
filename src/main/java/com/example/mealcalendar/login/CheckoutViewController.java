@@ -19,7 +19,7 @@ public class CheckoutViewController {
     @FXML
     void goBack(ActionEvent event)throws IOException {
         Stage stage = (Stage) indietro.getScene().getWindow();
-        GraphicController.cambiascena(stage, "hello-view.fxml");
+        GraphicController.cambiascena(stage, "register-view.fxml");
     }
 
     @FXML

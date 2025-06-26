@@ -50,7 +50,7 @@ public class RegisterController {
         LOGGER.log(Level.INFO, "Password dopo l''hash: {0}", hashedPassword);
 
         // Creazione dell'oggetto utente
-        UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword);
+        UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword,userRegisterBean.getRuolo());
 
         // Registrazione utente tramite il DAO
         return userDAO.registerUser(newUser);

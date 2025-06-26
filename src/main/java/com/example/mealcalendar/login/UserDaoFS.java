@@ -28,7 +28,7 @@ public class UserDaoFS implements UserDaoInterface {
             exceptionHandler();
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            String riga = user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword();
+            String riga = user.getUsername() + ":" + user.getEmail() + ":" + user.getPassword() + ":" + user.getRole();
             writer.write(riga);
             writer.newLine();
             return true;
@@ -47,7 +47,7 @@ public class UserDaoFS implements UserDaoInterface {
             while ((line = reader.readLine()) != null) {
                 String[] userParts = line.split(":");
                 if (userParts.length >= 3) {
-                    users.add(new UserEntity(userParts[0], userParts[1], userParts[2]));
+                    users.add(new UserEntity(userParts[0], userParts[1], userParts[2],userParts[3]));
                 }
             }
         }
@@ -61,7 +61,7 @@ public class UserDaoFS implements UserDaoInterface {
             while ((line = reader.readLine()) != null) {
                 String[] userParts = line.split(":");
                 if (userParts.length >= 3 && userParts[0].trim().equalsIgnoreCase(username.trim())) {
-                    return new UserEntity(userParts[0], userParts[1], userParts[2]);
+                    return new UserEntity(userParts[0], userParts[1], userParts[2],userParts[3]);
                 }
             }
         }

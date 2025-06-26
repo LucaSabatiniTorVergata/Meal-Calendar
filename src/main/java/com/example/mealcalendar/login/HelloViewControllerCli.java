@@ -73,7 +73,9 @@ public class HelloViewControllerCli {
 
         RegisterController controller = new RegisterController();
 
-        UserBean userRegisterBean = new UserBean(username, email, password);
+        String ruolo =SessionManagerSLT.getInstance().getRuolo();
+
+        UserBean userRegisterBean = new UserBean(username, email, password,ruolo);
         try {
             boolean result = controller.register(userRegisterBean);
 

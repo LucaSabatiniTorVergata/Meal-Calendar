@@ -26,6 +26,8 @@ public class HelloViewController {
     private Button register;
     @FXML
     private Button login;
+    @FXML
+    private Button backbutton;
 
     @FXML
     private TextField usernamefield;
@@ -37,7 +39,11 @@ public class HelloViewController {
     private Label messageLabel;
 
 
-
+    @FXML
+    private void goback(ActionEvent event)  {
+        Stage stage = (Stage) backbutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "hello-view.fxml");
+    }
 
     @FXML
     private void guestmenuview(ActionEvent event)  {
@@ -88,10 +94,10 @@ public class HelloViewController {
             return;
         }
 
-
+        String ruolo=SessionManagerSLT.getInstance().getRuolo();
         RegisterController controller = new RegisterController();
 
-        UserBean userRegisterBean = new UserBean(username, email, password);
+        UserBean userRegisterBean = new UserBean(username, email, password,ruolo);
         boolean results = controller.register(userRegisterBean);
 
         if (results) {

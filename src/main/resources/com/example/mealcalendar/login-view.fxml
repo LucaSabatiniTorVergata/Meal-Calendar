@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
@@ -11,7 +13,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFF8BF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.login.LoginViewController">
    <children>
-      <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="435.0" layoutX="799.0" layoutY="120.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
+      <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="435.0" layoutX="801.0" layoutY="120.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
       <Circle fill="#e2ecf5" layoutX="377.0" layoutY="353.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="854.0" layoutY="199.0" prefHeight="17.0" prefWidth="67.0" text="Username" />
       <TextField fx:id="user" layoutX="850.0" layoutY="217.0" prefHeight="26.0" prefWidth="296.0" promptText="Insert your username..." />
@@ -29,9 +31,18 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="messagelabel" layoutX="845.0" layoutY="378.0" prefHeight="38.0" prefWidth="296.0" textFill="RED">
+      <Label fx:id="messagelabel" layoutX="849.0" layoutY="400.0" prefHeight="38.0" prefWidth="296.0" textFill="RED">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
+      <SplitMenuButton fx:id="ruolo" layoutX="850.0" layoutY="365.0" mnemonicParsing="false" text="Ruolo">
+        <items>
+          <MenuItem fx:id="nutrizionista" mnemonicParsing="false" text="Nutrizionista" />
+          <MenuItem fx:id="utente" mnemonicParsing="false" text="User" />
+        </items>
+      </SplitMenuButton>
+      <Label layoutX="854.0" layoutY="345.0" text="Scegli Ruolo:" />
+      
    </children>
+
 </AnchorPane>

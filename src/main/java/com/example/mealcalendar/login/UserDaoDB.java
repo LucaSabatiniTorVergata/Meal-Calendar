@@ -46,7 +46,8 @@ public class UserDaoDB implements UserDaoInterface {
                 UserEntity user = new UserEntity(
                         rs.getString("username"),
                         rs.getString("email"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("ruolo")
                 );
                 users.add(user);
             }
@@ -72,7 +73,8 @@ public class UserDaoDB implements UserDaoInterface {
                 return new UserEntity(
                         rs.getString("username"),
                         rs.getString("email"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("ruolo")
                 );
             }
 

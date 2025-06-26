@@ -21,6 +21,8 @@ public class LoginViewControllerCli {
             String username = scanner.nextLine();
             printer.print("Password: ");
             String password = scanner.nextLine();
+            printer.print("Role: ");
+            String role = scanner.nextLine();
             printer.print("\nScegli un'opzione:");
             printer.print("1. Login");
             printer.print("2. Torna indietro");
@@ -31,7 +33,7 @@ public class LoginViewControllerCli {
             switch (choice) {
                 case "1" -> {
                     // Se l'utente ha scelto Login
-                    LoginBean userLoginBean = new LoginBean(username, password);
+                    LoginBean userLoginBean = new LoginBean(username, password,role);
                     LoginController controller = new LoginController();
 
                     try {
