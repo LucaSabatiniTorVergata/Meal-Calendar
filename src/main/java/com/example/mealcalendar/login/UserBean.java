@@ -21,5 +21,5 @@ public class UserBean {
     public void setEmail(String email) { this.email = email; }
     public void setPassword(String password) { this.password = password; }
     public String getRuolo() { return ruolo; }
-    public void setRuolo(String username) { this.username = ruolo; }
+    public void setRuolo(String role) { this.ruolo = role; }
 }
