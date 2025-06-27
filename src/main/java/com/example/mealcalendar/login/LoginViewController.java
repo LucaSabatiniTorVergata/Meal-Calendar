@@ -77,7 +77,7 @@ public class LoginViewController {
     @FXML
     public void initialize() {
         nutrizionista.setOnAction(e -> ruolo.setText("nutrizionista"));
-        utente.setOnAction(e -> ruolo.setText("user"));
+        utente.setOnAction(e -> ruolo.setText("utente"));
 
     }
 }

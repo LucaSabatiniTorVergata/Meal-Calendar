@@ -25,5 +25,17 @@
             <Font size="44.0" />
         </font>
     </Label>
+    <Button fx:id="dbbutton" layoutX="34.0" layoutY="74.0" mnemonicParsing="false" onAction="#useDatabase" text="DB" />
+    <Button fx:id="fsbutton" layoutX="97.0" layoutY="74.0" mnemonicParsing="false" onAction="#useFileSystem" text="FS" />
+    <Button fx:id="rambutton" layoutX="160.0" layoutY="74.0" mnemonicParsing="false" onAction="#useRam" text="RAM" />
+    <Label layoutX="225.0" layoutY="69.0" prefHeight="36.0" prefWidth="426.0" text="&lt;----- SCEGLI UNA TRA QUESTE OPZIONI">
+     <font>
+        <Font name="System Bold Italic" size="21.0" />
+     </font>
+    </Label>
+    <Label fx:id="messageLabel" layoutX="874.0" layoutY="103.0" prefHeight="55.0" prefWidth="201.0" textFill="RED">
+        <font>
+            <Font name="System Bold Italic" size="15.0" />
+        </font></Label>
 
 </AnchorPane>

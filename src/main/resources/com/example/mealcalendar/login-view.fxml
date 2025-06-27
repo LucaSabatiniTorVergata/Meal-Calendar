@@ -38,7 +38,7 @@
       <SplitMenuButton fx:id="ruolo" layoutX="850.0" layoutY="365.0" mnemonicParsing="false" text="Ruolo">
         <items>
           <MenuItem fx:id="nutrizionista" mnemonicParsing="false" text="Nutrizionista" />
-          <MenuItem fx:id="utente" mnemonicParsing="false" text="User" />
+          <MenuItem fx:id="utente" mnemonicParsing="false" text="Utente" />
         </items>
       </SplitMenuButton>
       <Label layoutX="854.0" layoutY="345.0" text="Scegli Ruolo:" />

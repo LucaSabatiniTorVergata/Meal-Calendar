@@ -13,12 +13,6 @@ import javafx.scene.control.*;
 public class HelloViewController {
 
 
-    @FXML
-    private Button dbbutton;
-    @FXML
-    private Button rambutton;
-    @FXML
-    private Button fsbutton;
 
     @FXML
     private Button quibutton;
@@ -35,8 +29,10 @@ public class HelloViewController {
     private TextField emailfield;
     @FXML
     private PasswordField passWordBox;
+
     @FXML
     private Label messageLabel;
+
 
 
     @FXML
@@ -58,28 +54,6 @@ public class HelloViewController {
     }
 
     // Metodo per cambiare modalità su File System
-    @FXML
-    private void useFileSystem(ActionEvent event) {
-        SessionManagerSLT.getInstance().setRam(false); // Nasconde il bottone ram
-        SessionManagerSLT.getInstance().setDB(false); // Nasconde il bottone db
-        SessionManagerSLT.getInstance().setFs(true);  // Nasconde il bottone fs
-        updateButtonVisibility();
-        SessionManagerSLT.getInstance().setFSDataBase(false);
-        SessionManagerSLT.getInstance().setDemo(false);
-        messageLabel.setText("🔹 Utilizzando il File System per i dati utenti.");
-    }
-
-    // Metodo per cambiare modalità su Database
-    @FXML
-    private void useDatabase(ActionEvent event) {
-        SessionManagerSLT.getInstance().setRam(false); // Nasconde il bottone ram
-        SessionManagerSLT.getInstance().setDB(true); // Nasconde il bottone db
-        SessionManagerSLT.getInstance().setFs(false);  // Nasconde il bottone fs
-        updateButtonVisibility();
-        SessionManagerSLT.getInstance().setFSDataBase(true);
-        SessionManagerSLT.getInstance().setDemo(false);
-        messageLabel.setText("🔹 Utilizzando il Database per i dati utenti.");
-    }
 
 
     // Metodo per registrare un nuovo utente
@@ -109,29 +83,6 @@ public class HelloViewController {
         }
     }
 
-    @FXML
-    public void useRam(ActionEvent event) {
-        SessionManagerSLT.getInstance().setRam(true); // Nasconde il bottone ram
-        SessionManagerSLT.getInstance().setDB(false); // Nasconde il bottone db
-        SessionManagerSLT.getInstance().setFs(false); // Nasconde il bottone fs
-        updateButtonVisibility();
-        SessionManagerSLT.getInstance().setFSDataBase(false);
-        SessionManagerSLT.getInstance().setDemo(true);
-        messageLabel.setText("🔹 Utilizzando la demo per i dati utenti.");
-    }
-
-    @FXML
-    public void initialize(){
-
-        updateButtonVisibility();
-
-    }
-
-    private void updateButtonVisibility() {
-        rambutton.setVisible(SessionManagerSLT.getInstance().getRam());
-        dbbutton.setVisible(SessionManagerSLT.getInstance().getDB());
-        fsbutton.setVisible(SessionManagerSLT.getInstance().getFs());
-    }
 
 
 }
