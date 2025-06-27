@@ -112,13 +112,13 @@ public class RecipeViewController {
 
     @FXML
     public void initialize() {
-        vegan.setOnAction(e -> tipoDieta.setText("Vegan"));
-        vegetarian.setOnAction(e -> tipoDieta.setText("Vegetarian"));
-        omnivorous.setOnAction(e -> tipoDieta.setText("Omnivorous"));
+        vegan.setOnAction(e -> tipoDieta.setText("vegano"));
+        vegetarian.setOnAction(e -> tipoDieta.setText("vegetariano"));
+        omnivorous.setOnAction(e -> tipoDieta.setText("onnivoro"));
 
-        breakfast.setOnAction(e -> tipoPasto.setText("Breakfast"));
-        lunch.setOnAction(e -> tipoPasto.setText("Lunch"));
-        dinner.setOnAction(e -> tipoPasto.setText("Dinner"));
+        breakfast.setOnAction(e -> tipoPasto.setText("colazione"));
+        lunch.setOnAction(e -> tipoPasto.setText("pranzo"));
+        dinner.setOnAction(e -> tipoPasto.setText("cena"));
 
     }
 

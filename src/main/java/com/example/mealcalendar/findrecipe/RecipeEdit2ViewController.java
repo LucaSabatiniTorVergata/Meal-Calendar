@@ -96,13 +96,13 @@ public class RecipeEdit2ViewController {
             LOGGER.info("Errore: ricettascelta è null!");
         }
 
-        vegan.setOnAction(e -> tipodieta.setText("Vegan"));
-        vegetariana.setOnAction(e -> tipodieta.setText("Vegetarian"));
-        omnivora.setOnAction(e -> tipodieta.setText("Omnivorous"));
+        vegan.setOnAction(e -> tipodieta.setText("vegano"));
+        vegetariana.setOnAction(e -> tipodieta.setText("vegetariano"));
+        omnivora.setOnAction(e -> tipodieta.setText("onnivoro"));
 
-        colazione.setOnAction(e -> tipopasto.setText("Breakfast"));
-        pranzo.setOnAction(e -> tipopasto.setText("Lunch"));
-        cena.setOnAction(e -> tipopasto.setText("Dinnner"));
+        colazione.setOnAction(e -> tipopasto.setText("colazione"));
+        pranzo.setOnAction(e -> tipopasto.setText("pranzo"));
+        cena.setOnAction(e -> tipopasto.setText("cena"));
     }
 
     @FXML

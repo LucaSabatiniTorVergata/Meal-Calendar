@@ -34,6 +34,9 @@ public class MainMenuViewController {
     @FXML
     private Label rolelabel;
 
+    @FXML
+    private Button makediet;
+
     // Aggiungi un flag per la persistenza, per esempio
 
 
@@ -48,6 +51,14 @@ public class MainMenuViewController {
     private void goHome(ActionEvent event) {
         Stage stage = (Stage) homebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "register-view.fxml");
+    }
+
+    @FXML
+    private void gomakediet(ActionEvent event) {
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("nutrizionista")){
+        Stage stage = (Stage) makediet.getScene().getWindow();
+        GraphicController.cambiascena(stage, "makediet-view.fxml");
+        }
     }
 
     //metodi eseguibili dall'user
