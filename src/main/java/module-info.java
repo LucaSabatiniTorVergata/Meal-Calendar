@@ -2,12 +2,13 @@ module demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.json;
-    requires java.desktop;
     requires jbcrypt;
     requires jdk.jshell;
-    requires java.sql;
     requires jakarta.mail;
     requires com.google.protobuf;
+    requires com.fasterxml.jackson.databind;
+    requires java.sql;
+    requires java.desktop;
 
     exports com.example.mealcalendar;
     opens com.example.mealcalendar to javafx.fxml;
