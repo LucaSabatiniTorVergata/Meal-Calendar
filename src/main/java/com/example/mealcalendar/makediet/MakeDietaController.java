@@ -17,22 +17,27 @@ public class MakeDietaController {
 
         if(dieta!=null) {
 
-        List<GiornoDietaEntity> giorni = new ArrayList<>();
-        for (GiornoBean giornoBean : dieta.getGiorni()) {
-
-            giorni.add(convertiGiorno(giornoBean));
-        }
-
-        DietaEntity dieta1=new DietaEntity(dieta.getNome(),dieta.getDescrizione(),dieta.getAutore(),giorni,dieta.getDataPubblicazione(),dieta.getDurata());
-
-        dietDao.save(dieta1);
-        return true;
+         dietDao.save(convertiDieta(dieta));
+         return true;
         }
         else{
             return false;
         }
 
     }
+
+    private DietaEntity convertiDieta(DietaBean dieta) {
+
+            List<GiornoDietaEntity> giorni = new ArrayList<>();
+            for (GiornoBean giornoBean : dieta.getGiorni()) {
+
+                giorni.add(convertiGiorno(giornoBean));
+            }
+
+            return new DietaEntity(dieta.getNome(),dieta.getDescrizione(),dieta.getAutore(),giorni,dieta.getDataPubblicazione(),dieta.getDurata());
+
+    }
+
     private PastoEntity convertiPasto(PastoBean bean) {
         return new PastoEntity(bean.getNomePiatto(), bean.getCalorie());
     }
