@@ -1,7 +1,5 @@
 package com.example.mealcalendar.makediet;
 
-import com.example.mealcalendar.login.UserDaoFactory;
-import com.example.mealcalendar.login.UserDaoInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +20,7 @@ public class MakeDietaController {
         List<GiornoDietaEntity> giorni = new ArrayList<>();
         for (GiornoBean giornoBean : dieta.getGiorni()) {
 
-            PastoEntity colazione = convertiPasto(giornoBean.getColazione());
-            PastoEntity pranzo = convertiPasto(giornoBean.getPranzo());
-            PastoEntity cena = convertiPasto(giornoBean.getCena());
-
-            GiornoDietaEntity giorno = new GiornoDietaEntity(
-                    giornoBean.getNgiorno(),
-                    colazione,
-                    pranzo,
-                    cena
-            );
-
-            giorni.add(giorno);
+            giorni.add(convertiGiorno(giornoBean));
         }
 
         DietaEntity dieta1=new DietaEntity(dieta.getNome(),dieta.getDescrizione(),dieta.getAutore(),giorni,dieta.getDataPubblicazione(),dieta.getDurata());
@@ -48,6 +35,15 @@ public class MakeDietaController {
     }
     private PastoEntity convertiPasto(PastoBean bean) {
         return new PastoEntity(bean.getNomePiatto(), bean.getCalorie());
+    }
+
+    private GiornoDietaEntity convertiGiorno(GiornoBean bean) {
+        return new GiornoDietaEntity(
+                bean.getNgiorno(),
+                convertiPasto(bean.getColazione()),
+                convertiPasto(bean.getPranzo()),
+                convertiPasto(bean.getCena())
+        );
     }
 
 
