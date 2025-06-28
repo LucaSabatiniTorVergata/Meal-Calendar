@@ -1,8 +1,5 @@
 package com.example.mealcalendar.makediet;
 
-import com.example.mealcalendar.login.UserEntity;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class DietaBean {

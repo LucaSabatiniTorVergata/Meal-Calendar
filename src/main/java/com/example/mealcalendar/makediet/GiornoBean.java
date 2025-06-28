@@ -1,6 +1,5 @@
 package com.example.mealcalendar.makediet;
 
-import java.util.List;
 
 public class GiornoBean {
 

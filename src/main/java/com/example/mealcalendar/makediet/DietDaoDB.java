@@ -16,8 +16,8 @@ public class DietDaoDB implements DietDao {
 
     @Override
     public List<DietaEntity> findAll(){
-        List<DietaEntity>diete=new ArrayList<>();
-        return diete;
+
+        return new ArrayList<>();
     }
 
     @Override
