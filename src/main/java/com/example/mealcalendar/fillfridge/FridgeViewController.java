@@ -34,11 +34,8 @@ public class FridgeViewController {
     private IngredienteValidoSet ingredienteValidoSet = IngredienteValidoSet.getInstance();
     Logger logger = Logger.getLogger(getClass().getName());
 
-    // Variabile per la modalità di persistenza
-
     @FXML
     public void initialize() {
-
         label.setText("Hi, " + SessionManagerSLT.getInstance().getLoggedInUsername() + "!");
         listaInventario.getItems().clear();
         if (frigoriferoController == null) {
@@ -47,19 +44,25 @@ public class FridgeViewController {
         aggiornaInventario();
     }
 
-    // Aggiunge un ingrediente all'inventario
     @FXML
-    private void aggiungiIngrediente(ActionEvent event)  {
+    private void aggiungiIngrediente(ActionEvent event) {
+        gestisciIngrediente(true);
+    }
+
+    @FXML
+    private void rimuoviIngrediente(ActionEvent event) {
+        gestisciIngrediente(false);
+    }
+
+    private void gestisciIngrediente(boolean aggiungi) {
         String nomeIngrediente = txtIngrediente.getText().trim();
         String quantitaText = txtQuantita.getText().trim();
 
-        // Controlla se i campi sono vuoti
         if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
             logger.info("Inserisci nome e quantità dell'ingrediente!");
             return;
         }
 
-        // Verifica se l'ingrediente è valido
         if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
             logger.info("Errore: Inserisci un ingrediente valido!");
             return;
@@ -67,49 +70,20 @@ public class FridgeViewController {
 
         try {
             int quantita = Integer.parseInt(quantitaText);
-            frigoriferoController.aggiungiIngrediente(nomeIngrediente, quantita);
+            if (aggiungi) {
+                frigoriferoController.aggiungiIngrediente(nomeIngrediente, quantita);
+            } else {
+                frigoriferoController.rimuoviIngrediente(nomeIngrediente, quantita);
+            }
             aggiornaInventario();
         } catch (NumberFormatException e) {
             logger.info("Errore: Inserisci un numero valido per la quantità!");
         }
 
-        // Pulisce i campi di input
         txtIngrediente.clear();
         txtQuantita.clear();
     }
 
-    // Rimuove un ingrediente dall'inventario
-    @FXML
-    private void rimuoviIngrediente(ActionEvent event)  {
-        String nomeIngrediente = txtIngrediente.getText().trim();
-        String quantitaText = txtQuantita.getText().trim();
-
-        // Controlla se i campi sono vuoti
-        if (nomeIngrediente.isEmpty() || quantitaText.isEmpty()) {
-            logger.info("Inserisci nome e quantità dell'ingrediente!");
-            return;
-        }
-
-        // Verifica se l'ingrediente è valido
-        if (!ingredienteValidoSet.isIngredienteValido(nomeIngrediente)) {
-            logger.info("Errore: Inserisci un ingrediente valido!");
-            return;
-        }
-
-        try {
-            int quantita = Integer.parseInt(quantitaText);
-            frigoriferoController.rimuoviIngrediente(nomeIngrediente, quantita);
-            aggiornaInventario();
-        } catch (NumberFormatException e) {
-            logger.info("Errore: Inserisci un numero valido per la quantità!");
-        }
-
-        // Pulisce i campi di input
-        txtIngrediente.clear();
-        txtQuantita.clear();
-    }
-
-    // Metodo per aggiornare la visualizzazione dell'inventario nella ListView
     private void aggiornaInventario() {
         listaInventario.getItems().clear();
         for (Map.Entry<String, Integer> entry : frigoriferoController.getInventario().entrySet()) {
@@ -122,5 +96,4 @@ public class FridgeViewController {
         Stage stage = (Stage) home.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
     }
-
 }
