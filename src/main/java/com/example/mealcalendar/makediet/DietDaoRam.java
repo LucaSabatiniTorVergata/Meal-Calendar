@@ -22,7 +22,7 @@ public class DietDaoRam implements DietDao {
     }
 
     @Override
-    public List<DietaEntity> Filbyauthor(String username){
+    public List<DietaEntity> filbyauthor(String username){
         return dietaStorage.values()
                 .stream()
                 .filter(d -> d.getAutore().equals(username))

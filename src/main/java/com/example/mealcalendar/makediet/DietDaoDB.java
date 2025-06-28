@@ -11,7 +11,7 @@ public class DietDaoDB implements DietDao {
 
     @Override
     public void save(DietaEntity dieta) {
-
+     //we will see how to do it
     }
 
     @Override
@@ -21,7 +21,7 @@ public class DietDaoDB implements DietDao {
     }
 
     @Override
-    public List<DietaEntity> Filbyauthor(String username){
+    public List<DietaEntity> filbyauthor(String username){
 
         return List.of();
     }
