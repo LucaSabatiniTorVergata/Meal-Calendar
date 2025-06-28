@@ -26,7 +26,7 @@ public class DietDaoRam implements DietDao {
         return dietaStorage.values()
                 .stream()
                 .filter(d -> d.getAutore().equals(username))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     }
