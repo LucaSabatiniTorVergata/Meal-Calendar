@@ -22,20 +22,9 @@ public class MakeDietaController {
         List<GiornoDietaEntity> giorni = new ArrayList<>();
         for (GiornoBean giornoBean : dieta.getGiorni()) {
 
-            PastoEntity colazione = new PastoEntity(
-                    giornoBean.getColazione().getNomePiatto(),
-                    giornoBean.getColazione().getCalorie()
-            );
-
-            PastoEntity pranzo = new PastoEntity(
-                    giornoBean.getPranzo().getNomePiatto(),
-                    giornoBean.getPranzo().getCalorie()
-            );
-
-            PastoEntity cena = new PastoEntity(
-                    giornoBean.getCena().getNomePiatto(),
-                    giornoBean.getCena().getCalorie()
-            );
+            PastoEntity colazione = convertiPasto(giornoBean.getColazione());
+            PastoEntity pranzo = convertiPasto(giornoBean.getPranzo());
+            PastoEntity cena = convertiPasto(giornoBean.getCena());
 
             GiornoDietaEntity giorno = new GiornoDietaEntity(
                     giornoBean.getNgiorno(),
@@ -56,6 +45,9 @@ public class MakeDietaController {
             return false;
         }
 
+    }
+    private PastoEntity convertiPasto(PastoBean bean) {
+        return new PastoEntity(bean.getNomePiatto(), bean.getCalorie());
     }
 
 
