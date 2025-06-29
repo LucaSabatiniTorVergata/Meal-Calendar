@@ -2,7 +2,6 @@ package com.example.mealcalendar;
 
 import com.example.mealcalendar.fillfridge.FridgeViewBoundaryCli;
 import com.example.mealcalendar.findrecipe.*;
-import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
 import com.example.mealcalendar.login.HelloViewControllerCli;
 import com.example.mealcalendar.login.LoginViewControllerCli;
 import com.example.mealcalendar.seteatingtime.MealCalenderViewControllerCli;
@@ -48,16 +47,6 @@ public class CliController {
                 printer.print("🔹 Navigazione alla schermata principale (CLI).");
                 MainMenuViewControllerCli mainMenuView = new MainMenuViewControllerCli();
                 mainMenuView.start();
-                break;
-            case "ristoranteUser":
-                printer.print("🔹 Navigazione alla schermata di ristorante user (CLI).");
-                FindRestaurantViewControllerCli findRestaurantView = new FindRestaurantViewControllerCli();
-                findRestaurantView.start();
-                break;
-            case "ristoranteguest":
-                printer.print("🔹 Navigazione alla schermata di ristorante guest (CLI).");
-                FindRestaurantViewControllerCli findRestaurantViewGuest = new FindRestaurantViewControllerCli();
-                findRestaurantViewGuest.start();
                 break;
             case "trovaricette":
                 printer.print("🔹 Navigazione alla schermata di trova ricette (CLI).");

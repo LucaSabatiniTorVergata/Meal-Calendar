@@ -1,9 +1,5 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.findrest.ChooseRestaurantController;
-import com.example.mealcalendar.findrest.FiltersRestaurantBean;
-import com.example.mealcalendar.findrest.FindRestaurantApiBoundary;
-import com.example.mealcalendar.findrest.ReturnRestaurantsBean;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 

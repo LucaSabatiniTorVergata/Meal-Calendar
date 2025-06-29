@@ -6,7 +6,6 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.findrecipe.RecipeNotSelectedException;
 import com.example.mealcalendar.findrecipe.RecipeReturnBean;
 import com.example.mealcalendar.findrecipe.RecipeViewControllerCli;
-import com.example.mealcalendar.findrest.FindRestaurantViewControllerCli;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -52,7 +51,7 @@ public class MealCalenderViewControllerCli {
         LOGGER.log(Level.INFO, "Scelta luogo: {0}", sceltaLuogo);
 
         try {
-            confirmChoise();
+
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Errore durante la conferma della scelta", e);
@@ -134,25 +133,9 @@ public class MealCalenderViewControllerCli {
         }
     }
 
-    private void confirmChoise() throws Exception {
-        setVengoDaCalendar(true);
-        if (sceltaLuogo) {
-            navigateToRestaurant();
-        } else {
-            RecipeViewControllerCli ricercaRicette = new RecipeViewControllerCli(true);
-            ricercaRicette.start();
-        }
-    }
 
-    private void navigateToRestaurant() throws Exception {
-        FindRestaurantViewControllerCli findRestaurantView = new FindRestaurantViewControllerCli(true);
-        findRestaurantView.start();
-        if (ristorantescelto != null && !ristorantescelto.isEmpty()) {
-            printer.print("Ristorante selezionato: " + ristorantescelto);
-        } else {
-            printer.print("Nessun ristorante selezionato.");
-        }
-    }
+
+
 
     public static void inviomail() throws MailSendingException {
         try {

@@ -5,9 +5,9 @@ import java.util.Set;
 public class RecipeSearchFiltersBean {
 
 
-    private static final Set<String> DIETE_VALIDE = Set.of("vegano", "vegetariano","onnivoro");
+    private static final Set<String> DIETE_VALIDE = Set.of("vegan", "vegetarian","omnivorous");
 
-    private static final Set<String> PASTI_VALIDI = Set.of("colazione", "pranzo", "cena");
+    private static final Set<String> PASTI_VALIDI = Set.of("breakfast", "lunch", "dinner");
 
     private String tipoDieta;
     private String tipoPasto;
@@ -29,15 +29,7 @@ public class RecipeSearchFiltersBean {
         if (tipoDieta == null || !DIETE_VALIDE.contains(tipoDieta.toLowerCase())) {
             throw new IllegalArgumentException("Dieta non valida! Scelte: " + DIETE_VALIDE);
         }
-        else{
-            if (tipoDieta.equalsIgnoreCase("Onnivoro") ){
-                this.tipoDieta = "";
-            }
-            else{
-                this.tipoDieta = tipoDieta;
-            }
-
-        }
+        this.tipoDieta = tipoDieta;
 
     }
     public void setTipoPasto(String pasto)

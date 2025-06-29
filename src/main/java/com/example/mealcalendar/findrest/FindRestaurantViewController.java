@@ -43,9 +43,7 @@ public class FindRestaurantViewController {
     @FXML
     private SplitMenuButton tipoDieta;
     @FXML
-    private SplitMenuButton pasto;
-    @FXML
-    private TextField distanza;
+    private TextField city;
 
     @FXML
     private MenuItem vegan;
@@ -54,18 +52,12 @@ public class FindRestaurantViewController {
     @FXML
     private MenuItem omnivora;
 
-    @FXML
-    private MenuItem colazione;
-    @FXML
-    private MenuItem pranzo;
-    @FXML
-    private MenuItem cena;
 
     @FXML
     private Label welcomelabel;
 
     @FXML
-    private ListView<ReturnRestaurantsBean> ristorantiListView;
+    private ListView<RistoranteBean> ristorantiListView;
 
     @FXML
     private Button homebutton;
@@ -81,33 +73,27 @@ public class FindRestaurantViewController {
     private Button fillfridgebutton;
 
     private String tipoDietaSelezionato;
-    private String pastoSelezionato;
-    private double distanzaInserita;
-
-    private List<ReturnRestaurantsBean> listaRistoranti;
+    private double cittaSelezionata;
 
     @FXML
-    private void confermafiltri(ActionEvent event) throws IOException {
+    private void confermafiltri(ActionEvent event) {
+        try {
+            tipoDietaSelezionato = tipoDieta.getText();
+            String nomeCitta = city.getText().trim();
 
-        tipoDietaSelezionato = tipoDieta.getText();
 
+            LOGGER.log(Level.INFO, "Filtri confermati:");
+            LOGGER.log(Level.INFO, "Dieta: {0}", tipoDietaSelezionato);
+            LOGGER.log(Level.INFO, "Città: {0}", nomeCitta);
 
-        pastoSelezionato = pasto.getText();
-        distanzaInserita = Double.parseDouble(distanza.getText());
+            RistoranteBean filtro = new RistoranteBean();
+            filtro.setCitta(nomeCitta);  // Metodo corretto
 
-        LOGGER.log(Level.INFO, "Filtri confermati:");
-        LOGGER.log(Level.INFO, "Dieta: {0}", tipoDietaSelezionato);
-        LOGGER.log(Level.INFO, "Pasto: {0}", pastoSelezionato);
-        LOGGER.log(Level.INFO, "Distanza: {0} km", distanzaInserita);
-
-        FiltersRestaurantBean filtro = new FiltersRestaurantBean();
-        filtro.setPasto(pastoSelezionato);
-        filtro.setDistanza(distanzaInserita);
-        filtro.setTipoDieta(tipoDietaSelezionato);
-        ChooseRestaurantController controller = new ChooseRestaurantController(filtro,new FindRestaurantApiBoundary());
-        List<ReturnRestaurantsBean> ristorantiBeans = controller.trovaRistorante();
-        mostraRistoranti(ristorantiBeans);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Errore durante la conferma dei filtri", e);
+        }
     }
+
 
     @FXML
     public void initialize() {
@@ -120,84 +106,17 @@ public class FindRestaurantViewController {
         vegetariana.setOnAction(e -> tipoDieta.setText("Vegetariano"));
         omnivora.setOnAction(e -> tipoDieta.setText("Onnivoro"));
 
-        colazione.setOnAction(e -> pasto.setText("Colazione"));
-        pranzo.setOnAction(e -> pasto.setText("Pranzo"));
-        cena.setOnAction(e -> pasto.setText("Cena"));
 
         Pattern validEditingState = Pattern.compile("\\d*");
         UnaryOperator<TextFormatter.Change> filter = change -> validEditingState.matcher(change.getControlNewText()).matches() ? change : null;
         TextFormatter<String> textformatter = new TextFormatter<>(filter);
-        distanza.setTextFormatter(textformatter);
+        city.setTextFormatter(textformatter);
     }
 
-    public void mostraRistoranti(List<ReturnRestaurantsBean> listaRistoranti) {
+    public void mostraRistoranti(List<RistoranteBean> listaRistoranti) {
         ristorantiListView.getItems().clear();
-        this.listaRistoranti = listaRistoranti;
+       // this.listaRistoranti = listaRistoranti;
         ristorantiListView.getItems().addAll(listaRistoranti);
-    }
-
-    private void apriGoogleMaps(double lat, double lng) {
-        String url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
-        try {
-            Desktop.getDesktop().browse(new URI(url));
-        } catch (IOException | URISyntaxException e) {
-            LOGGER.log(Level.SEVERE, "Errore nell'apertura di Google Maps", e);
-        }
-    }
-
-    @FXML
-    private void handleclick(MouseEvent event) {
-        if (event.getClickCount() != 2) {
-            return;
-        }
-        int selectedIndex = ristorantiListView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex < 0) {
-            return;
-        }
-        ReturnRestaurantsBean ristorante = listaRistoranti.get(selectedIndex);
-        if (isVengoDaCalendar()) {
-            processCalendarSelection(ristorante);
-        } else {
-            loadingIndicator.setVisible(false);
-            apriGoogleMaps(ristorante.getLatitudine(), ristorante.getLongitudine());
-        }
-    }
-
-    private void processCalendarSelection(ReturnRestaurantsBean ristorante) {
-        if (!DEBUG) {
-            // In modalità produzione, non mostrare il progresso di caricamento
-            return;
-        }
-
-        lableemail.setVisible(true);
-        loadingIndicator.setVisible(true);
-        loadingIndicator.setProgress(0);
-        final Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
-            private double progress = 0;
-            @Override
-            public void handle(ActionEvent event) {
-                progress += 0.05;
-                loadingIndicator.setProgress(progress);
-                if (progress >= 1) {
-                    timeline.stop();
-                    try {
-                        lableemail.setVisible(false);
-                        // Resetto la modalità calendario e imposto il ristorante selezionato
-                        setVengoDaCalendar(false);
-                        setRistorantescelto("🍽️ " + ristorante.getNome() + " - 📍 " + ristorante.getIndirizzo());
-                        MealCalenderViewController.inviomail();  // Chiamata al metodo che invia l'email
-                        Stage stage = (Stage) seteatingtimebutton.getScene().getWindow();
-                        GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
-                    } catch (Exception ex) {
-                        LOGGER.log(Level.SEVERE, "Errore nel processo", ex);
-                    }
-                }
-            }
-        });
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
     }
 
     @FXML

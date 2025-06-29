@@ -13,6 +13,8 @@ public class NutrorUserViewController {
 
     @FXML
     private Button btnUser;
+    @FXML
+    private Button btnRest1;
 
     @FXML
     private Button btnLogin;
@@ -33,6 +35,13 @@ public class NutrorUserViewController {
     @FXML
     private void goRegisterU(ActionEvent event) {
         SessionManagerSLT.getInstance().setRuolo("utente");
+        Stage stage = (Stage) btnUser.getScene().getWindow();
+        GraphicController.cambiascena(stage, "register-view.fxml");
+    }
+
+    @FXML
+    private void goRestLogin(ActionEvent event) {
+        SessionManagerSLT.getInstance().setRuolo("ristorante");
         Stage stage = (Stage) btnUser.getScene().getWindow();
         GraphicController.cambiascena(stage, "register-view.fxml");
     }

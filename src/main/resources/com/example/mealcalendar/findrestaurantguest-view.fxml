@@ -45,16 +45,8 @@
             <MenuItem fx:id="omnivora" mnemonicParsing="false" text="Onnivora" />
         </items>
       </SplitMenuButton>
-      <SplitMenuButton fx:id="pasto" layoutX="982.0" layoutY="342.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="223.0" text="Choose">
-         <items>
-            <MenuItem fx:id="colazione" mnemonicParsing="false" text="Breakfast" />
-            <MenuItem fx:id="pranzo" mnemonicParsing="false" text="Lunch" />
-            <MenuItem fx:id="cena" mnemonicParsing="false" text="Dinner" />
-         </items>
-      </SplitMenuButton>
-      <Label layoutX="982.0" layoutY="320.0" prefHeight="17.0" prefWidth="134.0" text="Select type of meal" />
-      <TextField fx:id="distanza" layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" promptText="only numbers" />
-      <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="Insert radius" />
+      <TextField fx:id="city" layoutX="982.0" layoutY="443.0" prefHeight="26.0" prefWidth="223.0" promptText="Insert city here" />
+      <Label layoutX="982.0" layoutY="420.0" prefHeight="17.0" prefWidth="134.0" text="Insert city" />
       <Button layoutX="983.0" layoutY="515.0" mnemonicParsing="false" onAction="#confermafiltri" prefHeight="35.0" prefWidth="223.0" text="APPLY">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -69,11 +61,6 @@
       <Label layoutX="221.0" layoutY="23.0" text="FINDING RESTAURANT...">
          <font>
             <Font name="System Bold Italic" size="41.0" />
-         </font>
-      </Label>
-      <Label layoutX="1210.0" layoutY="448.0" text="KM">
-         <font>
-            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
    </children>

@@ -16,6 +16,9 @@ public class HelloViewController {
 
     @FXML
     private Button quibutton;
+
+    @FXML
+    private Button btnRest1;
     @FXML
     private Button register;
     @FXML
@@ -34,6 +37,13 @@ public class HelloViewController {
     private Label messageLabel;
 
 
+
+
+    @FXML
+    void goRestLogin(ActionEvent event) {
+        Stage stage = (Stage) backbutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "restaurantManagement-view.fxml");
+    }
 
     @FXML
     private void goback(ActionEvent event)  {
