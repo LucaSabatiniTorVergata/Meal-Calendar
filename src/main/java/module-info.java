@@ -24,4 +24,6 @@ module demo {
     opens com.example.mealcalendar.seteatingtime to javafx.fxml;
     exports com.example.mealcalendar.makediet;
     opens com.example.mealcalendar.makediet to javafx.fxml;
+    exports com.example.mealcalendar.followdiet to javafx.fxml;
+    opens com.example.mealcalendar.followdiet to javafx.fxml;
 }

@@ -1,6 +1,8 @@
 package com.example.mealcalendar.makediet;
 
 
+import com.example.mealcalendar.DietaCacheManagerSLT;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class MakeDietaController {
         if(dieta!=null) {
 
          dietDao.save(convertiDieta(dieta));
+         DietaCacheManagerSLT.getInstance().invalidateCache();
          return true;
         }
         else{

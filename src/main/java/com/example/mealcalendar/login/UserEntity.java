@@ -1,11 +1,14 @@
 package com.example.mealcalendar.login;
 
+import com.example.mealcalendar.makediet.DietaEntity;
+
 public class UserEntity {
 
     private String username;
     private String email;
     private String password;
     private String role;
+    private DietaEntity dietaAssegnata;
 
     public UserEntity(String username, String email, String password, String role) {
         this.username = username;

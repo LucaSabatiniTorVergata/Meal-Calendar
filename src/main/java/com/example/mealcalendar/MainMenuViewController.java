@@ -1,7 +1,6 @@
 package com.example.mealcalendar;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -37,7 +36,9 @@ public class MainMenuViewController {
     @FXML
     private Button makediet;
 
-    // Aggiungi un flag per la persistenza, per esempio
+    @FXML
+    private Button choose;
+
 
 
     //metodi eseguibili dal guest
@@ -61,7 +62,16 @@ public class MainMenuViewController {
         }
     }
 
-    //metodi eseguibili dall'user
+    @FXML
+    private void gochooseview(ActionEvent event) {
+
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("utente")){
+            System.out.println(SessionManagerSLT.getInstance().getLoggedRole());
+            Stage stage = (Stage) choose.getScene().getWindow();
+            GraphicController.cambiascena(stage, "choosediet-view.fxml");
+        }
+    }
+
     @FXML
     private void findRestaurantUser(ActionEvent event)  {
         Stage stage = (Stage) findrestaurantbutton.getScene().getWindow();
