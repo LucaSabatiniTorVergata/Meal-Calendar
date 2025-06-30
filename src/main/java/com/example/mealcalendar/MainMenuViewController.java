@@ -83,6 +83,8 @@ public class MainMenuViewController {
     @FXML
     private TextArea descrizione;
 
+    private String controllo="utente";
+
     //metodi eseguibili dal guest
     @FXML
     private void findRestaurantGuest(ActionEvent event) {
@@ -107,7 +109,7 @@ public class MainMenuViewController {
     @FXML
     private void gochooseview(ActionEvent event) {
 
-        if(SessionManagerSLT.getInstance().getLoggedRole().equals("utente")){
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
             Stage stage = (Stage) choose.getScene().getWindow();
             GraphicController.cambiascena(stage, "choosediet-view.fxml");
         }
@@ -133,7 +135,7 @@ public class MainMenuViewController {
 
     @FXML
     private void loadInsertMeal(ActionEvent event) {
-        if(SessionManagerSLT.getInstance().getLoggedRole().equals("utente")){
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
          Stage stage = (Stage)insertmealbutton .getScene().getWindow();
          GraphicController.cambiascena(stage, "insertmeal-view.fxml");
         }
@@ -158,7 +160,7 @@ public class MainMenuViewController {
             rolelabel.setText("Sei un "+role);
         }
 
-        if ("utente".equals(role)) {
+        if (controllo.equals(role)) {
             // Nasconde le immagini
             img1.setVisible(false);
             img2.setVisible(false);
