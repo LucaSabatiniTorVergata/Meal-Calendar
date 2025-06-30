@@ -13,7 +13,7 @@ module demo {
     exports com.example.mealcalendar;
     opens com.example.mealcalendar to javafx.fxml;
     exports com.example.mealcalendar.login;
-    opens com.example.mealcalendar.login to javafx.fxml;
+    opens com.example.mealcalendar.login to javafx.fxml, com.fasterxml.jackson.databind;
     exports com.example.mealcalendar.findrest;
     opens com.example.mealcalendar.findrest to javafx.fxml;
     exports com.example.mealcalendar.findrecipe;
@@ -26,4 +26,5 @@ module demo {
     opens com.example.mealcalendar.makediet to javafx.fxml;
     exports com.example.mealcalendar.followdiet to javafx.fxml;
     opens com.example.mealcalendar.followdiet to javafx.fxml;
+
 }

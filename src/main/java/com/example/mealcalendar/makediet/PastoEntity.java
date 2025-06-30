@@ -1,10 +1,17 @@
 package com.example.mealcalendar.makediet;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PastoEntity {
+
+    @JsonProperty
     private String nome;
+    @JsonProperty
     private double kcal;
+
+
+    public PastoEntity() {}
 
     public PastoEntity(String nome, double kcal) {
         this.nome = nome;

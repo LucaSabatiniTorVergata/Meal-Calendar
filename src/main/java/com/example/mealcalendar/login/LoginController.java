@@ -8,10 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 public class LoginController {
 
     private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
-    private UserDaoInterface userDAO;
 
-    public LoginController() {
-        this.userDAO=UserDaoFactory.createUserDao();
+    public LoginController() {//costruttore
     }
 
 
@@ -20,7 +18,7 @@ public class LoginController {
     }
 
     private boolean check(String username, String password,String ruolo) throws IOException {
-        UserEntity user = userDAO.getUserByUsername(username);
+        UserEntity user = UserSessionCacheSLT.getInstance().getUser(username);
         if (user != null && user.getRole().equals(ruolo)) {
 
             LOGGER.log(Level.INFO, "User: {0}", user.getUsername());

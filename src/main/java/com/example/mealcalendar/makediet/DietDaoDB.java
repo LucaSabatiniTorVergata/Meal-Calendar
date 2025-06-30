@@ -21,9 +21,9 @@ public class DietDaoDB implements DietDao {
     }
 
     @Override
-    public List<DietaEntity> filbyauthor(String username){
+    public DietaEntity filbyname(String username){
 
-        return List.of();
+        return null;
     }
 
 }

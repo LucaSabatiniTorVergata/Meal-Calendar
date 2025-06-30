@@ -27,4 +27,11 @@ public class UserDaoRam implements UserDaoInterface {
         }
         return null;
     }
+
+    @Override
+    public void updateUser(UserEntity updatedUser) {
+        demoUsers.removeIf(u -> u.getUsername().equals(updatedUser.getUsername()));
+        demoUsers.add(updatedUser);
+    }
+
 }

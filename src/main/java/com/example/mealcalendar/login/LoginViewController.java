@@ -38,7 +38,7 @@ public class LoginViewController {
     private void indietroview(ActionEvent event) {
 
         Stage stage = (Stage) indietro.getScene().getWindow();
-        GraphicController.cambiascena(stage, "register-view.fxml");
+        GraphicController.cambiascena(stage, "hello-view.fxml");
 
     }
 

@@ -58,10 +58,11 @@ public class DietDaoFS implements DietDao {
     }
 
     @Override
-    public List<DietaEntity> filbyauthor(String username) {
+    public DietaEntity filbyname(String nome) {
         return findAll().stream()
-                .filter(d -> d.getAutore() != null && username.equals(d.getAutore()))
-                .toList();
+                .filter(d -> d.getNome().equals(nome))
+                .findFirst()
+                .orElse(null);
     }
 
     private void exceptionHandler(){

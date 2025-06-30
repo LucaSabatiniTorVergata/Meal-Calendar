@@ -1,2 +1,0 @@
-smith:1:$2a$10$Z.40MmKUEVWZlZjrLKlxx.C0r1eYEl1q0Ixg7uGGhXqhy/i4KrHJ2:utente
-luca:1:$2a$10$IYtXFOIYMRMDi37Ojunhy.JOIWJ9VTKH8nzp2HrMEd2Zj2qTpSloC:nutrizionista

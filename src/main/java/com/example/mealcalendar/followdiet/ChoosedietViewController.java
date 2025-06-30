@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class ChoosedietViewController {
 
@@ -29,7 +31,7 @@ public class ChoosedietViewController {
     private TableColumn<DietaVisualBean, Integer> durataColumn;
 
     @FXML
-    private TextArea descrizioneArea;
+    private TextArea descrizione;
 
     @FXML
     private Button seguiButton;
@@ -58,29 +60,21 @@ public class ChoosedietViewController {
         dietTable.setOnMouseClicked(event -> {
             DietaVisualBean selezionata = dietTable.getSelectionModel().getSelectedItem();
             if (selezionata != null) {
-                descrizioneArea.setText(selezionata.getDescrizione());
+                descrizione.setText(selezionata.getDescrizione());
             }
         });
 
     }
 
     @FXML
-    private void seguiButton(ActionEvent event) {
-
+    private void seguiButton(ActionEvent event) throws IOException {
+        DietaVisualBean selezionata = dietTable.getSelectionModel().getSelectedItem();
+        if (selezionata != null) {
+            controller.assegnaDietaAUser(selezionata, SessionManagerSLT.getInstance().getLoggedInUsername());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Dieta assegnata con successo!");
+            alert.showAndWait();
+        }
     }
 }
 
-// //public void assegnaDietaAUser(DietaVisualBean bean, String username) {
-//        DietaEntity dieta = dietDao.findByName(bean.getNome());
-//        if (dieta != null) {
-//            UserEntity user = userDao.findByUsername(username);
-//            user.setDietaCorrente(dieta);
-//            userDao.update(user);
-//        }
-//    }
-//DietaVisualBean selezionata = dietTable.getSelectionModel().getSelectedItem();
-        //if (selezionata != null) {
-        //controller.assegnaDietaAUser(selezionata, SessionManagerSLT.getInstance().getLoggedInUsername());
-//Alert alert = new Alert(Alert.AlertType.INFORMATION, "Dieta assegnata con successo!");
-            //alert.showAndWait();
-        //}
+

@@ -5,5 +5,5 @@ import java.util.List;
 public interface DietDao {
     void save(DietaEntity dieta);
     List<DietaEntity> findAll();
-    List<DietaEntity> filbyauthor(String author);
+    DietaEntity filbyname(String name);
 }

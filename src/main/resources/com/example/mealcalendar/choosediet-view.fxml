@@ -29,12 +29,12 @@
             <TableColumn fx:id="durataColumn" prefWidth="100" text="Durata (giorni)" />
         </columns>
       </TableView>
-      <Label fx:id="descrizioneArea" layoutX="707.0" layoutY="144.0" prefHeight="68.0" prefWidth="518.0" text="Descrizione della dieta selezionata">
+      <Label layoutX="707.0" layoutY="144.0" prefHeight="68.0" prefWidth="518.0" text="Descrizione della dieta selezionata">
          <font>
             <Font name="System Italic" size="23.0" />
          </font>
       </Label>
-      <TextArea layoutX="707.0" layoutY="223.0" prefHeight="346.0" prefWidth="518.0" />
+      <TextArea fx:id="descrizione"  layoutX="707.0" layoutY="223.0" prefHeight="346.0" prefWidth="518.0" />
       <Button fx:id="seguiButton" onAction="#seguiButton" layoutX="513.0" layoutY="612.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="195.0" text="SEGUI DIETA">
          <font>
             <Font name="System Bold" size="22.0" />

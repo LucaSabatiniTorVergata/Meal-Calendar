@@ -1,5 +1,7 @@
 package com.example.mealcalendar.login;
 
+import com.example.mealcalendar.makediet.DietaEntity;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,8 +52,8 @@ public class RegisterController {
         LOGGER.log(Level.INFO, "Password dopo l''hash: {0}", hashedPassword);
 
         // Creazione dell'oggetto utente
-        UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword,userRegisterBean.getRuolo());
-
+        UserEntity newUser = new UserEntity(userRegisterBean.getUsername(), userRegisterBean.getEmail(), hashedPassword,userRegisterBean.getRuolo(), null);
+        UserSessionCacheSLT.getInstance().invalidateAll();
         // Registrazione utente tramite il DAO
         return userDAO.registerUser(newUser);
     }

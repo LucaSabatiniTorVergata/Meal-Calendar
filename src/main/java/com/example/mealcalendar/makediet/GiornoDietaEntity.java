@@ -1,13 +1,22 @@
 package com.example.mealcalendar.makediet;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class GiornoDietaEntity {
 
-    private int numeroGiorno; // es: 1 = Lunedì
+    @JsonProperty
+    private int numeroGiorno;// es: 1 = Lunedì
+    @JsonProperty
     private PastoEntity colazione;
+    @JsonProperty
     private PastoEntity pranzo;
+    @JsonProperty
     private PastoEntity cena;
+
+
+    public GiornoDietaEntity() {}
 
     public GiornoDietaEntity(int numeroGiorno, PastoEntity colazione, PastoEntity pranzo, PastoEntity cena) {
         this.numeroGiorno = numeroGiorno;

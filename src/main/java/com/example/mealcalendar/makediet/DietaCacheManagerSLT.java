@@ -1,14 +1,10 @@
-package com.example.mealcalendar;
-
-import com.example.mealcalendar.makediet.DietDao;
-import com.example.mealcalendar.makediet.DietDaoFactory;
-import com.example.mealcalendar.makediet.DietaEntity;
+package com.example.mealcalendar.makediet;
 
 import java.util.List;
 
 public class DietaCacheManagerSLT {
 
-    private static DietaCacheManagerSLT instance;
+    private static DietaCacheManagerSLT instance=null;
 
     private List<DietaEntity> cache;
 

@@ -66,7 +66,6 @@ public class MainMenuViewController {
     private void gochooseview(ActionEvent event) {
 
         if(SessionManagerSLT.getInstance().getLoggedRole().equals("utente")){
-            System.out.println(SessionManagerSLT.getInstance().getLoggedRole());
             Stage stage = (Stage) choose.getScene().getWindow();
             GraphicController.cambiascena(stage, "choosediet-view.fxml");
         }
