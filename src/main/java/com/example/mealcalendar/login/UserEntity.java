@@ -32,6 +32,6 @@ public class UserEntity {
     public String getPassword() { return password; }
     public String getRole() { return role; }
     public DietaEntity getDietaAssegnata() { return dietaAssegnata; }
-    public void setDietaAssegnata(DietaEntity dietaAssegnata) {}
+    public void setDietaAssegnata(DietaEntity dietaAssegnata) {this.dietaAssegnata = dietaAssegnata; }
 }
 

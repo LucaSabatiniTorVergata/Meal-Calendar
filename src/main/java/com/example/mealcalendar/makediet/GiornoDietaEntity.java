@@ -2,7 +2,6 @@ package com.example.mealcalendar.makediet;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
 
 public class GiornoDietaEntity {
 
