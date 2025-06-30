@@ -146,7 +146,7 @@ public class FindRestaurantViewController {
     @FXML
     private void fridgeuser(ActionEvent event) {
         Stage stage = (Stage) fillfridgebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "fridge-view.fxml");
+        GraphicController.cambiascena(stage, "insertmeal-view.fxml");
     }
 
     @FXML

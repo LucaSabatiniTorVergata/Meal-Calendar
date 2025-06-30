@@ -18,8 +18,6 @@ module demo {
     opens com.example.mealcalendar.findrest to javafx.fxml;
     exports com.example.mealcalendar.findrecipe;
     opens com.example.mealcalendar.findrecipe to javafx.fxml;
-    exports com.example.mealcalendar.fillfridge;
-    opens com.example.mealcalendar.fillfridge to javafx.fxml;
     exports com.example.mealcalendar.seteatingtime;
     opens com.example.mealcalendar.seteatingtime to javafx.fxml;
     exports com.example.mealcalendar.makediet;

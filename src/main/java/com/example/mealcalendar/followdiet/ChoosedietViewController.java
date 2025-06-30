@@ -43,7 +43,6 @@ public class ChoosedietViewController {
     private void goback(ActionEvent event) {
         Stage stage = (Stage) back.getScene().getWindow();
         GraphicController.cambiascena(stage, "usermenu-view.fxml");
-
     }
 
     @FXML

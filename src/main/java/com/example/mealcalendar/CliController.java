@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.fillfridge.FridgeViewBoundaryCli;
 import com.example.mealcalendar.findrecipe.*;
 import com.example.mealcalendar.login.HelloViewControllerCli;
 import com.example.mealcalendar.login.LoginViewControllerCli;
@@ -18,11 +17,11 @@ public class CliController {
                 RecipeEditViewControllerCli recipeEditViewControllerCli = new RecipeEditViewControllerCli();
                 recipeEditViewControllerCli.start();
                 break;
-            case "fridge":
+            /*case "insertmeal":
                 printer.print("🔹 Navigazione alla schermata frigo (CLI).");
                 FridgeViewBoundaryCli frigorifero = new FridgeViewBoundaryCli();
                 frigorifero.start();
-                break;
+                break;*/
             case "registration":
                 printer.print("🔹 Navigazione alla schermata hello (CLI).");
                 HelloViewControllerCli helloview = new HelloViewControllerCli();

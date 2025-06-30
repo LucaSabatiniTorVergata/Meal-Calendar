@@ -1,10 +1,20 @@
 package com.example.mealcalendar;
 
+
+import com.example.mealcalendar.login.UserEntity;
+import com.example.mealcalendar.login.UserSessionCacheSLT;
+import com.example.mealcalendar.makediet.DietaEntity;
+import com.example.mealcalendar.makediet.GiornoDietaEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
+import java.io.IOException;
 
 
 public class MainMenuViewController {
@@ -13,7 +23,7 @@ public class MainMenuViewController {
     private Button backbutton;
 
     @FXML
-    private Button fillfridgebutton;
+    private Button insertmealbutton;
 
     @FXML
     private Button findrecipebutton;
@@ -39,7 +49,39 @@ public class MainMenuViewController {
     @FXML
     private Button choose;
 
+    @FXML
+    private VBox dietaBox;
+    @FXML
+    private Label titoloDietaLabel;
+    @FXML
+    private Label nomeDietaLabel;
+    @FXML
+    private Label autoreDietaLabel;
+    @FXML
+    private Label durataDietaLabel;
+    @FXML
+    private Label giorniDettagliLabel;
 
+    @FXML
+    private ImageView img1;
+
+    @FXML
+    private ImageView img2;
+
+    @FXML
+    private ImageView img3;
+
+    @FXML
+    private ImageView img4;
+
+    @FXML
+    private ImageView img5;
+
+    @FXML
+    private ScrollPane scrollDietaPane;
+
+    @FXML
+    private TextArea descrizione;
 
     //metodi eseguibili dal guest
     @FXML
@@ -90,9 +132,11 @@ public class MainMenuViewController {
     }
 
     @FXML
-    private void loadFrigeMenu(ActionEvent event) {
-        Stage stage = (Stage) fillfridgebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "fridge-view.fxml");
+    private void loadInsertMeal(ActionEvent event) {
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("utente")){
+         Stage stage = (Stage)insertmealbutton .getScene().getWindow();
+         GraphicController.cambiascena(stage, "insertmeal-view.fxml");
+        }
     }
 
     @FXML
@@ -104,7 +148,7 @@ public class MainMenuViewController {
     }
 
     @FXML
-    public void initialize()  {
+    public void initialize() throws IOException {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         String role=SessionManagerSLT.getInstance().getLoggedRole();
         if (username != null) {
@@ -113,6 +157,42 @@ public class MainMenuViewController {
         if (role != null) {
             rolelabel.setText("Sei un "+role);
         }
+
+        if ("utente".equals(role)) {
+            // Nasconde le immagini
+            img1.setVisible(false);
+            img2.setVisible(false);
+            img3.setVisible(false);
+            img4.setVisible(false);
+            img5.setVisible(false);
+
+            UserEntity user = UserSessionCacheSLT.getInstance().getUser(username);
+            DietaEntity dieta = user.getDietaAssegnata();
+
+            if (dieta != null) {
+                scrollDietaPane.setVisible(true);
+                dietaBox.setVisible(true);
+                descrizione.setVisible(true);
+                nomeDietaLabel.setText("Nome: " + dieta.getNome());
+                autoreDietaLabel.setText("Autore: " + dieta.getAutore());
+                durataDietaLabel.setText("Durata: " + dieta.getDurataSettimane() + " giorni");
+
+
+                descrizione.setText(dieta.getDescrizione());
+
+                StringBuilder sb = new StringBuilder();
+                for (GiornoDietaEntity giorno : dieta.getGiorni()) {
+                    sb.append("Giorno ").append(giorno.getNumeroGiorno()).append(":\n");
+                    sb.append("- Colazione: ").append(giorno.getColazione().getNome()).append(" (").append(giorno.getColazione().getKcal()).append(" kcal)\n");
+                    sb.append("- Pranzo: ").append(giorno.getPranzo().getNome()).append(" (").append(giorno.getPranzo().getKcal()).append(" kcal)\n");
+                    sb.append("- Cena: ").append(giorno.getCena().getNome()).append(" (").append(giorno.getCena().getKcal()).append(" kcal)\n\n");
+                }
+                giorniDettagliLabel.setText(sb.toString());
+            }
+        }
+
+
+
     }
 
 

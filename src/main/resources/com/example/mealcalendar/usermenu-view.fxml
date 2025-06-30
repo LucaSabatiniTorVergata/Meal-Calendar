@@ -3,9 +3,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -25,7 +28,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button fx:id="fillfridgebutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFrigeMenu" style="-fx-background-color: 000000;" text="Fill fridge">
+        <Button fx:id="insertmealbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadInsertMeal" style="-fx-background-color: 000000;" text="Insert meal">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -42,27 +45,27 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <ImageView fitHeight="242.0" fitWidth="312.0" layoutX="488.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="img1" fitHeight="242.0" fitWidth="312.0" layoutX="488.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../pictures/tortino.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="239.0" fitWidth="231.0" layoutX="283.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="img2" fitHeight="239.0" fitWidth="231.0" layoutX="283.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../pictures/checeviche.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="215.0" fitWidth="217.0" layoutX="780.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="img3" fitHeight="215.0" fitWidth="217.0" layoutX="780.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../pictures/lasagna.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="215.0" fitWidth="217.0" layoutX="67.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="img4" fitHeight="215.0" fitWidth="217.0" layoutX="67.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../pictures/stecca.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1002.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="img5" fitHeight="150.0" fitWidth="200.0" layoutX="1002.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../pictures/pollos.png" />
             </image>
@@ -77,5 +80,17 @@
             <Font size="21.0" />
          </font></Label>
 
+        <ScrollPane fx:id="scrollDietaPane" fitToWidth="true" hbarPolicy="AS_NEEDED" layoutX="100.0" layoutY="150.0" prefHeight="500.0" prefWidth="623.0" vbarPolicy="AS_NEEDED" visible="false">
+            <content>
+                <VBox fx:id="dietaBox" spacing="6" style="-fx-padding: 10;">
+                    <Label fx:id="titoloDietaLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Dieta Assegnata" />
+                    <Label fx:id="nomeDietaLabel" />
+                    <Label fx:id="autoreDietaLabel" />
+                    <Label fx:id="durataDietaLabel" />
+                    <Label fx:id="giorniDettagliLabel" wrapText="true" />
+                </VBox>
+            </content>
+        </ScrollPane>
+      <TextArea fx:id="descrizione" layoutX="762.0" layoutY="177.0" prefHeight="446.0" prefWidth="475.0"  visible="false"/>
     </children>
 </AnchorPane>
