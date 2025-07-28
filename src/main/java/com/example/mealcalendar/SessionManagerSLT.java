@@ -5,16 +5,19 @@ import java.time.LocalDate;
 public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
+
     private String loggedInUsername;
     private String loggedrole;
-    private boolean fSDataBase;
-    private boolean demo;
-    private boolean ram=true;//solo per gui
-    private boolean db=true;//solo per gui
-    private boolean fs=true;//solo per gui
+    private String loggedmail;
+
+    private boolean fSDataBase;//se falso allora stiamo in database
+    private boolean demo;//se vero allora stiamo in ram
+
     private LocalDate datas;
     private String oras;
+
     private String ruolo;
+
 
     private SessionManagerSLT() {}
 
@@ -59,24 +62,9 @@ public class SessionManagerSLT {
 
     }
 
-    public void setRam(boolean ram) {
-        this.ram = ram;
-    }
-    public boolean getRam() {
-        return ram;
-    }
-    public void setDB(boolean db) {
-        this.db = db;
-    }
-    public boolean getDB() {
-        return db;
-    }
-    public void setFs(boolean fs) {
-        this.fs = fs;
-    }
-    public boolean getFs() {
-        return fs;
-    }
+    public void setLoggedmail(String loggedmail) {this.loggedmail = loggedmail;}
+    public String getLoggedmail() {return loggedmail;}
+
     public void setDatas(LocalDate datas) {
         this.datas = datas;
     }

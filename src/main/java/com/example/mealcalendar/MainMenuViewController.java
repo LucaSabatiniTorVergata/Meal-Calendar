@@ -1,10 +1,6 @@
 package com.example.mealcalendar;
 
 
-import com.example.mealcalendar.login.UserEntity;
-import com.example.mealcalendar.login.UserSessionCacheSLT;
-import com.example.mealcalendar.makediet.DietaEntity;
-import com.example.mealcalendar.makediet.GiornoDietaEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -160,38 +156,6 @@ public class MainMenuViewController {
             rolelabel.setText("Sei un "+role);
         }
 
-        if (controllo.equals(role)) {
-            // Nasconde le immagini
-            img1.setVisible(false);
-            img2.setVisible(false);
-            img3.setVisible(false);
-            img4.setVisible(false);
-            img5.setVisible(false);
-
-            UserEntity user = UserSessionCacheSLT.getInstance().getUser(username);
-            DietaEntity dieta = user.getDietaAssegnata();
-
-            if (dieta != null) {
-                scrollDietaPane.setVisible(true);
-                dietaBox.setVisible(true);
-                descrizione.setVisible(true);
-                nomeDietaLabel.setText("Nome: " + dieta.getNome());
-                autoreDietaLabel.setText("Autore: " + dieta.getAutore());
-                durataDietaLabel.setText("Durata: " + dieta.getDurataSettimane() + " giorni");
-
-
-                descrizione.setText(dieta.getDescrizione());
-
-                StringBuilder sb = new StringBuilder();
-                for (GiornoDietaEntity giorno : dieta.getGiorni()) {
-                    sb.append("Giorno ").append(giorno.getNumeroGiorno()).append(":\n");
-                    sb.append("- Colazione: ").append(giorno.getColazione().getNome()).append(" (").append(giorno.getColazione().getKcal()).append(" kcal)\n");
-                    sb.append("- Pranzo: ").append(giorno.getPranzo().getNome()).append(" (").append(giorno.getPranzo().getKcal()).append(" kcal)\n");
-                    sb.append("- Cena: ").append(giorno.getCena().getNome()).append(" (").append(giorno.getCena().getKcal()).append(" kcal)\n\n");
-                }
-                giorniDettagliLabel.setText(sb.toString());
-            }
-        }
 
 
 
