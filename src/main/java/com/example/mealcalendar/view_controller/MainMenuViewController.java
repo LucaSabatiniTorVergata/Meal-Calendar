@@ -1,6 +1,8 @@
-package com.example.mealcalendar;
+package com.example.mealcalendar.view_controller;
 
 
+import com.example.mealcalendar.GraphicController;
+import com.example.mealcalendar.SessionManagerSLT;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -88,24 +90,21 @@ public class MainMenuViewController {
         GraphicController.cambiascena(stage, "findrestaurantguest-view.fxml");
     }
 
-    @FXML
-    private void goHome(ActionEvent event) {
-        Stage stage = (Stage) homebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "register-view.fxml");
-    }
 
     @FXML
     private void gomakediet(ActionEvent event) {
-        if(SessionManagerSLT.getInstance().getLoggedRole().equals("nutrizionista")){
+
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("nutritionist")){
         Stage stage = (Stage) makediet.getScene().getWindow();
         GraphicController.cambiascena(stage, "makediet-view.fxml");
         }
+
     }
 
     @FXML
     private void gochooseview(ActionEvent event) {
 
-        if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("user")){
             Stage stage = (Stage) choose.getScene().getWindow();
             GraphicController.cambiascena(stage, "choosediet-view.fxml");
         }
@@ -123,11 +122,6 @@ public class MainMenuViewController {
         GraphicController.cambiascena(stage, "mealcalendar-view.fxml");
     }
 
-    @FXML
-    private void loadFindRecpe(ActionEvent event) {
-        Stage stage = (Stage) findrecipebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "recipe-view.fxml");
-    }
 
     @FXML
     private void loadInsertMeal(ActionEvent event) {
@@ -147,6 +141,7 @@ public class MainMenuViewController {
 
     @FXML
     public void initialize() throws IOException {
+
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         String role=SessionManagerSLT.getInstance().getLoggedRole();
         if (username != null) {
@@ -155,13 +150,5 @@ public class MainMenuViewController {
         if (role != null) {
             rolelabel.setText("Sei un "+role);
         }
-
-
-
-
     }
-
-
-
-
 }

@@ -1,68 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: FFF8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.makediet.MakeDietViewController">
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.mealcalendar.view_controller.AddDietViewController"
+            prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFF8BF;">
+
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-        <Button fx:id="backbutton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="BACK">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK"
+                   strokeType="INSIDE" width="1280.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+        <Label layoutX="94.0" layoutY="27.0" text="Crea e pubblica dieta...">
             <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Button>
-      <Label layoutX="94.0" layoutY="27.0" prefHeight="59.0" prefWidth="520.0" text="Crea e pubblica dieta...">
-         <font>
-            <Font name="System Bold Italic" size="41.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="458.0" layoutX="14.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="558.0" />
-      <Label layoutX="38.0" layoutY="228.0" prefHeight="18.0" prefWidth="72.0" text="Nome Dieta:" />
-      <TextField fx:id="nomedieta" layoutX="36.0" layoutY="254.0" promptText="Inserisci nome dieta...">
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="36.0" layoutY="314.0" text="Descrizione" />
-      <TextArea fx:id="descrizione" layoutX="34.0" layoutY="341.0" prefHeight="87.0" prefWidth="470.0" promptText="Inserisci descrizione ricetta...">
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </TextArea>
-      <Label layoutX="34.0" layoutY="454.0" text="Durata dieta" />
-      <SplitMenuButton fx:id="duratadieta" layoutX="38.0" layoutY="472.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="durata">
-        <items>
-          <MenuItem fx:id="durata" mnemonicParsing="false" text="7 giorni" />
-        </items>
-      </SplitMenuButton>
-        <ScrollPane fx:id="scrollpane" layoutX="680.0" layoutY="120.0">
-        <HBox layoutX="678.0" layoutY="114.0" prefHeight="530.0" prefWidth="362.0"> <VBox fx:id="colonnaSinistra" spacing="10" />
-          <VBox fx:id="colonnaDestra" spacing="10" />
-      </HBox>
+                <Font name="System Bold Italic" size="41.0"/>
+            </font>
+        </Label>
+
+        <Label layoutX="38.0" layoutY="130.0" text="Nome Dieta:"/>
+        <TextField fx:id="nomedieta" layoutX="36.0" layoutY="150.0" prefWidth="300.0"
+                   promptText="Inserisci nome dieta..."/>
+
+        <Label layoutX="38.0" layoutY="190.0" text="Descrizione:"/>
+        <TextArea fx:id="descrizione" layoutX="36.0" layoutY="210.0" prefHeight="80.0" prefWidth="400.0"
+                  promptText="Inserisci descrizione..."/>
+
+        <Label layoutX="38.0" layoutY="300.0" text="Durata (giorni):"/>
+        <SplitMenuButton fx:id="duratadieta" layoutX="36.0" layoutY="320.0" text="Scegli durata">
+            <items>
+                <MenuItem fx:id="durata7" text="7 giorni"/>
+                <MenuItem fx:id="durata14" text="14 giorni"/>
+            </items>
+        </SplitMenuButton>
+
+        <Button layoutX="36.0" layoutY="370.0" onAction="#makeschedule" text="Genera Scheda"/>
+
+        <ScrollPane layoutX="500.0" layoutY="120.0" prefHeight="500.0" prefWidth="700.0">
+            <content>
+                <HBox spacing="20.0">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <VBox fx:id="colonnaSinistra" spacing="20.0" prefWidth="330.0"/>
+                    <VBox fx:id="colonnaDestra" spacing="20.0" prefWidth="330.0"/>
+                </HBox>
+            </content>
         </ScrollPane>
-      <Button fx:id="generascheda" layoutX="38.0" layoutY="556.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="180.0" text="Genera Scheda">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="conferma" onAction="#confirm" layoutX="1115.0" layoutY="309.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="CONFERMA">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="annulla" onAction="#clean" layoutX="1115.0" layoutY="405.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="ANNULLA">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
+
+
+        <Button layoutX="1100.0" layoutY="640.0" onAction="#confirm" text="CONFERMA"/>
+        <Button layoutX="970.0" layoutY="640.0" onAction="#clean" text="ANNULLA"/>
+        <Button fx:id="backbutton" layoutX="15.0" layoutY="14.0" onAction="#goBack" text="BACK"/>
     </children>
 </AnchorPane>

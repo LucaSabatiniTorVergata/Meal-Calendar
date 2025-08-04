@@ -9,7 +9,7 @@ import java.io.IOException;
 public class LoginController {
 
     public boolean vallogin(UserLoginBean userBean) throws IOException {
-        String filename = userBean.getRuolo().equals("Nutritionist") ? "nutritionists.txt" : "users.txt";
+        String filename = userBean.getRuolo().equals("nutritionist") ? "nutritionists.txt" : "users.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;

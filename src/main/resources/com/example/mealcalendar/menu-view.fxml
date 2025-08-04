@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: FFF8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.MainMenuViewController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: FFF8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.view_controller.MainMenuViewController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
         <Label fx:id="welcomelabel" layoutX="104.0" layoutY="37.0">
@@ -20,27 +20,19 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button fx:id="findrestaurantbutton" layoutX="798.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
+        <Button fx:id="findrestaurantbutton" layoutX="887.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="findrecipebutton" layoutX="908.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadFindRecpe" style="-fx-background-color: 000000;" text="Find recipe">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
         <Button fx:id="insertmealbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadInsertMeal" style="-fx-background-color: 000000;" text="Insert meal">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button fx:id="seteatingtimebutton" layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadCalendarMenu" style="-fx-background-color: 000000;" text="Set eating time">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-        <Button fx:id="makediet" layoutX="1176.0" layoutY="39.0" mnemonicParsing="false" onAction="#gomakediet" style="-fx-background-color: 000000;" text="Make diet">
+        <Button fx:id="makediet" layoutX="1091.0" layoutY="37.0" mnemonicParsing="false" onAction="#gomakediet" style="-fx-background-color: 000000;" text="Make diet">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="choose" layoutX="700.0" layoutY="40.0" mnemonicParsing="false" onAction="#gochooseview" style="-fx-background-color: 000000;" text="Choose diet">
+        <Button fx:id="choose" layoutX="800.0" layoutY="40.0" mnemonicParsing="false" onAction="#gochooseview" style="-fx-background-color: 000000;" text="Choose diet">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -91,6 +83,6 @@
                 </VBox>
             </content>
         </ScrollPane>
-      <TextArea fx:id="descrizione" layoutX="762.0" layoutY="177.0" prefHeight="446.0" prefWidth="475.0"  visible="false"/>
+      <TextArea fx:id="descrizione" layoutX="762.0" layoutY="177.0" prefHeight="446.0" prefWidth="475.0" visible="false" />
     </children>
 </AnchorPane>

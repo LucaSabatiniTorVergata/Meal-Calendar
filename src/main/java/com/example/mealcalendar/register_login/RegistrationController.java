@@ -10,7 +10,7 @@ public class RegistrationController {
 
     public void register(UserBean bean) throws IOException {
 
-        String filename = bean.getRuolo().equals("Nutritionist") ? "nutritionists.txt" : "users.txt";
+        String filename = bean.getRuolo().equals("nutritionist") ? "nutritionists.txt" : "users.txt";
         File file = new File(filename);
 
         // Se il file non esiste, lo creo

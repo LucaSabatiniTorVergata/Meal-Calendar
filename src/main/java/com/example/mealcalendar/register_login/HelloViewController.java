@@ -49,7 +49,7 @@ public class HelloViewController {
     @FXML
     public void goRegisterU() {
 
-        SessionManagerSLT.getInstance().setRuolo("User");
+        SessionManagerSLT.getInstance().setRuolo("user");
         Stage stage = (Stage) btnUser.getScene().getWindow();
         GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
     }
@@ -57,7 +57,7 @@ public class HelloViewController {
     @FXML
     public void goRegisterN() {
 
-        SessionManagerSLT.getInstance().setRuolo("Nutritionist");
+        SessionManagerSLT.getInstance().setRuolo("nutritionist");
         Stage stage = (Stage) btnNutrizionista.getScene().getWindow();
         GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
 

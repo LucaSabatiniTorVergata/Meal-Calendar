@@ -2,6 +2,7 @@ package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.GraphicController;
 
+import com.example.mealcalendar.SessionManagerSLT;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -21,19 +22,21 @@ public class LoginViewController {
 
     @FXML
     private void initialize() {
+
         nutrizionista.setOnAction(e -> {
             ruolo.setText("Nutrizionista");
-            selectedRole = "Nutritionist";
+            selectedRole = "nutritionist";
         });
 
         utente.setOnAction(e -> {
             ruolo.setText("Utente");
-            selectedRole = "User";
+            selectedRole = "user";
         });
     }
 
     @FXML
     public void logIn() {
+
         String username = user.getText();
         String password = pass.getText();
 
@@ -50,7 +53,7 @@ public class LoginViewController {
                 messagelabel.setText("Login effettuato!");
 
                 Stage stage = (Stage) login.getScene().getWindow();
-                GraphicController.cambiascena(stage, "/com/example/mealcalendar/usermenu-view.fxml");
+                GraphicController.cambiascena(stage, "/com/example/mealcalendar/menu-view.fxml");
 
             } else {
                 messagelabel.setText("Credenziali non valide.");
@@ -63,7 +66,7 @@ public class LoginViewController {
     @FXML
     public void goback() {
 
-        Stage stage = (Stage) user.getScene().getWindow();
+        Stage stage = (Stage)back.getScene().getWindow();
         GraphicController.cambiascena(stage, "/com/example/mealcalendar/hello-view.fxml");
     }
 }

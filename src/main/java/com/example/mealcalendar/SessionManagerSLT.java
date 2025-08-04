@@ -10,7 +10,7 @@ public class SessionManagerSLT {
     private String loggedrole;
     private String loggedmail;
 
-    private boolean fSDataBase;//se falso allora stiamo in database
+    private boolean fSDataBase;//se vero allora stiamo in fs
     private boolean demo;//se vero allora stiamo in ram
 
     private LocalDate datas;
