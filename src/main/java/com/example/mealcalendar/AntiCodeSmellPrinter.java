@@ -18,8 +18,8 @@ public class AntiCodeSmellPrinter {
 
         handler.setFormatter(new Formatter() {
             @Override
-            public String format(LogRecord record) {
-                return record.getMessage() + System.lineSeparator();
+            public String format(LogRecord rec) {
+                return rec.getMessage() + System.lineSeparator();
             }
         });
 

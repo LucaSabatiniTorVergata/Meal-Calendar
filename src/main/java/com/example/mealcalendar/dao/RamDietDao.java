@@ -49,7 +49,7 @@ public class RamDietDao implements DietDAO {
     public void printAllDiets() {
         for (Map.Entry<String, List<DietBean>> entry : data.entrySet()) {
             String nutritionist = entry.getKey();
-            System.out.println("👨‍⚕️ Diete per: " + nutritionist);
+            System.out.println(" Diete per :" + nutritionist);
             for (DietBean diet : entry.getValue()) {
                 System.out.println("📋 Dieta: " + diet.getNome());
                 System.out.println("📝 Descrizione: " + diet.getDescrizione());

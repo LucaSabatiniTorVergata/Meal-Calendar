@@ -4,6 +4,9 @@ import com.example.mealcalendar.SessionManagerSLT;
 
 public class DietDAOFactory {
 
+    private DietDAOFactory() {
+    }
+
     public static DietDAO getDietDAO() {
 
         if (SessionManagerSLT.getInstance().getDemo()) {

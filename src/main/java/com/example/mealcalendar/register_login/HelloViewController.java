@@ -72,6 +72,8 @@ public class HelloViewController {
     }
 
     @FXML
-    public void goRestLogin() {}
+    public void goRestLogin() {
+        //parte di Luca
+    }
 
 }

@@ -15,7 +15,10 @@ public class RegistrationController {
 
         // Se il file non esiste, lo creo
         if (!file.exists()) {
-            file.createNewFile(); // crea file vuoto
+
+            boolean ignored = file.createNewFile();
+            System.out.println("File created: " + ignored);// crea file vuoto
+
         }
 
 

@@ -23,7 +23,7 @@ public class FileSystemDietDAO implements DietDAO {
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write("{}");  // file vuoto con struttura JSON base (mappa vuota)
             } catch (IOException e) {
-                throw new RuntimeException("Impossibile creare il file JSON", e);
+                throw new IllegalArgumentException("Impossibile creare il file JSON", e);
             }
         }
     }
@@ -41,7 +41,7 @@ public class FileSystemDietDAO implements DietDAO {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(allDiets, writer);
         } catch (IOException e) {
-            throw new RuntimeException("Errore nel salvataggio della dieta", e);
+            throw new IllegalArgumentException("Errore nel salvataggio della dieta", e);
         }
     }
 
@@ -67,7 +67,7 @@ public class FileSystemDietDAO implements DietDAO {
             Map<String, List<DietBean>> loaded = gson.fromJson(reader, type);
             return loaded != null ? loaded : new HashMap<>();
         } catch (IOException e) {
-            throw new RuntimeException("Errore nella lettura delle diete", e);
+            throw new IllegalArgumentException("Errore nella lettura delle diete", e);
         }
     }
 }
