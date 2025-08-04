@@ -1,5 +1,6 @@
 package com.example.mealcalendar.dao;
 
+import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.DayBean;
 import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.MealBean;
@@ -9,19 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class RamDietDao implements DietDAO {
 
-    private static RamDietDao instance;
+    private static RamDietDao instance = null;
 
     private final Map<String, List<DietBean>> data = new HashMap<>();
 
     private RamDietDao() {}
 
     public static synchronized RamDietDao getInstance() {
+
         if (instance == null) {
             instance = new RamDietDao();
         }
         return instance;
+
     }
 
 
