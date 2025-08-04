@@ -1,6 +1,6 @@
 package com.example.mealcalendar.dao;
 
-import com.example.mealcalendar.SessionManagerSLT;
+
 import com.example.mealcalendar.bean.DayBean;
 import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.MealBean;
