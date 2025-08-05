@@ -31,23 +31,29 @@ public class RamDietDAO implements DietDAO {
 
     @Override
     public void saveDiet(String nutritionistUsername, DietBean diet) {
+
         data.putIfAbsent(nutritionistUsername, new ArrayList<>());
         data.get(nutritionistUsername).add(diet);
         printAllDiets();
+
     }
 
     @Override
     public List<DietBean> getDietsByNutritionist(String nutritionistUsername) {
+
         return data.getOrDefault(nutritionistUsername, new ArrayList<>());
+
     }
 
     @Override
     public List<DietBean> getAllDiets() {
+
         List<DietBean> allDiets = new ArrayList<>();
         for (List<DietBean> diets : data.values()) {
             allDiets.addAll(diets);
         }
         return allDiets;
+
     }
 
     public void printAllDiets() {

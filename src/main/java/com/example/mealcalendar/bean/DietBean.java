@@ -35,10 +35,12 @@ public class DietBean {
         }
 
         public void addDay(DayBean g) {
+
             if (g == null) {
                 throw new IllegalArgumentException("Il giorno non può essere nullo.");
             }
             this.giorni.add(g);
+
         }
 
         public String getNome() {

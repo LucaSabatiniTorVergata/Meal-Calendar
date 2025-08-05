@@ -1,6 +1,6 @@
 package com.example.mealcalendar.model;
 
-import com.example.mealcalendar.bean.DayBean;
+
 
 import java.util.ArrayList;
 import java.util.List;

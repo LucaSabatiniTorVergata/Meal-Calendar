@@ -77,8 +77,11 @@ public class SessionManagerSLT {
     }
 
     public void logout() {
+
         loggedInUsername = null;
         loggedrole = null;
+        loggedmail = null;
+        loggedpassword = null;
 
     }
 

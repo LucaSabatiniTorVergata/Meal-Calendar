@@ -21,9 +21,11 @@ public class DayEntity {
     }
 
     public void addMeal(MealEntity pasto) {
+
         if (pasto != null) {
             pasti.add(pasto);
         }
+
     }
 
     public void setPasti(List<MealEntity> pasti) {

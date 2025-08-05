@@ -45,11 +45,13 @@ public class AddDietViewController {
 
     @FXML
     private void makeschedule() {
+
         colonnaSinistra.getChildren().clear();
         colonnaDestra.getChildren().clear();
         giorniPannelli.clear();
 
         for (int i = 0; i < durata; i++) {
+
             GridPane giornoPane = new GridPane();
             giornoPane.setHgap(10);
             giornoPane.setVgap(5);
@@ -57,8 +59,9 @@ public class AddDietViewController {
             Label giornoLabel = new Label("Giorno " + (i + 1));
             giornoPane.add(giornoLabel, 0, 0);
 
-            // Creiamo 3 pasti: riga 1, 2, 3 (a partire da riga 1 perché 0 è il label del giorno)
+            // Creiamo 3 pasti
             for (int pastoIndex = 0; pastoIndex < 3; pastoIndex++) {
+
                 TextField nomePasto = new TextField();
                 nomePasto.setPromptText("Nome pasto");
 
@@ -73,6 +76,7 @@ public class AddDietViewController {
                 giornoPane.add(nomePasto, 0, row);
                 giornoPane.add(kcalPasto, 1, row);
                 giornoPane.add(descrizionePasto, 2, row);
+
             }
 
             giorniPannelli.add(giornoPane);
@@ -92,8 +96,6 @@ public class AddDietViewController {
         String nome = nomedieta.getText();
         String desc = descrizione.getText();
 
-
-
         DietBean dietBean = new DietBean();
         dietBean.setNome(nome);
         dietBean.setDescrizione(desc);
@@ -102,23 +104,32 @@ public class AddDietViewController {
 
         for (int i = 0; i < durata; i++) {
 
-            GridPane giornoPane = giorniPannelli.get(i);
-            TextField nomeField = (TextField) giornoPane.getChildren().get(1);
-            TextField kcalField = (TextField) giornoPane.getChildren().get(2);
-            TextField descField = (TextField) giornoPane.getChildren().get(3);
-
-            MealBean mealBean = new MealBean();
-            mealBean.setNome(nomeField.getText());
-            mealBean.setDescrizione(descField.getText());
-            try {
-                mealBean.setKcal(Integer.parseInt(kcalField.getText()));
-            } catch (NumberFormatException e) {
-                return;
-            }
-
             DayBean dayBean = new DayBean();
             dayBean.setGiorno(i + 1);
-            dayBean.addMeal(mealBean);
+
+            GridPane giornoPane = giorniPannelli.get(i);
+
+
+            for( int pastoIndex = 0; pastoIndex < 3; pastoIndex++) {
+
+                int baseIndex = 1 + pastoIndex * 3;
+
+                TextField nomeField = (TextField) giornoPane.getChildren().get(baseIndex);
+                TextField kcalField = (TextField) giornoPane.getChildren().get(baseIndex+1);
+                TextField descField = (TextField) giornoPane.getChildren().get(baseIndex+2);
+
+
+                MealBean mealBean = new MealBean();
+                mealBean.setNome(nomeField.getText());
+                mealBean.setDescrizione(descField.getText());
+
+                try {
+                    mealBean.setKcal(Integer.parseInt(kcalField.getText()));
+                } catch (NumberFormatException e) {
+                    return;
+                }
+                dayBean.addMeal(mealBean);
+                }
             dietBean.addDay(dayBean);
         }
 
