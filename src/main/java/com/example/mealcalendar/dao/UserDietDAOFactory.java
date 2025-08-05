@@ -2,27 +2,20 @@ package com.example.mealcalendar.dao;
 
 import com.example.mealcalendar.SessionManagerSLT;
 
-public class DietDAOFactory {
+public class UserDietDAOFactory {
 
-    private DietDAOFactory() {
-    }
 
-    public static DietDAO getDietDAO() {
+    public static UserDietDAO getuserdietDAO() {
 
         if (SessionManagerSLT.getInstance().getDemo()) {
-            return RamDietDAO.getInstance();
+            return RamUserDietDAO.getInstance();
         } else {
             if(SessionManagerSLT.getInstance().getFSDataBase()){
-                return new CacheDietDAO(new FileSystemDietDAO());
+                return new CacheUserDietDAO(new FileSystemUserDietDAO());
             }else{
                 //databasepersistenza
-                }
             }
+        }
         return null;
     }
 }
-
-
-
-
-

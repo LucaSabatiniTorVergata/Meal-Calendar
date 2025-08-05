@@ -15,6 +15,7 @@ public class DietCreationController {
     }
 
     public void saveDiet(DietBean diet) {
+
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         dietDAO.saveDiet(username, diet);
     }

@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
-import java.io.IOException;
+
 
 
 public class MainMenuViewController {
@@ -21,7 +21,7 @@ public class MainMenuViewController {
     private Button backbutton;
 
     @FXML
-    private Button insertmealbutton;
+    private Button followdietbutton;
 
     @FXML
     private Button findrecipebutton;
@@ -81,7 +81,7 @@ public class MainMenuViewController {
     @FXML
     private TextArea descrizione;
 
-    private String controllo="utente";
+    private String controllo="user";
 
     //metodi eseguibili dal guest
     @FXML
@@ -103,7 +103,6 @@ public class MainMenuViewController {
 
     @FXML
     private void gochooseview(ActionEvent event) {
-
         if(SessionManagerSLT.getInstance().getLoggedRole().equals("user")){
             Stage stage = (Stage) choose.getScene().getWindow();
             GraphicController.cambiascena(stage, "choosediet-view.fxml");
@@ -124,10 +123,11 @@ public class MainMenuViewController {
 
 
     @FXML
-    private void loadInsertMeal(ActionEvent event) {
+    private void followdiet(ActionEvent event) {
+
         if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
-         Stage stage = (Stage)insertmealbutton .getScene().getWindow();
-         GraphicController.cambiascena(stage, "insertmeal-view.fxml");
+         Stage stage = (Stage)followdietbutton .getScene().getWindow();
+         GraphicController.cambiascena(stage, "followdiet-view.fxml");
         }
     }
 
@@ -140,7 +140,7 @@ public class MainMenuViewController {
     }
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
 
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         String role=SessionManagerSLT.getInstance().getLoggedRole();

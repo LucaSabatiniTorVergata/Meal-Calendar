@@ -1,14 +1,23 @@
 package com.example.mealcalendar;
 
+import com.example.mealcalendar.dao.CacheDietDAO;
+import com.example.mealcalendar.dao.DietDAO;
+import com.example.mealcalendar.dao.FileSystemDietDAO;
+import com.example.mealcalendar.dao.RamDietDAO;
+
 import java.time.LocalDate;
 
 public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
 
+    private PersistenceType persistenceType;
+
+
     private String loggedInUsername;
     private String loggedrole;
     private String loggedmail;
+    private String loggedpassword;
 
     private boolean fSDataBase;//se vero allora stiamo in fs
     private boolean demo;//se vero allora stiamo in ram
@@ -19,13 +28,19 @@ public class SessionManagerSLT {
     private String ruolo;
 
 
-    private SessionManagerSLT() {}
+    private SessionManagerSLT() {
+
+    }
 
     public static SessionManagerSLT getInstance() {
         if (instance == null) {
             instance = new SessionManagerSLT();
         }
         return instance;
+    }
+
+    public void setLoggedpassword(String loggedpassword) {
+        this.loggedpassword = loggedpassword;
     }
 
     public void setLoggedInUsername(String username) {
@@ -38,9 +53,14 @@ public class SessionManagerSLT {
 
     public void setLoggedRole(String role) {this.loggedrole = role;}
 
+    public String getLoggedpassword(){
+        return loggedpassword;
+    }
+
     public String getLoggedRole() {return loggedrole;}
 
     public void setFSDataBase(boolean fSDataBase) {
+
         this.fSDataBase=fSDataBase;
     }
 
@@ -82,5 +102,27 @@ public class SessionManagerSLT {
     }
     public String getRuolo() {
         return ruolo;
+    }
+
+    public void setPersistenceType(PersistenceType type) {
+
+        this.persistenceType = type;
+    }
+
+    public DietDAO getDietDAO() {
+
+        if(demo){
+            return RamDietDAO.getInstance();
+        }
+        else{
+            if(fSDataBase) {
+                return new CacheDietDAO(new FileSystemDietDAO());
+            }
+            else{
+                //database
+            }
+        }
+
+       return null;
     }
 }

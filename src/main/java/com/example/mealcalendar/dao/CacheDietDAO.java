@@ -11,7 +11,7 @@ import java.util.List;
 public class CacheDietDAO implements DietDAO {
 
     private final DietDAO backendDAO;  // può essere FileSystemDietDAO
-    private final RamDietDao cache = RamDietDao.getInstance(); // usa il singleton
+    private final RamDietDAO cache = RamDietDAO.getInstance(); // usa il singleton
 
     public CacheDietDAO(DietDAO backendDAO) {
         this.backendDAO = backendDAO;
@@ -40,6 +40,10 @@ public class CacheDietDAO implements DietDAO {
 
     @Override
     public List<DietBean> getAllDiets() {
+
+        List<DietBean> cached = cache.getAllDiets();
+        if (!cached.isEmpty()) return cached;
+
         List<DietBean> allFromBackend = backendDAO.getAllDiets();
         for (DietBean d : allFromBackend) {
             String nutritionist = d.getNutritionistUsername();

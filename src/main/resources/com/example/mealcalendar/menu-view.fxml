@@ -24,7 +24,7 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="insertmealbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#loadInsertMeal" style="-fx-background-color: 000000;" text="Insert meal">
+        <Button fx:id="followdietbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#followdiet" style="-fx-background-color: 000000;" text="follow diet">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

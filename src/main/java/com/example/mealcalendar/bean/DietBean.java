@@ -34,7 +34,7 @@ public class DietBean {
             this.durata = d;
         }
 
-        public void aggiungiGiorno(DayBean g) {
+        public void addDay(DayBean g) {
             if (g == null) {
                 throw new IllegalArgumentException("Il giorno non può essere nullo.");
             }

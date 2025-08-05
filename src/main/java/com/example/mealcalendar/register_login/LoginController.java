@@ -1,6 +1,7 @@
 package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.model.DietEntity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,6 +10,7 @@ import java.io.IOException;
 public class LoginController {
 
     public boolean vallogin(UserLoginBean userBean) throws IOException {
+
         String filename = userBean.getRuolo().equals("nutritionist") ? "nutritionists.txt" : "users.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -29,6 +31,7 @@ public class LoginController {
                         SessionManagerSLT.getInstance().setLoggedInUsername(savedUsername);
                         SessionManagerSLT.getInstance().setLoggedRole(savedRuolo);
                         SessionManagerSLT.getInstance().setLoggedmail(savedmail);
+                        SessionManagerSLT.getInstance().setLoggedpassword(savedPassword);
 
                         return true;
                     }
@@ -38,6 +41,8 @@ public class LoginController {
 
         return false;
     }
+
+
 }
 
 

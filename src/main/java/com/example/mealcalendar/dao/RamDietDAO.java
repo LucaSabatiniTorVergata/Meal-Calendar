@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 
-public class RamDietDao implements DietDAO {
+public class RamDietDAO implements DietDAO {
 
-    private static RamDietDao instance = null;
+    private static RamDietDAO instance = null;
 
     private final Map<String, List<DietBean>> data = new HashMap<>();
 
-    private RamDietDao() {}
+    private RamDietDAO() {}
 
-    public static synchronized RamDietDao getInstance() {
+    public static synchronized RamDietDAO getInstance() {
 
         if (instance == null) {
-            instance = new RamDietDao();
+            instance = new RamDietDAO();
         }
         return instance;
 

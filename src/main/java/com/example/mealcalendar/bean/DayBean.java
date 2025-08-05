@@ -15,9 +15,10 @@ public class DayBean {
         }
         this.giorno = g;
     }
+    public Integer getGiorno() {return this.giorno;}
 
     // Aggiunge un pasto solo se non nullo e se ha dati validi
-    public void aggiungiPasto(MealBean m) {
+    public void addMeal(MealBean m) {
 
         if (m == null) {
             throw new IllegalArgumentException("Il pasto non può essere nullo.");

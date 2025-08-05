@@ -118,8 +118,8 @@ public class AddDietViewController {
 
             DayBean dayBean = new DayBean();
             dayBean.setGiorno(i + 1);
-            dayBean.aggiungiPasto(mealBean);
-            dietBean.aggiungiGiorno(dayBean);
+            dayBean.addMeal(mealBean);
+            dietBean.addDay(dayBean);
         }
 
         // Salvataggio tramite controller

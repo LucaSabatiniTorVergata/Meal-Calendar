@@ -22,4 +22,8 @@ module demo {
 
     exports com.example.mealcalendar.bean;
     opens com.example.mealcalendar.bean to com.google.gson;
+
+    exports com.example.mealcalendar.model;
+    opens com.example.mealcalendar.model to com.google.gson;
+
 }
