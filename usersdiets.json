@@ -1,1 +1,155 @@
-[{"nome":"smith","email":"1","ruolo":"user","dietaAssegnata":{"nome":"fs","descrizione":"ciao","durata":7,"nutritionistUsername":"luca","giorni":[{"giorno":1,"pasti":[{"nome":"ciao","descrizione":"d","kcal":1},{"nome":"bello","descrizione":"f","kcal":2},{"nome":"suki","descrizione":"g","kcal":3}]},{"giorno":2,"pasti":[{"nome":"vr","descrizione":"vr","kcal":656},{"nome":"v","descrizione":"r","kcal":56},{"nome":"vrv","descrizione":"vr","kcal":656}]},{"giorno":3,"pasti":[{"nome":"vr","descrizione":"vr","kcal":5},{"nome":"vr","descrizione":"vr","kcal":5},{"nome":"vr","descrizione":"vrvr","kcal":45}]},{"giorno":4,"pasti":[{"nome":"vr","descrizione":"vrvr","kcal":565},{"nome":"vrv","descrizione":"rv","kcal":56},{"nome":"vrv","descrizione":"rv","kcal":56}]},{"giorno":5,"pasti":[{"nome":"vr","descrizione":"vr","kcal":54},{"nome":"vr","descrizione":"rv","kcal":54},{"nome":"vr","descrizione":"vr","kcal":5}]},{"giorno":6,"pasti":[{"nome":"vrvr","descrizione":"vr","kcal":6},{"nome":"v","descrizione":"vr","kcal":56},{"nome":"vrv","descrizione":"vrv","kcal":656}]},{"giorno":7,"pasti":[{"nome":"rv","descrizione":"vr","kcal":54},{"nome":"vr","descrizione":"vr","kcal":54},{"nome":"rv","descrizione":"vr","kcal":5}]}]}}]
+[
+  {
+    "nome": "smith",
+    "email": "1",
+    "ruolo": "user",
+    "dietaAssegnata": {
+      "nome": "Dieta per Calcio",
+      "descrizione": "Mangiare di meno",
+      "durata": 7,
+      "nutritionistUsername": "luca",
+      "giorni": [
+        {
+          "giorno": 1,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 1
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 2
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 3
+            }
+          ]
+        },
+        {
+          "giorno": 2,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 22
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 22
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 22
+            }
+          ]
+        },
+        {
+          "giorno": 3,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 4
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 5
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 6
+            }
+          ]
+        },
+        {
+          "giorno": 4,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 33
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 33
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 33
+            }
+          ]
+        },
+        {
+          "giorno": 5,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 7
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 8
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 9
+            }
+          ]
+        },
+        {
+          "giorno": 6,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 4
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 4
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 4
+            }
+          ]
+        },
+        {
+          "giorno": 7,
+          "pasti": [
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 1
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 1
+            },
+            {
+              "nome": "Pasta",
+              "descrizione": "tonno",
+              "kcal": 1
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

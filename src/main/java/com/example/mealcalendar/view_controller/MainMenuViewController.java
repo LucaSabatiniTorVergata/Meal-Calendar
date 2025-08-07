@@ -45,7 +45,7 @@ public class MainMenuViewController {
     private Button makediet;
 
     @FXML
-    private Button choose;
+    private Button insertmeal;
 
     @FXML
     private VBox dietaBox;
@@ -102,10 +102,11 @@ public class MainMenuViewController {
     }
 
     @FXML
-    private void gochooseview(ActionEvent event) {
+    private void goinsertmealview(ActionEvent event) {
+
         if(SessionManagerSLT.getInstance().getLoggedRole().equals("user")){
-            Stage stage = (Stage) choose.getScene().getWindow();
-            GraphicController.cambiascena(stage, "choosediet-view.fxml");
+            Stage stage = (Stage) insertmeal.getScene().getWindow();
+            GraphicController.cambiascena(stage, "insertmeal-view.fxml");
         }
     }
 

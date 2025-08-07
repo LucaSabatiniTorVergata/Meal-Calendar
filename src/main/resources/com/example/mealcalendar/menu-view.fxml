@@ -20,11 +20,11 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button fx:id="findrestaurantbutton" layoutX="887.0" layoutY="39.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
+        <Button fx:id="findrestaurantbutton" layoutX="814.0" layoutY="40.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="followdietbutton" layoutX="1000.0" layoutY="37.0" mnemonicParsing="false" onAction="#followdiet" style="-fx-background-color: 000000;" text="follow diet">
+        <Button fx:id="followdietbutton" layoutX="1002.0" layoutY="40.0" mnemonicParsing="false" onAction="#followdiet" style="-fx-background-color: 000000;" text="follow diet">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -32,7 +32,7 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="choose" layoutX="800.0" layoutY="40.0" mnemonicParsing="false" onAction="#gochooseview" style="-fx-background-color: 000000;" text="Choose diet">
+        <Button fx:id="insertmeal" layoutX="920.0" layoutY="40.0" mnemonicParsing="false" onAction="#goinsertmealview" style="-fx-background-color: 000000;" text="Insert meal">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>

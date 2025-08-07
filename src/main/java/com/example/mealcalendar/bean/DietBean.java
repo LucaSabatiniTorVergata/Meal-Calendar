@@ -59,7 +59,11 @@ public class DietBean {
             return giorni;
         }
 
-        public String getNutritionistUsername() {
+    public void setGiorni(List<DayBean> giorni) {
+        this.giorni = giorni;
+    }
+
+    public String getNutritionistUsername() {
                 return nutritionistUsername;
         }
 

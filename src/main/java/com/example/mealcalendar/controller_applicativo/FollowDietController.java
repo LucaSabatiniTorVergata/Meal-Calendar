@@ -2,10 +2,12 @@ package com.example.mealcalendar.controller_applicativo;
 
 
 import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.bean.DayBean;
 import com.example.mealcalendar.bean.DietBean;
+import com.example.mealcalendar.bean.MealBean;
 import com.example.mealcalendar.bean.UserBean;
+import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
-import com.example.mealcalendar.dao.UserDietDAOFactory;
 import com.example.mealcalendar.model.DayEntity;
 import com.example.mealcalendar.model.DietEntity;
 import com.example.mealcalendar.model.MealEntity;
@@ -14,20 +16,23 @@ import com.example.mealcalendar.register_login.LoginController;
 import com.example.mealcalendar.register_login.UserLoginBean;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FollowDietController {
 
     private final LoginController logcontr = new LoginController();
-    private UserDietDAO userdietDAO;
     private DietBean selecdiet;
     private UserBean userlog;
 
     public FollowDietController(DietBean selecdiet, UserBean user) {
 
-        this.userdietDAO = UserDietDAOFactory.getuserdietDAO();
         this.selecdiet = selecdiet;
         this.userlog = user;
 
+    }
+
+    public FollowDietController(){
     }
 
     public void assignDiet() throws IOException {
@@ -71,10 +76,83 @@ public class FollowDietController {
 
     public void saveUserDiet(UserEntity user, DietEntity diet) {
 
-
+        if(user.getDietaAssegnata()==null){
         user.setDietaAssegnata(diet);
-        userdietDAO.saveUser(user);
+        UserDietDAO.getInstance().saveUser(user);
+        UserDietDAO.getInstance().getAllUsers();
 
+    }
+    }
+
+    public DietBean getAssignedDiet(String mail){
+
+        UserEntity user = UserDietDAO.getInstance().getUserByEmail(mail);
+
+        if (user != null && user.getDietaAssegnata() != null) {
+            DietEntity diet = user.getDietaAssegnata();
+            DietBean bean = new DietBean();
+            bean.setNome(diet.getNome());
+            bean.setDescrizione(diet.getDescrizione());
+            bean.setDurata(diet.getDurata());
+            bean.setNutritionistUsername(diet.getNutritionistUsername());
+
+            diet.getGiorni().forEach(dayEntity -> {
+                DayBean day = new DayBean();
+                day.setGiorno(dayEntity.getGiorno());
+                dayEntity.getPasti().forEach(mealEntity -> {
+                    MealBean meal = new MealBean();
+                    meal.setNome(mealEntity.getNome());
+                    meal.setDescrizione(mealEntity.getDescrizione());
+                    meal.setKcal(mealEntity.getKcal());
+                    day.addMeal(meal);
+                });
+                bean.addDay(day);
+            });
+            return bean;
+        }
+        return null;
+    }
+
+    public List<DietBean> convertdiet(){
+
+        List<DietBean> dietB= new ArrayList<>();
+        List<DietEntity> dietE=new ArrayList<>();
+        dietE.addAll(DietDAO.getInstance().getRamStorage());
+        
+        for (DietEntity entity : dietE) {
+            
+         DietBean bean = new DietBean();
+         bean.setNome(entity.getNome());
+         bean.setDescrizione(entity.getDescrizione());
+         bean.setDurata(entity.getDurata());
+         bean.setNutritionistUsername(entity.getNutritionistUsername());
+         List<DayBean> dayBeans = new ArrayList<>();
+
+         for (DayEntity dayEntity : entity.getGiorni()) {
+
+             DayBean dayBean = new DayBean();
+             dayBean.setGiorno(dayEntity.getGiorno());
+
+             List<MealBean> mealBeans = new ArrayList<>();
+             for (MealEntity mealEntity : dayEntity.getPasti()) {
+
+                 MealBean mealBean = new MealBean();
+                 mealBean.setNome(mealEntity.getNome());
+                 mealBean.setDescrizione(mealEntity.getDescrizione());
+                 mealBean.setKcal(mealEntity.getKcal());
+                 mealBeans.add(mealBean);
+             }
+
+             dayBean.setPasti(mealBeans);
+             dayBeans.add(dayBean);
+         }
+
+         bean.setGiorni(dayBeans);
+         dietB.add(bean);
+        }
+        return dietB;
     }
 
 }
+
+

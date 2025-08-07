@@ -37,5 +37,9 @@ public class DayBean {
     public List<MealBean> getPasti() {
         return pasti;
     }
+
+    public void setPasti(List<MealBean> pasti) {
+        this.pasti = pasti;
+    }
 }
 

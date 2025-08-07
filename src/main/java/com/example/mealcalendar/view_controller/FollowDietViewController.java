@@ -35,12 +35,11 @@ public class FollowDietViewController {
 
     private DietBean selectedDiet;
 
-    private final DietDAO dietDAO = SessionManagerSLT.getInstance().getDietDAO();
 
     @FXML
     public void initialize() {
 
-        List<DietBean> diets = dietDAO.getAllDiets();
+        List<DietBean>diets=new FollowDietController().convertdiet();
 
         dietListView.getItems().addAll(diets);
         dietListView.setCellFactory(param -> new ListCell<>() {

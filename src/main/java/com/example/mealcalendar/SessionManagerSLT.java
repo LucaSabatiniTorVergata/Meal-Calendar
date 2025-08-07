@@ -1,9 +1,6 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.dao.CacheDietDAO;
 import com.example.mealcalendar.dao.DietDAO;
-import com.example.mealcalendar.dao.FileSystemDietDAO;
-import com.example.mealcalendar.dao.RamDietDAO;
 
 import java.time.LocalDate;
 
@@ -12,15 +9,10 @@ public class SessionManagerSLT {
     private static SessionManagerSLT instance = null;
 
     private PersistenceType persistenceType;
-
-
     private String loggedInUsername;
     private String loggedrole;
     private String loggedmail;
     private String loggedpassword;
-
-    private boolean fSDataBase;//se vero allora stiamo in fs
-    private boolean demo;//se vero allora stiamo in ram
 
     private LocalDate datas;
     private String oras;
@@ -29,7 +21,6 @@ public class SessionManagerSLT {
 
 
     private SessionManagerSLT() {
-
     }
 
     public static SessionManagerSLT getInstance() {
@@ -58,23 +49,6 @@ public class SessionManagerSLT {
     }
 
     public String getLoggedRole() {return loggedrole;}
-
-    public void setFSDataBase(boolean fSDataBase) {
-
-        this.fSDataBase=fSDataBase;
-    }
-
-    public boolean getFSDataBase() {
-        return fSDataBase;
-    }
-
-    public void setDemo(boolean altroDato) {
-        this.demo = altroDato;
-    }
-
-    public boolean getDemo() {
-        return demo;
-    }
 
     public void logout() {
 
@@ -112,20 +86,8 @@ public class SessionManagerSLT {
         this.persistenceType = type;
     }
 
-    public DietDAO getDietDAO() {
-
-        if(demo){
-            return RamDietDAO.getInstance();
-        }
-        else{
-            if(fSDataBase) {
-                return new CacheDietDAO(new FileSystemDietDAO());
-            }
-            else{
-                //database
-            }
-        }
-
-       return null;
+    public PersistenceType getPersistenceType() {
+        return persistenceType;
     }
+
 }

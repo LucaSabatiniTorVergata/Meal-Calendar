@@ -1,6 +1,7 @@
 package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.GraphicController;
+import com.example.mealcalendar.PersistenceType;
 import com.example.mealcalendar.SessionManagerSLT;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,17 +23,15 @@ public class HelloViewController {
     @FXML
     public void useDatabase() {
 
+        SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.DATABASE);
 
-        SessionManagerSLT.getInstance().setDemo(false);
-        SessionManagerSLT.getInstance().setFSDataBase(false);
         messageLabel.setText("Modalità: Database attiva");
     }
 
     @FXML
     public void useFileSystem() {
 
-        SessionManagerSLT.getInstance().setDemo(false);
-        SessionManagerSLT.getInstance().setFSDataBase(true);
+        SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.FILESYSTEM);
         messageLabel.setText("Modalità: File System attiva");
     }
 
@@ -40,8 +39,7 @@ public class HelloViewController {
     public void useRam() {
 
 
-        SessionManagerSLT.getInstance().setDemo(true);
-        SessionManagerSLT.getInstance().setFSDataBase(false);
+        SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.RAM);
         messageLabel.setText("Modalità: RAM attiva");
 
     }
