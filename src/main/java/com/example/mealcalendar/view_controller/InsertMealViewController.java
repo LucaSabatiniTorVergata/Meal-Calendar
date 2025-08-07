@@ -16,11 +16,16 @@ import java.util.List;
 
 public class InsertMealViewController {
 
-    @FXML private Label dietStatusLabel;
-    @FXML private VBox dietInputContainer;
-    @FXML private Button confirmButton;
-    @FXML private ScrollPane scrollPane;
-    @FXML private Button back;
+    @FXML
+    private Label dietStatusLabel;
+    @FXML
+    private VBox dietInputContainer;
+    @FXML
+    private Button confirmButton;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private Button back;
 
     private final List<MealInputGroup> mealInputs = new ArrayList<>();
     private DietBean currentDiet;
@@ -72,7 +77,9 @@ public class InsertMealViewController {
     @FXML
     private void onConfirmMealClicked() {
 
-        List<DayTakenBean> daysTaken = new ArrayList<>();
+        DietTakenBean dietTaken = new DietTakenBean();
+        dietTaken.setUser(SessionManagerSLT.getInstance().getLoggedInUsername());
+
         int inputIndex = 0;
 
         for (int i = 0; i < currentDiet.getGiorni().size(); i++) {
@@ -93,31 +100,19 @@ public class InsertMealViewController {
                     continue;
                 }
 
-                dayBean.addPastoAssunto(mealTaken);
+                dayBean.addMeal(mealTaken);
             }
-
-            daysTaken.add(dayBean);
+            dietTaken.addDay(dayBean);
         }
+        FollowDietController controller = new FollowDietController();
+        controller.insertmeal(dietTaken);
 
-        DietTakenBean dietTaken = new DietTakenBean();
-        dietTaken.setUserEmail(SessionManagerSLT.getInstance().getLoggedInUsername());
-        dietTaken.setGiorniAssunti(daysTaken);
 
-        // Debug
-        System.out.println("Pasti assunti (DietTakenBean):");
-        for (DayTakenBean day : dietTaken.getGiorniAssunti()) {
-            System.out.println("Giorno " + day.getGiorno());
-            for (MealTakenBean meal : day.getPastiAssunti()) {
-                System.out.println("- " + meal.getNome() + " | " + meal.getKcal() + " kcal | " + meal.getDescrizione());
-            }
-        }
-
-        // Poi chiami il controller applicativo
-        // controller.salvaPastiAssunti(dietTaken);
     }
 
     //solo per prenderi i dati dalla GUI
     private static class MealInputGroup {
+
         private final TextField nameField;
         private final TextField kcalField;
         private final TextField descField;
@@ -146,7 +141,7 @@ public class InsertMealViewController {
         }
 
         public int getKcal() {
-           return Integer.parseInt(kcalField.getText());
+            return Integer.parseInt(kcalField.getText());
         }
 
         public String getDescription() {
@@ -154,3 +149,5 @@ public class InsertMealViewController {
         }
     }
 }
+
+

@@ -2,16 +2,11 @@ package com.example.mealcalendar.controller_applicativo;
 
 
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.bean.DayBean;
-import com.example.mealcalendar.bean.DietBean;
-import com.example.mealcalendar.bean.MealBean;
-import com.example.mealcalendar.bean.UserBean;
+import com.example.mealcalendar.bean.*;
 import com.example.mealcalendar.dao.DietDAO;
+import com.example.mealcalendar.dao.DietTakenDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
-import com.example.mealcalendar.model.DayEntity;
-import com.example.mealcalendar.model.DietEntity;
-import com.example.mealcalendar.model.MealEntity;
-import com.example.mealcalendar.model.UserEntity;
+import com.example.mealcalendar.model.*;
 import com.example.mealcalendar.register_login.LoginController;
 import com.example.mealcalendar.register_login.UserLoginBean;
 
@@ -151,6 +146,35 @@ public class FollowDietController {
          dietB.add(bean);
         }
         return dietB;
+    }
+
+    public void insertmeal(DietTakenBean bean){
+
+        DietTakenDAO.getInstance().insertDiet(converterTaken( bean));
+        DietTakenDAO.getInstance().getAll();
+
+    }
+
+    public TakenDietEntity converterTaken(DietTakenBean bean){
+
+        TakenDietEntity dieta = new TakenDietEntity(
+                bean.getUser()
+        );
+
+        bean.getDietTaken().forEach(dayBean -> {
+            TakenDayEntity day = new TakenDayEntity(dayBean.getGiorno());
+            dayBean.getMealsTaken().forEach(mealBean -> {
+                TakenMealEntity meal = new TakenMealEntity(
+                        mealBean.getNome(),
+                        mealBean.getDescrizione(),
+                        mealBean.getKcal()
+                );
+                day.addMeal(meal);
+            });
+            dieta.addDay(day);
+        });
+        return dieta;
+
     }
 
 }

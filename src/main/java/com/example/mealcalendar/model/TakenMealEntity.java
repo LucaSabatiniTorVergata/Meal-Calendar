@@ -3,9 +3,9 @@ package com.example.mealcalendar.model;
 public class TakenMealEntity {
     private String nome;
     private String descrizione;
-    private String kcal;
+    private int kcal;
 
-    public TakenMealEntity(String nome, String descrizione, String kcal) {
+    public TakenMealEntity(String nome, String descrizione, int kcal) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.kcal = kcal;
@@ -19,7 +19,7 @@ public class TakenMealEntity {
         return descrizione;
     }
 
-    public String getKcal() {
+    public int getKcal() {
         return kcal;
     }
 }

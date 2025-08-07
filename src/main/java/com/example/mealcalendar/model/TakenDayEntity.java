@@ -19,7 +19,7 @@ public class TakenDayEntity {
         return pasti;
     }
 
-    public void addPasto(TakenMealEntity pasto) {
+    public void addMeal(TakenMealEntity pasto) {
         pasti.add(pasto);
     }
 }

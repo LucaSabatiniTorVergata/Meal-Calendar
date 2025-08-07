@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DayTakenBean {
     private int giorno;
-    private List<MealTakenBean> pastiAssunti = new ArrayList<>();
+    private List<MealTakenBean> pastiAssunti=new ArrayList<>();
 
     public int getGiorno() {
         return giorno;
@@ -15,11 +15,13 @@ public class DayTakenBean {
         this.giorno = giorno;
     }
 
-    public List<MealTakenBean> getPastiAssunti() {
+    public List<MealTakenBean> getMealsTaken() {
         return pastiAssunti;
     }
 
-    public void addPastoAssunto(MealTakenBean meal) {
+    public void addMeal(MealTakenBean meal) {
         pastiAssunti.add(meal);
     }
+
+
 }
