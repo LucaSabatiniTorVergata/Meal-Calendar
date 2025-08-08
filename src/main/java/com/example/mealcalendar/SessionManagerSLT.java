@@ -1,28 +1,37 @@
 package com.example.mealcalendar;
 
+import com.example.mealcalendar.dao.DietDAO;
+
 import java.time.LocalDate;
 
 public class SessionManagerSLT {
 
     private static SessionManagerSLT instance = null;
+
+    private PersistenceType persistenceType;
     private String loggedInUsername;
     private String loggedrole;
-    private boolean fSDataBase;
-    private boolean demo;
-    private boolean ram=true;//solo per gui
-    private boolean db=true;//solo per gui
-    private boolean fs=true;//solo per gui
+    private String loggedmail;
+    private String loggedpassword;
+
     private LocalDate datas;
     private String oras;
+
     private String ruolo;
 
-    private SessionManagerSLT() {}
+
+    private SessionManagerSLT() {
+    }
 
     public static SessionManagerSLT getInstance() {
         if (instance == null) {
             instance = new SessionManagerSLT();
         }
         return instance;
+    }
+
+    public void setLoggedpassword(String loggedpassword) {
+        this.loggedpassword = loggedpassword;
     }
 
     public void setLoggedInUsername(String username) {
@@ -35,48 +44,24 @@ public class SessionManagerSLT {
 
     public void setLoggedRole(String role) {this.loggedrole = role;}
 
+    public String getLoggedpassword(){
+        return loggedpassword;
+    }
+
     public String getLoggedRole() {return loggedrole;}
 
-    public void setFSDataBase(boolean fSDataBase) {
-        this.fSDataBase=fSDataBase;
-    }
-
-    public boolean getFSDataBase() {
-        return fSDataBase;
-    }
-
-    public void setDemo(boolean altroDato) {
-        this.demo = altroDato;
-    }
-
-    public boolean getDemo() {
-        return demo;
-    }
-
     public void logout() {
+
         loggedInUsername = null;
         loggedrole = null;
+        loggedmail = null;
+        loggedpassword = null;
 
     }
 
-    public void setRam(boolean ram) {
-        this.ram = ram;
-    }
-    public boolean getRam() {
-        return ram;
-    }
-    public void setDB(boolean db) {
-        this.db = db;
-    }
-    public boolean getDB() {
-        return db;
-    }
-    public void setFs(boolean fs) {
-        this.fs = fs;
-    }
-    public boolean getFs() {
-        return fs;
-    }
+    public void setLoggedmail(String loggedmail) {this.loggedmail = loggedmail;}
+    public String getLoggedmail() {return loggedmail;}
+
     public void setDatas(LocalDate datas) {
         this.datas = datas;
     }
@@ -95,4 +80,14 @@ public class SessionManagerSLT {
     public String getRuolo() {
         return ruolo;
     }
+
+    public void setPersistenceType(PersistenceType type) {
+
+        this.persistenceType = type;
+    }
+
+    public PersistenceType getPersistenceType() {
+        return persistenceType;
+    }
+
 }

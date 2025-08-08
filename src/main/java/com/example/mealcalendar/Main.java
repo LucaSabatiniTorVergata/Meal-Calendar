@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.login.HelloViewControllerCli;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         primaryStage.setResizable(true);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -32,8 +32,7 @@ public class Main extends Application {
         String choice = scanner.nextLine();
 
         if ("2".equals(choice)) {
-            HelloViewControllerCli cli = new HelloViewControllerCli();
-            cli.start();
+            return;
         } else {
             launch();
         }
