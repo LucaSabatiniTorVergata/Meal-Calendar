@@ -11,7 +11,15 @@ public class LoginController {
 
     public boolean vallogin(UserLoginBean userBean) throws IOException {
 
-        String filename = userBean.getRuolo().equals("nutritionist") ? "nutritionists.txt" : "users.txt";
+        String filename;
+        if (userBean.getRuolo().equals("nutritionist")) {
+            filename = "nutritionists.txt";
+        } else if (userBean.getRuolo().equals("restaurant")) {
+            filename = "restaurants.txt";
+        } else {
+            filename = "users.txt";
+        }
+
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
