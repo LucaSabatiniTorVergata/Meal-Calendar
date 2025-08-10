@@ -71,7 +71,9 @@ public class HelloViewController {
 
     @FXML
     public void goRestLogin() {
-        //parte di Luca
+        SessionManagerSLT.getInstance().setRuolo("restaurant");
+        Stage stage = (Stage) btnLogin.getScene().getWindow();
+        GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
     }
 
 }

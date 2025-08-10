@@ -13,6 +13,7 @@ public class LoginViewController {
     @FXML private PasswordField pass;
     @FXML private SplitMenuButton ruolo;
     @FXML private MenuItem nutrizionista;
+    @FXML private MenuItem ristorante;
     @FXML private MenuItem utente;
     @FXML private Label messagelabel;
     @FXML private Button login;
@@ -31,6 +32,10 @@ public class LoginViewController {
         utente.setOnAction(e -> {
             ruolo.setText("Utente");
             selectedRole = "user";
+        });
+        ristorante.setOnAction(e -> {
+            ruolo.setText("ristorante");
+            selectedRole = "restaurant";
         });
     }
 
@@ -52,8 +57,15 @@ public class LoginViewController {
             if (controller.vallogin(bean)) {
                 messagelabel.setText("Login effettuato!");
 
+                if(SessionManagerSLT.getInstance().getRuolo().equalsIgnoreCase("restaurant")){
+
+                    Stage stage = (Stage) login.getScene().getWindow();
+                    GraphicController.cambiascena(stage, "/com/example/mealcalendar/restaurantManagement-view.fxml");
+                }
+
                 Stage stage = (Stage) login.getScene().getWindow();
                 GraphicController.cambiascena(stage, "/com/example/mealcalendar/menu-view.fxml");
+
 
             } else {
                 messagelabel.setText("Credenziali non valide.");
