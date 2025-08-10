@@ -15,6 +15,7 @@ public class UserDietDAO {
 
 
     private static UserDietDAO instance=null;
+
     private final List<UserEntity> ramStorage = new ArrayList<>();
 
     private static final String FILE_PATH = "usersdiets.json";
@@ -119,6 +120,27 @@ public class UserDietDAO {
 
     }
 
+    public void deleteByUserEmail(String email) {
+        switch (SessionManagerSLT.getInstance().getPersistenceType()) {
+            case RAM -> {
+                ramStorage.removeIf(user -> user.getEmail().equalsIgnoreCase(email));
+            }
+            case FILESYSTEM -> {
+                List<UserEntity> allUsers = loadAllUsers();
+                allUsers.removeIf(user -> user.getEmail().equalsIgnoreCase(email));
+                try (FileWriter writer = new FileWriter(FILE_PATH)) {
+                    gson.toJson(allUsers, writer);
+                } catch (IOException e) {
+                    throw new IllegalStateException("Errore durante la cancellazione dell'utente", e);
+                }
+                ramStorage.clear();
+                ramStorage.addAll(allUsers);
+            }
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+        }
+    }
+
+
 
     private List<UserEntity> loadAllUsers() {
         try (Reader reader = new FileReader(FILE_PATH)) {
@@ -140,5 +162,7 @@ public class UserDietDAO {
     public List<UserEntity> getramStorage() {
         return ramStorage;
     }
+
+
 
 }

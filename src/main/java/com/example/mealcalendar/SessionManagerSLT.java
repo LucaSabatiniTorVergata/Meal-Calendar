@@ -13,6 +13,7 @@ public class SessionManagerSLT {
     private String loggedrole;
     private String loggedmail;
     private String loggedpassword;
+    private Boolean requestnutr;
 
     private LocalDate datas;
     private String oras;
@@ -90,4 +91,10 @@ public class SessionManagerSLT {
         return persistenceType;
     }
 
+    public void setRequestnutr(Boolean requestnutr) {
+        this.requestnutr = requestnutr;
+    }
+    public Boolean getRequestnutr() {
+        return requestnutr;
+    }
 }

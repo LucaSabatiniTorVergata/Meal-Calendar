@@ -10,6 +10,7 @@ module demo {
     requires java.desktop;
     requires com.google.gson;
 
+
     exports com.example.mealcalendar;
     opens com.example.mealcalendar to javafx.fxml;
 
@@ -25,5 +26,8 @@ module demo {
 
     exports com.example.mealcalendar.model;
     opens com.example.mealcalendar.model to com.google.gson;
+    exports com.example.mealcalendar.patternobserver;
+    opens com.example.mealcalendar.patternobserver to javafx.fxml;
+
 
 }

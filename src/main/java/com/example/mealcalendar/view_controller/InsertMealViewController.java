@@ -107,6 +107,9 @@ public class InsertMealViewController {
         FollowDietController controller = new FollowDietController();
         controller.insertmeal(dietTaken);
 
+        Stage stage = (Stage)confirmButton .getScene().getWindow();
+        GraphicController.cambiascena(stage, "resultsodiet-view.fxml");
+
 
     }
 

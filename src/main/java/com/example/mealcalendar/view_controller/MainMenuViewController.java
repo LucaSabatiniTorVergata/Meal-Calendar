@@ -3,6 +3,9 @@ package com.example.mealcalendar.view_controller;
 
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.dao.DietDAO;
+import com.example.mealcalendar.dao.ReportRequestDAO;
+import com.example.mealcalendar.dao.UserDietDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +19,12 @@ import javafx.scene.image.ImageView;
 
 
 public class MainMenuViewController {
+
+    @FXML
+    private Button reports;
+
+    @FXML
+    private Button requests;
 
     @FXML
     private Button backbutton;
@@ -104,7 +113,7 @@ public class MainMenuViewController {
     @FXML
     private void goinsertmealview(ActionEvent event) {
 
-        if(SessionManagerSLT.getInstance().getLoggedRole().equals("user")){
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
             Stage stage = (Stage) insertmeal.getScene().getWindow();
             GraphicController.cambiascena(stage, "insertmeal-view.fxml");
         }
@@ -141,8 +150,32 @@ public class MainMenuViewController {
     }
 
     @FXML
+    private void viewreports(){
+
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals(controllo)){
+            Stage stage = (Stage) reports.getScene().getWindow();
+            GraphicController.cambiascena(stage, "usereport-view.fxml");
+        }
+
+    }
+
+    @FXML
+    private void viewrequests(){
+
+        if(SessionManagerSLT.getInstance().getLoggedRole().equals("nutritionist")){
+            Stage stage = (Stage)requests.getScene().getWindow();
+            GraphicController.cambiascena(stage, "vieweansbynutri-view.fxml");
+        }
+
+    }
+
+
+    @FXML
     public void initialize() {
 
+        ReportRequestDAO.getInstance().getAll();
+        UserDietDAO.getInstance().getAllUsers();
+        DietDAO.getInstance().getAllDiets();
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         String role=SessionManagerSLT.getInstance().getLoggedRole();
         if (username != null) {

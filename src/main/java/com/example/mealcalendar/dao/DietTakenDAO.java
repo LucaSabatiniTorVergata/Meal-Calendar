@@ -88,6 +88,27 @@ public class DietTakenDAO {
         return new ArrayList<>();
     }
 
+    public void deleteByUser(String username) {
+        switch (SessionManagerSLT.getInstance().getPersistenceType()) {
+            case RAM -> {
+                ramStorage.removeIf(d -> d.getUser().equalsIgnoreCase(username));
+            }
+            case FILESYSTEM -> {
+                List<TakenDietEntity> all = loadFromFile();
+                all.removeIf(d -> d.getUser().equalsIgnoreCase(username));
+                try (FileWriter writer = new FileWriter(FILE_PATH)) {
+                    gson.toJson(all, writer);
+                } catch (IOException e) {
+                    throw new IllegalStateException("Errore durante la cancellazione della dieta assunta", e);
+                }
+                ramStorage.clear();
+                ramStorage.addAll(all);
+            }
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+        }
+    }
+
+
     private List<TakenDietEntity> loadFromFile() {
 
         try (FileReader reader = new FileReader(FILE_PATH)) {

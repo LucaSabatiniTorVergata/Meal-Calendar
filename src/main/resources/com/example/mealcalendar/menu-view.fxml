@@ -20,19 +20,19 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button fx:id="findrestaurantbutton" layoutX="814.0" layoutY="40.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
+        <Button fx:id="findrestaurantbutton" layoutX="644.0" layoutY="40.0" mnemonicParsing="false" onAction="#findRestaurantUser" style="-fx-background-color: 000000;" text="Find restaurant">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="followdietbutton" layoutX="1002.0" layoutY="40.0" mnemonicParsing="false" onAction="#followdiet" style="-fx-background-color: 000000;" text="follow diet">
+        <Button fx:id="followdietbutton" layoutX="851.0" layoutY="40.0" mnemonicParsing="false" onAction="#followdiet" style="-fx-background-color: 000000;" text="follow diet">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <Button fx:id="makediet" layoutX="1091.0" layoutY="37.0" mnemonicParsing="false" onAction="#gomakediet" style="-fx-background-color: 000000;" text="Make diet">
+        <Button fx:id="makediet" layoutX="933.0" layoutY="40.0" mnemonicParsing="false" onAction="#gomakediet" style="-fx-background-color: 000000;" text="Make diet">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="insertmeal" layoutX="920.0" layoutY="40.0" mnemonicParsing="false" onAction="#goinsertmealview" style="-fx-background-color: 000000;" text="Insert meal">
+        <Button fx:id="insertmeal" layoutX="762.0" layoutY="40.0" mnemonicParsing="false" onAction="#goinsertmealview" style="-fx-background-color: 000000;" text="Insert meal">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -84,5 +84,15 @@
             </content>
         </ScrollPane>
       <TextArea fx:id="descrizione" layoutX="762.0" layoutY="177.0" prefHeight="446.0" prefWidth="475.0" visible="false" />
+      <Button fx:id="reports" layoutX="1163.0" layoutY="40.0" mnemonicParsing="false" onAction="#viewreports" style="-fx-background-color: 000000;" text="Reports for User">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="requests" layoutX="1014.0" layoutY="40.0" mnemonicParsing="false" onAction="#viewrequests" style="-fx-background-color: 000000;" text="Requests for nutritionist">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
     </children>
 </AnchorPane>

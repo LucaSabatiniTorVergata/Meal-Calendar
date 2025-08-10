@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: FFF8bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.view_controller.UserReportViewController">
+    <children>
+
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8b681" height="100.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+
+    <Label layoutX="39.0" layoutY="35.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Risposta del nutritionist...">
+        <font>
+            <Font name="System Bold Italic" size="42.0" />
+        </font></Label>
+
+        <VBox>
+
+            <HBox spacing="20">
+                <Label fx:id="lblDietName" />
+            </HBox>
+
+            <HBox spacing="20">
+                <Label fx:id="lblNutritionist" />
+            </HBox>
+
+        </VBox>
+         <TextArea fx:id="txtResponse" editable="false" layoutX="362.0" layoutY="198.0" prefHeight="200" wrapText="true" />
+
+         <Button fx:id="btnComplete" layoutX="555.0" layoutY="581.0" onAction="#close" text="Segna dieta come completata" />
+
+         <Label layoutX="86.0" layoutY="146.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Resoconto dieta" />
+          <Label layoutX="109.0" layoutY="191.0" text="Dieta:" />
+          <Label layoutX="107.0" layoutY="224.0" prefHeight="18.0" prefWidth="81.0" text="Nutrizionista:" />
+
+         <Label layoutX="107.0" layoutY="262.0" text="Risposta:" />
+
+
+
+    </children>
+
+
+
+
+</AnchorPane>
