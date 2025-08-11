@@ -41,7 +41,7 @@ public class RegistrationViewController {
             return;
         }
 
-        UserBean bean = new UserBean(username,email,password,SessionManagerSLT.getInstance().getRuolo());
+        UserBeanA bean = new UserBeanA(username,email,password,SessionManagerSLT.getInstance().getRuolo());
 
 
         RegistrationController regController = new RegistrationController();

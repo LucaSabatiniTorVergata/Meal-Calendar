@@ -1,13 +1,13 @@
 package com.example.mealcalendar.register_login;
 
-public class UserBean {
+public class UserBeanA {
 
     private String username;
     private String email;
     private String password;
     private String ruolo;
 
-    public UserBean(String username, String email, String password, String ruolo) {
+    public UserBeanA(String username, String email, String password, String ruolo) {
         this.username = username;
         this.email = email;
         this.password = password;

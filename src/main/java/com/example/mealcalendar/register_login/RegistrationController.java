@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class RegistrationController {
 
-    public void register(UserBean bean) throws IOException {
+    public void register(UserBeanA bean) throws IOException {
 
         String filename;
         if (bean.getRuolo().equals("nutritionist")) {
