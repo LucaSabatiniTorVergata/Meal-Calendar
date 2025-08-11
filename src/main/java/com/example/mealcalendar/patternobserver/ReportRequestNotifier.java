@@ -25,10 +25,6 @@ public class ReportRequestNotifier implements ReportRequestSubject {
         }
     }
 
-    @Override
-    public void removeObserver(ReportRequestObserver observer) {
-        observers.remove(observer);
-    }
 
     @Override
     public void notifyObservers() {

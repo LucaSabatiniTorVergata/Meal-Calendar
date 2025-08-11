@@ -3,6 +3,8 @@ package com.example.mealcalendar.view_controller;
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.bean.ReportRequestBean;
 import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportController;
+import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
+import com.example.mealcalendar.patternobserver.ReportRequestObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +13,9 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class ViewAnsByNutritionistViewController {
+public class ViewAnsByNutritionistViewController implements ReportRequestObserver {
+
+
 
     @FXML
     private ListView<ReportRequestBean> requestsListView;
@@ -30,6 +34,8 @@ public class ViewAnsByNutritionistViewController {
 
     @FXML
     public void initialize() {
+
+        ReportRequestNotifier.getInstance().registerObserver(this);
 
         // Recupera le richieste pendenti
         List<ReportRequestBean> pending = controller.getPendingRequestsForNutritionist();
@@ -106,4 +112,13 @@ public class ViewAnsByNutritionistViewController {
         Stage stage = (Stage) sendResponseButton.getScene().getWindow();
         GraphicController.cambiascena(stage, "menu-view.fxml");
     }
+
+    @Override
+    public void onNewReportRequest() {
+        // Aggiorna la lista quando arriva una nuova richiesta
+        List<ReportRequestBean> pending = controller.getPendingRequestsForNutritionist();
+        requests.setAll(pending);
+        requestsListView.setItems(requests);
+    }
+
 }

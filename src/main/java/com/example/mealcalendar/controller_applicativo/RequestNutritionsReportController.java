@@ -9,19 +9,16 @@ import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
 import com.example.mealcalendar.model.*;
 import com.example.mealcalendar.patternobserver.ReportObserver;
+import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
 import com.example.mealcalendar.patternobserver.Subject;
 
 import java.util.List;
-import java.util.Observer;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RequestNutritionsReportController implements Subject{
 
     private ReportObserver observer;
-
-
-    private final UserDietDAO userDietDAO = UserDietDAO.getInstance();
 
     public void askreport(String nutritionist) {
 
@@ -87,6 +84,7 @@ public class RequestNutritionsReportController implements Subject{
                 entity.setResponse(bean.getResponse());
                 entity.setAnswered(bean.isAnswered());
                 ReportRequestDAO.getInstance().update(entity);
+                ReportRequestNotifier.getInstance().notifyObservers();
 
             }
             System.out.println("[DEBUG] Risposta aggiornata per richiesta di " + bean.getUserEmail() + ": " + bean.getResponse());
@@ -155,8 +153,9 @@ public class RequestNutritionsReportController implements Subject{
         UserDietDAO.getInstance().deleteByUserEmail(SessionManagerSLT.getInstance().getLoggedmail());
         DietTakenDAO.getInstance().deleteByUser(SessionManagerSLT.getInstance().getLoggedInUsername());
 
-
         notifyObservers();
+
+
     }
 
     @Override

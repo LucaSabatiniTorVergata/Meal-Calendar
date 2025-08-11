@@ -28,9 +28,10 @@ public class LoginController {
                 String[] fields = line.split("-");
                 if (fields.length >= 4) {
                     String savedUsername = fields[0];
+                    String savedmail=fields[1];
                     String savedPassword = fields[2];
                     String savedRuolo = fields[3];
-                    String savedmail=fields[1];
+
 
                     if (savedUsername.equals(userBean.getUsername()) &&
                             savedPassword.equals(userBean.getPassword()) &&

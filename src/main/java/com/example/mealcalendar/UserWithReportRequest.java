@@ -5,6 +5,7 @@ import com.example.mealcalendar.model.DietEntity;
 import com.example.mealcalendar.model.ReportRequestEntity;
 import com.example.mealcalendar.model.TakenDietEntity;
 import com.example.mealcalendar.model.UserEntity;
+import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
 
 import java.time.LocalDateTime;
 
@@ -40,7 +41,7 @@ public class UserWithReportRequest extends UserEntity {
                 takenDiet,
                 LocalDateTime.now()
         );
-
+        ReportRequestNotifier.getInstance().notifyObservers();
         ReportRequestDAO.getInstance().save(request);
         System.out.println("[UserWithReportRequest] Richiesta inviata al nutrizionista: " + nutritionist);
     }

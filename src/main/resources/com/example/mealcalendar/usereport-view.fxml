@@ -20,7 +20,7 @@
             <Font name="System Bold Italic" size="42.0" />
         </font></Label>
 
-        <VBox>
+        <VBox layoutX="106.0" layoutY="173.0" prefHeight="140.0" prefWidth="137.0">
 
             <HBox spacing="20">
                 <Label fx:id="lblDietName" />
