@@ -12,16 +12,21 @@ public class DayTakenBean {
     }
 
     public void setGiorno(int giorno) {
+        if (giorno < 1) {
+            throw new IllegalArgumentException("Il numero del giorno deve essere positivo e maggiore di zero.");
+        }
         this.giorno = giorno;
+    }
+
+    public void addMeal(MealTakenBean meal) {
+        if (meal == null) {
+            throw new IllegalArgumentException("Il pasto non può essere null.");
+        }
+        pastiAssunti.add(meal);
     }
 
     public List<MealTakenBean> getMealsTaken() {
         return pastiAssunti;
     }
-
-    public void addMeal(MealTakenBean meal) {
-        pastiAssunti.add(meal);
-    }
-
 
 }

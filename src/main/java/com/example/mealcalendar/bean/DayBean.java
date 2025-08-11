@@ -15,7 +15,6 @@ public class DayBean {
         }
         this.giorno = g;
     }
-    public Integer getGiorno() {return this.giorno;}
 
     // Aggiunge un pasto solo se non nullo e se ha dati validi
     public void addMeal(MealBean m) {
@@ -29,17 +28,23 @@ public class DayBean {
         if (m.getKcal() < 0) {
             throw new IllegalArgumentException("Le kcal devono essere un numero positivo o zero.");
         }
-        // Puoi aggiungere altri controlli se vuoi, es. su descrizione
 
         pasti.add(m);
     }
+
+    public void setPasti(List<MealBean> pasti) {
+        if (pasti == null) {
+            throw new IllegalArgumentException("Il pasto non può essere null.");
+        }
+        this.pasti = pasti;
+    }
+
+    public Integer getGiorno() {return this.giorno;}
 
     public List<MealBean> getPasti() {
         return pasti;
     }
 
-    public void setPasti(List<MealBean> pasti) {
-        this.pasti = pasti;
-    }
+
 }
 

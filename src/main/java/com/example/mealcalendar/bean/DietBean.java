@@ -42,6 +42,13 @@ public class DietBean {
             this.giorni.add(g);
 
         }
+        public void setGiorni(List<DayBean> giorni) {
+        if (giorni == null) {
+            throw new IllegalArgumentException("Il pasto non può essere null.");
+        }
+        this.giorni = giorni;
+
+        }
 
         public String getNome() {
             return nome;
@@ -59,15 +66,15 @@ public class DietBean {
             return giorni;
         }
 
-    public void setGiorni(List<DayBean> giorni) {
-        this.giorni = giorni;
-    }
 
-    public String getNutritionistUsername() {
+        public String getNutritionistUsername() {
                 return nutritionistUsername;
         }
 
         public void setNutritionistUsername(String nutritionistUsername) {
+            if(nutritionistUsername == null) {
+                throw new IllegalArgumentException("Il nutritionist non può essere null.");
+            }
             this.nutritionistUsername = nutritionistUsername;
         }
 
