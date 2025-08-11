@@ -57,14 +57,14 @@ public class LoginViewController {
             if (controller.vallogin(bean)) {
                 messagelabel.setText("Login effettuato!");
 
-                if(SessionManagerSLT.getInstance().getRuolo().equalsIgnoreCase("restaurant")){
+                if(bean.getRuolo().equalsIgnoreCase("restaurant")){
 
                     Stage stage = (Stage) login.getScene().getWindow();
                     GraphicController.cambiascena(stage, "/com/example/mealcalendar/restaurantManagement-view.fxml");
                 }
-
+                else{
                 Stage stage = (Stage) login.getScene().getWindow();
-                GraphicController.cambiascena(stage, "/com/example/mealcalendar/menu-view.fxml");
+                GraphicController.cambiascena(stage, "/com/example/mealcalendar/menu-view.fxml");}
 
 
             } else {
@@ -80,5 +80,6 @@ public class LoginViewController {
 
         Stage stage = (Stage)back.getScene().getWindow();
         GraphicController.cambiascena(stage, "/com/example/mealcalendar/hello-view.fxml");
+
     }
 }

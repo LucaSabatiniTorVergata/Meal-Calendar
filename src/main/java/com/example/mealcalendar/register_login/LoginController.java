@@ -1,7 +1,6 @@
 package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.model.DietEntity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,6 +30,12 @@ public class LoginController {
                     String savedmail=fields[1];
                     String savedPassword = fields[2];
                     String savedRuolo = fields[3];
+
+                    System.out.println(savedUsername);
+                    System.out.println(savedmail);
+                    System.out.println(savedPassword);
+                    System.out.println(savedRuolo);
+
 
 
                     if (savedUsername.equals(userBean.getUsername()) &&

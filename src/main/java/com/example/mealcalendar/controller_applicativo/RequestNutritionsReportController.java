@@ -12,6 +12,7 @@ import com.example.mealcalendar.patternobserver.ReportObserver;
 import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
 import com.example.mealcalendar.patternobserver.Subject;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -124,26 +125,24 @@ public class RequestNutritionsReportController implements Subject{
 
     public ReportReponseBean getLatestResponseForUser() {
 
+
         String userId = SessionManagerSLT.getInstance().getLoggedInUsername();
 
-
-        List<ReportRequestEntity> allRequests = ReportRequestDAO.getInstance().getRamStorage();
-
-        Optional<ReportRequestEntity> requestOpt = allRequests.stream()
+        return ReportRequestDAO.getInstance()
+                .getRamStorage()
+                .stream()
                 .filter(r -> r.getDietTaken().getUser().equalsIgnoreCase(userId))
-                .findFirst();
-
-        if (requestOpt.isPresent() && requestOpt.get().getResponse() != null) {
-            ReportRequestEntity req = requestOpt.get();
-            return new ReportReponseBean(
-                    req.getDietAssigned().getNome(),
-                    req.getNutritionistEmail(),
-                    req.getResponse()
-            );
-        }
-
-        return null;
+                .filter(r -> r.getResponse() != null && !r.getResponse().isBlank())
+                .max(Comparator.comparing(ReportRequestEntity::getRequestTime))
+                .map(req -> new ReportReponseBean(
+                        req.getDietAssigned() != null ? req.getDietAssigned().getNome() : "Dieta sconosciuta",
+                        req.getNutritionistEmail(),
+                        req.getResponse()
+                ))
+                .orElse(null);
     }
+
+
 
     public void deletediet() {
 

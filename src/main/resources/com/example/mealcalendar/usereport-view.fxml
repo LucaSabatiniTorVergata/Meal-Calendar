@@ -20,14 +20,16 @@
             <Font name="System Bold Italic" size="42.0" />
         </font></Label>
 
-        <VBox layoutX="106.0" layoutY="173.0" prefHeight="140.0" prefWidth="137.0">
+        <VBox layoutX="154.0" layoutY="173.0" prefHeight="225.0" prefWidth="205.0">
 
-            <HBox spacing="20">
-                <Label fx:id="lblDietName" />
+            <HBox prefHeight="51.0" prefWidth="206.0" spacing="20">
+            <children>
+                   <Label fx:id="lblNutritionist" prefHeight="62.0" prefWidth="206.0" />
+            </children>
             </HBox>
 
-            <HBox spacing="20">
-                <Label fx:id="lblNutritionist" />
+            <HBox prefHeight="46.0" prefWidth="168.0" spacing="20">
+                <Label fx:id="lblDietName" prefHeight="48.0" prefWidth="206.0" />
             </HBox>
 
         </VBox>
@@ -35,11 +37,11 @@
 
          <Button fx:id="btnComplete" layoutX="555.0" layoutY="581.0" onAction="#close" text="Segna dieta come completata" />
 
-         <Label layoutX="86.0" layoutY="146.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Resoconto dieta" />
-          <Label layoutX="109.0" layoutY="191.0" text="Dieta:" />
-          <Label layoutX="107.0" layoutY="224.0" prefHeight="18.0" prefWidth="81.0" text="Nutrizionista:" />
+         <Label layoutX="86.0" layoutY="116.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Resoconto dieta" />
 
-         <Label layoutX="107.0" layoutY="262.0" text="Risposta:" />
+         <Label layoutX="362.0" layoutY="173.0" text="Risposta:" />
+          <Label layoutX="80.0" layoutY="227.0" prefHeight="18.0" prefWidth="81.0" text="Nutrizionista:" />
+          <Label layoutX="105.0" layoutY="189.0" text="Dieta:" />
 
 
 

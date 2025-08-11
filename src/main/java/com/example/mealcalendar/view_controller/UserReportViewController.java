@@ -1,5 +1,6 @@
 package com.example.mealcalendar.view_controller;
 
+import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.ReportReponseBean;
 import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportController;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.util.Observer;
 
@@ -27,28 +29,23 @@ public class UserReportViewController implements ReportObserver {
     @FXML
     private Button btnComplete;
 
-    @FXML
-    private Button closeDietButton;
-
-    private ReportRequestEntity currentReport;
+    private ReportReponseBean currentReport;
 
     private RequestNutritionsReportController controller;
 
     public void initialize() {
-
-        this.controller = new RequestNutritionsReportController();
+        controller = new RequestNutritionsReportController();
         controller.registerObserver(this);
         loadReport();
-
     }
 
     private void loadReport() {
-        ReportReponseBean bean =controller.getLatestResponseForUser();
+        currentReport = controller.getLatestResponseForUser();
 
-        if (bean != null) {
-            lblDietName.setText(bean.getDietName());
-            lblNutritionist.setText(bean.getNutritionistName());
-            txtResponse.setText(bean.getResponseText());
+        if (currentReport != null) {
+            lblDietName.setText(currentReport.getDietName());
+            lblNutritionist.setText(currentReport.getNutritionistName());
+            txtResponse.setText(currentReport.getResponseText());
             btnComplete.setDisable(false);
         } else {
             lblDietName.setText("Nessun resoconto disponibile");
@@ -66,13 +63,10 @@ public class UserReportViewController implements ReportObserver {
     @FXML
     private void close() {
         if (currentReport != null) {
-
-            RequestNutritionsReportController controller=new RequestNutritionsReportController();
-
             controller.deletediet();
-
-
-
+            loadReport();// Aggiorna la view subito
+            Stage stage = (Stage)btnComplete.getScene().getWindow();
+            GraphicController.cambiascena(stage, "menu-view.fxml");
         }
     }
 }
