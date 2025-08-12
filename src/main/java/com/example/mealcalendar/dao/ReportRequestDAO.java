@@ -50,9 +50,9 @@ public class ReportRequestDAO {
     public void save(ReportRequestEntity request) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
-            case RAM -> {
+            case RAM ->
                 ramStorage.add(request);
-            }
+
             case FILESYSTEM -> {
                 List<ReportRequestEntity> all = loadFromFile();
                 all.add(request);
@@ -129,9 +129,9 @@ public class ReportRequestDAO {
     public void deleteByUser(String username) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
-            case RAM -> {
+            case RAM ->
                 ramStorage.removeIf(r -> r.getDietTaken().getUser().equalsIgnoreCase(username));
-            }
+
 
             case FILESYSTEM -> {
                 List<ReportRequestEntity> all = loadFromFile();

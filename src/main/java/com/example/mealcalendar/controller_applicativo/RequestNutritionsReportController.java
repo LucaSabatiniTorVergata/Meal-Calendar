@@ -9,12 +9,10 @@ import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
 import com.example.mealcalendar.model.*;
 import com.example.mealcalendar.patternobserver.ReportObserver;
-import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
 import com.example.mealcalendar.patternobserver.Subject;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RequestNutritionsReportController implements Subject{
@@ -74,6 +72,8 @@ public class RequestNutritionsReportController implements Subject{
          */
         public void updateResponse(ReportRequestBean bean) {
 
+            UserEntity baseUser = new UserEntity(SessionManagerSLT.getInstance().getLoggedInUsername(),SessionManagerSLT.getInstance().getLoggedmail(), SessionManagerSLT.getInstance().getLoggedRole());
+
             // Carica l'entità originale (se hai un id usa quello, qui filtro per user + nutritionist + data)
             List<ReportRequestEntity> allRequests = ReportRequestDAO.getInstance().getAllByNutritionist(bean.getNutritionistEmail());
             ReportRequestEntity entity = allRequests.stream()
@@ -83,13 +83,10 @@ public class RequestNutritionsReportController implements Subject{
                     .orElse(null);
 
             if (entity != null) {
-                entity.setResponse(bean.getResponse());
-                entity.setAnswered(bean.isAnswered());
-                ReportRequestDAO.getInstance().update(entity);
-                ReportRequestNotifier.getInstance().notifyObservers();
-
+                UserWithNutritionistRole nutritionist = new UserWithNutritionistRole(baseUser);
+                nutritionist.respondToReportRequest(entity,bean.getResponse());
             }
-            System.out.println("[DEBUG] Risposta aggiornata per richiesta di " + bean.getUserEmail() + ": " + bean.getResponse());
+
         }
 
         private ReportRequestBean convertEntityToBean(ReportRequestEntity entity) {

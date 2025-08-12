@@ -14,6 +14,24 @@ public class UserWithReportRequest extends UserEntity {
 
     private final UserEntity baseUser;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o instanceof UserWithReportRequest that) {
+            return baseUser.equals(that.baseUser);
+        }
+        if (o instanceof UserEntity thatUser) {
+            return baseUser.equals(thatUser);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return baseUser.hashCode();
+    }
+
     public UserWithReportRequest(UserEntity baseUser) {
 
         super(baseUser.getNome(),baseUser.getEmail(), baseUser.getRuolo());

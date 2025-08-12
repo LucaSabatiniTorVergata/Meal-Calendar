@@ -49,10 +49,8 @@ public class DietDAO {
     public void saveDiet( DietEntity diet) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
-            case RAM -> {
+            case RAM ->
                 ramStorage.add(diet);
-
-            }
 
             case FILESYSTEM ->{
 

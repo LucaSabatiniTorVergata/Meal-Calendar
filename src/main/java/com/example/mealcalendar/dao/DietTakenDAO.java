@@ -90,9 +90,9 @@ public class DietTakenDAO {
 
     public void deleteByUser(String username) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
-            case RAM -> {
+            case RAM ->
                 ramStorage.removeIf(d -> d.getUser().equalsIgnoreCase(username));
-            }
+
             case FILESYSTEM -> {
                 List<TakenDietEntity> all = loadFromFile();
                 all.removeIf(d -> d.getUser().equalsIgnoreCase(username));

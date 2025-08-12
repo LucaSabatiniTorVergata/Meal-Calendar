@@ -1,6 +1,5 @@
 package com.example.mealcalendar;
 
-import com.example.mealcalendar.dao.DietDAO;
 
 import java.time.LocalDate;
 

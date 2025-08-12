@@ -278,7 +278,7 @@ public class FollowDietController {
 
     public Boolean requnutr(){
 
-        if(SessionManagerSLT.getInstance().getRequestnutr()){
+        if(Boolean.TRUE.equals(SessionManagerSLT.getInstance().getRequestnutr())){
 
             UserEntity currentUser= UserDietDAO.getInstance()
                     .getramStorage()

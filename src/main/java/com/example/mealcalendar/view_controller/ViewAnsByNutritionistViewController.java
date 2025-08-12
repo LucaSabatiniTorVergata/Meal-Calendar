@@ -96,6 +96,7 @@ public class ViewAnsByNutritionistViewController implements ReportRequestObserve
 
     @FXML
     private void onSendResponse() {
+
         ReportRequestBean selected = requestsListView.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
