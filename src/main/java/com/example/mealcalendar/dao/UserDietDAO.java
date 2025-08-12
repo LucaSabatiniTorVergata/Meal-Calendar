@@ -121,9 +121,9 @@ public class UserDietDAO {
 
     public void deleteByUserEmail(String email) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
-            case RAM -> {
-                ramStorage.removeIf(user -> user.getEmail().equalsIgnoreCase(email));
-            }
+
+            case RAM -> ramStorage.removeIf(user -> user.getEmail().equalsIgnoreCase(email));
+
             case FILESYSTEM -> {
                 List<UserEntity> allUsers = loadAllUsers();
                 allUsers.removeIf(user -> user.getEmail().equalsIgnoreCase(email));

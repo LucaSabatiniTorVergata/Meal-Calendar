@@ -13,17 +13,14 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
-import java.io.*;
-import java.lang.reflect.Type;
 import java.sql.*;
-import java.util.*;
 
 public class DietDAO {
 
     private static DietDAO instance=null;
 
     // RAM condivisa (vale anche come cache)
-    private final  List<DietEntity> ramStorage = new ArrayList();
+    private final  List <DietEntity> ramStorage = new ArrayList<>();
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -54,7 +51,7 @@ public class DietDAO {
 
             case RAM -> {
                 ramStorage.add(diet);
-                printDietDetails("[DietDAO][RAM] Dieta salvata in RAM:", diet);
+
             }
 
             case FILESYSTEM ->{
@@ -66,7 +63,7 @@ public class DietDAO {
                 } catch (IOException e) {
                     throw new IllegalArgumentException("Errore nel salvataggio della dieta", e);
                 }
-                printDietDetails("Dettagli dieta salvata:", diet);
+
 
             }
 
@@ -124,7 +121,7 @@ public class DietDAO {
                     conn.commit();
 
                     ramStorage.add(diet);
-                    printDietDetails("[DietDAO][DATABASE] Dieta salvata nel DB:", diet);
+
 
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -245,23 +242,6 @@ public class DietDAO {
 
     public List<DietEntity> getRamStorage() {
         return ramStorage;
-    }
-
-    private void printDietDetails(String header, DietEntity diet) {
-        System.out.println(header);
-        System.out.println("- Nome: " + diet.getNome());
-        System.out.println("- Durata: " + diet.getDurata());
-        System.out.println("- Descrizione: " + diet.getDescrizione());
-        System.out.println("- Nutritionist: " + diet.getNutritionistUsername());
-        System.out.println("- Giorni: " + diet.getGiorni().size());
-        int i = 1;
-        for (var day : diet.getGiorni()) {
-            System.out.println("  Giorno " + i++ );
-            int j = 1;
-            for (var meal : day.getPasti()) {
-                System.out.println("    Pasto " + j++ + ": " + meal.getNome() + ", kcal=" + meal.getKcal() + meal.getDescrizione());
-            }
-        }
     }
 
 }

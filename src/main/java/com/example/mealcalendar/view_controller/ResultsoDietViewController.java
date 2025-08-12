@@ -14,6 +14,8 @@ import java.util.List;
 
 public class ResultsoDietViewController {
 
+    private String viewMenu="menu-view.fxml";
+
     @FXML
     private VBox resocontoBox;
 
@@ -44,7 +46,7 @@ public class ResultsoDietViewController {
     public void gohome() {
 
         Stage stage = (Stage)home .getScene().getWindow();
-        GraphicController.cambiascena(stage, "menu-view.fxml");
+        GraphicController.cambiascena(stage,viewMenu );
 
     }
 
@@ -55,7 +57,7 @@ public class ResultsoDietViewController {
         controller.delete(SessionManagerSLT.getInstance().getLoggedInUsername(),SessionManagerSLT.getInstance().getLoggedmail());
 
         Stage stage = (Stage)end.getScene().getWindow();
-        GraphicController.cambiascena(stage, "menu-view.fxml");
+        GraphicController.cambiascena(stage, viewMenu);
 
 
     }
@@ -65,9 +67,9 @@ public class ResultsoDietViewController {
 
         SessionManagerSLT.getInstance().setRequestnutr(true);
         FollowDietController controller = new FollowDietController();
-        if(controller.requnutr()){
+        if(Boolean.TRUE.equals(controller.requnutr())){
             Stage stage = (Stage)asknutrbutton.getScene().getWindow();
-            GraphicController.cambiascena(stage, "menu-view.fxml");
+            GraphicController.cambiascena(stage, viewMenu);
         }
 
     }

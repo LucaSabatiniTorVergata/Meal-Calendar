@@ -7,11 +7,8 @@ import com.example.mealcalendar.model.ReportRequestEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.sql.Connection;
 import java.io.*;
 import java.lang.reflect.Type;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,7 +34,6 @@ public class ReportRequestDAO {
         if (!file.exists()) {
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write("[]");
-                System.out.println("[ReportRequestDAO] File creato: " + FILE_PATH);
             } catch (IOException e) {
                 throw new IllegalStateException("Errore creazione file reportRequests.json", e);
             }
@@ -56,14 +52,12 @@ public class ReportRequestDAO {
 
             case RAM -> {
                 ramStorage.add(request);
-                System.out.println("[ReportRequestDAO][RAM] Report request salvato per utente: " + request.getUserEmail());
             }
             case FILESYSTEM -> {
                 List<ReportRequestEntity> all = loadFromFile();
                 all.add(request);
                 try (FileWriter writer = new FileWriter(FILE_PATH)) {
                     gson.toJson(all, writer);
-                    System.out.println("[ReportRequestDAO][FILESYSTEM] Report request salvato su file.");
                 } catch (IOException e) {
                     throw new IllegalStateException("Errore nel salvataggio report request", e);
                 }
@@ -99,7 +93,6 @@ public class ReportRequestDAO {
                     all.set(idx, request);
                     try (FileWriter writer = new FileWriter(FILE_PATH)) {
                         gson.toJson(all, writer);
-                        System.out.println("[ReportRequestDAO][FILESYSTEM] Report request aggiornato su file.");
                     } catch (IOException e) {
                         throw new IllegalStateException("Errore aggiornamento report request", e);
                     }
@@ -138,7 +131,6 @@ public class ReportRequestDAO {
 
             case RAM -> {
                 ramStorage.removeIf(r -> r.getDietTaken().getUser().equalsIgnoreCase(username));
-                System.out.println("[ReportRequestDAO][RAM] Richiesta rimossa per utente: " + username);
             }
 
             case FILESYSTEM -> {
@@ -147,7 +139,6 @@ public class ReportRequestDAO {
                 if (removed) {
                     try (FileWriter writer = new FileWriter(FILE_PATH)) {
                         gson.toJson(all, writer);
-                        System.out.println("[ReportRequestDAO][FILESYSTEM] Richiesta rimossa su file per utente: " + username);
                     } catch (IOException e) {
                         throw new IllegalStateException("Errore nella rimozione report request", e);
                     }

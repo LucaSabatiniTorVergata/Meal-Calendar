@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ReportRequestNotifier implements ReportRequestSubject {
 
-    private static ReportRequestNotifier instance;
+    private static ReportRequestNotifier instance=null;
 
     private final List<ReportRequestObserver> observers = new ArrayList<>();
 

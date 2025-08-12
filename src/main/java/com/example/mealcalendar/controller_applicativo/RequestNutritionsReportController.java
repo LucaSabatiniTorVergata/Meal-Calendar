@@ -73,6 +73,7 @@ public class RequestNutritionsReportController implements Subject{
          * Permette di rispondere ad una richiesta specifica (riceve bean)
          */
         public void updateResponse(ReportRequestBean bean) {
+
             // Carica l'entità originale (se hai un id usa quello, qui filtro per user + nutritionist + data)
             List<ReportRequestEntity> allRequests = ReportRequestDAO.getInstance().getAllByNutritionist(bean.getNutritionistEmail());
             ReportRequestEntity entity = allRequests.stream()

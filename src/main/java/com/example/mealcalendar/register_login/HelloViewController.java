@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class HelloViewController {
 
+    private String viewRegister="/com/example/mealcalendar/register-view.fxml";
+
     @FXML
     private Button btnUser;
     @FXML private Button btnNutrizionista;
@@ -49,7 +51,7 @@ public class HelloViewController {
 
         SessionManagerSLT.getInstance().setRuolo("user");
         Stage stage = (Stage) btnUser.getScene().getWindow();
-        GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
+        GraphicController.cambiascena(stage, viewRegister);
     }
 
     @FXML
@@ -57,7 +59,7 @@ public class HelloViewController {
 
         SessionManagerSLT.getInstance().setRuolo("nutritionist");
         Stage stage = (Stage) btnNutrizionista.getScene().getWindow();
-        GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
+        GraphicController.cambiascena(stage, viewRegister);
 
     }
 
@@ -73,7 +75,7 @@ public class HelloViewController {
     public void goRestLogin() {
         SessionManagerSLT.getInstance().setRuolo("restaurant");
         Stage stage = (Stage) btnLogin.getScene().getWindow();
-        GraphicController.cambiascena(stage, "/com/example/mealcalendar/register-view.fxml");
+        GraphicController.cambiascena(stage, viewRegister);
     }
 
 }

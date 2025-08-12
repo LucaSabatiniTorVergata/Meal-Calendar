@@ -79,8 +79,8 @@ public class MainMenuCLI {
                         case "6":
                             // logout
                             SessionManagerSLT.getInstance().logout();
-                            logger.info("Logout effettuato.");
-                            return;
+                            new LoginCLI(scanner).start();
+                            break;
                         default:
                             logger.warning("Opzione non valida.");
                     }
@@ -96,10 +96,10 @@ public class MainMenuCLI {
                             break;
                         case "3":
                             SessionManagerSLT.getInstance().logout();
-                            logger.info("Logout effettuato.");
-                            return;
+                            new LoginCLI(scanner).start();
+                            break;
                         default:
-                            logger.warning("Opzione non valida.");
+                            logger.warning("scegliere un numero valido.");
                     }
                 } else if ("restaurant".equals(ruolo)) {
                     switch (scelta) {
@@ -110,10 +110,10 @@ public class MainMenuCLI {
                             break;
                         case "2":
                             SessionManagerSLT.getInstance().logout();
-                            logger.info("Logout effettuato.");
-                            return;
+                            new LoginCLI(scanner).start();
+                            break;
                         default:
-                            logger.warning("Opzione non valida.");
+                            logger.warning("Scelta non valida.");
                     }
                 }
             } catch (Exception e) {

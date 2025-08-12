@@ -43,7 +43,7 @@ public class UserWithReportRequest extends UserEntity {
         );
         ReportRequestNotifier.getInstance().notifyObservers();
         ReportRequestDAO.getInstance().save(request);
-        System.out.println("[UserWithReportRequest] Richiesta inviata al nutrizionista: " + nutritionist);
+
     }
 }
 
