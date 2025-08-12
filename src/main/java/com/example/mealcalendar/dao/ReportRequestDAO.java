@@ -7,9 +7,11 @@ import com.example.mealcalendar.model.ReportRequestEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
+import java.sql.Connection;
 import java.io.*;
 import java.lang.reflect.Type;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class ReportRequestDAO {
 
     public void save(ReportRequestEntity request) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
+
             case RAM -> {
                 ramStorage.add(request);
                 System.out.println("[ReportRequestDAO][RAM] Report request salvato per utente: " + request.getUserEmail());
@@ -67,17 +70,20 @@ public class ReportRequestDAO {
                 ramStorage.clear();
                 ramStorage.addAll(all);
             }
-            case DATABASE -> throw new UnsupportedOperationException("DB non supportato");
+
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+
         }
     }
 
     public void update(ReportRequestEntity request) {
+
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
             case RAM -> {
                 int idx = findIndexByRequest(request);
                 if (idx != -1) {
                     ramStorage.set(idx, request);
-                    System.out.println("[ReportRequestDAO][RAM] Report request aggiornato per utente: " + request.getUserEmail());
+
                 }
             }
             case FILESYSTEM -> {
@@ -101,33 +107,40 @@ public class ReportRequestDAO {
                     ramStorage.addAll(all);
                 }
             }
-            case DATABASE -> throw new UnsupportedOperationException("DB non supportato");
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+
         }
     }
 
     public List<ReportRequestEntity> getAll() {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
+
             case RAM -> {
                 return new ArrayList<>(ramStorage);
             }
+
             case FILESYSTEM -> {
                 List<ReportRequestEntity> loaded = loadFromFile();
                 ramStorage.clear();
                 ramStorage.addAll(loaded);
                 return loaded;
             }
-            case DATABASE -> throw new UnsupportedOperationException("DB non supportato");
+
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
         }
+
         return Collections.emptyList();
     }
 
 
     public void deleteByUser(String username) {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
+
             case RAM -> {
                 ramStorage.removeIf(r -> r.getDietTaken().getUser().equalsIgnoreCase(username));
                 System.out.println("[ReportRequestDAO][RAM] Richiesta rimossa per utente: " + username);
             }
+
             case FILESYSTEM -> {
                 List<ReportRequestEntity> all = loadFromFile();
                 boolean removed = all.removeIf(r -> r.getDietTaken().getUser().equalsIgnoreCase(username));
@@ -142,7 +155,9 @@ public class ReportRequestDAO {
                     ramStorage.addAll(all);
                 }
             }
-            case DATABASE -> throw new UnsupportedOperationException("DB non supportato");
+
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+
         }
     }
 

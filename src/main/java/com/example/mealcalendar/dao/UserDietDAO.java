@@ -2,7 +2,6 @@ package com.example.mealcalendar.dao;
 
 
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.model.DietEntity;
 import com.example.mealcalendar.model.UserEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -76,7 +75,7 @@ public class UserDietDAO {
                 }
             }
 
-            case DATABASE -> throw new UnsupportedOperationException("Database non supportato ancora");
+            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
         }
     }
 

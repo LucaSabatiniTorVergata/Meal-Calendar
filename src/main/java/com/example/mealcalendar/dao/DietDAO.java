@@ -1,15 +1,21 @@
 package com.example.mealcalendar.dao;
 
-import com.example.mealcalendar.bean.DietBean;
+
+import com.example.mealcalendar.model.DayEntity;
 import com.example.mealcalendar.model.DietEntity;
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.PersistenceType;
+import com.example.mealcalendar.model.MealEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.*;
+
+import java.io.*;
+import java.lang.reflect.Type;
+import java.sql.*;
 import java.util.*;
 
 public class DietDAO {
@@ -64,14 +70,73 @@ public class DietDAO {
 
             }
 
+            case DATABASE -> {
+                String url = "jdbc:mysql://localhost:3306/mio_database";
+                String user = System.getenv("DB_USER");
+                String password = System.getenv("DB_PASSWORD");
 
-            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+                String insertDietSQL = "INSERT INTO diets (nome, descrizione, durata, nutritionist_username) VALUES (?, ?, ?, ?)";
+                String insertDaySQL = "INSERT INTO diet_days (diet_id, giorno) VALUES (?, ?)";
+                String insertMealSQL = "INSERT INTO meals (day_id, nome, descrizione, kcal) VALUES (?, ?, ?, ?)";
 
+                try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    conn.setAutoCommit(false);
+
+                    try (PreparedStatement psDiet = conn.prepareStatement(insertDietSQL, Statement.RETURN_GENERATED_KEYS)) {
+                        psDiet.setString(1, diet.getNome());
+                        psDiet.setString(2, diet.getDescrizione());
+                        psDiet.setInt(3, diet.getDurata());
+                        psDiet.setString(4, diet.getNutritionistUsername());
+
+                        psDiet.executeUpdate();
+
+                        ResultSet generatedKeys = psDiet.getGeneratedKeys();
+                        if (!generatedKeys.next()) {
+                            throw new SQLException("Creazione dieta fallita, nessun ID generato.");
+                        }
+                        int dietId = generatedKeys.getInt(1);
+
+                        try (PreparedStatement psDay = conn.prepareStatement(insertDaySQL, Statement.RETURN_GENERATED_KEYS);
+                             PreparedStatement psMeal = conn.prepareStatement(insertMealSQL)) {
+
+                            for (DayEntity day : diet.getGiorni()) {
+                                psDay.setInt(1, dietId);
+                                psDay.setInt(2, day.getGiorno());
+                                psDay.executeUpdate();
+
+                                ResultSet dayKeys = psDay.getGeneratedKeys();
+                                if (!dayKeys.next()) {
+                                    throw new SQLException("Creazione giorno fallita, nessun ID generato.");
+                                }
+                                int dayId = dayKeys.getInt(1);
+
+                                for (MealEntity meal : day.getPasti()) {
+                                    psMeal.setInt(1, dayId);
+                                    psMeal.setString(2, meal.getNome());
+                                    psMeal.setString(3, meal.getDescrizione());
+                                    psMeal.setInt(4, meal.getKcal());
+                                    psMeal.executeUpdate();
+                                }
+                            }
+                        }
+                    }
+
+                    conn.commit();
+
+                    ramStorage.add(diet);
+                    printDietDetails("[DietDAO][DATABASE] Dieta salvata nel DB:", diet);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw new IllegalArgumentException("Errore salvataggio dieta su DB", e);
+                }
+            }
         }
     }
 
 
     public List<DietEntity> getAllDiets() {
+
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
             case RAM -> {
@@ -91,8 +156,79 @@ public class DietDAO {
 
             }
 
-            case DATABASE -> throw new UnsupportedOperationException("DB non ancora supportato");
+            case DATABASE -> {
+                String url = "jdbc:mysql://localhost:3306/mio_database";
+                String user = System.getenv("DB_USER");
+                String password = System.getenv("DB_PASSWORD");
+
+                String selectDietsSQL = "SELECT * FROM diets";
+                String selectDaysSQL = "SELECT * FROM diet_days WHERE diet_id = ?";
+                String selectMealsSQL = "SELECT * FROM meals WHERE day_id = ?";
+
+                List<DietEntity> result = new ArrayList<>();
+
+                try (Connection conn = DriverManager.getConnection(url, user, password);
+                     PreparedStatement psDiets = conn.prepareStatement(selectDietsSQL)) {
+
+                    ResultSet rsDiets = psDiets.executeQuery();
+
+                    while (rsDiets.next()) {
+                        DietEntity diet = new DietEntity();
+                        diet.setNome(rsDiets.getString("nome"));
+                        diet.setDescrizione(rsDiets.getString("descrizione"));
+                        diet.setDurata(rsDiets.getInt("durata"));
+                        diet.setNutritionistUsername(rsDiets.getString("nutritionist_username"));
+
+                        int dietId = rsDiets.getInt("id");
+
+                        // Carico i giorni
+                        List<DayEntity> giorni = new ArrayList<>();
+                        try (PreparedStatement psDays = conn.prepareStatement(selectDaysSQL)) {
+                            psDays.setInt(1, dietId);
+                            ResultSet rsDays = psDays.executeQuery();
+
+                            while (rsDays.next()) {
+                                DayEntity day = new DayEntity(rsDays.getInt("giorno"));
+
+                                int dayId = rsDays.getInt("id");
+
+                                // Carico i pasti per il giorno
+                                List<MealEntity> pasti = new ArrayList<>();
+                                try (PreparedStatement psMeals = conn.prepareStatement(selectMealsSQL)) {
+                                    psMeals.setInt(1, dayId);
+                                    ResultSet rsMeals = psMeals.executeQuery();
+
+                                    while (rsMeals.next()) {
+                                        MealEntity meal = new MealEntity(
+                                                rsMeals.getString("nome"),
+                                                rsMeals.getString("descrizione"),
+                                                rsMeals.getInt("kcal")
+                                        );
+                                        pasti.add(meal);
+                                    }
+                                }
+
+                                day.setPasti(pasti);
+                                giorni.add(day);
+                            }
+                        }
+
+                        diet.setGiorni(giorni);
+                        result.add(diet);
+                    }
+
+                    ramStorage.clear();
+                    ramStorage.addAll(result);
+
+                    return result;
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return new ArrayList<>();
+                }
+            }
         }
+
         return Collections.emptyList();
     }
 

@@ -19,9 +19,8 @@ public class Main {
         printer.print("Scegli un'opzione: ");
 
         String scelta = scanner.nextLine().trim();
-        boolean isGui = !scelta.equals("2");
 
-        if (isGui) {
+        if (scelta.equals("1")) {
             launch();
         } else {
             HelloViewCLI cli = new HelloViewCLI(scanner);

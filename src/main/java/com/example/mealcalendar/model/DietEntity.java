@@ -20,6 +20,8 @@ public class DietEntity {
         this.nutritionistUsername = nutritionistUsername;
     }
 
+    public DietEntity(){}
+
     public String getNome() {
         return nome;
     }
