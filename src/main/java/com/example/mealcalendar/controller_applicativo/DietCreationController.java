@@ -9,8 +9,6 @@ import com.example.mealcalendar.model.MealEntity;
 
 public class DietCreationController {
 
-
-
     public void saveDiet(DietBean diet) {
 
         DietDAO.getInstance().saveDiet(converter(diet));
