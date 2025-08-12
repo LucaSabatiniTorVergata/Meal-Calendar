@@ -20,14 +20,36 @@ public class AddDietCLI {
     public void start() {
         logger.info("=== Creazione nuova dieta ===");
 
+        DietBean dietBean = leggiDatiDieta();
+
+        for (int i = 0; i < dietBean.getDurata(); i++) {
+            DayBean dayBean = leggiGiorno(i + 1);
+            dietBean.addDay(dayBean);
+        }
+
+        new DietCreationController().saveDiet(dietBean);
+        logger.info("Dieta salvata con successo.");
+    }
+
+    private DietBean leggiDatiDieta() {
         System.out.print("Inserisci nome dieta: ");
         String nome = scanner.nextLine().trim();
 
         System.out.print("Inserisci descrizione: ");
         String descrizione = scanner.nextLine().trim();
 
-        int durata = 0;
+        int durata = leggiDurata();
 
+        DietBean dietBean = new DietBean();
+        dietBean.setNome(nome);
+        dietBean.setDescrizione(descrizione);
+        dietBean.setDurata(durata);
+        dietBean.setNutritionistUsername(SessionManagerSLT.getInstance().getLoggedInUsername());
+        return dietBean;
+    }
+
+    private int leggiDurata() {
+        int durata = 0;
         while (durata != 7 && durata != 14) {
             System.out.print("Inserisci durata (7 o 14 giorni): ");
             try {
@@ -39,54 +61,53 @@ public class AddDietCLI {
                 logger.warning("Input non valido, inserisci un numero.");
             }
         }
-
-        DietBean dietBean = new DietBean();
-        dietBean.setNome(nome);
-        dietBean.setDescrizione(descrizione);
-        dietBean.setDurata(durata);
-        dietBean.setNutritionistUsername(SessionManagerSLT.getInstance().getLoggedInUsername());
-
-        for (int i = 0; i < durata; i++) {
-            logger.info("Giorno " + (i + 1));
-            DayBean dayBean = new DayBean();
-            dayBean.setGiorno(i + 1);
-
-            for (int pastoIndex = 0; pastoIndex < 3; pastoIndex++) {
-                System.out.println("Inserisci dati pasto " + (pastoIndex + 1) + ":");
-
-                System.out.print("  Nome pasto: ");
-                String nomePasto = scanner.nextLine().trim();
-
-                int kcalPasto = -1;
-                while (kcalPasto < 0) {
-                    System.out.print("  Kcal: ");
-                    try {
-                        kcalPasto = Integer.parseInt(scanner.nextLine().trim());
-                        if (kcalPasto < 0) {
-                            logger.warning("Kcal deve essere positiva.");
-                        }
-                    } catch (NumberFormatException e) {
-                        logger.warning("Inserisci un numero valido.");
-                    }
-                }
-
-                System.out.print("  Descrizione: ");
-                String descrizionePasto = scanner.nextLine().trim();
-
-                MealBean mealBean = new MealBean();
-                mealBean.setNome(nomePasto);
-                mealBean.setKcal(kcalPasto);
-                mealBean.setDescrizione(descrizionePasto);
-
-                dayBean.addMeal(mealBean);
-            }
-
-            dietBean.addDay(dayBean);
-        }
-
-        DietCreationController controller = new DietCreationController();
-        controller.saveDiet(dietBean);
-
-        logger.info("Dieta salvata con successo.");
+        return durata;
     }
+
+    private DayBean leggiGiorno(int numeroGiorno) {
+        logger.info("Giorno " + numeroGiorno);
+        DayBean dayBean = new DayBean();
+        dayBean.setGiorno(numeroGiorno);
+
+        for (int i = 0; i < 3; i++) {
+            MealBean meal = leggiPasto(i + 1);
+            dayBean.addMeal(meal);
+        }
+        return dayBean;
+    }
+
+    private MealBean leggiPasto(int indicePasto) {
+        System.out.println("Inserisci dati pasto " + indicePasto + ":");
+
+        System.out.print("  Nome pasto: ");
+        String nomePasto = scanner.nextLine().trim();
+
+        int kcalPasto = leggiKcal();
+
+        System.out.print("  Descrizione: ");
+        String descrizionePasto = scanner.nextLine().trim();
+
+        MealBean mealBean = new MealBean();
+        mealBean.setNome(nomePasto);
+        mealBean.setKcal(kcalPasto);
+        mealBean.setDescrizione(descrizionePasto);
+        return mealBean;
+    }
+
+    private int leggiKcal() {
+        int kcalPasto = -1;
+        while (kcalPasto < 0) {
+            System.out.print("  Kcal: ");
+            try {
+                kcalPasto = Integer.parseInt(scanner.nextLine().trim());
+                if (kcalPasto < 0) {
+                    logger.warning("Kcal deve essere positiva.");
+                }
+            } catch (NumberFormatException e) {
+                logger.warning("Inserisci un numero valido.");
+            }
+        }
+        return kcalPasto;
+    }
+
 }
