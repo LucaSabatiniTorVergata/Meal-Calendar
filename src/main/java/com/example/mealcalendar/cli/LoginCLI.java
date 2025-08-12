@@ -64,8 +64,7 @@ public class LoginCLI {
                 SessionManagerSLT.getInstance().setRuolo(selectedRole);
 
                 if (bean.getRuolo().equalsIgnoreCase("restaurant")) {
-                    logger.info("Apertura interfaccia gestione ristorante...");
-                   // new RestaurantManagementCLI().start();
+                    logger.info("Apertura interfaccia gestione ristorante...");// qui va il ristoranteCLI
                 } else {
                     logger.info("Apertura interfaccia menu...");
                     new MainMenuCLI(scanner).start();

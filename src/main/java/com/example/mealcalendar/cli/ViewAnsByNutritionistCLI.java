@@ -5,6 +5,7 @@ import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportCo
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ViewAnsByNutritionistCLI {
@@ -44,8 +45,7 @@ public class ViewAnsByNutritionistCLI {
             } catch (NumberFormatException ignored) {}
 
             if (scelta == requests.size() + 1) {
-                // Esci
-                break;
+                new MainMenuCLI(scanner).start();
             } else if (scelta >= 1 && scelta <= requests.size()) {
                 ReportRequestBean selected = requests.get(scelta - 1);
                 showRequestDetails(selected);
@@ -63,30 +63,35 @@ public class ViewAnsByNutritionistCLI {
     }
 
     private void showRequestDetails(ReportRequestBean request) {
-        StringBuilder details = new StringBuilder();
-        details.append("Utente: ").append(request.getUserEmail()).append("\n")
-                .append("Dieta: ").append(request.getDietName()).append("\n")
-                .append("Descrizione: ").append(request.getDietDescription()).append("\n")
-                .append("Data richiesta: ").append(request.getRequestDate()).append("\n\n");
 
-        if (request.getDietTaken() != null && !request.getDietTaken().getDietTaken().isEmpty()) {
-            for (int i = 0; i < request.getDietTaken().getDietTaken().size(); i++) {
-                details.append("Giorno ").append(i + 1).append(":\n");
-                request.getDietTaken().getDietTaken().get(i).getMealsTaken().forEach(meal -> {
-                    details.append("  • ").append(meal.getNome())
-                            .append(" (").append(meal.getKcal()).append(" kcal)\n")
-                            .append("    ").append(meal.getDescrizione()).append("\n");
-                });
-                details.append("\n");
+        if (logger.isLoggable(Level.INFO)) {
+            StringBuilder details = new StringBuilder();
+            details.append("Utente: ").append(request.getUserEmail()).append("\n")
+                    .append("Dieta: ").append(request.getDietName()).append("\n")
+                    .append("Descrizione: ").append(request.getDietDescription()).append("\n")
+                    .append("Data richiesta: ").append(request.getRequestDate()).append("\n\n");
+
+            if (request.getDietTaken() != null && !request.getDietTaken().getDietTaken().isEmpty()) {
+                for (int i = 0; i < request.getDietTaken().getDietTaken().size(); i++) {
+                    details.append("Giorno ").append(i + 1).append(":\n");
+                    request.getDietTaken().getDietTaken().get(i).getMealsTaken().forEach(meal -> {
+                        details.append("  • ").append(meal.getNome())
+                                .append(" (").append(meal.getKcal()).append(" kcal)\n")
+                                .append("    ").append(meal.getDescrizione()).append("\n");
+                    });
+                    details.append("\n");
+                }
+            } else {
+                details.append("Nessun pasto registrato.\n");
             }
-        } else {
-            details.append("Nessun pasto registrato.\n");
-        }
 
-        logger.info(details.toString());
+            logger.info(details.toString());
+        }
     }
 
+
     private void askForResponse(ReportRequestBean request) {
+
         System.out.println("Risposta attuale: " + (request.getResponse() != null ? request.getResponse() : "(nessuna)"));
         System.out.print("Inserisci la risposta (o lascia vuoto per saltare): ");
         String risposta = scanner.nextLine().trim();

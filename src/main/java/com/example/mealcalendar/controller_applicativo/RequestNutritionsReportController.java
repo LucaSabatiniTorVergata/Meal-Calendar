@@ -64,7 +64,7 @@ public class RequestNutritionsReportController implements Subject{
             // Converto in bean per passare alla view
             return pendingEntities.stream()
                     .map(this::convertEntityToBean)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         /**
