@@ -94,26 +94,39 @@ public class DietDAO {
                         try (PreparedStatement psDay = conn.prepareStatement(insertDaySQL, Statement.RETURN_GENERATED_KEYS);
                              PreparedStatement psMeal = conn.prepareStatement(insertMealSQL)) {
 
+                            psMeal.clearBatch();
+                            psDay.setInt(1, dietId);
+
                             for (DayEntity day : diet.getGiorni()) {
-                                psDay.setInt(1, dietId);
+
+
+
                                 psDay.setInt(2, day.getGiorno());
-                                psDay.executeUpdate();
+                                psDay.addBatch();
 
-                                ResultSet dayKeys = psDay.getGeneratedKeys();
-                                if (!dayKeys.next()) {
-                                    throw new SQLException("Creazione giorno fallita, nessun ID generato.");
-                                }
-                                int dayId = dayKeys.getInt(1);
+                                // Eseguo subito il batch di giorno per ottenere la chiave generata
+                                psDay.executeBatch();
 
-                                for (MealEntity meal : day.getPasti()) {
+                                try (ResultSet dayKeys = psDay.getGeneratedKeys()) {
+                                    if (!dayKeys.next()) {
+                                        throw new SQLException("Creazione giorno fallita, nessun ID generato.");
+                                    }
+                                    int dayId = dayKeys.getInt(1);
+
+                                    // Inserisco i pasti associati in batch
+                                    psMeal.clearBatch();
                                     psMeal.setInt(1, dayId);
-                                    psMeal.setString(2, meal.getNome());
-                                    psMeal.setString(3, meal.getDescrizione());
-                                    psMeal.setInt(4, meal.getKcal());
-                                    psMeal.executeUpdate();
+                                    for (MealEntity meal : day.getPasti()) {
+                                        psMeal.setString(2, meal.getNome());
+                                        psMeal.setString(3, meal.getDescrizione());
+                                        psMeal.setInt(4, meal.getKcal());
+                                        psMeal.addBatch();
+                                    }
+                                    psMeal.executeBatch();
                                 }
                             }
                         }
+
                     }
 
                     conn.commit();
@@ -156,9 +169,10 @@ public class DietDAO {
                 String user = System.getenv("DB_USER");
                 String password = System.getenv("DB_PASSWORD");
 
-                String selectDietsSQL = "SELECT * FROM diets";
-                String selectDaysSQL = "SELECT * FROM diet_days WHERE diet_id = ?";
-                String selectMealsSQL = "SELECT * FROM meals WHERE day_id = ?";
+                // Specifico solo le colonne necessarie
+                String selectDietsSQL = "SELECT id, nome, descrizione, durata, nutritionist_username FROM diets";
+                String selectDaysSQL = "SELECT id, giorno FROM diet_days WHERE diet_id = ?";
+                String selectMealsSQL = "SELECT nome, descrizione, kcal FROM meals WHERE day_id = ?";
 
                 List<DietEntity> result = new ArrayList<>();
 
@@ -168,6 +182,7 @@ public class DietDAO {
                     ResultSet rsDiets = psDiets.executeQuery();
 
                     while (rsDiets.next()) {
+
                         DietEntity diet = new DietEntity();
                         diet.setNome(rsDiets.getString("nome"));
                         diet.setDescrizione(rsDiets.getString("descrizione"));
@@ -222,6 +237,7 @@ public class DietDAO {
                     return new ArrayList<>();
                 }
             }
+
         }
 
         return Collections.emptyList();
