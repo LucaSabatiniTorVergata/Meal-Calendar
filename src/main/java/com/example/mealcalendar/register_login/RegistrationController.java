@@ -22,10 +22,10 @@ public class RegistrationController {
 
         // Se il file non esiste, lo creo
         if (!file.exists()) {
-
-            boolean ignored = file.createNewFile();
-
-
+            boolean created = file.createNewFile();
+            if (!created) {
+                throw new IOException("Impossibile creare il file: " + file.getAbsolutePath());
+            }
         }
 
 
