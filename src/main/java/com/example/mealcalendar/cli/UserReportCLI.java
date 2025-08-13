@@ -20,20 +20,21 @@ public class UserReportCLI {
     }
 
     public void start() {
-        logger.info("=== Visualizza il resoconto del nutrizionista ===");
+
+        System.out.println("=== Visualizza il resoconto del nutrizionista ===");
 
         ReportReponseBean report = controller.getLatestResponseForUser();
 
         if (report != null) {
             showReport(report);
 
-            logger.info("Premi INVIO per completare e cancellare il resoconto... ");
+            System.out.println("Premi INVIO per completare e cancellare il resoconto... ");
             scanner.nextLine();
 
             controller.deletediet();
-            logger.info("Resoconto completato e rimosso. Torno al menu.");
+            System.out.println("Resoconto completato e rimosso. Torno al menu.");
         } else {
-            logger.info("Nessun resoconto disponibile per te al momento.");
+            System.out.println("Nessun resoconto disponibile per te al momento.");
         }
 
         new MainMenuCLI(scanner).start();
@@ -47,7 +48,7 @@ public class UserReportCLI {
                         .append("Nutrizionista: ").append(report.getNutritionistName()).append("\n")
                         .append("Risposta:\n").append(report.getResponseText()).append("\n");
 
-                logger.info(sb.toString());
+                System.out.println(sb.toString());
             }
         }
 

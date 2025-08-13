@@ -5,11 +5,11 @@ import com.example.mealcalendar.register_login.LoginController;
 import com.example.mealcalendar.register_login.UserLoginBean;
 
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class LoginCLI {
 
-    private static final Logger logger = Logger.getLogger(LoginCLI.class.getName());
+
     private Scanner scanner;
 
     public LoginCLI(Scanner scanner) {
@@ -18,18 +18,18 @@ public class LoginCLI {
 
     public void start() {
 
-        logger.info("=== Login ===");
+        System.out.println("=== Login ===");
 
-        logger.info("Inserisci username:");
+        System.out.println("Inserisci username:");
         String username = scanner.nextLine().trim();
 
-        logger.info("Inserisci password:");
+        System.out.println("Inserisci password:");
         String password = scanner.nextLine().trim();
 
-        logger.info("Scegli il ruolo:");
-        logger.info("1 - Utente");
-        logger.info("2 - Nutrizonista");
-        logger.info("3 - Ristorante");
+        System.out.println("Scegli il ruolo:");
+        System.out.println("1 - Utente");
+        System.out.println("2 - Nutrizonista");
+        System.out.println("3 - Ristorante");
 
         String roleChoice = scanner.nextLine().trim();
         String selectedRole = "";
@@ -45,12 +45,12 @@ public class LoginCLI {
                 selectedRole = "restaurant";
                 break;
             default:
-                logger.warning("Scelta ruolo non valida.");
+                System.out.println("Scelta ruolo non valida.");
                 return;
         }
 
         if (username.isEmpty() || password.isEmpty() || selectedRole.isEmpty()) {
-            logger.warning("Compila tutti i campi.");
+            System.out.println("Compila tutti i campi.");
             return;
         }
 
@@ -59,21 +59,21 @@ public class LoginCLI {
 
         try {
             if (controller.vallogin(bean)) {
-                logger.info("Login effettuato!");
+                System.out.println("Login effettuato!");
 
                 SessionManagerSLT.getInstance().setRuolo(selectedRole);
 
                 if (bean.getRuolo().equalsIgnoreCase("restaurant")) {
-                    logger.info("Apertura interfaccia gestione ristorante...");// qui va il ristoranteCLI
+                    System.out.println("Apertura interfaccia gestione ristorante...");// qui va il ristoranteCLI
                 } else {
-                    logger.info("Apertura interfaccia menu...");
+                    System.out.println("Apertura interfaccia menu...");
                     new MainMenuCLI(scanner).start();
                 }
             } else {
-                logger.warning("Credenziali non valide.");
+                System.out.println("Credenziali non valide.");
             }
         } catch (Exception e) {
-            logger.severe("Errore durante il login: " + e.getMessage());
+            System.out.println("Errore durante il login: " + e.getMessage());
         }
     }
 }

@@ -6,11 +6,11 @@ import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.MealBean;
 import com.example.mealcalendar.controller_applicativo.DietCreationController;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class AddDietCLI {
 
-    private static final Logger logger = Logger.getLogger(AddDietCLI.class.getName());
+
     private final Scanner scanner;
 
     public AddDietCLI(Scanner scanner) {
@@ -18,7 +18,7 @@ public class AddDietCLI {
     }
 
     public void start() {
-        logger.info("=== Creazione nuova dieta ===");
+        System.out.println("=== Creazione nuova dieta ===");
 
         DietBean dietBean = leggiDatiDieta();
 
@@ -28,7 +28,7 @@ public class AddDietCLI {
         }
 
         new DietCreationController().saveDiet(dietBean);
-        logger.info("Dieta salvata con successo.");
+        System.out.println("Dieta salvata con successo.");
     }
 
     private DietBean leggiDatiDieta() {
@@ -55,17 +55,18 @@ public class AddDietCLI {
             try {
                 durata = Integer.parseInt(scanner.nextLine().trim());
                 if (durata != 7 && durata != 14) {
-                    logger.warning("Durata non valida, inserisci 7 o 14.");
+                    System.out.println("Durata non valida, inserisci 7 o 14.");
                 }
             } catch (NumberFormatException e) {
-                logger.warning("Input non valido, inserisci un numero.");
+                System.out.println("Input non valido, inserisci un numero.");
             }
         }
         return durata;
     }
 
     private DayBean leggiGiorno(int numeroGiorno) {
-        logger.info("Giorno " + numeroGiorno);
+
+        System.out.println("Giorno " + numeroGiorno);
         DayBean dayBean = new DayBean();
         dayBean.setGiorno(numeroGiorno);
 
@@ -77,6 +78,7 @@ public class AddDietCLI {
     }
 
     private MealBean leggiPasto(int indicePasto) {
+
         System.out.println("Inserisci dati pasto " + indicePasto + ":");
 
         System.out.print("  Nome pasto: ");
@@ -101,10 +103,10 @@ public class AddDietCLI {
             try {
                 kcalPasto = Integer.parseInt(scanner.nextLine().trim());
                 if (kcalPasto < 0) {
-                    logger.warning("Kcal deve essere positiva.");
+                    System.out.println("Kcal deve essere positiva.");
                 }
             } catch (NumberFormatException e) {
-                logger.warning("Inserisci un numero valido.");
+                System.out.println("Inserisci un numero valido.");
             }
         }
         return kcalPasto;

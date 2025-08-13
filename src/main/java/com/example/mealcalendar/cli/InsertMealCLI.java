@@ -6,11 +6,11 @@ import com.example.mealcalendar.controller_applicativo.FollowDietController;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class InsertMealCLI {
 
-    private static final Logger logger = Logger.getLogger(InsertMealCLI.class.getName());
+
     private final Scanner scanner;
 
     public InsertMealCLI(Scanner scanner) {
@@ -23,11 +23,11 @@ public class InsertMealCLI {
         DietBean currentDiet = controller.getAssignedDiet(email);
 
         if (currentDiet == null) {
-            logger.info("Nessuna dieta assegnata. Prima devi scegliere una dieta.");
+            System.out.println("Nessuna dieta assegnata. Prima devi scegliere una dieta.");
             return;
         }
 
-        logger.info("Inserisci i pasti realmente assunti per la dieta: " + currentDiet.getNome());
+        System.out.println("Inserisci i pasti realmente assunti per la dieta: " + currentDiet.getNome());
 
         DietTakenBean dietTaken = new DietTakenBean();
         dietTaken.setUser(SessionManagerSLT.getInstance().getLoggedInUsername());
@@ -39,11 +39,12 @@ public class InsertMealCLI {
         }
 
         controller.insertmeal(dietTaken);
-        logger.info("Pasti inseriti correttamente. Puoi ora richiedere il resoconto.");
+        System.out.println("Pasti inseriti correttamente. Puoi ora richiedere il resoconto.");
     }
 
     private DayTakenBean inserisciPastiGiorno(DayBean day, int giornoNumero) {
-        logger.info("\nGiorno " + giornoNumero + ":");
+
+        System.out.println("\nGiorno " + giornoNumero + ":");
 
         DayTakenBean dayTaken = new DayTakenBean();
         dayTaken.setGiorno(giornoNumero);
@@ -57,6 +58,7 @@ public class InsertMealCLI {
     }
 
     private MealTakenBean inserisciDatiPasto(MealBean pasto) {
+
         System.out.println("Pasto previsto: " + pasto.getNome());
 
         System.out.print("Nome pasto (premi invio per confermare il nome previsto): ");
@@ -79,6 +81,7 @@ public class InsertMealCLI {
     }
 
     private int leggiKcal() {
+
         int kcalInserite = -1;
         while (kcalInserite < 0) {
             System.out.print("Kcal assunte: ");
@@ -86,10 +89,10 @@ public class InsertMealCLI {
             try {
                 kcalInserite = Integer.parseInt(kcalInput);
                 if (kcalInserite < 0) {
-                    logger.warning("Inserisci un valore kcal positivo.");
+                    System.out.println("Inserisci un valore kcal positivo.");
                 }
             } catch (NumberFormatException e) {
-                logger.warning("Valore kcal non valido, riprova.");
+                System.out.println("Valore kcal non valido, riprova.");
             }
         }
         return kcalInserite;

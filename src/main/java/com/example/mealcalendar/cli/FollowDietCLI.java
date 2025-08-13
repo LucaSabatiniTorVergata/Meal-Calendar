@@ -8,11 +8,11 @@ import com.example.mealcalendar.controller_applicativo.FollowDietController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class FollowDietCLI {
 
-    private static final Logger logger = Logger.getLogger(FollowDietCLI.class.getName());
+
     private final Scanner scanner;
 
     public FollowDietCLI(Scanner scanner) {
@@ -20,16 +20,18 @@ public class FollowDietCLI {
     }
 
     public void start() throws IOException {
+
         FollowDietController controller = new FollowDietController();
 
         List<DietBean> diets = controller.convertdiet();
 
         if (diets.isEmpty()) {
-            logger.info("Nessuna dieta disponibile.");
+
+            System.out.println("Nessuna dieta disponibile.");
             return;
         }
 
-        logger.info("=== Lista di diete disponibili ===");
+        System.out.println("=== Lista di diete disponibili ===");
         for (int i = 0; i < diets.size(); i++) {
             DietBean d = diets.get(i);
             System.out.printf("%d) %s - %s (Autore: %s)%n", i + 1, d.getNome(), d.getDescrizione(), d.getNutritionistUsername());
@@ -41,10 +43,10 @@ public class FollowDietCLI {
             try {
                 scelta = Integer.parseInt(scanner.nextLine().trim());
                 if (scelta < 1 || scelta > diets.size()) {
-                    logger.warning("Scelta non valida, riprova.");
+                    System.out.println("Scelta non valida, riprova.");
                 }
             } catch (NumberFormatException e) {
-                logger.warning("Inserisci un numero valido.");
+                System.out.println("Inserisci un numero valido.");
             }
         }
 
@@ -60,6 +62,6 @@ public class FollowDietCLI {
 
         followController.assignDiet();
 
-        logger.info("Dieta \"" + selectedDiet.getNome() + "\" assegnata con successo all'utente " + userBean.getNome());
+        System.out.println("Dieta \"" + selectedDiet.getNome() + "\" assegnata con successo all'utente " + userBean.getNome());
     }
 }

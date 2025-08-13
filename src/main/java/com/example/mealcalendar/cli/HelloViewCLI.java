@@ -4,11 +4,10 @@ import com.example.mealcalendar.PersistenceType;
 import com.example.mealcalendar.SessionManagerSLT;
 
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class HelloViewCLI {
 
-    private static final Logger logger = Logger.getLogger(HelloViewCLI.class.getName());
     private final Scanner scanner;
 
     public HelloViewCLI(Scanner scanner) {
@@ -16,38 +15,38 @@ public class HelloViewCLI {
     }
 
     public void start() {
-        logger.info("Avvio CLI...");
+        System.out.println("Avvio CLI...");
         // === Selezione tipo di persistenza ===
-        logger.info("=== Seleziona modalità di persistenza ===");
-        logger.info("1. Database");
-        logger.info("2. File System");
-        logger.info("3. RAM");
+        System.out.println("=== Seleziona modalità di persistenza ===");
+        System.out.println("1. Database");
+        System.out.println("2. File System");
+        System.out.println("3. RAM: ");
         String persistenceChoice = scanner.nextLine().trim();
 
         switch (persistenceChoice) {
             case "1":
                 SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.DATABASE);
-                logger.info("Modalità: Database attiva");
+                System.out.println("Modalità: Database attiva");
                 break;
             case "2":
                 SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.FILESYSTEM);
-                logger.info("Modalità: File System attiva");
+                System.out.println("Modalità: File System attiva");
                 break;
             case "3":
                 SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.RAM);
-                logger.info("Modalità: RAM attiva");
+                System.out.println("Modalità: RAM attiva");
                 break;
             default:
-                logger.warning("Scelta non valida, default RAM.");
+                System.out.println("Scelta non valida, default RAM.");
                 SessionManagerSLT.getInstance().setPersistenceType(PersistenceType.RAM);
         }
 
         // === Menu principale ===
-        logger.info("\n=== Menu Principale ===");
-        logger.info("1. Registrati come Utente");
-        logger.info("2. Registrati come Nutrizionista");
-        logger.info("3. Registrati come Ristorante");
-        logger.info("4. Login");
+        System.out.println("\n=== Menu Principale ===");
+        System.out.println("1. Registrati come Utente");
+        System.out.println("2. Registrati come Nutrizionista");
+        System.out.println("3. Registrati come Ristorante");
+        System.out.println("4. Login");
         String roleChoice = scanner.nextLine().trim();
 
         switch (roleChoice) {
@@ -67,7 +66,7 @@ public class HelloViewCLI {
                 new LoginCLI(scanner).start();
                 break;
             default:
-                logger.warning("Scelta non valida, ritorno al menu principale.");
+                System.out.println("Scelta non valida, ritorno al menu principale.");
                 start();
         }
     }

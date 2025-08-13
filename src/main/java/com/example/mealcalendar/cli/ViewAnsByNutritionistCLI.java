@@ -19,22 +19,24 @@ public class ViewAnsByNutritionistCLI {
     }
 
     public void start() {
-        logger.info("=== Visualizza richieste di resoconto ===");
+
+        System.out.println("=== Visualizza richieste di resoconto ===");
 
         List<ReportRequestBean> requests = controller.getPendingRequestsForNutritionist();
 
         if (requests.isEmpty()) {
-            logger.info("Non ci sono richieste pendenti.");
+            System.out.println("Non ci sono richieste pendenti.");
             return;
         }
 
         while (true) {
-            logger.info("\nRichieste pendenti:");
+
+            System.out.println("\nRichieste pendenti:");
             for (int i = 0; i < requests.size(); i++) {
                 ReportRequestBean r = requests.get(i);
-                logger.info((i + 1) + ". Dieta: " + r.getDietName() + " - Utente: " + r.getUserEmail());
+                System.out.println((i + 1) + ". Dieta: " + r.getDietName() + " - Utente: " + r.getUserEmail());
             }
-            logger.info((requests.size() + 1) + ". Torna indietro");
+            System.out.println((requests.size() + 1) + ". Torna indietro");
 
             System.out.print("Seleziona una richiesta da visualizzare o rispondere: ");
             String input = scanner.nextLine().trim();
@@ -53,11 +55,11 @@ public class ViewAnsByNutritionistCLI {
                 // Aggiorna la lista dopo possibile risposta
                 requests = controller.getPendingRequestsForNutritionist();
                 if (requests.isEmpty()) {
-                    logger.info("Non ci sono più richieste pendenti.");
+                    System.out.println("Non ci sono più richieste pendenti.");
                     break;
                 }
             } else {
-                logger.warning("Scelta non valida. Riprova.");
+                System.out.println("Scelta non valida. Riprova.");
             }
         }
     }
@@ -85,7 +87,7 @@ public class ViewAnsByNutritionistCLI {
                 details.append("Nessun pasto registrato.\n");
             }
 
-            logger.info(details.toString());
+            System.out.println(details.toString());
         }
     }
 
@@ -100,9 +102,9 @@ public class ViewAnsByNutritionistCLI {
             request.setResponse(risposta);
             request.setAnswered(true);
             controller.updateResponse(request);
-            logger.info("Risposta inviata con successo.");
+            System.out.println("Risposta inviata con successo.");
         } else {
-            logger.info("Risposta non modificata.");
+            System.out.println("Risposta non modificata.");
         }
     }
 }

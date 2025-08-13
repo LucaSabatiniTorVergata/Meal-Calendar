@@ -5,11 +5,11 @@ import com.example.mealcalendar.controller_applicativo.FollowDietController;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class ResultsoDietCLI {
 
-    private static final Logger logger = Logger.getLogger(ResultsoDietCLI.class.getName());
+
     private final Scanner scanner;
 
     public ResultsoDietCLI(Scanner scanner) {
@@ -20,7 +20,7 @@ public class ResultsoDietCLI {
         FollowDietController controller = new FollowDietController();
         List<String> resoconto = controller.generaResoconto();
 
-        logger.info("\n--- Resoconto Dieta ---");
+        System.out.println("\n--- Resoconto Dieta ---");
         for (String giorno : resoconto) {
             System.out.println("\n" + giorno);
         }
@@ -36,28 +36,28 @@ public class ResultsoDietCLI {
 
             switch (scelta) {
                 case "1":
-                    logger.info("Tornando al menu principale...");
+                    System.out.println("Tornando al menu principale...");
                     new MainMenuCLI(scanner).start();
                     return;
 
                 case "2":
                     controller.delete(SessionManagerSLT.getInstance().getLoggedInUsername(),
                             SessionManagerSLT.getInstance().getLoggedmail());
-                    logger.info("Dieta terminata e rimossa.");
+                    System.out.println("Dieta terminata e rimossa.");
                     return;
 
                 case "3":
                     SessionManagerSLT.getInstance().setRequestnutr(true);
                     boolean richiestaInviata = controller.requnutr();
                     if (richiestaInviata) {
-                        logger.info("Richiesta inviata al nutrizionista.");
+                        System.out.println("Richiesta inviata al nutrizionista.");
                     } else {
-                        logger.warning("Errore nell'invio della richiesta.");
+                        System.out.println("Errore nell'invio della richiesta.");
                     }
                     return;
 
                 default:
-                    logger.warning("Opzione non valida, riprova.");
+                    System.out.println("Opzione non valida, riprova.");
             }
         }
     }

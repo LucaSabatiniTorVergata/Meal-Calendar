@@ -5,11 +5,10 @@ import com.example.mealcalendar.register_login.RegistrationController;
 import com.example.mealcalendar.register_login.UserBeanA;
 
 import java.util.Scanner;
-import java.util.logging.Logger;
+
 
 public class RegisterCLI {
 
-    private static final Logger logger = Logger.getLogger(RegisterCLI.class.getName());
     private final Scanner scanner;
 
     public RegisterCLI(Scanner scanner) {
@@ -18,19 +17,19 @@ public class RegisterCLI {
 
     public void start() {
 
-        logger.info("=== Registrazione Nuovo Utente ===");
+        System.out.println("=== Registrazione Nuovo Utente ===");
 
-        logger.info("Inserisci username:");
+        System.out.println("Inserisci username:");
         String username = scanner.nextLine().trim();
 
-        logger.info("Inserisci email:");
+        System.out.println("Inserisci email:");
         String email = scanner.nextLine().trim();
 
-        logger.info("Inserisci password:");
+        System.out.println("Inserisci password:");
         String password = scanner.nextLine().trim();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            logger.warning("Compila tutti i campi.");
+            System.out.println("Compila tutti i campi.");
             return;
         }
 
@@ -39,9 +38,9 @@ public class RegisterCLI {
 
         try {
             regController.register(bean);
-            logger.info("Registrazione completata!");
+            System.out.println("Registrazione completata!");
         } catch (Exception e) {
-            logger.severe("Errore nella registrazione: " + e.getMessage());
+            System.out.println("Errore nella registrazione: " + e.getMessage());
         }
 
         new HelloViewCLI(scanner).start();
