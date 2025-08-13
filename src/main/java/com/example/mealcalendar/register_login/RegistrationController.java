@@ -24,7 +24,7 @@ public class RegistrationController {
         if (!file.exists()) {
 
             boolean ignored = file.createNewFile();
-            System.out.println("File created: " + ignored);// crea file vuoto
+
 
         }
 

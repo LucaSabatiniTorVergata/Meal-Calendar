@@ -80,12 +80,7 @@ public class FollowDietViewController {
 
         if (selectedDiet != null) {
 
-            System.out.println("Hai selezionato la dieta: " + selectedDiet.getNome());
             controller.assignDiet();
-
-        } else {
-
-            System.out.println("Nessuna dieta selezionata.");
 
         }
     }

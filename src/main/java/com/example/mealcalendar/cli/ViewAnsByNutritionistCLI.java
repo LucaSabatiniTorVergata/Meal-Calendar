@@ -44,7 +44,8 @@ public class ViewAnsByNutritionistCLI {
             int scelta = -1;
             try {
                 scelta = Integer.parseInt(input);
-            } catch (NumberFormatException ignored) {}
+            } catch (NumberFormatException ignored) {return;
+            }
 
             if (scelta == requests.size() + 1) {
                 new MainMenuCLI(scanner).start();

@@ -31,13 +31,6 @@ public class LoginController {
                     String savedPassword = fields[2];
                     String savedRuolo = fields[3];
 
-                    System.out.println(savedUsername);
-                    System.out.println(savedmail);
-                    System.out.println(savedPassword);
-                    System.out.println(savedRuolo);
-
-
-
                     if (savedUsername.equals(userBean.getUsername()) &&
                             savedPassword.equals(userBean.getPassword()) &&
                             savedRuolo.equals(userBean.getRuolo())) {
