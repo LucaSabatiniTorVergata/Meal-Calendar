@@ -10,16 +10,10 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class RestaurantViewController {
+public class GestisciPrenotazioneUserViewController {
 
     @FXML
     private Button deleteBooking;
-
-    @FXML
-    private Button fillfridgebutton;
-
-    @FXML
-    private Button findrecipebutton;
 
     @FXML
     private Button homebutton;
@@ -31,26 +25,10 @@ public class RestaurantViewController {
     private ProgressIndicator loadingIndicator;
 
     @FXML
-    private ListView<?> ristorantiListView;
-
-    @FXML
-    private ListView<?> ristorantiListView1;
-
-    @FXML
-    private Button seteatingtimebutton;
+    private ListView<?> prenotazioniListView;
 
     @FXML
     private Label welcomelabel;
-
-    @FXML
-    void calendaruser(ActionEvent event) {
-
-    }
-
-    @FXML
-    void fridgeuser(ActionEvent event) {
-
-    }
 
     @FXML
     void handleclick(MouseEvent event) {
@@ -61,12 +39,7 @@ public class RestaurantViewController {
     void loadHomePageUser(ActionEvent event) {
 
         Stage stage = (Stage) homebutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "/com/example/mealcalendar/login-view.fxml");
-    }
-
-    @FXML
-    void recipeuser(ActionEvent event) {
-
+        GraphicController.cambiascena(stage, "menu-view.fxml");
     }
 
 }

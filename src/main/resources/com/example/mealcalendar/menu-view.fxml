@@ -94,5 +94,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="reservationButton" layoutX="513.0" layoutY="40.0" mnemonicParsing="false" onAction="#loadReservationPage" style="-fx-background-color: 000000;" text="manage reservation">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
     </children>
 </AnchorPane>

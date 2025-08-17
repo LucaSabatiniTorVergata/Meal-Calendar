@@ -39,6 +39,9 @@ public class MainMenuViewController {
     private Button findrestaurantbutton;
 
     @FXML
+    private Button reservationButton;
+
+    @FXML
     private Button seteatingtimebutton;
 
     @FXML
@@ -93,10 +96,12 @@ public class MainMenuViewController {
     private String controllo="user";
 
     //metodi eseguibili dal guest
+
     @FXML
-    private void findRestaurantGuest(ActionEvent event) {
-        Stage stage = (Stage) findrestaurantbutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "findrestaurantguest-view.fxml");
+    private void loadReservationPage(ActionEvent event) {
+
+        Stage stage = (Stage) reservationButton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "PrenotazioneUserView.fxml");
     }
 
 
@@ -122,7 +127,7 @@ public class MainMenuViewController {
     @FXML
     private void findRestaurantUser(ActionEvent event)  {
         Stage stage = (Stage) findrestaurantbutton.getScene().getWindow();
-        GraphicController.cambiascena(stage, "findrestaurantuser-view.fxml");
+        GraphicController.cambiascena(stage, "prenotaRistorante-view.fxml");
     }
 
     @FXML
