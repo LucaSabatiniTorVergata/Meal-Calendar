@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class HelloViewController {
 
-    private String viewRegister="/com/example/mealcalendar/register-view.fxml";
+    private String viewRegister="/com/example/mealcalendar/registrazioneRistorante-view.fxml";
 
     @FXML
     private Button btnUser;

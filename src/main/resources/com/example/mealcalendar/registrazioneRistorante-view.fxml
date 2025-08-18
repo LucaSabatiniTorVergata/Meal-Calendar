@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff0bf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mealcalendar.register_login.RegistrationViewController">
+    <children>
+        <Rectangle arcHeight="70.0" arcWidth="70.0" fill="WHITE" height="600.0" layoutX="799.0" layoutY="62.0" stroke="#d9d9d9" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" width="400.0" />
+        <Circle fill="#e2ecf5" layoutX="384.0" layoutY="391.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label layoutX="335.0" layoutY="338.0" prefHeight="55.0" prefWidth="98.0" text="Logo">
+            <font>
+                <Font size="44.0" />
+            </font>
+        </Label>
+        <Label layoutX="869.0" layoutY="141.0" prefHeight="23.0" prefWidth="69.0" text="Username" />
+        <TextField fx:id="usernamefield" layoutX="869.0" layoutY="172.0" prefHeight="20.0" prefWidth="273.0" promptText="inserisci qui il tuo username" />
+        <Label layoutX="869.0" layoutY="243.0" prefHeight="23.0" prefWidth="69.0" text="indirizzo" />
+        <TextField fx:id="emailfield" layoutX="869.0" layoutY="278.0" prefHeight="20.0" prefWidth="273.0" promptText="inserisci il tuo indirizzo" />
+        <Label layoutX="869.0" layoutY="338.0" prefHeight="23.0" prefWidth="69.0" text="Password" />
+        <TextField layoutX="869.0" layoutY="378.0" prefHeight="26.0" prefWidth="273.0" />
+        <PasswordField fx:id="passWordBox" layoutX="869.0" layoutY="378.0" prefHeight="26.0" prefWidth="273.0" promptText="Inserisci la password" />
+        <Button fx:id="register" layoutX="869.0" layoutY="551.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="100.0" text="register" />
+        <Button fx:id="login" layoutX="1041.0" layoutY="551.0" mnemonicParsing="false" onAction="#gologin" prefHeight="26.0" prefWidth="100.0" text="login" />
+        <Button fx:id="backbutton" layoutX="14.0" layoutY="21.0" onAction="#goback" prefHeight="26.0" prefWidth="56.0" text="BACK" />
+        <Label fx:id="messageLabel" layoutX="869.0" layoutY="468.0" prefHeight="18.0" prefWidth="274.0" textFill="RED">
+            <font>
+                <Font name="System Bold" size="21.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

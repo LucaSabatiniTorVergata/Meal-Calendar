@@ -1,39 +1,13 @@
 package com.example.mealcalendar.register_login;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import com.example.mealcalendar.dao.UserDao;
 import java.io.IOException;
-
 
 public class RegistrationController {
 
+    private final UserDao userDao = new UserDao();
+
     public void register(UserBeanA bean) throws IOException {
-
-        String filename;
-        if (bean.getRuolo().equals("nutritionist")) {
-            filename = "nutritionists.txt";
-        } else if (bean.getRuolo().equals("restaurant")) {
-            filename = "restaurants.txt";
-        } else {
-            filename = "users.txt";
-        }
-        File file = new File(filename);
-
-        // Se il file non esiste, lo creo
-        if (!file.exists()) {
-            boolean created = file.createNewFile();
-            if (!created) {
-                throw new IOException("Impossibile creare il file: " + file.getAbsolutePath());
-            }
-        }
-
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(bean.getUsername() + "-" + bean.getEmail() + "-" + bean.getPassword() + "-" + bean.getRuolo());
-            writer.newLine();
-        }
+        userDao.saveUser(bean);
     }
-
-
 }

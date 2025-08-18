@@ -4,6 +4,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -41,5 +43,19 @@
         </Button>
         <TextField fx:id="orascelta" layoutX="112.0" layoutY="232.0" promptText="00:00-23:59" />
       <ListView fx:id="listaRistoranti" layoutX="661.0" layoutY="148.0" prefHeight="487.0" prefWidth="549.0" />
+      <TextField fx:id="posti" layoutX="111.0" layoutY="347.0" promptText="insert the number of people" />
+      <Label layoutX="111.0" layoutY="287.0" prefHeight="50.0" prefWidth="395.0" text="how many people">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <SplitMenuButton fx:id="tipoSelezionato" layoutX="684.0" layoutY="674.0" mnemonicParsing="false" text="SplitMenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="vegano" />
+          <MenuItem mnemonicParsing="false" text="vegetariano" />
+            <MenuItem mnemonicParsing="false" text="onnivoro" />
+        </items>
+      </SplitMenuButton>
+      <Button fx:id="ricarica" layoutX="995.0" layoutY="674.0" mnemonicParsing="false" onAction="#caricaRistoranti" text="Carica" />
     </children>
 </AnchorPane>
