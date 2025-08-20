@@ -1,1 +1,581 @@
-[]
+[
+  {
+    "userEmail": "smith",
+    "nutritionist": "luca",
+    "assignedDiet": {
+      "nome": "dieta per calcio",
+      "descrizione": "mangiare di meno",
+      "durata": 14,
+      "nutritionistUsername": "luca",
+      "giorni": [
+        {
+          "giorno": 1,
+          "pasti": [
+            {
+              "nome": "pasta",
+              "descrizione": "v",
+              "kcal": 65
+            },
+            {
+              "nome": "pasta",
+              "descrizione": "c",
+              "kcal": 65
+            },
+            {
+              "nome": "pasta",
+              "descrizione": "v",
+              "kcal": 56
+            }
+          ]
+        },
+        {
+          "giorno": 2,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "er",
+              "kcal": 5
+            },
+            {
+              "nome": "riso",
+              "descrizione": "er",
+              "kcal": 5
+            },
+            {
+              "nome": "riso",
+              "descrizione": "erer",
+              "kcal": 5
+            }
+          ]
+        },
+        {
+          "giorno": 3,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 5
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "vc",
+              "kcal": 65
+            }
+          ]
+        },
+        {
+          "giorno": 4,
+          "pasti": [
+            {
+              "nome": "v",
+              "descrizione": "er",
+              "kcal": 6
+            },
+            {
+              "nome": "riso",
+              "descrizione": "er",
+              "kcal": 6
+            },
+            {
+              "nome": "v",
+              "descrizione": "er",
+              "kcal": 6
+            }
+          ]
+        },
+        {
+          "giorno": 5,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "vc",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "vc",
+              "kcal": 65
+            }
+          ]
+        },
+        {
+          "giorno": 6,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "re",
+              "kcal": 8
+            },
+            {
+              "nome": "riso",
+              "descrizione": "re",
+              "kcal": 8
+            },
+            {
+              "nome": "riso",
+              "descrizione": "erer",
+              "kcal": 8
+            }
+          ]
+        },
+        {
+          "giorno": 7,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 65
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 65
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 65
+            }
+          ]
+        },
+        {
+          "giorno": 8,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "re",
+              "kcal": 9
+            },
+            {
+              "nome": "v",
+              "descrizione": "er",
+              "kcal": 9
+            },
+            {
+              "nome": "riso",
+              "descrizione": "re",
+              "kcal": 9
+            }
+          ]
+        },
+        {
+          "giorno": 9,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 667
+            }
+          ]
+        },
+        {
+          "giorno": 10,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "bnb",
+              "kcal": 10
+            },
+            {
+              "nome": "riso",
+              "descrizione": "bn",
+              "kcal": 14
+            },
+            {
+              "nome": "riso",
+              "descrizione": "bg",
+              "kcal": 13
+            }
+          ]
+        },
+        {
+          "giorno": 11,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 65
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 4
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 35
+            }
+          ]
+        },
+        {
+          "giorno": 12,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "bn",
+              "kcal": 31
+            },
+            {
+              "nome": "riso",
+              "descrizione": "bn",
+              "kcal": 31
+            },
+            {
+              "nome": "riso",
+              "descrizione": "nbn",
+              "kcal": 33
+            }
+          ]
+        },
+        {
+          "giorno": 13,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 43
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 3
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cv",
+              "kcal": 43
+            }
+          ]
+        },
+        {
+          "giorno": 14,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "b",
+              "kcal": 54
+            },
+            {
+              "nome": "riso",
+              "descrizione": "bn",
+              "kcal": 4
+            },
+            {
+              "nome": "riso",
+              "descrizione": "bn",
+              "kcal": 3
+            }
+          ]
+        }
+      ]
+    },
+    "takenDiet": {
+      "days": [
+        {
+          "giorno": 1,
+          "pasti": [
+            {
+              "nome": "pasta",
+              "descrizione": "c",
+              "kcal": 4
+            },
+            {
+              "nome": "pasta",
+              "descrizione": "c",
+              "kcal": 4
+            },
+            {
+              "nome": "pasta",
+              "descrizione": "c",
+              "kcal": 4
+            }
+          ]
+        },
+        {
+          "giorno": 2,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "c",
+              "kcal": 4
+            },
+            {
+              "nome": "riso",
+              "descrizione": "ciao",
+              "kcal": 9
+            },
+            {
+              "nome": "riso",
+              "descrizione": "c",
+              "kcal": 8
+            }
+          ]
+        },
+        {
+          "giorno": 3,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 7
+            },
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 6
+            },
+            {
+              "nome": "carne",
+              "descrizione": "c",
+              "kcal": 8
+            }
+          ]
+        },
+        {
+          "giorno": 4,
+          "pasti": [
+            {
+              "nome": "v",
+              "descrizione": "c",
+              "kcal": 6
+            },
+            {
+              "nome": "riso",
+              "descrizione": "v",
+              "kcal": 8
+            },
+            {
+              "nome": "v",
+              "descrizione": "b",
+              "kcal": 7
+            }
+          ]
+        },
+        {
+          "giorno": 5,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "c",
+              "kcal": 34
+            },
+            {
+              "nome": "carne",
+              "descrizione": "xv",
+              "kcal": 4
+            },
+            {
+              "nome": "carne",
+              "descrizione": "xvx",
+              "kcal": 3
+            }
+          ]
+        },
+        {
+          "giorno": 6,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "cbb",
+              "kcal": 56
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cbc",
+              "kcal": 56
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cbc",
+              "kcal": 77
+            }
+          ]
+        },
+        {
+          "giorno": 7,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "ch",
+              "kcal": 667
+            },
+            {
+              "nome": "carne",
+              "descrizione": "ch",
+              "kcal": 23
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cb",
+              "kcal": 55
+            }
+          ]
+        },
+        {
+          "giorno": 8,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 4
+            },
+            {
+              "nome": "v",
+              "descrizione": "cv",
+              "kcal": 4
+            },
+            {
+              "nome": "riso",
+              "descrizione": "ccv",
+              "kcal": 4
+            }
+          ]
+        },
+        {
+          "giorno": 9,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "cbn",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cbc",
+              "kcal": 56
+            },
+            {
+              "nome": "carne",
+              "descrizione": "cbbc",
+              "kcal": 87
+            }
+          ]
+        },
+        {
+          "giorno": 10,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "cb",
+              "kcal": 656
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cb",
+              "kcal": 67
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cbb",
+              "kcal": 45
+            }
+          ]
+        },
+        {
+          "giorno": 11,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "c",
+              "kcal": 4
+            },
+            {
+              "nome": "carne",
+              "descrizione": "c",
+              "kcal": 4
+            },
+            {
+              "nome": "carne",
+              "descrizione": "c",
+              "kcal": 4
+            }
+          ]
+        },
+        {
+          "giorno": 12,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 56
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 5
+            }
+          ]
+        },
+        {
+          "giorno": 13,
+          "pasti": [
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 3434
+            },
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 34
+            },
+            {
+              "nome": "carne",
+              "descrizione": "v",
+              "kcal": 4
+            }
+          ]
+        },
+        {
+          "giorno": 14,
+          "pasti": [
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 54
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 45
+            },
+            {
+              "nome": "riso",
+              "descrizione": "cv",
+              "kcal": 54
+            }
+          ]
+        }
+      ],
+      "user": "smith"
+    },
+    "requestDate": "2025-08-19T11:19:42.4557706",
+    "answered": false
+  }
+]

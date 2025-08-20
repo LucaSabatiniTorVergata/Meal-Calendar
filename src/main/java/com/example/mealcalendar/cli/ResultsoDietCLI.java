@@ -48,7 +48,7 @@ public class ResultsoDietCLI {
 
                 case "3":
                     SessionManagerSLT.getInstance().setRequestnutr(true);
-                    boolean richiestaInviata = controller.requnutr();
+                    boolean richiestaInviata = controller.requNutr();
                     if (richiestaInviata) {
                         System.out.println("Richiesta inviata al nutrizionista.");
                     } else {

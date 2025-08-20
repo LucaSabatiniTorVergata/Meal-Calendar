@@ -1,9 +1,9 @@
-package  com.example.mealcalendar;
+package com.example.mealcalendar.patterndecorator;
 
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.model.ReportRequestEntity;
 import com.example.mealcalendar.model.UserEntity;
-import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
+import com.example.mealcalendar.patternobserver.observerasknutri.ReportRequestNotifier;
 
 import java.util.List;
 import java.util.Objects;

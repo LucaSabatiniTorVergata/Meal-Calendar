@@ -180,8 +180,6 @@ public class FollowDietController {
 
     public List<String> generaResoconto() {
 
-
-
         UserEntity currentUser= UserDietDAO.getInstance()
                 .getramStorage()
                 .stream()
@@ -276,7 +274,7 @@ public class FollowDietController {
 
     }
 
-    public Boolean requnutr(){
+    public Boolean requNutr(){
 
         if(Boolean.TRUE.equals(SessionManagerSLT.getInstance().getRequestnutr())){
 

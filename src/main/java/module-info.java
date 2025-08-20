@@ -26,8 +26,12 @@ module demo {
 
     exports com.example.mealcalendar.model;
     opens com.example.mealcalendar.model to com.google.gson;
-    exports com.example.mealcalendar.patternobserver;
-    opens com.example.mealcalendar.patternobserver to javafx.fxml;
+    exports com.example.mealcalendar.patternobserver.observerasknutri;
+    opens com.example.mealcalendar.patternobserver.observerasknutri to javafx.fxml;
+    exports com.example.mealcalendar.patternobserver.observerreport;
+    opens com.example.mealcalendar.patternobserver.observerreport to javafx.fxml;
+    exports com.example.mealcalendar.patterndecorator;
+    opens com.example.mealcalendar.patterndecorator to javafx.fxml;
 
 
 }

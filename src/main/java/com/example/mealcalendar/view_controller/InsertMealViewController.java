@@ -33,39 +33,8 @@ public class InsertMealViewController {
     @FXML
     public void initialize() {
 
-        String email = SessionManagerSLT.getInstance().getLoggedmail();
-        FollowDietController controller = new FollowDietController();
-        currentDiet = controller.getAssignedDiet(email);
+        preparaScheda();
 
-        if (currentDiet == null) {
-            dietStatusLabel.setText("Scegliere una dieta prima di inserire i pasti.");
-            confirmButton.setDisable(true);
-            return;
-        }
-
-        //solo GUI
-        dietStatusLabel.setText("Inserisci i pasti realmente assunti");
-        confirmButton.setDisable(false);
-
-        VBox mainContent = new VBox(20);
-        mainContent.setPadding(new Insets(10));
-
-        for (int i = 0; i < currentDiet.getGiorni().size(); i++) {
-            VBox dayBox = new VBox(10);
-            dayBox.setStyle("-fx-background-color: #f5e8c7; -fx-padding: 10; -fx-background-radius: 10;");
-            dayBox.getChildren().add(new Label("Giorno " + (i + 1)));
-
-            List<MealBean> meals = currentDiet.getGiorni().get(i).getPasti();
-            for (MealBean meal : meals) {
-                MealInputGroup inputGroup = new MealInputGroup(meal.getNome());
-                mealInputs.add(inputGroup);
-                dayBox.getChildren().add(inputGroup.getContainer());
-            }
-
-            mainContent.getChildren().add(dayBox);
-        }
-
-        dietInputContainer.getChildren().add(mainContent);
     }
 
     @FXML
@@ -151,6 +120,44 @@ public class InsertMealViewController {
             return descField.getText();
         }
     }
+
+    private void preparaScheda(){
+            String email = SessionManagerSLT.getInstance().getLoggedmail();
+            FollowDietController controller = new FollowDietController();
+            currentDiet = controller.getAssignedDiet(email);
+
+            if (currentDiet == null) {
+                dietStatusLabel.setText("Scegliere una dieta prima di inserire i pasti.");
+                confirmButton.setDisable(true);
+                return;
+            }
+
+            //solo GUI
+            dietStatusLabel.setText("Inserisci i pasti realmente assunti");
+            confirmButton.setDisable(false);
+
+            VBox mainContent = new VBox(20);
+            mainContent.setPadding(new Insets(10));
+
+            for (int i = 0; i < currentDiet.getGiorni().size(); i++) {
+                VBox dayBox = new VBox(10);
+                dayBox.setStyle("-fx-background-color: #f5e8c7; -fx-padding: 10; -fx-background-radius: 10;");
+                dayBox.getChildren().add(new Label("Giorno " + (i + 1)));
+
+                List<MealBean> meals = currentDiet.getGiorni().get(i).getPasti();
+                for (MealBean meal : meals) {
+                    MealInputGroup inputGroup = new MealInputGroup(meal.getNome());
+                    mealInputs.add(inputGroup);
+                    dayBox.getChildren().add(inputGroup.getContainer());
+                }
+
+                mainContent.getChildren().add(dayBox);
+            }
+
+            dietInputContainer.getChildren().add(mainContent);
+    }
 }
+
+
 
 

@@ -3,8 +3,8 @@ package com.example.mealcalendar.view_controller;
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.bean.ReportRequestBean;
 import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportController;
-import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
-import com.example.mealcalendar.patternobserver.ReportRequestObserver;
+import com.example.mealcalendar.patternobserver.observerasknutri.ReportRequestNotifier;
+import com.example.mealcalendar.patternobserver.observerasknutri.ReportRequestObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,8 +38,13 @@ public class ViewAnsByNutritionistViewController implements ReportRequestObserve
         ReportRequestNotifier.getInstance().registerObserver(this);
 
         // Recupera le richieste pendenti
-        List<ReportRequestBean> pending = controller.getPendingRequestsForNutritionist();
-        requests.setAll(pending);
+        if(requests.isEmpty())
+        {
+            List<ReportRequestBean> pending = controller.getPendingRequestsForNutritionist();
+            requests.setAll(pending);
+
+        }
+
         requestsListView.setItems(requests);
 
         // Definisce come visualizzare gli elementi nella ListView
@@ -77,11 +82,9 @@ public class ViewAnsByNutritionistViewController implements ReportRequestObserve
         if (request.getDietTaken() != null && !request.getDietTaken().getDietTaken().isEmpty()) {
             for (int i = 0; i < request.getDietTaken().getDietTaken().size(); i++) {
                 details.append("Giorno ").append(i + 1).append(":\n");
-                request.getDietTaken().getDietTaken().get(i).getMealsTaken().forEach(meal -> {
-                    details.append("  • ").append(meal.getNome())
-                            .append(" (").append(meal.getKcal()).append(" kcal)\n")
-                            .append("    ").append(meal.getDescrizione()).append("\n");
-                });
+                request.getDietTaken().getDietTaken().get(i).getMealsTaken().forEach(meal -> details.append("  • ").append(meal.getNome())
+                        .append(" (").append(meal.getKcal()).append(" kcal)\n")
+                        .append("    ").append(meal.getDescrizione()).append("\n"));
                 details.append("\n");
             }
         } else {
@@ -119,7 +122,7 @@ public class ViewAnsByNutritionistViewController implements ReportRequestObserve
         // Aggiorna la lista quando arriva una nuova richiesta
         List<ReportRequestBean> pending = controller.getPendingRequestsForNutritionist();
         requests.setAll(pending);
-        requestsListView.setItems(requests);
+
     }
 
 }

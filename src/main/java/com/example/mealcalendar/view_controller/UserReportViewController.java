@@ -1,18 +1,14 @@
 package com.example.mealcalendar.view_controller;
 
 import com.example.mealcalendar.GraphicController;
-import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.ReportReponseBean;
 import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportController;
-import com.example.mealcalendar.model.ReportRequestEntity;
-import com.example.mealcalendar.patternobserver.ReportObserver;
+import com.example.mealcalendar.patternobserver.observerreport.ReportObserver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-
-import java.util.Observer;
 
 public class UserReportViewController implements ReportObserver {
 
@@ -40,6 +36,7 @@ public class UserReportViewController implements ReportObserver {
     }
 
     private void loadReport() {
+
         currentReport = controller.getLatestResponseForUser();
 
         if (currentReport != null) {

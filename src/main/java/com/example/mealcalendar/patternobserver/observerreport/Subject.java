@@ -1,4 +1,4 @@
-package com.example.mealcalendar.patternobserver;
+package com.example.mealcalendar.patternobserver.observerreport;
 
 
 public interface Subject {

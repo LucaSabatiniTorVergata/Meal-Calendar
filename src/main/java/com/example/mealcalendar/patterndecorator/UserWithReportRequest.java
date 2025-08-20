@@ -1,11 +1,11 @@
-package com.example.mealcalendar;
+package com.example.mealcalendar.patterndecorator;
 
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.model.DietEntity;
 import com.example.mealcalendar.model.ReportRequestEntity;
 import com.example.mealcalendar.model.TakenDietEntity;
 import com.example.mealcalendar.model.UserEntity;
-import com.example.mealcalendar.patternobserver.ReportRequestNotifier;
+import com.example.mealcalendar.patternobserver.observerasknutri.ReportRequestNotifier;
 
 import java.time.LocalDateTime;
 
@@ -59,8 +59,9 @@ public class UserWithReportRequest extends UserEntity {
                 takenDiet,
                 LocalDateTime.now()
         );
-        ReportRequestNotifier.getInstance().notifyObservers();
+
         ReportRequestDAO.getInstance().save(request);
+        ReportRequestNotifier.getInstance().notifyObservers();
 
     }
 }

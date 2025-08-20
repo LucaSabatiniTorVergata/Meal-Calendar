@@ -5,7 +5,6 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.UserBean;
 import com.example.mealcalendar.controller_applicativo.FollowDietController;
-import com.example.mealcalendar.dao.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,24 +38,7 @@ public class FollowDietViewController {
     @FXML
     public void initialize() {
 
-        List<DietBean>diets=new FollowDietController().convertdiet();
-
-        dietListView.getItems().addAll(diets);
-        dietListView.setCellFactory(param -> new ListCell<>() {
-
-            @Override
-            protected void updateItem(DietBean item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText("📋 " + item.getNome());
-                }
-            }
-
-        });
-
-        dietListView.setOnMouseClicked(this::onDietSelected);
+       showdiets();
 
     }
 
@@ -92,4 +74,28 @@ public class FollowDietViewController {
         GraphicController.cambiascena(stage, "menu-view.fxml");
 
     }
+
+    private void showdiets(){
+
+        List<DietBean>diets=new FollowDietController().convertdiet();
+
+        dietListView.getItems().addAll(diets);
+        dietListView.setCellFactory(param -> new ListCell<>() {
+
+            @Override
+            protected void updateItem(DietBean item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText("📋 " + item.getNome());
+                }
+            }
+
+        });
+
+        dietListView.setOnMouseClicked(this::onDietSelected);
+
+    }
+
 }

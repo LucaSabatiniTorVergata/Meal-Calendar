@@ -1,15 +1,15 @@
 package com.example.mealcalendar.controller_applicativo;
 
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.UserWithNutritionistRole;
-import com.example.mealcalendar.UserWithReportRequest;
+import com.example.mealcalendar.patterndecorator.UserWithNutritionistRole;
+import com.example.mealcalendar.patterndecorator.UserWithReportRequest;
 import com.example.mealcalendar.bean.*;
 import com.example.mealcalendar.dao.DietTakenDAO;
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
 import com.example.mealcalendar.model.*;
-import com.example.mealcalendar.patternobserver.ReportObserver;
-import com.example.mealcalendar.patternobserver.Subject;
+import com.example.mealcalendar.patternobserver.observerreport.ReportObserver;
+import com.example.mealcalendar.patternobserver.observerreport.Subject;
 
 import java.util.Comparator;
 import java.util.List;
@@ -101,7 +101,7 @@ public class RequestNutritionsReportController implements Subject{
             return bean;
         }
 
-    public DietTakenBean converterTaken(TakenDietEntity entity){
+    private DietTakenBean converterTaken(TakenDietEntity entity){
 
         DietTakenBean dieta = new DietTakenBean();
 
@@ -162,7 +162,9 @@ public class RequestNutritionsReportController implements Subject{
     @Override
     public void notifyObservers() {
         if (observer != null) {
+
             observer.update();
+
         }
     }
 }

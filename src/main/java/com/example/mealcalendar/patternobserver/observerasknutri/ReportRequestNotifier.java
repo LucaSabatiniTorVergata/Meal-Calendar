@@ -1,4 +1,4 @@
-package com.example.mealcalendar.patternobserver;
+package com.example.mealcalendar.patternobserver.observerasknutri;
 
 import java.util.ArrayList;
 import java.util.List;
