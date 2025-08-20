@@ -1,11 +1,10 @@
 package com.example.mealcalendar.dao;
 
-import com.example.mealcalendar.register_login.UserLoginBean;
+import com.example.mealcalendar.register_login.UserBeanA;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
 
@@ -13,14 +12,12 @@ public class UserDao {
         switch (role) {
             case "nutritionist":
                 return "nutritionists.txt";
-            case "restaurant":
-                return "restaurants.txt";
             default:
                 return "users.txt";
         }
     }
 
-    public void saveUser(com.example.mealcalendar.register_login.UserBeanA bean) throws IOException {
+    public void saveUser(UserBeanA bean) throws IOException {
         String filename = getFilenameByRole(bean.getRuolo());
 
         File file = new File(filename);
@@ -32,34 +29,43 @@ public class UserDao {
             }
         }
 
-        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(file, true))) {
-            writer.write(bean.getUsername() + "-" + bean.getEmail() + "-" + bean.getPassword() + "-" + bean.getRuolo());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.write(bean.getUsername() + "-" +
+                    bean.getEmail() + "-" +
+                    bean.getPassword() + "-" +
+                    bean.getRuolo());
             writer.newLine();
         }
     }
 
-    public String[] validateUser(UserLoginBean userBean) throws IOException {
-        String filename = getFilenameByRole(userBean.getRuolo());
+    // Lettura utenti come Bean
+    public List<UserBeanA> leggiUtenti() {
+        List<UserBeanA> utenti = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
+        String[] files = {"users.txt", "nutritionists.txt"};
 
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split("-");
-                if (fields.length >= 4) {
-                    String savedUsername = fields[0];
-                    String savedMail = fields[1];
-                    String savedPassword = fields[2];
-                    String savedRole = fields[3];
+        for (String filename : files) {
+            File file = new File(filename);
+            if (!file.exists()) continue;
 
-                    if (savedUsername.equals(userBean.getUsername()) &&
-                            savedPassword.equals(userBean.getPassword()) &&
-                            savedRole.equals(userBean.getRuolo())) {
-                        return fields; // ritorno i dati trovati
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] fields = line.split("-");
+                    if (fields.length == 4) {
+                        String username = fields[0];
+                        String email = fields[1];
+                        String password = fields[2];
+                        String ruolo = fields[3];
+
+                        utenti.add(new UserBeanA(username, email, password, ruolo));
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return null; // nessun match
+
+        return utenti;
     }
 }

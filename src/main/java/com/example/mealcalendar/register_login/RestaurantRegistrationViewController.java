@@ -2,11 +2,12 @@ package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.model.TipologiaRistorante;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class RegistrationViewController {
+public class RestaurantRegistrationViewController {
 
     @FXML private TextField usernamefield;
     @FXML private TextField emailfield;
@@ -14,7 +15,22 @@ public class RegistrationViewController {
     @FXML private Label messageLabel;
     @FXML private Button login;
     @FXML private Button backbutton;
-    @FXML private Button register;
+    @FXML private SplitMenuButton tipologia;
+
+    private TipologiaRistorante tipologiaSelezionata; // salva la scelta
+
+    @FXML
+    public void initialize() {
+        // Popola lo SplitMenuButton con tutte le tipologie
+        for (TipologiaRistorante t : TipologiaRistorante.values()) {
+            MenuItem item = new MenuItem(t.name());
+            item.setOnAction(e -> {
+                tipologia.setText(t.name()); // mostra la scelta nel bottone
+                tipologiaSelezionata = t;    // salva la scelta
+            });
+            tipologia.getItems().add(item);
+        }
+    }
 
     @FXML
     public void goback() {
@@ -33,17 +49,27 @@ public class RegistrationViewController {
             return;
         }
 
+        if ("restaurant".equalsIgnoreCase(SessionManagerSLT.getInstance().getRuolo()) && tipologiaSelezionata == null) {
+            messageLabel.setText("Seleziona una tipologia valida!");
+            return;
+        }
+
         UserBeanA bean = new UserBeanA(
                 username,
                 email,
                 password,
-                SessionManagerSLT.getInstance().getRuolo() // qui può essere "user" o "nutritionist"
+                SessionManagerSLT.getInstance().getRuolo()
         );
 
         RegistrationController regController = new RegistrationController();
 
         try {
-            regController.register(bean);
+            // Se è un ristorante, usa anche la tipologia
+            if (tipologiaSelezionata != null) {
+                regController.register(bean, tipologiaSelezionata);
+            } else {
+                regController.register(bean);
+            }
             messageLabel.setText("Registrazione completata!");
         } catch (Exception e) {
             messageLabel.setText("Errore nella registrazione.");

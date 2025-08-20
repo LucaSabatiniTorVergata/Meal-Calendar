@@ -3,9 +3,9 @@ package com.example.mealcalendar.cli;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.register_login.RegistrationController;
 import com.example.mealcalendar.register_login.UserBeanA;
+import com.example.mealcalendar.model.TipologiaRistorante;
 
 import java.util.Scanner;
-
 
 public class RegisterCLI {
 
@@ -33,11 +33,30 @@ public class RegisterCLI {
             return;
         }
 
+        // Creo bean utente base
         UserBeanA bean = new UserBeanA(username, email, password, SessionManagerSLT.getInstance().getRuolo());
         RegistrationController regController = new RegistrationController();
 
         try {
-            regController.register(bean);
+            // Se il ruolo è "restaurant" chiedo la tipologia
+            if ("restaurant".equalsIgnoreCase(SessionManagerSLT.getInstance().getRuolo())) {
+                System.out.println("Seleziona tipologia (VEGANO, VEGETARIANO, ONNIVORO):");
+                String tipologiaInput = scanner.nextLine().trim().toUpperCase();
+
+                TipologiaRistorante tipologia;
+                try {
+                    tipologia = TipologiaRistorante.valueOf(tipologiaInput);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Tipologia non valida, default ONNIVORO.");
+                    tipologia = TipologiaRistorante.ONNIVORO;
+                }
+
+                regController.register(bean, tipologia);
+            } else {
+                // per utenti normali
+                regController.register(bean);
+            }
+
             System.out.println("Registrazione completata!");
         } catch (Exception e) {
             System.out.println("Errore nella registrazione: " + e.getMessage());
