@@ -13,19 +13,21 @@ public class LoginController {
     private final UserDao userDao = new UserDao();
     private final RistoranteDao ristoranteDao = new RistoranteDao();
 
+    /**
+     * Esegue il login basandosi su nome/username e ruolo.
+     * Non richiede più email/password per i ristoranti.
+     */
     public boolean vallogin(UserLoginBean userBean) throws IOException {
 
-        if ("restaurant".equalsIgnoreCase(userBean.getRuolo())) {
+        String ruolo = userBean.getRuolo();
+        String username = userBean.getUsername();
+
+        if ("restaurant".equalsIgnoreCase(ruolo)) {
             List<RistoranteBean> ristoranti = ristoranteDao.leggiRistoranti();
             for (RistoranteBean r : ristoranti) {
-                if (r.getUsername().equals(userBean.getUsername()) &&
-                        r.getPassword().equals(userBean.getPassword()) &&
-                        r.getRuolo().equals(userBean.getRuolo())) {
-
-                    SessionManagerSLT.getInstance().setLoggedInUsername(r.getUsername());
-                    SessionManagerSLT.getInstance().setLoggedRole(r.getRuolo());
-                    SessionManagerSLT.getInstance().setLoggedmail(r.getEmail());
-                    SessionManagerSLT.getInstance().setLoggedpassword(r.getPassword());
+                if (r.getNome().equalsIgnoreCase(username)) { // login basato sul nome
+                    SessionManagerSLT.getInstance().setLoggedInUsername(r.getNome());
+                    SessionManagerSLT.getInstance().setLoggedRole(ruolo);
                     SessionManagerSLT.getInstance().setTipologiaRistorante(r.getTipologiaRistorante());
                     return true;
                 }
@@ -33,14 +35,9 @@ public class LoginController {
         } else {
             List<UserBeanA> utenti = userDao.leggiUtenti();
             for (UserBeanA u : utenti) {
-                if (u.getUsername().equals(userBean.getUsername()) &&
-                        u.getPassword().equals(userBean.getPassword()) &&
-                        u.getRuolo().equals(userBean.getRuolo())) {
-
+                if (u.getUsername().equals(username)) {
                     SessionManagerSLT.getInstance().setLoggedInUsername(u.getUsername());
                     SessionManagerSLT.getInstance().setLoggedRole(u.getRuolo());
-                    SessionManagerSLT.getInstance().setLoggedmail(u.getEmail());
-                    SessionManagerSLT.getInstance().setLoggedpassword(u.getPassword());
                     return true;
                 }
             }

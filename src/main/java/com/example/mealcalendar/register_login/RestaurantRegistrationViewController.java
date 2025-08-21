@@ -1,7 +1,8 @@
 package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.GraphicController;
-import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.bean.RistoranteBean;
+import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.model.TipologiaRistorante;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,26 +10,28 @@ import javafx.stage.Stage;
 
 public class RestaurantRegistrationViewController {
 
-    @FXML private TextField usernamefield;
-    @FXML private TextField emailfield;
-    @FXML private PasswordField passWordBox;
+    @FXML private TextField nameField;
+    @FXML private TextField addressField;
+    @FXML private TextField postiField;
     @FXML private Label messageLabel;
-    @FXML private Button login;
     @FXML private Button backbutton;
     @FXML private SplitMenuButton tipologia;
 
-    private TipologiaRistorante tipologiaSelezionata; // salva la scelta
+    private TipologiaRistorante tipologiaSelezionata;
+
+    private final RistoranteDao ristoranteDao = new RistoranteDao();
 
     @FXML
     public void initialize() {
-        // Popola lo SplitMenuButton con tutte le tipologie
-        for (TipologiaRistorante t : TipologiaRistorante.values()) {
-            MenuItem item = new MenuItem(t.name());
-            item.setOnAction(e -> {
-                tipologia.setText(t.name()); // mostra la scelta nel bottone
-                tipologiaSelezionata = t;    // salva la scelta
-            });
-            tipologia.getItems().add(item);
+        if (tipologia != null) {
+            for (TipologiaRistorante t : TipologiaRistorante.values()) {
+                MenuItem item = new MenuItem(t.name());
+                item.setOnAction(e -> {
+                    tipologia.setText(t.name());
+                    tipologiaSelezionata = t;
+                });
+                tipologia.getItems().add(item);
+            }
         }
     }
 
@@ -39,47 +42,42 @@ public class RestaurantRegistrationViewController {
     }
 
     @FXML
+    public void gologin() {
+        Stage stage = (Stage) backbutton.getScene().getWindow();
+        GraphicController.cambiascena(stage, "/com/example/mealcalendar/login-View.fxml");
+    }
+
+    @FXML
     public void register() {
-        String username = usernamefield.getText();
-        String email = emailfield.getText();
-        String password = passWordBox.getText();
+        String nome = nameField.getText().trim();
+        String indirizzo = addressField.getText().trim();
+        String postiText = postiField.getText().trim();
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            messageLabel.setText("Compila tutti i campi.");
+        if (nome.isEmpty() || indirizzo.isEmpty() || postiText.isEmpty()) {
+            messageLabel.setText("Compila tutti i campi obbligatori.");
             return;
         }
 
-        if ("restaurant".equalsIgnoreCase(SessionManagerSLT.getInstance().getRuolo()) && tipologiaSelezionata == null) {
-            messageLabel.setText("Seleziona una tipologia valida!");
+        int postiDisponibili;
+        try {
+            postiDisponibili = Integer.parseInt(postiText);
+        } catch (NumberFormatException e) {
+            messageLabel.setText("Numero posti non valido.");
             return;
         }
 
-        UserBeanA bean = new UserBeanA(
-                username,
-                email,
-                password,
-                SessionManagerSLT.getInstance().getRuolo()
-        );
+        if (tipologiaSelezionata == null) {
+            tipologiaSelezionata = TipologiaRistorante.ONNIVORO; // default
+        }
 
-        RegistrationController regController = new RegistrationController();
+        RistoranteBean bean = new RistoranteBean(nome, indirizzo, postiDisponibili, tipologiaSelezionata);
 
         try {
-            // Se è un ristorante, usa anche la tipologia
-            if (tipologiaSelezionata != null) {
-                regController.register(bean, tipologiaSelezionata);
-            } else {
-                regController.register(bean);
-            }
+            ristoranteDao.aggiungiRistorante(bean);
             messageLabel.setText("Registrazione completata!");
         } catch (Exception e) {
             messageLabel.setText("Errore nella registrazione.");
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    public void gologin() {
-        Stage stage = (Stage) login.getScene().getWindow();
-        GraphicController.cambiascena(stage, "/com/example/mealcalendar/login-view.fxml");
     }
 }

@@ -1,8 +1,7 @@
 package com.example.mealcalendar.cli;
 
-import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.register_login.RegistrationController;
-import com.example.mealcalendar.register_login.UserBeanA;
+import com.example.mealcalendar.dao.RistoranteDao;
+import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.model.TipologiaRistorante;
 
 import java.util.Scanner;
@@ -10,58 +9,48 @@ import java.util.Scanner;
 public class RegisterCLI {
 
     private final Scanner scanner;
+    private final RistoranteDao ristoranteDao = new RistoranteDao();
 
     public RegisterCLI(Scanner scanner) {
         this.scanner = scanner;
     }
 
     public void start() {
+        System.out.println("=== Registrazione Nuovo Ristorante ===");
 
-        System.out.println("=== Registrazione Nuovo Utente ===");
+        System.out.println("Inserisci nome del ristorante:");
+        String nome = scanner.nextLine().trim();
 
-        System.out.println("Inserisci username:");
-        String username = scanner.nextLine().trim();
+        System.out.println("Inserisci indirizzo:");
+        String indirizzo = scanner.nextLine().trim();
 
-        System.out.println("Inserisci email:");
-        String email = scanner.nextLine().trim();
-
-        System.out.println("Inserisci password:");
-        String password = scanner.nextLine().trim();
-
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            System.out.println("Compila tutti i campi.");
+        System.out.println("Inserisci numero posti disponibili:");
+        int posti;
+        try {
+            posti = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Numero posti non valido.");
             return;
         }
 
-        // Creo bean utente base
-        UserBeanA bean = new UserBeanA(username, email, password, SessionManagerSLT.getInstance().getRuolo());
-        RegistrationController regController = new RegistrationController();
+        System.out.println("Seleziona tipologia (VEGANO, VEGETARIANO, ONNIVORO):");
+        String tipologiaInput = scanner.nextLine().trim().toUpperCase();
+        TipologiaRistorante tipologia;
+        try {
+            tipologia = TipologiaRistorante.valueOf(tipologiaInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipologia non valida, default ONNIVORO.");
+            tipologia = TipologiaRistorante.ONNIVORO;
+        }
+
+        // Creazione del bean senza menu
+        RistoranteBean ristorante = new RistoranteBean(nome, indirizzo, posti, tipologia);
 
         try {
-            // Se il ruolo è "restaurant" chiedo la tipologia
-            if ("restaurant".equalsIgnoreCase(SessionManagerSLT.getInstance().getRuolo())) {
-                System.out.println("Seleziona tipologia (VEGANO, VEGETARIANO, ONNIVORO):");
-                String tipologiaInput = scanner.nextLine().trim().toUpperCase();
-
-                TipologiaRistorante tipologia;
-                try {
-                    tipologia = TipologiaRistorante.valueOf(tipologiaInput);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Tipologia non valida, default ONNIVORO.");
-                    tipologia = TipologiaRistorante.ONNIVORO;
-                }
-
-                regController.register(bean, tipologia);
-            } else {
-                // per utenti normali
-                regController.register(bean);
-            }
-
-            System.out.println("Registrazione completata!");
+            ristoranteDao.aggiungiRistorante(ristorante);
+            System.out.println("Ristorante registrato con successo!");
         } catch (Exception e) {
             System.out.println("Errore nella registrazione: " + e.getMessage());
         }
-
-        new HelloViewCLI(scanner).start();
     }
 }

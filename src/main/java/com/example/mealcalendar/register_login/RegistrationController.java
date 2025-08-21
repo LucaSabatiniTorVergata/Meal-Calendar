@@ -1,9 +1,9 @@
 package com.example.mealcalendar.register_login;
 
+import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.dao.UserDao;
 import com.example.mealcalendar.model.TipologiaRistorante;
-import com.example.mealcalendar.bean.RistoranteBean;
 
 import java.io.IOException;
 
@@ -18,14 +18,7 @@ public class RegistrationController {
     }
 
     // Registrazione ristorante
-    public void register(UserBeanA bean, TipologiaRistorante tipologia) throws IOException {
-        RistoranteBean ristoranteBean = new RistoranteBean(
-                bean.getUsername(),
-                bean.getEmail(),
-                bean.getPassword(),
-                bean.getRuolo(),
-                tipologia
-        );
+    public void registerRistorante(RistoranteBean ristoranteBean) throws IOException {
         ristoranteDao.aggiungiRistorante(ristoranteBean);
     }
 }
