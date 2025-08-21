@@ -2,6 +2,7 @@ package com.example.mealcalendar.view_controller;
 
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
 import com.example.mealcalendar.model.TipologiaRistorante;
@@ -22,7 +23,8 @@ public class PrenotazioneRistoranteViewController {
     @FXML private Button ricarica;
     @FXML private SplitMenuButton tipoSelezionato;
     @FXML private ListView<RistoranteBean> listaRistoranti;
-    @FXML private TextField orascelta;
+    @FXML private TextField orascelta;      // Ora prenotazione
+    @FXML private TextField postiASedere;    // Numero posti
 
     private TipologiaRistorante tipologiaSelezionata; // memorizza scelta filtro
 
@@ -38,7 +40,20 @@ public class PrenotazioneRistoranteViewController {
             });
             tipoSelezionato.getItems().add(item);
         }
+
+        // Impedisci selezione date passate
+        calendar.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(java.time.LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (date.isBefore(java.time.LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #ffc0cb;"); // opzionale: colore rosato per le date disabilitate
+                }
+            }
+        });
     }
+
 
     @FXML
     void confermaPrenotazione(ActionEvent event) {
@@ -53,24 +68,38 @@ public class PrenotazioneRistoranteViewController {
             return;
         }
 
-        // Prendi lo username dell'utente loggato
         String usernameUtente = SessionManagerSLT.getInstance().getLoggedInUsername();
 
-        // Nome ristorante
-        String nomeRistorante = ristoranteScelto.getNome();
+        // Lettura posti a sedere
+        int posti = 1; // default
+        if (postiASedere != null && !postiASedere.getText().isEmpty()) {
+            try {
+                posti = Integer.parseInt(postiASedere.getText());
+            } catch (NumberFormatException e) {
+                showAlert("Errore", "Inserisci un numero valido di posti a sedere!");
+                return;
+            }
+        }
 
-        // Debug
-        System.out.println("Prenotazione confermata:");
-        System.out.println("Utente: " + usernameUtente);
-        System.out.println("Ristorante: " + nomeRistorante);
-        System.out.println("Data: " + calendar.getValue());
-        System.out.println("Ora: " + orascelta.getText());
-        System.out.println("Tipologia: " + (tipologiaSelezionata != null ? tipologiaSelezionata.name() : "Nessuna"));
+        System.out.println("Posti selezionati: " + posti); // Debug
 
-        // Salva la prenotazione nel controller
-        prenotazioneController.salvaPrenotazione(usernameUtente, nomeRistorante, calendar.getValue().toString(), orascelta.getText());
+        // Creazione prenotazione
+        PrenotazioneBean prenotazione = new PrenotazioneBean(
+                null,                                // ID lo assegna il DAO
+                calendar.getValue(),                 // data prenotazione
+                calendar.getValue().plusDays(1),     // data scadenza
+                orascelta.getText(),                 // ora prenotazione
+                usernameUtente,                      // username utente
+                ristoranteScelto.getNome(),          // nome ristorante
+                posti                                 // posti a sedere
+        );
 
-        showAlert("Successo", "Prenotazione confermata per " + nomeRistorante + " da parte di " + usernameUtente);
+        prenotazioneController.salvaPrenotazione(prenotazione);
+
+        showAlert("Successo", "Prenotazione confermata per " +
+                ristoranteScelto.getNome() + " da parte di " + usernameUtente +
+                " alle ore " + orascelta.getText() +
+                " per " + posti + " persone.");
     }
 
     @FXML

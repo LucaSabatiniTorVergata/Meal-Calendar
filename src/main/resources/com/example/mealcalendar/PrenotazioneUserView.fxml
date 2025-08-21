@@ -34,6 +34,6 @@
                 <Font name="System Bold Italic" size="41.0" />
             </font>
         </Label>
-        <Button fx:id="deleteBooking" layoutX="570.0" layoutY="623.0" mnemonicParsing="false" onAction="#loadHomePageUser" text="Cancella prenotazione" />
+        <Button fx:id="deleteBooking" layoutX="570.0" layoutY="623.0" mnemonicParsing="false" onAction="#eliminaPrenotazioneSelezionata" text="Cancella prenotazione" />
     </children>
 </AnchorPane>

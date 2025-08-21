@@ -1,72 +1,130 @@
 package com.example.mealcalendar.view_controller;
 
 import com.example.mealcalendar.GraphicController;
+import com.example.mealcalendar.SessionManagerSLT;
+import com.example.mealcalendar.bean.PrenotazioneBean;
+import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class RestaurantViewController {
 
     @FXML
-    private Button deleteBooking;
-
-    @FXML
-    private Button fillfridgebutton;
-
-    @FXML
-    private Button findrecipebutton;
+    public Button deleteBooking;
 
     @FXML
     private Button homebutton;
 
     @FXML
-    private Label lableemail;
-
-    @FXML
     private ProgressIndicator loadingIndicator;
 
     @FXML
-    private ListView<?> ristorantiListView;
-
-    @FXML
-    private ListView<?> ristorantiListView1;
-
-    @FXML
-    private Button seteatingtimebutton;
+    private ListView<PrenotazioneBean> prenotazioniListView;
 
     @FXML
     private Label welcomelabel;
 
-    @FXML
-    void calendaruser(ActionEvent event) {
+    private final PrenotazioneController prenotazioneController = new PrenotazioneController();
 
+    @FXML
+    public void initialize() {
+        caricaPrenotazioniRistorante();
+
+        // Renderizza ogni prenotazione nella ListView
+        prenotazioniListView.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(PrenotazioneBean item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText("ID: " + item.getId() +
+                            " | Utente: " + item.getUsernameUtente() +
+                            " | Data: " + item.getDataPrenotazione() +
+                            " | Ora: " + item.getOraPrenotazione() +
+                            " | Posti: " + item.getPostiASedere());
+                }
+            }
+        });
     }
 
-    @FXML
-    void fridgeuser(ActionEvent event) {
+    private void caricaPrenotazioniRistorante() {
+        loadingIndicator.setVisible(true);
 
+        String nomeRistorante = SessionManagerSLT.getInstance().getLoggedInUsername(); // supponiamo username = ristorante
+        // Mostra il nome del ristorante nella welcomelabel
+        welcomelabel.setText("Ristorante: " + nomeRistorante);
+
+        // Prende tutte le prenotazioni
+        List<PrenotazioneBean> tutte = prenotazioneController.getPrenotazioni();
+
+        // Filtra solo quelle del ristorante loggato
+        List<PrenotazioneBean> filtrate = tutte.stream()
+                .filter(p -> p.getNomeRistorante().equals(nomeRistorante))
+                .toList();
+
+        prenotazioniListView.getItems().setAll(filtrate);
+
+        loadingIndicator.setVisible(false);
     }
 
     @FXML
     void handleclick(MouseEvent event) {
+        PrenotazioneBean selezionata = prenotazioniListView.getSelectionModel().getSelectedItem();
+        if (selezionata != null) {
+            System.out.println("Hai selezionato la prenotazione con ID: " + selezionata.getId() +
+                    " | Utente: " + selezionata.getUsernameUtente() +
+                    " | Posti: " + selezionata.getPostiASedere());
+        }
+    }
 
+    @FXML
+    void eliminaPrenotazioneSelezionata(ActionEvent event) {
+        PrenotazioneBean selezionata = prenotazioniListView.getSelectionModel().getSelectedItem();
+        if (selezionata == null) {
+            showAlert("Errore", "Seleziona una prenotazione da eliminare!");
+            return;
+        }
+
+        boolean conferma = confermaDialog("Conferma eliminazione",
+                "Sei sicuro di voler eliminare la prenotazione con ID: " + selezionata.getId() + "?");
+
+        if (!conferma) return;
+
+        boolean eliminata = prenotazioneController.eliminaPrenotazione(selezionata);
+        if (eliminata) {
+            prenotazioniListView.getItems().remove(selezionata);
+            showAlert("Successo", "Prenotazione eliminata correttamente!");
+        } else {
+            showAlert("Errore", "Non è stato possibile eliminare la prenotazione.");
+        }
+    }
+
+    private boolean confermaDialog(String titolo, String messaggio) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(titolo);
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+
+        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+    }
+
+    private void showAlert(String titolo, String messaggio) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titolo);
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
     }
 
     @FXML
     void loadHomePageUser(ActionEvent event) {
-
         Stage stage = (Stage) homebutton.getScene().getWindow();
         GraphicController.cambiascena(stage, "/com/example/mealcalendar/login-view.fxml");
     }
-
-    @FXML
-    void recipeuser(ActionEvent event) {
-
-    }
-
 }

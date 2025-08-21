@@ -4,85 +4,50 @@ import java.time.LocalDate;
 
 public class PrenotazioneBean {
 
-    private String idPrenotazione;
+    private Integer id;
     private LocalDate dataPrenotazione;
     private LocalDate dataScadenza;
-    private String usernameUtente;     // dal UserEntity
-    private String nomeRistorante;     // dal RistoranteEntity
+    private String oraPrenotazione;
+    private String usernameUtente;
+    private String nomeRistorante;
     private int postiASedere;
 
-    // Costruttore vuoto
-    public PrenotazioneBean() {}
-
-    // Costruttore completo
-    public PrenotazioneBean(String idPrenotazione, LocalDate dataPrenotazione, LocalDate dataScadenza,
-                            String usernameUtente, String nomeRistorante, int postiASedere) {
-        this.idPrenotazione = idPrenotazione;
+    public PrenotazioneBean(Integer id, LocalDate dataPrenotazione, LocalDate dataScadenza,
+                            String oraPrenotazione, String usernameUtente, String nomeRistorante,
+                            int postiASedere) {
+        this.id = id;
         this.dataPrenotazione = dataPrenotazione;
         this.dataScadenza = dataScadenza;
+        this.oraPrenotazione = oraPrenotazione;
         this.usernameUtente = usernameUtente;
         this.nomeRistorante = nomeRistorante;
         this.postiASedere = postiASedere;
     }
 
-    // Getter e Setter
-    public String getIdPrenotazione() {
-        return idPrenotazione;
-    }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public void setIdPrenotazione(String idPrenotazione) {
-        this.idPrenotazione = idPrenotazione;
-    }
+    public LocalDate getDataPrenotazione() { return dataPrenotazione; }
+    public void setDataPrenotazione(LocalDate dataPrenotazione) { this.dataPrenotazione = dataPrenotazione; }
 
-    public LocalDate getDataPrenotazione() {
-        return dataPrenotazione;
-    }
+    public LocalDate getDataScadenza() { return dataScadenza; }
+    public void setDataScadenza(LocalDate dataScadenza) { this.dataScadenza = dataScadenza; }
 
-    public void setDataPrenotazione(LocalDate dataPrenotazione) {
-        this.dataPrenotazione = dataPrenotazione;
-    }
+    public String getOraPrenotazione() { return oraPrenotazione; }
+    public void setOraPrenotazione(String oraPrenotazione) { this.oraPrenotazione = oraPrenotazione; }
 
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
-    }
+    public String getUsernameUtente() { return usernameUtente; }
+    public void setUsernameUtente(String usernameUtente) { this.usernameUtente = usernameUtente; }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
-    }
+    public String getNomeRistorante() { return nomeRistorante; }
+    public void setNomeRistorante(String nomeRistorante) { this.nomeRistorante = nomeRistorante; }
 
-    public String getUsernameUtente() {
-        return usernameUtente;
-    }
-
-    public void setUsernameUtente(String usernameUtente) {
-        this.usernameUtente = usernameUtente;
-    }
-
-    public String getNomeRistorante() {
-        return nomeRistorante;
-    }
-
-    public void setNomeRistorante(String nomeRistorante) {
-        this.nomeRistorante = nomeRistorante;
-    }
-
-    public int getPostiASedere() {
-        return postiASedere;
-    }
-
-    public void setPostiASedere(int postiASedere) {
-        this.postiASedere = postiASedere;
-    }
+    public int getPostiASedere() { return postiASedere; }
+    public void setPostiASedere(int postiASedere) { this.postiASedere = postiASedere; }
 
     @Override
     public String toString() {
-        return "PrenotazioneBean{" +
-                "idPrenotazione='" + idPrenotazione + '\'' +
-                ", dataPrenotazione=" + dataPrenotazione +
-                ", dataScadenza=" + dataScadenza +
-                ", usernameUtente='" + usernameUtente + '\'' +
-                ", nomeRistorante='" + nomeRistorante + '\'' +
-                ", postiASedere=" + postiASedere +
-                '}';
+        return id + ";" + dataPrenotazione + ";" + dataScadenza + ";" + oraPrenotazione + ";" +
+                usernameUtente + ";" + nomeRistorante + ";" + postiASedere;
     }
 }

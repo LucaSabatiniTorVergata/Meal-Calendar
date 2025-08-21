@@ -43,7 +43,7 @@
         </Button>
         <TextField fx:id="orascelta" layoutX="112.0" layoutY="232.0" promptText="00:00-23:59" />
       <ListView fx:id="listaRistoranti" layoutX="661.0" layoutY="148.0" prefHeight="487.0" prefWidth="549.0" />
-      <TextField fx:id="posti" layoutX="111.0" layoutY="347.0" promptText="insert the number of people" />
+      <TextField fx:id="postiASedere" layoutX="111.0" layoutY="347.0" promptText="insert the number of people" />
       <Label layoutX="111.0" layoutY="287.0" prefHeight="50.0" prefWidth="395.0" text="how many people">
          <font>
             <Font name="System Bold" size="22.0" />
