@@ -8,7 +8,8 @@ import com.example.mealcalendar.model.MealEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
+import com.example.mealcalendar.handlexceptions.DietPersistenceException;
+import com.example.mealcalendar.handlexceptions.DietNotFoundException;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -46,7 +47,7 @@ public class DietDAO {
     }
 
 
-    public void saveDiet( DietEntity diet) {
+    public void saveDiet( DietEntity diet)  throws DietPersistenceException {
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
             case RAM ->
@@ -59,7 +60,7 @@ public class DietDAO {
                 try (FileWriter writer = new FileWriter(FILE_PATH)) {
                     gson.toJson(allDiets, writer);
                 } catch (IOException e) {
-                    throw new IllegalArgumentException("Errore nel salvataggio della dieta", e);
+                    throw new DietPersistenceException("Errore nel salvataggio della dieta su FileSystem", e);
                 }
 
 
@@ -135,31 +136,32 @@ public class DietDAO {
 
 
                 } catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new IllegalArgumentException("Errore salvataggio dieta su DB", e);
+                    throw new DietPersistenceException("Errore salvataggio dieta su DB", e);
                 }
             }
         }
     }
 
 
-    public List<DietEntity> getAllDiets() {
+    public List<DietEntity> getAllDiets() throws DietNotFoundException {
 
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
 
             case RAM -> {
+                if (ramStorage.isEmpty()) {
+                    throw new DietNotFoundException("Nessuna dieta trovata in RAM");
+                }
                 return new ArrayList<>(ramStorage);
             }
-
 
             case FILESYSTEM -> {
 
                 List<DietEntity> loaded = loadAllDietsList();
-
-                // Pulisco e aggiorno la cache RAM
+                if (loaded.isEmpty()) {
+                    throw new DietNotFoundException("Nessuna dieta salvata su FileSystem");
+                }
                 ramStorage.clear();
                 ramStorage.addAll(loaded);
-
                 return loaded;
 
             }
