@@ -26,7 +26,6 @@ public class PrenotazioneDao {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(record);
             writer.newLine();
-            System.out.println("Prenotazione salvata con ID: " + prenotazione.getId());
         } catch (IOException e) {
             System.err.println("Errore durante il salvataggio della prenotazione: " + e.getMessage());
         }
@@ -44,13 +43,13 @@ public class PrenotazioneDao {
                 String[] campi = linea.split(",");
                 if (campi.length == 7) {
                     PrenotazioneBean prenotazione = new PrenotazioneBean(
-                            Integer.parseInt(campi[0]),           // id
-                            LocalDate.parse(campi[3]),           // dataPrenotazione
-                            LocalDate.parse(campi[4]),           // dataScadenza
-                            campi[5],                            // oraPrenotazione
-                            campi[1],                            // usernameUtente
-                            campi[2],                            // nomeRistorante
-                            Integer.parseInt(campi[6])           // postiASedere
+                            Integer.parseInt(campi[0]),
+                            LocalDate.parse(campi[3]),
+                            LocalDate.parse(campi[4]),
+                            campi[5],
+                            campi[1],
+                            campi[2],
+                            Integer.parseInt(campi[6])
                     );
                     prenotazioni.add(prenotazione);
                 }
@@ -86,7 +85,7 @@ public class PrenotazioneDao {
     }
 
     public boolean eliminaPrenotazione(String idPrenotazione) {
-        File file = new File(FILE_NAME); // FILE_NAME è il file dove salvi le prenotazioni
+        File file = new File(FILE_NAME);
         if (!file.exists()) return false;
 
         List<String> righe = new ArrayList<>();
@@ -95,7 +94,7 @@ public class PrenotazioneDao {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                if (!linea.startsWith(idPrenotazione + ",")) { // esclude la riga da cancellare
+                if (!linea.startsWith(idPrenotazione + ",")) {
                     righe.add(linea);
                 } else {
                     trovata = true;
@@ -120,6 +119,4 @@ public class PrenotazioneDao {
 
         return trovata;
     }
-
-
 }

@@ -36,22 +36,29 @@ public class GestisciPrenotazioneUserViewController {
 
     @FXML
     public void initialize() {
-        // carica le prenotazioni dell'utente loggato
         caricaPrenotazioniUtente();
 
-        // mostra come renderizzare ogni prenotazione nella lista
+        // Customizzazione grafica delle celle della ListView
         prenotazioniListView.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(PrenotazioneBean item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
+                    setStyle("");
                 } else {
                     setText("ID: " + item.getId() +
                             " | Ristorante: " + item.getNomeRistorante() +
                             " | Data: " + item.getDataPrenotazione() +
                             " | Ora: " + item.getOraPrenotazione() +
                             " | Posti: " + item.getPostiASedere());
+
+                    // Mostriamo in rosso le prenotazioni scadute
+                    if (item.isScaduta()) {
+                        setStyle("-fx-text-fill: red;");
+                    } else {
+                        setStyle(""); // stile di default
+                    }
                 }
             }
         });
@@ -63,7 +70,7 @@ public class GestisciPrenotazioneUserViewController {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         lableemail.setText("Utente: " + username);
 
-        // tutte le prenotazioni
+        // tutte le prenotazioni già marcate come scadute dal controller
         List<PrenotazioneBean> tutte = prenotazioneController.getPrenotazioni();
 
         // filtriamo solo quelle dell'utente corrente
@@ -72,7 +79,6 @@ public class GestisciPrenotazioneUserViewController {
                 .toList();
 
         prenotazioniListView.getItems().setAll(filtrate);
-
         loadingIndicator.setVisible(false);
     }
 

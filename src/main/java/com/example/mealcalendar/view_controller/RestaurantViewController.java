@@ -35,19 +35,24 @@ public class RestaurantViewController {
     public void initialize() {
         caricaPrenotazioniRistorante();
 
-        // Renderizza ogni prenotazione nella ListView
         prenotazioniListView.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(PrenotazioneBean item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
+                    setStyle("");
                 } else {
                     setText("ID: " + item.getId() +
                             " | Utente: " + item.getUsernameUtente() +
                             " | Data: " + item.getDataPrenotazione() +
                             " | Ora: " + item.getOraPrenotazione() +
                             " | Posti: " + item.getPostiASedere());
+                    if (item.isScaduta()) {
+                        setStyle("-fx-text-fill: red;");
+                    } else {
+                        setStyle("");
+                    }
                 }
             }
         });
@@ -56,20 +61,16 @@ public class RestaurantViewController {
     private void caricaPrenotazioniRistorante() {
         loadingIndicator.setVisible(true);
 
-        String nomeRistorante = SessionManagerSLT.getInstance().getLoggedInUsername(); // supponiamo username = ristorante
-        // Mostra il nome del ristorante nella welcomelabel
+        String nomeRistorante = SessionManagerSLT.getInstance().getLoggedInUsername();
         welcomelabel.setText("Ristorante: " + nomeRistorante);
 
-        // Prende tutte le prenotazioni
         List<PrenotazioneBean> tutte = prenotazioneController.getPrenotazioni();
 
-        // Filtra solo quelle del ristorante loggato
         List<PrenotazioneBean> filtrate = tutte.stream()
                 .filter(p -> p.getNomeRistorante().equals(nomeRistorante))
                 .toList();
 
         prenotazioniListView.getItems().setAll(filtrate);
-
         loadingIndicator.setVisible(false);
     }
 

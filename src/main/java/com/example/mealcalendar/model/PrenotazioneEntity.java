@@ -4,32 +4,35 @@ import java.time.LocalDate;
 
 public class PrenotazioneEntity {
 
-    private String idPrenotazione;
+    private Integer id; // allineato a PrenotazioneBean
     private LocalDate dataPrenotazione;
     private LocalDate dataScadenza;
-    private String oraPrenotazione; // nuovo attributo
-    private UserEntity utente;
-    private RistoranteEntity ristorante;
+    private String oraPrenotazione;
+    private String usernameUtente;    // allineato alla Bean
+    private String nomeRistorante;    // allineato alla Bean
     private int postiASedere;
+    private boolean scaduta;          // aggiunto per allineamento
 
     // Costruttore vuoto
     public PrenotazioneEntity() {}
 
     // Costruttore completo
-    public PrenotazioneEntity(String idPrenotazione, LocalDate dataPrenotazione, LocalDate dataScadenza,
-                              String oraPrenotazione, UserEntity utente, RistoranteEntity ristorante, int postiASedere) {
-        this.idPrenotazione = idPrenotazione;
+    public PrenotazioneEntity(Integer id, LocalDate dataPrenotazione, LocalDate dataScadenza,
+                              String oraPrenotazione, String usernameUtente, String nomeRistorante,
+                              int postiASedere) {
+        this.id = id;
         this.dataPrenotazione = dataPrenotazione;
         this.dataScadenza = dataScadenza;
         this.oraPrenotazione = oraPrenotazione;
-        this.utente = utente;
-        this.ristorante = ristorante;
+        this.usernameUtente = usernameUtente;
+        this.nomeRistorante = nomeRistorante;
         this.postiASedere = postiASedere;
+        this.scaduta = false;
     }
 
     // Getter e Setter
-    public String getIdPrenotazione() { return idPrenotazione; }
-    public void setIdPrenotazione(String idPrenotazione) { this.idPrenotazione = idPrenotazione; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public LocalDate getDataPrenotazione() { return dataPrenotazione; }
     public void setDataPrenotazione(LocalDate dataPrenotazione) { this.dataPrenotazione = dataPrenotazione; }
@@ -40,24 +43,28 @@ public class PrenotazioneEntity {
     public String getOraPrenotazione() { return oraPrenotazione; }
     public void setOraPrenotazione(String oraPrenotazione) { this.oraPrenotazione = oraPrenotazione; }
 
-    public UserEntity getUtente() { return utente; }
-    public void setUtente(UserEntity utente) { this.utente = utente; }
+    public String getUsernameUtente() { return usernameUtente; }
+    public void setUsernameUtente(String usernameUtente) { this.usernameUtente = usernameUtente; }
 
-    public RistoranteEntity getRistorante() { return ristorante; }
-    public void setRistorante(RistoranteEntity ristorante) { this.ristorante = ristorante; }
+    public String getNomeRistorante() { return nomeRistorante; }
+    public void setNomeRistorante(String nomeRistorante) { this.nomeRistorante = nomeRistorante; }
 
     public int getPostiASedere() { return postiASedere; }
     public void setPostiASedere(int postiASedere) { this.postiASedere = postiASedere; }
 
-    // Metodo per dettagli
+    public boolean isScaduta() { return scaduta; }
+    public void setScaduta(boolean scaduta) { this.scaduta = scaduta; }
+
+    // Metodo per dettagli (allineato)
     public String dettagliPrenotazione() {
-        return "Prenotazione [ID=" + idPrenotazione +
+        return "Prenotazione [ID=" + id +
                 ", Data Prenotazione=" + dataPrenotazione +
                 ", Ora=" + oraPrenotazione +
                 ", Data Scadenza=" + dataScadenza +
-                ", Utente=" + (utente != null ? utente.getNome() : "N/A") +
-                ", Ristorante=" + (ristorante != null ? ristorante.getNome() : "N/A") +
+                ", Utente=" + usernameUtente +
+                ", Ristorante=" + nomeRistorante +
                 ", Posti a sedere=" + postiASedere +
+                ", Scaduta=" + scaduta +
                 "]";
     }
 }

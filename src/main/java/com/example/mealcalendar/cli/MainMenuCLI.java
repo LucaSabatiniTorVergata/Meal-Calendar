@@ -21,7 +21,7 @@ public class MainMenuCLI {
 
         ReportRequestDAO.getInstance().getAll();
         UserDietDAO.getInstance().getAllUsers();
-        DietDAO.getInstance().getAllDiets();
+        //DietDAO.getInstance().getAllDiets();
 
         while (true) {
 

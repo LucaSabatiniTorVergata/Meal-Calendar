@@ -180,7 +180,7 @@ public class MainMenuViewController {
 
         ReportRequestDAO.getInstance().getAll();
         UserDietDAO.getInstance().getAllUsers();
-        DietDAO.getInstance().getAllDiets();
+        //DietDAO.getInstance().getAllDiets();
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         String role=SessionManagerSLT.getInstance().getLoggedRole();
         if (username != null) {

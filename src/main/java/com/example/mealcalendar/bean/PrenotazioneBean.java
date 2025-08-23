@@ -11,6 +11,7 @@ public class PrenotazioneBean {
     private String usernameUtente;
     private String nomeRistorante;
     private int postiASedere;
+    private boolean scaduta; // flag per prenotazioni scadute
 
     public PrenotazioneBean(Integer id, LocalDate dataPrenotazione, LocalDate dataScadenza,
                             String oraPrenotazione, String usernameUtente, String nomeRistorante,
@@ -22,6 +23,7 @@ public class PrenotazioneBean {
         this.usernameUtente = usernameUtente;
         this.nomeRistorante = nomeRistorante;
         this.postiASedere = postiASedere;
+        this.scaduta = false;
     }
 
     public Integer getId() { return id; }
@@ -44,6 +46,9 @@ public class PrenotazioneBean {
 
     public int getPostiASedere() { return postiASedere; }
     public void setPostiASedere(int postiASedere) { this.postiASedere = postiASedere; }
+
+    public boolean isScaduta() { return scaduta; }
+    public void setScaduta(boolean scaduta) { this.scaduta = scaduta; }
 
     @Override
     public String toString() {
