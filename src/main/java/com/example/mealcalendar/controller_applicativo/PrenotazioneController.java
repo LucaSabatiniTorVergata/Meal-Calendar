@@ -4,9 +4,12 @@ import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.PrenotazioneDao;
 import com.example.mealcalendar.dao.RistoranteDao;
+import com.example.mealcalendar.factory.PrenotazioneFactory;
+import com.example.mealcalendar.model.PrenotazioneEntity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PrenotazioneController {
 
@@ -17,23 +20,26 @@ public class PrenotazioneController {
         return ristoranteDao.leggiRistoranti();
     }
 
-    public void salvaPrenotazione(PrenotazioneBean prenotazione) {
-        prenotazioneDao.salvaPrenotazione(prenotazione);
+    public void salvaPrenotazione(PrenotazioneBean prenotazioneBean) {
+        PrenotazioneEntity entity = PrenotazioneFactory.beanToEntity(prenotazioneBean);
+        prenotazioneDao.salvaPrenotazione(entity);
     }
 
     public List<PrenotazioneBean> getPrenotazioni() {
-        List<PrenotazioneBean> prenotazioni = prenotazioneDao.leggiPrenotazioni();
+        List<PrenotazioneEntity> entities = prenotazioneDao.leggiPrenotazioni();
         LocalDate oggi = LocalDate.now();
 
-        for (PrenotazioneBean p : prenotazioni) {
-            p.setScaduta(p.getDataPrenotazione().isBefore(oggi));
+        for (PrenotazioneEntity e : entities) {
+            e.setScaduta(e.getDataPrenotazione().isBefore(oggi));
         }
 
-        return prenotazioni;
+        return entities.stream()
+                .map(PrenotazioneFactory::entityToBean)
+                .collect(Collectors.toList());
     }
 
-    public boolean eliminaPrenotazione(PrenotazioneBean prenotazione) {
-        if (prenotazione == null) return false;
-        return prenotazioneDao.eliminaPrenotazione(String.valueOf(prenotazione.getId()));
+    public boolean eliminaPrenotazione(PrenotazioneBean prenotazioneBean) {
+        if (prenotazioneBean == null) return false;
+        return prenotazioneDao.eliminaPrenotazione(String.valueOf(prenotazioneBean.getId()));
     }
 }

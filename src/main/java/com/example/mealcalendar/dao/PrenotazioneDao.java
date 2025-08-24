@@ -1,6 +1,6 @@
 package com.example.mealcalendar.dao;
 
-import com.example.mealcalendar.bean.PrenotazioneBean;
+import com.example.mealcalendar.model.PrenotazioneEntity;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ public class PrenotazioneDao {
 
     private static final String FILE_NAME = "prenotazioni.txt";
 
-    public void salvaPrenotazione(PrenotazioneBean prenotazione) {
+    public void salvaPrenotazione(PrenotazioneEntity prenotazione) {
         int nuovoId = getUltimoId() + 1;
         prenotazione.setId(nuovoId);
 
@@ -31,8 +31,8 @@ public class PrenotazioneDao {
         }
     }
 
-    public List<PrenotazioneBean> leggiPrenotazioni() {
-        List<PrenotazioneBean> prenotazioni = new ArrayList<>();
+    public List<PrenotazioneEntity> leggiPrenotazioni() {
+        List<PrenotazioneEntity> prenotazioni = new ArrayList<>();
         File file = new File(FILE_NAME);
 
         if (!file.exists()) return prenotazioni;
@@ -42,7 +42,7 @@ public class PrenotazioneDao {
             while ((linea = br.readLine()) != null) {
                 String[] campi = linea.split(",");
                 if (campi.length == 7) {
-                    PrenotazioneBean prenotazione = new PrenotazioneBean(
+                    PrenotazioneEntity prenotazione = new PrenotazioneEntity(
                             Integer.parseInt(campi[0]),
                             LocalDate.parse(campi[3]),
                             LocalDate.parse(campi[4]),
