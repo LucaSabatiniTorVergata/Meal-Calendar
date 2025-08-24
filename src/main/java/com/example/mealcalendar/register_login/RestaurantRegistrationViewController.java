@@ -2,7 +2,6 @@ package com.example.mealcalendar.register_login;
 
 import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.bean.RistoranteBean;
-import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.model.TipologiaRistorante;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,7 +18,8 @@ public class RestaurantRegistrationViewController {
 
     private TipologiaRistorante tipologiaSelezionata;
 
-    private final RistoranteDao ristoranteDao = new RistoranteDao();
+    // Invece di RistoranteDao, usiamo RegistrationController
+    private final RegistrationController registrationController = new RegistrationController();
 
     @FXML
     public void initialize() {
@@ -73,7 +73,7 @@ public class RestaurantRegistrationViewController {
         RistoranteBean bean = new RistoranteBean(nome, indirizzo, postiDisponibili, tipologiaSelezionata);
 
         try {
-            ristoranteDao.aggiungiRistorante(bean);
+            registrationController.registerRistorante(bean); // *** USO DEL CONTROLLER ***
             messageLabel.setText("Registrazione completata!");
         } catch (Exception e) {
             messageLabel.setText("Errore nella registrazione.");

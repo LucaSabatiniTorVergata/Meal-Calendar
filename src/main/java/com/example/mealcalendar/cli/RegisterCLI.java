@@ -2,6 +2,7 @@ package com.example.mealcalendar.cli;
 
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.bean.RistoranteBean;
+import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.TipologiaRistorante;
 
 import java.util.Scanner;
@@ -43,11 +44,12 @@ public class RegisterCLI {
             tipologia = TipologiaRistorante.ONNIVORO;
         }
 
-        // Creazione del bean senza menu
-        RistoranteBean ristorante = new RistoranteBean(nome, indirizzo, posti, tipologia);
+        // Creazione Bean
+        RistoranteBean ristoranteBean = new RistoranteBean(nome, indirizzo, posti, tipologia);
 
         try {
-            ristoranteDao.aggiungiRistorante(ristorante);
+            // Conversione Bean -> Entity e salvataggio
+            ristoranteDao.aggiungiRistorante(RistoranteFactory.beanToEntity(ristoranteBean));
             System.out.println("Ristorante registrato con successo!");
         } catch (Exception e) {
             System.out.println("Errore nella registrazione: " + e.getMessage());

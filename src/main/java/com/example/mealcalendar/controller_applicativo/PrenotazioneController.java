@@ -5,7 +5,9 @@ import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.PrenotazioneDao;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.factory.PrenotazioneFactory;
+import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.PrenotazioneEntity;
+import com.example.mealcalendar.model.RistoranteEntity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +19,8 @@ public class PrenotazioneController {
     private final PrenotazioneDao prenotazioneDao = new PrenotazioneDao();
 
     public List<RistoranteBean> getRistoranti() {
-        return ristoranteDao.leggiRistoranti();
+        List<RistoranteEntity> entities = ristoranteDao.leggiRistoranti();
+        return RistoranteFactory.entitiesToBeans(entities);
     }
 
     public void salvaPrenotazione(PrenotazioneBean prenotazioneBean) {

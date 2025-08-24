@@ -4,28 +4,31 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.dao.UserDao;
+import com.example.mealcalendar.factory.RistoranteFactory;
+import com.example.mealcalendar.model.RistoranteEntity;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginController {
 
     private final UserDao userDao = new UserDao();
     private final RistoranteDao ristoranteDao = new RistoranteDao();
 
-    /**
-     * Esegue il login basandosi su nome/username e ruolo.
-     * Non richiede più email/password per i ristoranti.
-     */
     public boolean vallogin(UserLoginBean userBean) {
         try {
             String ruolo = userBean.getRuolo();
             String username = userBean.getUsername();
 
             if ("restaurant".equalsIgnoreCase(ruolo)) {
-                List<RistoranteBean> ristoranti = ristoranteDao.leggiRistoranti();
+                // Leggi gli entity e convertili in bean
+                List<RistoranteBean> ristoranti = ristoranteDao.leggiRistoranti()
+                        .stream()
+                        .map(RistoranteFactory::entityToBean)
+                        .collect(Collectors.toList());
+
                 for (RistoranteBean r : ristoranti) {
-                    if (r.getNome().equalsIgnoreCase(username)) { // login basato sul nome
+                    if (r.getNome().equalsIgnoreCase(username)) {
                         SessionManagerSLT.getInstance().setLoggedInUsername(r.getNome());
                         SessionManagerSLT.getInstance().setLoggedRole(ruolo);
                         SessionManagerSLT.getInstance().setTipologiaRistorante(r.getTipologiaRistorante());
