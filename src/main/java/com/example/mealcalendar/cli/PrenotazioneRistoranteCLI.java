@@ -76,9 +76,11 @@ public class PrenotazioneRistoranteCLI {
                 System.out.println("Filtro impostato su: " + tipi[scelta - 1]);
                 return tipi[scelta - 1];
             }
-        } catch (NumberFormatException ignored) { }
+        } catch (NumberFormatException e) {
+            // Input non valido, il filtro non verrà applicato
+            System.out.println("Scelta non valida. Nessun filtro applicato.");
+        }
 
-        System.out.println("Scelta non valida. Nessun filtro applicato.");
         return null;
     }
 
