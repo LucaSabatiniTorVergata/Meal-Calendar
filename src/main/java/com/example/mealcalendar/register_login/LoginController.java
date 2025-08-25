@@ -21,18 +21,15 @@ public class LoginController {
         String ruolo = userBean.getRuolo();
         String username = userBean.getUsername();
 
-        try {
-            if ("restaurant".equalsIgnoreCase(ruolo)) {
-                return loginRistorante(username, ruolo);
-            } else {
-                return loginUtente(username);
-            }
-        } catch (IOException e) {
-            throw new LoginException("Errore I/O durante il login", e);
+        if ("restaurant".equalsIgnoreCase(ruolo)) {
+            return loginRistorante(username, ruolo);
+        } else {
+            return loginUtente(username);
         }
     }
 
-    private boolean loginRistorante(String username, String ruolo) throws IOException, LoginException {
+
+    private boolean loginRistorante(String username, String ruolo) throws LoginException {
         List<RistoranteEntity> entities = new ArrayList<>(ristoranteDao.leggiRistoranti());
 
         if (isRamAndEmpty(entities)) {
@@ -54,6 +51,7 @@ public class LoginController {
 
         throw new LoginException("Ristorante con username " + username + " non trovato.");
     }
+
 
     private boolean loginUtente(String username) throws LoginException {
         List<UserBeanA> utenti = userDao.leggiUtenti();
