@@ -3,10 +3,13 @@ package com.example.mealcalendar.factory;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.model.RistoranteEntity;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class RistoranteFactory {
+public final class RistoranteFactory {
+
+    // Costruttore privato per impedire istanziazioni
+    private RistoranteFactory() {}
 
     public static RistoranteEntity beanToEntity(RistoranteBean bean) {
         if (bean == null) return null;
@@ -29,9 +32,9 @@ public class RistoranteFactory {
     }
 
     public static List<RistoranteBean> entitiesToBeans(List<RistoranteEntity> entities) {
-        if (entities == null) return null;
+        if (entities == null || entities.isEmpty()) return Collections.emptyList();
         return entities.stream()
                 .map(RistoranteFactory::entityToBean)
-                .collect(Collectors.toList());
+                .toList(); // lista immutabile moderna
     }
 }

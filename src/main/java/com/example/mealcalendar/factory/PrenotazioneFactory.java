@@ -5,6 +5,11 @@ import com.example.mealcalendar.model.PrenotazioneEntity;
 
 public class PrenotazioneFactory {
 
+    // Costruttore privato per impedire l'instanziazione
+    private PrenotazioneFactory() {
+        // Intenzionalmente vuoto
+    }
+
     public static PrenotazioneEntity beanToEntity(PrenotazioneBean bean) {
         if (bean == null) return null;
         PrenotazioneEntity entity = new PrenotazioneEntity();

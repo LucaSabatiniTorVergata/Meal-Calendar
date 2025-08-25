@@ -8,8 +8,8 @@ import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.RistoranteEntity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LoginController {
 
@@ -34,7 +34,7 @@ public class LoginController {
     }
 
     private boolean loginRistorante(String username, String ruolo) throws IOException {
-        List<RistoranteEntity> entities = ristoranteDao.leggiRistoranti();
+        List<RistoranteEntity> entities = new ArrayList<>(ristoranteDao.leggiRistoranti());
 
         if (isRamAndEmpty(entities)) {
             RistoranteEntity demo = creaRistoranteDemo(username);
@@ -42,9 +42,10 @@ public class LoginController {
             entities.add(demo);
         }
 
+        // Usa Stream.toList() per ottenere una lista immutabile
         List<RistoranteBean> ristoranti = entities.stream()
                 .map(RistoranteFactory::entityToBean)
-                .collect(Collectors.toList());
+                .toList();
 
         for (RistoranteBean r : ristoranti) {
             if (r.getNome().equalsIgnoreCase(username)) {
