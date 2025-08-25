@@ -1,0 +1,23 @@
+CREATE TABLE diets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  descrizione TEXT,
+  durata INT NOT NULL,
+  nutritionist_username VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE diet_days (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  diet_id INT NOT NULL,
+  giorno INT NOT NULL,
+  FOREIGN KEY (diet_id) REFERENCES diets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE meals (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  day_id INT NOT NULL,
+  nome VARCHAR(255) NOT NULL,
+  descrizione TEXT,
+  kcal INT NOT NULL,
+  FOREIGN KEY (day_id) REFERENCES diet_days(id) ON DELETE CASCADE
+);
