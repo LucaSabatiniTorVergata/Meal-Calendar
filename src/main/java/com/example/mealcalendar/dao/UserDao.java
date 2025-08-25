@@ -9,13 +9,13 @@ import java.util.List;
 public class UserDao {
 
     private String getFilenameByRole(String role) {
-        switch (role) {
-            case "nutritionist":
-                return "nutritionists.txt";
-            default:
-                return "users.txt";
+        if ("nutritionist".equals(role)) {
+            return "nutritionists.txt";
+        } else {
+            return "users.txt";
         }
     }
+
 
     public void saveUser(UserBeanA bean) throws IOException {
         String filename = getFilenameByRole(bean.getRuolo());

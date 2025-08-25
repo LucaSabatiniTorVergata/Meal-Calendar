@@ -7,6 +7,7 @@ import com.example.mealcalendar.dao.UserDao;
 import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.RistoranteEntity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,51 +22,65 @@ public class LoginController {
             String username = userBean.getUsername();
 
             if ("restaurant".equalsIgnoreCase(ruolo)) {
-                // Leggi tutti gli entity dal DAO (RAM o file a seconda della sessione)
-                List<RistoranteEntity> entities = ristoranteDao.leggiRistoranti();
-
-                // Se siamo in RAM e la lista è vuota, aggiungi un ristorante demo temporaneo
-                if (SessionManagerSLT.getInstance().getPersistenceType() != null &&
-                        SessionManagerSLT.getInstance().getPersistenceType().name().equals("RAM") &&
-                        entities.isEmpty()) {
-                    RistoranteEntity demo = new RistoranteEntity();
-                    demo.setNome(username); // il nome che cerca l'utente
-                    demo.setIndirizzo("Demo Address");
-                    demo.setPostiDisponibili(50);
-                    demo.setTipologiaRistorante(com.example.mealcalendar.model.TipologiaRistorante.ONNIVORO);
-                    ristoranteDao.aggiungiRistorante(demo);
-                    entities.add(demo);
-                }
-
-                // Converte tutto in Bean per sessione
-                List<RistoranteBean> ristoranti = entities.stream()
-                        .map(RistoranteFactory::entityToBean)
-                        .collect(Collectors.toList());
-
-                for (RistoranteBean r : ristoranti) {
-                    if (r.getNome().equalsIgnoreCase(username)) {
-                        SessionManagerSLT.getInstance().setLoggedInUsername(r.getNome());
-                        SessionManagerSLT.getInstance().setLoggedRole(ruolo);
-                        SessionManagerSLT.getInstance().setTipologiaRistorante(r.getTipologiaRistorante());
-                        return true;
-                    }
-                }
+                return loginRistorante(username, ruolo);
             } else {
-                List<UserBeanA> utenti = userDao.leggiUtenti();
-                for (UserBeanA u : utenti) {
-                    if (u.getUsername().equals(username)) {
-                        SessionManagerSLT.getInstance().setLoggedInUsername(u.getUsername());
-                        SessionManagerSLT.getInstance().setLoggedRole(u.getRuolo());
-                        return true;
-                    }
-                }
+                return loginUtente(username);
             }
-
-            return false;
         } catch (Exception e) {
             System.err.println("Errore durante il login: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
+    }
+
+    private boolean loginRistorante(String username, String ruolo) throws IOException {
+        List<RistoranteEntity> entities = ristoranteDao.leggiRistoranti();
+
+        if (isRamAndEmpty(entities)) {
+            RistoranteEntity demo = creaRistoranteDemo(username);
+            ristoranteDao.aggiungiRistorante(demo);
+            entities.add(demo);
+        }
+
+        List<RistoranteBean> ristoranti = entities.stream()
+                .map(RistoranteFactory::entityToBean)
+                .collect(Collectors.toList());
+
+        for (RistoranteBean r : ristoranti) {
+            if (r.getNome().equalsIgnoreCase(username)) {
+                SessionManagerSLT.getInstance().setLoggedInUsername(r.getNome());
+                SessionManagerSLT.getInstance().setLoggedRole(ruolo);
+                SessionManagerSLT.getInstance().setTipologiaRistorante(r.getTipologiaRistorante());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean loginUtente(String username) {
+        List<UserBeanA> utenti = userDao.leggiUtenti();
+        for (UserBeanA u : utenti) {
+            if (u.getUsername().equals(username)) {
+                SessionManagerSLT.getInstance().setLoggedInUsername(u.getUsername());
+                SessionManagerSLT.getInstance().setLoggedRole(u.getRuolo());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isRamAndEmpty(List<RistoranteEntity> entities) {
+        return SessionManagerSLT.getInstance().getPersistenceType() != null &&
+                "RAM".equals(SessionManagerSLT.getInstance().getPersistenceType().name()) &&
+                entities.isEmpty();
+    }
+
+    private RistoranteEntity creaRistoranteDemo(String username) {
+        RistoranteEntity demo = new RistoranteEntity();
+        demo.setNome(username);
+        demo.setIndirizzo("Demo Address");
+        demo.setPostiDisponibili(50);
+        demo.setTipologiaRistorante(com.example.mealcalendar.model.TipologiaRistorante.ONNIVORO);
+        return demo;
     }
 }

@@ -2,6 +2,7 @@ package com.example.mealcalendar.cli;
 
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.controller_applicativo.FollowDietController;
+import com.example.mealcalendar.handlexceptions.DietNotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class ResultsoDietCLI {
         this.scanner = scanner;
     }
 
-    public void start() {
+    public void start() throws DietNotFoundException {
         FollowDietController controller = new FollowDietController();
         List<String> resoconto = controller.generaResoconto();
 

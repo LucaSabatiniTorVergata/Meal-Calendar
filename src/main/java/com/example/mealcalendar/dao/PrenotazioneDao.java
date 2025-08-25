@@ -12,6 +12,7 @@ public class PrenotazioneDao {
 
     private static final String FILE_NAME = "prenotazioni.txt";
     private static final List<PrenotazioneEntity> ramPrenotazioni = new ArrayList<>();
+    private static final String ERR_LETTURA_FILE = "Errore lettura file prenotazioni: ";
 
     public void salvaPrenotazione(PrenotazioneEntity prenotazione) {
         if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
@@ -67,7 +68,7 @@ public class PrenotazioneDao {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Errore lettura file prenotazioni: " + e.getMessage());
+            System.err.println(ERR_LETTURA_FILE + e.getMessage());
         }
 
         return prenotazioni;
@@ -82,7 +83,7 @@ public class PrenotazioneDao {
             String linea;
             while ((linea = br.readLine()) != null) ultimaRiga = linea;
         } catch (IOException e) {
-            System.err.println("Errore lettura file prenotazioni: " + e.getMessage());
+            System.err.println(ERR_LETTURA_FILE + e.getMessage());
         }
 
         if (ultimaRiga != null) {
@@ -117,7 +118,7 @@ public class PrenotazioneDao {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Errore lettura file prenotazioni: " + e.getMessage());
+            System.err.println(ERR_LETTURA_FILE + e.getMessage());
             return false;
         }
 

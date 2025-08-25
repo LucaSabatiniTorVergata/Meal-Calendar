@@ -3,6 +3,7 @@ package com.example.mealcalendar.cli;
 
 import com.example.mealcalendar.bean.ReportReponseBean;
 import com.example.mealcalendar.controller_applicativo.RequestNutritionsReportController;
+import com.example.mealcalendar.handlexceptions.DietNotFoundException;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ public class UserReportCLI {
         this.controller = new RequestNutritionsReportController();
     }
 
-    public void start() {
+    public void start() throws DietNotFoundException {
 
         System.out.println("=== Visualizza il resoconto del nutrizionista ===");
 

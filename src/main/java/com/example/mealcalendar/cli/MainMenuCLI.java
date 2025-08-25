@@ -75,7 +75,7 @@ public class MainMenuCLI {
         return true;
     }
 
-    private void handleChoice(String ruolo, String scelta) {
+    private void handleChoice(String ruolo, String scelta) throws DietNotFoundException {
         switch (ruolo) {
             case "user" -> handleUserChoice(scelta);
             case "nutritionist" -> handleNutritionistChoice(scelta);
@@ -84,7 +84,7 @@ public class MainMenuCLI {
         }
     }
 
-    private void handleUserChoice(String scelta) {
+    private void handleUserChoice(String scelta) throws DietNotFoundException {
         switch (scelta) {
             case "1" -> new FollowDietCLI(scanner).start();
             case "2" -> new InsertMealCLI(scanner).start();
@@ -99,7 +99,7 @@ public class MainMenuCLI {
         }
     }
 
-    private void handleNutritionistChoice(String scelta) {
+    private void handleNutritionistChoice(String scelta) throws DietNotFoundException {
         switch (scelta) {
             case "1" -> new AddDietCLI(scanner).start();
             case "2" -> new ViewAnsByNutritionistCLI(scanner).start();
