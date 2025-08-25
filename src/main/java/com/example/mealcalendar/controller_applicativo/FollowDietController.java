@@ -10,7 +10,6 @@ import com.example.mealcalendar.model.*;
 import com.example.mealcalendar.register_login.LoginController;
 import com.example.mealcalendar.register_login.UserLoginBean;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class FollowDietController {
     public FollowDietController(){
     }
 
-    public void assignDiet() throws IOException {
+    public void assignDiet() {
 
         UserLoginBean logus=new UserLoginBean(userlog.getNome(), SessionManagerSLT.getInstance().getLoggedpassword(), userlog.getRuolo());
 

@@ -5,7 +5,6 @@ import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.dao.UserDao;
 import com.example.mealcalendar.factory.RistoranteFactory;
-import com.example.mealcalendar.model.RistoranteEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;

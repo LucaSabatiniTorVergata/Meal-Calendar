@@ -4,8 +4,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
-
-import java.io.IOException;
+import com.example.mealcalendar.handlexceptions.DietNotFoundException;
 import java.util.Scanner;
 
 
@@ -17,11 +16,11 @@ public class MainMenuCLI {
         this.scanner = scanner;
     }
 
-    public void start() {
+    public void start() throws DietNotFoundException {
 
         ReportRequestDAO.getInstance().getAll();
         UserDietDAO.getInstance().getAllUsers();
-        //DietDAO.getInstance().getAllDiets();
+        DietDAO.getInstance().getAllDiets();
 
         while (true) {
 
@@ -76,7 +75,7 @@ public class MainMenuCLI {
         return true;
     }
 
-    private void handleChoice(String ruolo, String scelta) throws IOException {
+    private void handleChoice(String ruolo, String scelta) {
         switch (ruolo) {
             case "user" -> handleUserChoice(scelta);
             case "nutritionist" -> handleNutritionistChoice(scelta);
@@ -85,7 +84,7 @@ public class MainMenuCLI {
         }
     }
 
-    private void handleUserChoice(String scelta) throws IOException {
+    private void handleUserChoice(String scelta) {
         switch (scelta) {
             case "1" -> new FollowDietCLI(scanner).start();
             case "2" -> new InsertMealCLI(scanner).start();

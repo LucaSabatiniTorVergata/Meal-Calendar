@@ -5,7 +5,7 @@ import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.UserBean;
 import com.example.mealcalendar.controller_applicativo.FollowDietController;
 
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ public class FollowDietCLI {
         this.scanner = scanner;
     }
 
-    public void start() throws IOException {
+    public void start()  {
 
         FollowDietController controller = new FollowDietController();
 
