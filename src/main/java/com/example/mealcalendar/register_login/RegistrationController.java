@@ -3,7 +3,7 @@ package com.example.mealcalendar.register_login;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.dao.UserDao;
-import com.example.mealcalendar.model.TipologiaRistorante;
+
 
 import java.io.IOException;
 

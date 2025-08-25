@@ -1,7 +1,6 @@
 package com.example.mealcalendar.cli;
 
 import com.example.mealcalendar.SessionManagerSLT;
-import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
 
