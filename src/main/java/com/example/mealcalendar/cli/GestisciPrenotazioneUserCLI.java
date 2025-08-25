@@ -3,6 +3,7 @@ package com.example.mealcalendar.cli;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class GestisciPrenotazioneUserCLI {
     private final PrenotazioneController prenotazioneController = new PrenotazioneController();
     private final Scanner scanner = new Scanner(System.in);
 
-    public void start() {
+    public void start() throws PrenotazioneException {
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
         System.out.println("Benvenuto " + username + "!");
         boolean exit = false;
@@ -37,7 +38,7 @@ public class GestisciPrenotazioneUserCLI {
         System.out.println("Arrivederci!");
     }
 
-    private void mostraPrenotazioniUtente(String username) {
+    private void mostraPrenotazioniUtente(String username) throws PrenotazioneException {
         List<PrenotazioneBean> tutte = prenotazioneController.getPrenotazioni();
 
         List<PrenotazioneBean> filtrate = tutte.stream()
@@ -57,7 +58,7 @@ public class GestisciPrenotazioneUserCLI {
         }
     }
 
-    private void eliminaPrenotazioneUtente(String username) {
+    private void eliminaPrenotazioneUtente(String username) throws PrenotazioneException {
         List<PrenotazioneBean> tutte = prenotazioneController.getPrenotazioni();
         List<PrenotazioneBean> filtrate = tutte.stream()
                 .filter(p -> p.getUsernameUtente().equals(username))
@@ -102,7 +103,7 @@ public class GestisciPrenotazioneUserCLI {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PrenotazioneException {
         GestisciPrenotazioneUserCLI cli = new GestisciPrenotazioneUserCLI();
         cli.start();
     }

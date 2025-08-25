@@ -4,6 +4,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
+import com.example.mealcalendar.exception.LoginException;
 import com.example.mealcalendar.handlexceptions.DietNotFoundException;
 import java.util.Scanner;
 
@@ -75,7 +76,7 @@ public class MainMenuCLI {
         return true;
     }
 
-    private void handleChoice(String ruolo, String scelta) throws DietNotFoundException {
+    private void handleChoice(String ruolo, String scelta) throws DietNotFoundException, LoginException {
         switch (ruolo) {
             case "user" -> handleUserChoice(scelta);
             case "nutritionist" -> handleNutritionistChoice(scelta);
@@ -84,7 +85,7 @@ public class MainMenuCLI {
         }
     }
 
-    private void handleUserChoice(String scelta) throws DietNotFoundException {
+    private void handleUserChoice(String scelta) throws DietNotFoundException, LoginException {
         switch (scelta) {
             case "1" -> new FollowDietCLI(scanner).start();
             case "2" -> new InsertMealCLI(scanner).start();

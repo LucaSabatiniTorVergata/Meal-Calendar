@@ -6,6 +6,7 @@ import com.example.mealcalendar.bean.*;
 import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.DietTakenDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
+import com.example.mealcalendar.exception.LoginException;
 import com.example.mealcalendar.model.*;
 import com.example.mealcalendar.register_login.LoginController;
 import com.example.mealcalendar.register_login.UserLoginBean;
@@ -29,7 +30,7 @@ public class FollowDietController {
     public FollowDietController(){
     }
 
-    public void assignDiet() {
+    public void assignDiet() throws LoginException {
 
         UserLoginBean logus=new UserLoginBean(userlog.getNome(), SessionManagerSLT.getInstance().getLoggedpassword(), userlog.getRuolo());
 

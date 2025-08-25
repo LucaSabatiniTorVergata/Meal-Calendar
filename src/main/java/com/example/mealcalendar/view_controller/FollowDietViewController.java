@@ -5,6 +5,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.UserBean;
 import com.example.mealcalendar.controller_applicativo.FollowDietController;
+import com.example.mealcalendar.exception.LoginException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -53,7 +54,7 @@ public class FollowDietViewController {
     }
 
     @FXML
-    private void confirmSelection() {
+    private void confirmSelection() throws LoginException {
 
         UserBean userBean=new UserBean(SessionManagerSLT.getInstance().getLoggedInUsername(),SessionManagerSLT.getInstance().getLoggedmail(), SessionManagerSLT.getInstance().getLoggedRole());
 

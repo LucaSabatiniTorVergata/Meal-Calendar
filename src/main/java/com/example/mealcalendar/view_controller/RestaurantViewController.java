@@ -4,6 +4,7 @@ import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,7 +33,7 @@ public class RestaurantViewController {
     private final PrenotazioneController prenotazioneController = new PrenotazioneController();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws PrenotazioneException {
         caricaPrenotazioniRistorante();
 
         prenotazioniListView.setCellFactory(lv -> new ListCell<>() {
@@ -58,7 +59,7 @@ public class RestaurantViewController {
         });
     }
 
-    private void caricaPrenotazioniRistorante() {
+    private void caricaPrenotazioniRistorante() throws PrenotazioneException {
         loadingIndicator.setVisible(true);
 
         String nomeRistorante = SessionManagerSLT.getInstance().getLoggedInUsername();
@@ -85,7 +86,7 @@ public class RestaurantViewController {
     }
 
     @FXML
-    void eliminaPrenotazioneSelezionata(ActionEvent event) {
+    void eliminaPrenotazioneSelezionata(ActionEvent event) throws PrenotazioneException {
         PrenotazioneBean selezionata = prenotazioniListView.getSelectionModel().getSelectedItem();
         if (selezionata == null) {
             showAlert("Errore", "Seleziona una prenotazione da eliminare!");

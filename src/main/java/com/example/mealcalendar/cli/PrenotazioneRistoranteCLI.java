@@ -4,6 +4,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 import com.example.mealcalendar.model.TipologiaRistorante;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class PrenotazioneRistoranteCLI {
     private final PrenotazioneController prenotazioneController = new PrenotazioneController();
     private final Scanner scanner = new Scanner(System.in);
 
-    public void start() {
+    public void start() throws PrenotazioneException {
         System.out.println("Benvenuto nel sistema di prenotazione ristoranti!");
         boolean exit = false;
 
@@ -42,7 +43,7 @@ public class PrenotazioneRistoranteCLI {
         System.out.println("Arrivederci!");
     }
 
-    private void mostraRistoranti(TipologiaRistorante filtro) {
+    private void mostraRistoranti(TipologiaRistorante filtro) throws PrenotazioneException {
         List<RistoranteBean> ristoranti = prenotazioneController.getRistoranti();
 
         if (filtro != null) {
@@ -84,7 +85,7 @@ public class PrenotazioneRistoranteCLI {
         return null;
     }
 
-    private void prenotaRistorante(TipologiaRistorante filtro) {
+    private void prenotaRistorante(TipologiaRistorante filtro) throws PrenotazioneException {
         List<RistoranteBean> ristoranti = prenotazioneController.getRistoranti();
 
         if (filtro != null) {
@@ -156,7 +157,7 @@ public class PrenotazioneRistoranteCLI {
                 ristoranteScelto.getNome(), usernameUtente, ora, posti);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PrenotazioneException {
         PrenotazioneRistoranteCLI cli = new PrenotazioneRistoranteCLI();
         cli.start();
     }

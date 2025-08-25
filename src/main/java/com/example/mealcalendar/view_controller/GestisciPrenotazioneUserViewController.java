@@ -4,6 +4,7 @@ import com.example.mealcalendar.GraphicController;
 import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -35,7 +36,7 @@ public class GestisciPrenotazioneUserViewController {
     private final PrenotazioneController prenotazioneController = new PrenotazioneController();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws PrenotazioneException {
         caricaPrenotazioniUtente();
 
         // Customizzazione grafica delle celle della ListView
@@ -64,7 +65,7 @@ public class GestisciPrenotazioneUserViewController {
         });
     }
 
-    private void caricaPrenotazioniUtente() {
+    private void caricaPrenotazioniUtente() throws PrenotazioneException {
         loadingIndicator.setVisible(true);
 
         String username = SessionManagerSLT.getInstance().getLoggedInUsername();
@@ -98,7 +99,7 @@ public class GestisciPrenotazioneUserViewController {
     }
 
     @FXML
-    void eliminaPrenotazioneSelezionata(ActionEvent event) {
+    void eliminaPrenotazioneSelezionata(ActionEvent event) throws PrenotazioneException {
         PrenotazioneBean selezionata = prenotazioniListView.getSelectionModel().getSelectedItem();
         if (selezionata == null) {
             showAlert("Errore", "Seleziona una prenotazione da eliminare!");

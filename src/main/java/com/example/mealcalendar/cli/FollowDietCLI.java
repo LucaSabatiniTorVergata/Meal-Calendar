@@ -4,6 +4,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.DietBean;
 import com.example.mealcalendar.bean.UserBean;
 import com.example.mealcalendar.controller_applicativo.FollowDietController;
+import com.example.mealcalendar.exception.LoginException;
 
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class FollowDietCLI {
         this.scanner = scanner;
     }
 
-    public void start()  {
+    public void start() throws LoginException {
 
         FollowDietController controller = new FollowDietController();
 

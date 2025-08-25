@@ -5,6 +5,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 import com.example.mealcalendar.model.TipologiaRistorante;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class PrenotazioneRistoranteViewController {
     }
 
     @FXML
-    void confermaPrenotazione(ActionEvent event) {
+    void confermaPrenotazione(ActionEvent event) throws PrenotazioneException {
         if (calendar.getValue() == null || orascelta.getText().isEmpty()) {
             showAlert(ERROR_TITLE, "Compila data e ora prima di confermare!");
             return;
@@ -104,7 +105,7 @@ public class PrenotazioneRistoranteViewController {
     }
 
     @FXML
-    void caricaRistoranti(ActionEvent event) {
+    void caricaRistoranti(ActionEvent event) throws PrenotazioneException {
         listaRistoranti.getItems().clear();
         List<RistoranteBean> ristoranti = prenotazioneController.getRistoranti();
 
