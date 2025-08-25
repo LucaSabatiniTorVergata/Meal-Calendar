@@ -4,6 +4,7 @@ import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.bean.RistoranteBean;
 import com.example.mealcalendar.dao.RistoranteDao;
 import com.example.mealcalendar.dao.UserDao;
+import com.example.mealcalendar.exception.LoginException;
 import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.RistoranteEntity;
 
@@ -16,33 +17,28 @@ public class LoginController {
     private final UserDao userDao = new UserDao();
     private final RistoranteDao ristoranteDao = new RistoranteDao();
 
-    public boolean vallogin(UserLoginBean userBean) {
-        try {
-            String ruolo = userBean.getRuolo();
-            String username = userBean.getUsername();
+    public boolean vallogin(UserLoginBean userBean) throws LoginException {
+        String ruolo = userBean.getRuolo();
+        String username = userBean.getUsername();
 
+        try {
             if ("restaurant".equalsIgnoreCase(ruolo)) {
                 return loginRistorante(username, ruolo);
             } else {
                 return loginUtente(username);
             }
-        } catch (Exception e) {
-            System.err.println("Errore durante il login: " + e.getMessage());
-            e.printStackTrace();
-            return false;
+        } catch (IOException e) {
+            throw new LoginException("Errore I/O durante il login", e);
         }
     }
 
-    private boolean loginRistorante(String username, String ruolo) throws IOException {
+    private boolean loginRistorante(String username, String ruolo) throws IOException, LoginException {
         List<RistoranteEntity> entities = new ArrayList<>(ristoranteDao.leggiRistoranti());
 
         if (isRamAndEmpty(entities)) {
-            RistoranteEntity demo = creaRistoranteDemo(username);
-            ristoranteDao.aggiungiRistorante(demo);
-            entities.add(demo);
+            throw new LoginException("Nessun ristorante presente in RAM. Impossibile fare il login.");
         }
 
-        // Usa Stream.toList() per ottenere una lista immutabile
         List<RistoranteBean> ristoranti = entities.stream()
                 .map(RistoranteFactory::entityToBean)
                 .toList();
@@ -55,11 +51,17 @@ public class LoginController {
                 return true;
             }
         }
-        return false;
+
+        throw new LoginException("Ristorante con username " + username + " non trovato.");
     }
 
-    private boolean loginUtente(String username) {
+    private boolean loginUtente(String username) throws LoginException {
         List<UserBeanA> utenti = userDao.leggiUtenti();
+
+        if (utenti.isEmpty()) {
+            throw new LoginException("Nessun utente registrato.");
+        }
+
         for (UserBeanA u : utenti) {
             if (u.getUsername().equals(username)) {
                 SessionManagerSLT.getInstance().setLoggedInUsername(u.getUsername());
@@ -67,21 +69,13 @@ public class LoginController {
                 return true;
             }
         }
-        return false;
+
+        throw new LoginException("Utente " + username + " non trovato.");
     }
 
     private boolean isRamAndEmpty(List<RistoranteEntity> entities) {
         return SessionManagerSLT.getInstance().getPersistenceType() != null &&
                 "RAM".equals(SessionManagerSLT.getInstance().getPersistenceType().name()) &&
                 entities.isEmpty();
-    }
-
-    private RistoranteEntity creaRistoranteDemo(String username) {
-        RistoranteEntity demo = new RistoranteEntity();
-        demo.setNome(username);
-        demo.setIndirizzo("Demo Address");
-        demo.setPostiDisponibili(50);
-        demo.setTipologiaRistorante(com.example.mealcalendar.model.TipologiaRistorante.ONNIVORO);
-        return demo;
     }
 }
