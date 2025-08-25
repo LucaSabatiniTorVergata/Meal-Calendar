@@ -2,6 +2,7 @@ package com.example.mealcalendar.testLuca;
 
 import com.example.mealcalendar.bean.PrenotazioneBean;
 import com.example.mealcalendar.controller_applicativo.PrenotazioneController;
+import com.example.mealcalendar.exception.PrenotazioneException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class PrenotazioneControllerTest {
     }
 
     @Test
-    void testGetPrenotazioni() {
+    void testGetPrenotazioni() throws PrenotazioneException {
         List<PrenotazioneBean> prenotazioni = controller.getPrenotazioni();
         assertNotNull(prenotazioni, "La lista delle prenotazioni non deve essere null");
         // Non possiamo garantire che ci siano prenotazioni, ma la lista deve essere corretta
