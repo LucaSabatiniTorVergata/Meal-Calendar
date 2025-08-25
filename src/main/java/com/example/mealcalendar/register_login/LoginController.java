@@ -7,8 +7,6 @@ import com.example.mealcalendar.dao.UserDao;
 import com.example.mealcalendar.exception.LoginException;
 import com.example.mealcalendar.factory.RistoranteFactory;
 import com.example.mealcalendar.model.RistoranteEntity;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
