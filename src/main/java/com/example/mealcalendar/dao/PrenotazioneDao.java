@@ -1,5 +1,6 @@
 package com.example.mealcalendar.dao;
 
+import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.model.PrenotazioneEntity;
 
 import java.io.*;
@@ -10,8 +11,15 @@ import java.util.List;
 public class PrenotazioneDao {
 
     private static final String FILE_NAME = "prenotazioni.txt";
+    private static final List<PrenotazioneEntity> ramPrenotazioni = new ArrayList<>();
 
     public void salvaPrenotazione(PrenotazioneEntity prenotazione) {
+        if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
+            prenotazione.setId(ramPrenotazioni.size() + 1);
+            ramPrenotazioni.add(prenotazione);
+            return;
+        }
+
         int nuovoId = getUltimoId() + 1;
         prenotazione.setId(nuovoId);
 
@@ -32,6 +40,10 @@ public class PrenotazioneDao {
     }
 
     public List<PrenotazioneEntity> leggiPrenotazioni() {
+        if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
+            return new ArrayList<>(ramPrenotazioni);
+        }
+
         List<PrenotazioneEntity> prenotazioni = new ArrayList<>();
         File file = new File(FILE_NAME);
 
@@ -85,6 +97,10 @@ public class PrenotazioneDao {
     }
 
     public boolean eliminaPrenotazione(String idPrenotazione) {
+        if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
+            return ramPrenotazioni.removeIf(p -> String.valueOf(p.getId()).equals(idPrenotazione));
+        }
+
         File file = new File(FILE_NAME);
         if (!file.exists()) return false;
 

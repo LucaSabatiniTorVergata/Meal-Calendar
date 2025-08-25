@@ -1,5 +1,6 @@
 package com.example.mealcalendar.dao;
 
+import com.example.mealcalendar.SessionManagerSLT;
 import com.example.mealcalendar.model.RistoranteEntity;
 
 import java.io.*;
@@ -9,20 +10,31 @@ import java.util.List;
 public class RistoranteDao {
 
     private static final String FILE_NAME = "ristoranti.txt";
+    // Lista statica per modalità RAM
+    private static final List<RistoranteEntity> ramRistoranti = new ArrayList<>();
 
     public void aggiungiRistorante(RistoranteEntity ristorante) throws IOException {
-        String record = ristorante.getNome() + "," +
-                ristorante.getIndirizzo() + "," +
-                ristorante.getPostiDisponibili() + "," +
-                ristorante.getTipologiaRistorante().name();
+        if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
+            ramRistoranti.add(ristorante);
+        } else {
+            // Scrittura su file
+            String record = ristorante.getNome() + "," +
+                    ristorante.getIndirizzo() + "," +
+                    ristorante.getPostiDisponibili() + "," +
+                    ristorante.getTipologiaRistorante().name();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            writer.write(record);
-            writer.newLine();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+                writer.write(record);
+                writer.newLine();
+            }
         }
     }
 
     public List<RistoranteEntity> leggiRistoranti() {
+        if (SessionManagerSLT.getInstance().getPersistenceType() == com.example.mealcalendar.PersistenceType.RAM) {
+            return new ArrayList<>(ramRistoranti);
+        }
+
         List<RistoranteEntity> ristoranti = new ArrayList<>();
         File file = new File(FILE_NAME);
 

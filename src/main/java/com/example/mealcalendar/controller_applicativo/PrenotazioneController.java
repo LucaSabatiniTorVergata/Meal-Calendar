@@ -27,7 +27,6 @@ public class PrenotazioneController {
         PrenotazioneEntity entity = PrenotazioneFactory.beanToEntity(prenotazioneBean);
         prenotazioneDao.salvaPrenotazione(entity);
     }
-
     public List<PrenotazioneBean> getPrenotazioni() {
         List<PrenotazioneEntity> entities = prenotazioneDao.leggiPrenotazioni();
         LocalDate oggi = LocalDate.now();
