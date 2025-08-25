@@ -24,7 +24,7 @@ public class PrenotazioneDao {
         int nuovoId = getUltimoId() + 1;
         prenotazione.setId(nuovoId);
 
-        String record = prenotazione.getId() + "," +
+        String recordPrenotazione = prenotazione.getId() + "," +
                 prenotazione.getUsernameUtente() + "," +
                 prenotazione.getNomeRistorante() + "," +
                 prenotazione.getDataPrenotazione() + "," +
@@ -33,7 +33,7 @@ public class PrenotazioneDao {
                 prenotazione.getPostiASedere();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            writer.write(record);
+            writer.write(recordPrenotazione);
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Errore durante il salvataggio della prenotazione: " + e.getMessage());
