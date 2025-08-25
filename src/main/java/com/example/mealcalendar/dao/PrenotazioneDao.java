@@ -46,14 +46,14 @@ public class PrenotazioneDao {
         }
 
         List<PrenotazioneEntity> prenotazioni = new ArrayList<>();
-        File file = new File(FILE_NAME);
+        File filePrenotazioni = new File(FILE_NAME);
 
-        if (!file.exists()) return prenotazioni;
+        if (!filePrenotazioni.exists()) return prenotazioni;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] campi = linea.split(",");
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePrenotazioni))) {
+            String riga;
+            while ((riga = reader.readLine()) != null) {
+                String[] campi = riga.split(",");
                 if (campi.length == 7) {
                     PrenotazioneEntity prenotazione = new PrenotazioneEntity(
                             Integer.parseInt(campi[0]),
@@ -75,13 +75,13 @@ public class PrenotazioneDao {
     }
 
     private int getUltimoId() {
-        File file = new File(FILE_NAME);
-        if (!file.exists()) return 0;
+        File filePrenotazioni = new File(FILE_NAME);
+        if (!filePrenotazioni.exists()) return 0;
 
         String ultimaRiga = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String linea;
-            while ((linea = br.readLine()) != null) ultimaRiga = linea;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePrenotazioni))) {
+            String riga;
+            while ((riga = reader.readLine()) != null) ultimaRiga = riga;
         } catch (IOException e) {
             System.err.println(ERR_LETTURA_FILE + e.getMessage());
         }
@@ -102,17 +102,17 @@ public class PrenotazioneDao {
             return ramPrenotazioni.removeIf(p -> String.valueOf(p.getId()).equals(idPrenotazione));
         }
 
-        File file = new File(FILE_NAME);
-        if (!file.exists()) return false;
+        File filePrenotazioni = new File(FILE_NAME);
+        if (!filePrenotazioni.exists()) return false;
 
-        List<String> righe = new ArrayList<>();
+        List<String> righeRimanenti = new ArrayList<>();
         boolean trovata = false;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                if (!linea.startsWith(idPrenotazione + ",")) {
-                    righe.add(linea);
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePrenotazioni))) {
+            String riga;
+            while ((riga = reader.readLine()) != null) {
+                if (!riga.startsWith(idPrenotazione + ",")) {
+                    righeRimanenti.add(riga);
                 } else {
                     trovata = true;
                 }
@@ -123,10 +123,10 @@ public class PrenotazioneDao {
         }
 
         if (trovata) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                for (String r : righe) {
-                    bw.write(r);
-                    bw.newLine();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePrenotazioni))) {
+                for (String riga : righeRimanenti) {
+                    writer.write(riga);
+                    writer.newLine();
                 }
             } catch (IOException e) {
                 System.err.println("Errore scrittura file prenotazioni: " + e.getMessage());

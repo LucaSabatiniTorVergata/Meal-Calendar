@@ -11,7 +11,6 @@ import com.example.mealcalendar.model.RistoranteEntity;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PrenotazioneController {
 
@@ -27,6 +26,7 @@ public class PrenotazioneController {
         PrenotazioneEntity entity = PrenotazioneFactory.beanToEntity(prenotazioneBean);
         prenotazioneDao.salvaPrenotazione(entity);
     }
+
     public List<PrenotazioneBean> getPrenotazioni() {
         List<PrenotazioneEntity> entities = prenotazioneDao.leggiPrenotazioni();
         LocalDate oggi = LocalDate.now();
@@ -35,9 +35,10 @@ public class PrenotazioneController {
             e.setScaduta(e.getDataPrenotazione().isBefore(oggi));
         }
 
+        // Usa Stream.toList() invece di collect(Collectors.toList())
         return entities.stream()
                 .map(PrenotazioneFactory::entityToBean)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public boolean eliminaPrenotazione(PrenotazioneBean prenotazioneBean) {

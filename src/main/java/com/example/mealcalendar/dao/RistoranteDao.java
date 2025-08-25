@@ -18,13 +18,13 @@ public class RistoranteDao {
             ramRistoranti.add(ristorante);
         } else {
             // Scrittura su file
-            String record = ristorante.getNome() + "," +
+            String recordRistorante = ristorante.getNome() + "," +
                     ristorante.getIndirizzo() + "," +
                     ristorante.getPostiDisponibili() + "," +
                     ristorante.getTipologiaRistorante().name();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-                writer.write(record);
+                writer.write(recordRistorante);
                 writer.newLine();
             }
         }
