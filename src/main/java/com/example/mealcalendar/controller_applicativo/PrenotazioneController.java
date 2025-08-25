@@ -35,12 +35,26 @@ public class PrenotazioneController {
             throw new PrenotazioneException("Il numero di posti a sedere deve essere maggiore di zero.");
         }
 
-        try {
-            PrenotazioneEntity entity = PrenotazioneFactory.beanToEntity(prenotazioneBean);
-            prenotazioneDao.salvaPrenotazione(entity);
-        } catch (Exception e) {
-            throw new PrenotazioneException("Errore durante il salvataggio della prenotazione.", e);
+        // Recupera ristorante dal DAO
+        RistoranteBean ristorante = ristoranteDao.getRistoranteByName(prenotazioneBean.getNomeRistorante());
+        if (ristorante == null) {
+            throw new PrenotazioneException("Ristorante non trovato.");
         }
+
+        // Logica dello scalamento dei posti nel controller
+        int postiDisponibili = ristorante.getPostiDisponibili();
+        if (postiDisponibili < prenotazioneBean.getPostiASedere()) {
+            throw new PrenotazioneException("Posti insufficienti per la prenotazione.");
+        }
+        int nuoviPosti = postiDisponibili - prenotazioneBean.getPostiASedere();
+        ristorante.setPostiDisponibili(nuoviPosti);
+
+        // Aggiorna il DAO
+        ristoranteDao.aggiornaPosti(ristorante);
+
+        // Salva la prenotazione
+        PrenotazioneEntity entity = PrenotazioneFactory.beanToEntity(prenotazioneBean);
+        prenotazioneDao.salvaPrenotazione(entity);
     }
 
     public List<PrenotazioneBean> getPrenotazioni() throws PrenotazioneException {

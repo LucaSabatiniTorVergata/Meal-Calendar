@@ -16,10 +16,9 @@ public class PrenotazioneRistoranteCLI {
     private final PrenotazioneController prenotazioneController = new PrenotazioneController();
     private final Scanner scanner = new Scanner(System.in);
 
-    public void start() throws PrenotazioneException {
+    public void start() {
         System.out.println("Benvenuto nel sistema di prenotazione ristoranti!");
         boolean exit = false;
-
         TipologiaRistorante filtro = null;
 
         while (!exit) {
@@ -31,12 +30,16 @@ public class PrenotazioneRistoranteCLI {
             System.out.print("Scegli un'opzione: ");
 
             String scelta = scanner.nextLine();
-            switch (scelta) {
-                case "1" -> mostraRistoranti(filtro);
-                case "2" -> filtro = scegliTipologia();
-                case "3" -> prenotaRistorante(filtro);
-                case "4" -> exit = true;
-                default -> System.out.println("Opzione non valida, riprova.");
+            try {
+                switch (scelta) {
+                    case "1" -> mostraRistoranti(filtro);
+                    case "2" -> filtro = scegliTipologia();
+                    case "3" -> prenotaRistorante(filtro);
+                    case "4" -> exit = true;
+                    default -> System.out.println("Opzione non valida, riprova.");
+                }
+            } catch (PrenotazioneException e) {
+                System.out.println("Errore: " + e.getMessage());
             }
         }
 
@@ -58,7 +61,8 @@ public class PrenotazioneRistoranteCLI {
             System.out.println("\nRistoranti disponibili:");
             for (int i = 0; i < ristoranti.size(); i++) {
                 RistoranteBean r = ristoranti.get(i);
-                System.out.printf("%d. %s - %s (%s)%n", i + 1, r.getNome(), r.getIndirizzo(), r.getTipologiaRistorante());
+                System.out.printf("%d. %s - %s (%s) | Posti disponibili: %d%n",
+                        i + 1, r.getNome(), r.getIndirizzo(), r.getTipologiaRistorante(), r.getPostiDisponibili());
             }
         }
     }
@@ -78,7 +82,6 @@ public class PrenotazioneRistoranteCLI {
                 return tipi[scelta - 1];
             }
         } catch (NumberFormatException e) {
-            // Input non valido, il filtro non verrà applicato
             System.out.println("Scelta non valida. Nessun filtro applicato.");
         }
 
@@ -102,7 +105,7 @@ public class PrenotazioneRistoranteCLI {
         System.out.println("\nSeleziona il ristorante da prenotare:");
         for (int i = 0; i < ristoranti.size(); i++) {
             RistoranteBean r = ristoranti.get(i);
-            System.out.printf("%d. %s - %s%n", i + 1, r.getNome(), r.getIndirizzo());
+            System.out.printf("%d. %s - %s | Posti disponibili: %d%n", i + 1, r.getNome(), r.getIndirizzo(), r.getPostiDisponibili());
         }
 
         System.out.print("Scelta: ");
@@ -132,10 +135,14 @@ public class PrenotazioneRistoranteCLI {
         System.out.print("Inserisci ora prenotazione (HH:MM): ");
         String ora = scanner.nextLine();
 
-        System.out.print("Inserisci numero posti: ");
+        System.out.printf("Posti disponibili: %d. Quanti posti vuoi prenotare? ", ristoranteScelto.getPostiDisponibili());
         int posti;
         try {
             posti = Integer.parseInt(scanner.nextLine());
+            if (posti > ristoranteScelto.getPostiDisponibili()) {
+                System.out.println("Errore: non ci sono abbastanza posti disponibili.");
+                return;
+            }
         } catch (NumberFormatException e) {
             System.out.println("Numero posti non valido. Imposto 1 posto.");
             posti = 1;
@@ -152,12 +159,14 @@ public class PrenotazioneRistoranteCLI {
                 posti
         );
 
+        // Prova a salvare la prenotazione e scala i posti disponibili nel controller
         prenotazioneController.salvaPrenotazione(prenotazione);
+
         System.out.printf("Prenotazione confermata per %s da %s alle ore %s per %d persone.%n",
                 ristoranteScelto.getNome(), usernameUtente, ora, posti);
     }
 
-    public static void main(String[] args) throws PrenotazioneException {
+    public static void main(String[] args) {
         PrenotazioneRistoranteCLI cli = new PrenotazioneRistoranteCLI();
         cli.start();
     }

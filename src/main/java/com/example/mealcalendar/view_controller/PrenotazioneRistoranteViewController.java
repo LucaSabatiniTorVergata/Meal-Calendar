@@ -56,7 +56,7 @@ public class PrenotazioneRistoranteViewController {
     }
 
     @FXML
-    void confermaPrenotazione(ActionEvent event) throws PrenotazioneException {
+    void confermaPrenotazione(ActionEvent event) {
         if (calendar.getValue() == null || orascelta.getText().isEmpty()) {
             showAlert(ERROR_TITLE, "Compila data e ora prima di confermare!");
             return;
@@ -90,13 +90,20 @@ public class PrenotazioneRistoranteViewController {
                 posti
         );
 
-        prenotazioneController.salvaPrenotazione(prenotazione);
+        try {
+            prenotazioneController.salvaPrenotazione(prenotazione);
 
-        showAlert("Successo", "Prenotazione confermata per " +
-                ristoranteScelto.getNome() + " da parte di " + usernameUtente +
-                " alle ore " + orascelta.getText() +
-                " per " + posti + " persone.");
+            showAlert("Successo", "Prenotazione confermata per " +
+                    ristoranteScelto.getNome() + " da parte di " + usernameUtente +
+                    " alle ore " + orascelta.getText() +
+                    " per " + posti + " persone.");
+
+        } catch (PrenotazioneException e) {
+            // Mostriamo un alert specifico se i posti non sono sufficienti
+            showAlert("Errore prenotazione", e.getMessage());
+        }
     }
+
 
     @FXML
     void homeview(ActionEvent event) {
