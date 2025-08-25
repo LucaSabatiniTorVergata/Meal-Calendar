@@ -18,7 +18,7 @@ public class RegistrationController {
     }
 
     // Registrazione ristorante
-    public void registerRistorante(RistoranteBean ristoranteBean) throws IOException {
+    public void registerRistorante(RistoranteBean ristoranteBean)  {
         var entity = com.example.mealcalendar.factory.RistoranteFactory.beanToEntity(ristoranteBean);
         ristoranteDao.aggiungiRistorante(entity);
     }

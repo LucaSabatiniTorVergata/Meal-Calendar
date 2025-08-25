@@ -69,39 +69,55 @@ public class RistoranteDao {
     }
 
     public void aggiornaPosti(RistoranteBean ristorante) throws PrenotazioneException {
-        if (SessionManagerSLT.getInstance().getPersistenceType() != null &&
-                SessionManagerSLT.getInstance().getPersistenceType().name().equals("RAM")) {
-            List<RistoranteEntity> lista = leggiRistoranti();
-            for (RistoranteEntity r : lista) {
-                if (r.getNome().equals(ristorante.getNome())) {
-                    r.setPostiDisponibili(ristorante.getPostiDisponibili());
-                    return;
-                }
-            }
+        if (isRamMode()) {
+            aggiornaPostiRam(ristorante);
         } else {
-            // Scrive tutti i ristoranti aggiornati sul file
-            List<RistoranteEntity> lista = leggiRistoranti();
-            boolean trovato = false;
-            for (RistoranteEntity r : lista) {
-                if (r.getNome().equals(ristorante.getNome())) {
-                    r.setPostiDisponibili(ristorante.getPostiDisponibili());
-                    trovato = true;
-                    break;
-                }
-            }
-            if (!trovato) {
-                throw new PrenotazioneException("Ristorante non trovato per aggiornamento posti.");
-            }
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-                for (RistoranteEntity r : lista) {
-                    writer.write(r.getNome() + "," + r.getIndirizzo() + "," +
-                            r.getPostiDisponibili() + "," + r.getTipologiaRistorante().name());
-                    writer.newLine();
-                }
-            } catch (IOException e) {
-                throw new PrenotazioneException("Errore aggiornamento posti ristorante.", e);
-            }
+            aggiornaPostiFile(ristorante);
         }
     }
+
+    private boolean isRamMode() {
+        return SessionManagerSLT.getInstance().getPersistenceType() != null &&
+                "RAM".equals(SessionManagerSLT.getInstance().getPersistenceType().name());
+    }
+
+    private void aggiornaPostiRam(RistoranteBean ristorante) {
+        leggiRistoranti().stream()
+                .filter(r -> r.getNome().equals(ristorante.getNome()))
+                .findFirst()
+                .ifPresent(r -> r.setPostiDisponibili(ristorante.getPostiDisponibili()));
+    }
+
+    private void aggiornaPostiFile(RistoranteBean ristorante) throws PrenotazioneException {
+        List<RistoranteEntity> lista = leggiRistoranti();
+        boolean trovato = false;
+
+        for (RistoranteEntity r : lista) {
+            if (r.getNome().equals(ristorante.getNome())) {
+                r.setPostiDisponibili(ristorante.getPostiDisponibili());
+                trovato = true;
+                break;
+            }
+        }
+
+        if (!trovato) {
+            throw new PrenotazioneException("Ristorante non trovato per aggiornamento posti.");
+        }
+
+        scriviRistorantiSuFile(lista);
+    }
+
+
+    private void scriviRistorantiSuFile(List<RistoranteEntity> lista) throws PrenotazioneException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (RistoranteEntity r : lista) {
+                writer.write(r.getNome() + "," + r.getIndirizzo() + "," +
+                        r.getPostiDisponibili() + "," + r.getTipologiaRistorante().name());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            throw new PrenotazioneException("Errore aggiornamento posti ristorante.", e);
+        }
+    }
+
 }
