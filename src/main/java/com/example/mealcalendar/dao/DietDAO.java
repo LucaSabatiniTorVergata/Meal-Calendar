@@ -142,109 +142,112 @@ public class DietDAO {
         }
     }
 
-
     public List<DietEntity> getAllDiets() throws DietNotFoundException {
-
         switch (SessionManagerSLT.getInstance().getPersistenceType()) {
-
             case RAM -> {
-                if (ramStorage.isEmpty()) {
-                    throw new DietNotFoundException("Nessuna dieta trovata in RAM");
-                }
-                return new ArrayList<>(ramStorage);
+                return loadFromRam();
             }
-
             case FILESYSTEM -> {
-
-                List<DietEntity> loaded = loadAllDietsList();
-                if (loaded.isEmpty()) {
-                    throw new DietNotFoundException("Nessuna dieta salvata su FileSystem");
-                }
-                ramStorage.clear();
-                ramStorage.addAll(loaded);
-                return loaded;
-
+                return loadFromFileSystem();
             }
-
             case DATABASE -> {
-                String url = "jdbc:mysql://localhost:3306/mio_database";
-                String user = System.getenv("DB_USER");
-                String password = System.getenv("DB_PASSWORD");
-
-                // Specifico solo le colonne necessarie
-                String selectDietsSQL = "SELECT id, nome, descrizione, durata, nutritionist_username FROM diets";
-                String selectDaysSQL = "SELECT id, giorno FROM diet_days WHERE diet_id = ?";
-                String selectMealsSQL = "SELECT nome, descrizione, kcal FROM meals WHERE day_id = ?";
-
-                List<DietEntity> result = new ArrayList<>();
-
-                try (Connection conn = DriverManager.getConnection(url, user, password);
-                     PreparedStatement psDiets = conn.prepareStatement(selectDietsSQL)) {
-
-                    ResultSet rsDiets = psDiets.executeQuery();
-
-                    while (rsDiets.next()) {
-
-                        DietEntity diet = new DietEntity();
-                        diet.setNome(rsDiets.getString("nome"));
-                        diet.setDescrizione(rsDiets.getString("descrizione"));
-                        diet.setDurata(rsDiets.getInt("durata"));
-                        diet.setNutritionistUsername(rsDiets.getString("nutritionist_username"));
-
-                        int dietId = rsDiets.getInt("id");
-
-                        // Carico i giorni
-                        List<DayEntity> giorni = new ArrayList<>();
-                        try (PreparedStatement psDays = conn.prepareStatement(selectDaysSQL)) {
-                            psDays.setInt(1, dietId);
-                            ResultSet rsDays = psDays.executeQuery();
-
-                            while (rsDays.next()) {
-                                DayEntity day = new DayEntity(rsDays.getInt("giorno"));
-
-                                int dayId = rsDays.getInt("id");
-
-                                // Carico i pasti per il giorno
-                                List<MealEntity> pasti = new ArrayList<>();
-                                try (PreparedStatement psMeals = conn.prepareStatement(selectMealsSQL)) {
-                                    psMeals.setInt(1, dayId);
-                                    ResultSet rsMeals = psMeals.executeQuery();
-
-                                    while (rsMeals.next()) {
-                                        MealEntity meal = new MealEntity(
-                                                rsMeals.getString("nome"),
-                                                rsMeals.getString("descrizione"),
-                                                rsMeals.getInt("kcal")
-                                        );
-                                        pasti.add(meal);
-                                    }
-                                }
-
-                                day.setPasti(pasti);
-                                giorni.add(day);
-                            }
-                        }
-
-                        diet.setGiorni(giorni);
-                        result.add(diet);
-                    }
-
-                    ramStorage.clear();
-                    ramStorage.addAll(result);
-
-                    return result;
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return new ArrayList<>();
-                }
+                return loadFromDatabase();
             }
-
         }
-
         return Collections.emptyList();
     }
 
+    private List<DietEntity> loadFromRam() throws DietNotFoundException {
+        if (ramStorage.isEmpty()) {
+            throw new DietNotFoundException("Nessuna dieta trovata in RAM");
+        }
+        return new ArrayList<>(ramStorage);
+    }
+
+    private List<DietEntity> loadFromFileSystem() throws DietNotFoundException {
+        List<DietEntity> loaded = loadAllDietsList();
+        if (loaded.isEmpty()) {
+            throw new DietNotFoundException("Nessuna dieta salvata su FileSystem");
+        }
+        ramStorage.clear();
+        ramStorage.addAll(loaded);
+        return loaded;
+    }
+
+    private List<DietEntity> loadFromDatabase() throws DietNotFoundException {
+        String url = "jdbc:mysql://localhost:3306/mio_database";
+        String user = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
+
+        String selectDietsSQL = "SELECT id, nome, descrizione, durata, nutritionist_username FROM diets";
+        String selectDaysSQL = "SELECT id, giorno FROM diet_days WHERE diet_id = ?";
+        String selectMealsSQL = "SELECT nome, descrizione, kcal FROM meals WHERE day_id = ?";
+
+        List<DietEntity> result = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement psDiets = conn.prepareStatement(selectDietsSQL)) {
+
+            ResultSet rsDiets = psDiets.executeQuery();
+
+            while (rsDiets.next()) {
+                DietEntity diet = buildDietFromResultSet(rsDiets, conn, selectDaysSQL, selectMealsSQL);
+                result.add(diet);
+            }
+
+            if (result.isEmpty()) {
+                throw new DietNotFoundException("Nessuna dieta trovata nel Database");
+            }
+
+            ramStorage.clear();
+            ramStorage.addAll(result);
+
+            return result;
+
+        } catch (SQLException e) {
+            throw new DietNotFoundException("Errore durante il recupero delle diete da DB: " + e.getMessage());
+        }
+    }
+
+    private DietEntity buildDietFromResultSet(ResultSet rsDiets, Connection conn, String selectDaysSQL, String selectMealsSQL) throws SQLException {
+        DietEntity diet = new DietEntity();
+        diet.setNome(rsDiets.getString("nome"));
+        diet.setDescrizione(rsDiets.getString("descrizione"));
+        diet.setDurata(rsDiets.getInt("durata"));
+        diet.setNutritionistUsername(rsDiets.getString("nutritionist_username"));
+
+        int dietId = rsDiets.getInt("id");
+
+        List<DayEntity> giorni = new ArrayList<>();
+        try (PreparedStatement psDays = conn.prepareStatement(selectDaysSQL)) {
+            psDays.setInt(1, dietId);
+            ResultSet rsDays = psDays.executeQuery();
+
+            while (rsDays.next()) {
+                DayEntity day = new DayEntity(rsDays.getInt("giorno"));
+                int dayId = rsDays.getInt("id");
+
+                List<MealEntity> pasti = new ArrayList<>();
+                try (PreparedStatement psMeals = conn.prepareStatement(selectMealsSQL)) {
+                    psMeals.setInt(1, dayId);
+                    ResultSet rsMeals = psMeals.executeQuery();
+
+                    while (rsMeals.next()) {
+                        MealEntity meal = new MealEntity(
+                                rsMeals.getString("nome"),
+                                rsMeals.getString("descrizione"),
+                                rsMeals.getInt("kcal")
+                        );
+                        pasti.add(meal);
+                    }
+                }
+                day.setPasti(pasti);
+                giorni.add(day);
+            }
+        }
+        diet.setGiorni(giorni);
+        return diet;
+    }
 
     private List<DietEntity> loadAllDietsList() {
         try (Reader reader = new FileReader(FILE_PATH)) {

@@ -13,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -54,7 +53,7 @@ public class FollowDietViewController {
     }
 
     @FXML
-    private void confirmSelection() throws IOException {
+    private void confirmSelection() {
 
         UserBean userBean=new UserBean(SessionManagerSLT.getInstance().getLoggedInUsername(),SessionManagerSLT.getInstance().getLoggedmail(), SessionManagerSLT.getInstance().getLoggedRole());
 
