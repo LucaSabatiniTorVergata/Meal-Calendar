@@ -5,8 +5,6 @@ import com.example.mealcalendar.dao.DietDAO;
 import com.example.mealcalendar.dao.ReportRequestDAO;
 import com.example.mealcalendar.dao.UserDietDAO;
 import com.example.mealcalendar.handlexceptions.DietNotFoundException;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -77,7 +75,7 @@ public class MainMenuCLI {
         return true;
     }
 
-    private void handleChoice(String ruolo, String scelta) throws IOException {
+    private void handleChoice(String ruolo, String scelta) {
         switch (ruolo) {
             case "user" -> handleUserChoice(scelta);
             case "nutritionist" -> handleNutritionistChoice(scelta);
